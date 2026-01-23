@@ -1,4 +1,3 @@
-[AbishilS](https://github.com/AbishilS)
 # ELEE1149-Project-Template - Change me
 *A short, descriptive title for your project.*
 
@@ -103,8 +102,7 @@ project-name/
 
 ## Contributors
 
-Name 1 – Role
-Name 2 – Role
+[AbishilS](https://github.com/AbishilS)
 
 ## License
 Specify the license (e.g., MIT, Apache 2.0).
