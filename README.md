@@ -102,6 +102,7 @@ project-name/
 
 ## Contributors
 
+[A9rlt](https://github.com/A9rlt)
 [AbishilS](https://github.com/AbishilS)
 [declaringintent](https://github.com/declaringintent) – Role
 [Tomas-l-santos](https://github.com/Tomas-l-santos)
