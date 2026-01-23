@@ -102,8 +102,7 @@ project-name/
 
 ## Contributors
 
-Name 1 – Role
-Name 2 – Role
+[A9rlt](https://github.com/A9rlt)
 
 ## License
 Specify the license (e.g., MIT, Apache 2.0).
