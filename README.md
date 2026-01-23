@@ -102,7 +102,7 @@ project-name/
 
 ## Contributors
 
-Name 1 – Role
+[declaringintent](https://github.com/declaringintent) – Role
 Name 2 – Role
 
 ## License
