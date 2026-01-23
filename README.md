@@ -102,7 +102,7 @@ project-name/
 
 ## Contributors
 
-Name 1 – Role
+[Tomas-l-santos](https://github.com/Tomas-l-santos)
 Name 2 – Role
 
 ## License
