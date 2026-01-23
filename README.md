@@ -1,4 +1,3 @@
-[AbishilS](https://github.com/AbishilS)
 # ELEE1149-Project-Template - Change me
 *A short, descriptive title for your project.*
 
@@ -103,6 +102,7 @@ project-name/
 
 ## Contributors
 
+[AbishilS](https://github.com/AbishilS)
 [declaringintent](https://github.com/declaringintent) – Role
 [Tomas-l-santos](https://github.com/Tomas-l-santos)
 Name 2 – Role
