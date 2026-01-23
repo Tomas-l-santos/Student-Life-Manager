@@ -103,6 +103,7 @@ project-name/
 
 ## Contributors
 
+[declaringintent](https://github.com/declaringintent) – Role
 [Tomas-l-santos](https://github.com/Tomas-l-santos)
 Name 2 – Role
 
