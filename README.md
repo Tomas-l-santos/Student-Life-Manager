@@ -102,11 +102,10 @@ project-name/
 
 ## Contributors
 
-[A9rlt](https://github.com/A9rlt)
-[AbishilS](https://github.com/AbishilS)
-[declaringintent](https://github.com/declaringintent) – Role
-[Tomas-l-santos](https://github.com/Tomas-l-santos)
-Name 2 – Role
+- [A9rlt](https://github.com/A9rlt) - Role
+- [AbishilS](https://github.com/AbishilS) - Role
+- [declaringintent](https://github.com/declaringintent) – Role
+- [Tomas-l-santos](https://github.com/Tomas-l-santos) - Role
 
 ## License
 Specify the license (e.g., MIT, Apache 2.0).
