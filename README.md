@@ -102,10 +102,10 @@ project-name/
 
 ## Contributors
 
-- [A9rlt](https://github.com/A9rlt) - Role
+- [A9rlt](https://github.com/A9rlt) - Back End Developer
 - [AbishilS](https://github.com/AbishilS) - Front End Developer
-- [declaringintent](https://github.com/declaringintent) – Role
-- [Tomas-l-santos](https://github.com/Tomas-l-santos) - Role
+- [declaringintent](https://github.com/declaringintent) – Back End Developer
+- [Tomas-l-santos](https://github.com/Tomas-l-santos) - Front End Developer
 
 ## License
 Specify the license (e.g., MIT, Apache 2.0).
