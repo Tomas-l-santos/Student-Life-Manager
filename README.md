@@ -104,7 +104,7 @@ project-name/
 
 - [A9rlt](https://github.com/A9rlt) - Role
 - [AbishilS](https://github.com/AbishilS) - Role
-- [declaringintent](https://github.com/declaringintent) – Role
+- [declaringintent](https://github.com/declaringintent) – Backend developer
 - [Tomas-l-santos](https://github.com/Tomas-l-santos) - Role
 
 ## License
