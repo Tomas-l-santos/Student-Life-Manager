@@ -16,6 +16,29 @@ SR-1.3	System Requirement	The system should be able to pull the account based on
 
 # Functional Requirement
 
+## Academic & Timetable Management
+
+- The system shall allow users to log modules and input scores.
+
+- The system shall calculate the average score for each module.
+
+- The system should allow users to manually create a timetable or upload a picture for automatic filling.
+
+- The system should permit users to add side notes to each specific lecture entry.
+
+- The system shall generate automated deadline reminders for each academic module.
+
+- The system shall visualize a stress metric that links upcoming deadlines, student workload.
+
+## Finance Management 
+
+- The system shall allow users to set a budget limit and record daily expenses.
+
+- The system should categorize expenses(e.g,food, rent, travel) for better tracking.
+
+- The system shall generate monthly summaries of spend limits versus actual spending.
+
+## Mental & Physical Health Tracking
 
 
 
