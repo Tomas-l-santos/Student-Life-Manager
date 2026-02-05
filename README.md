@@ -103,11 +103,7 @@ project-name/
 ## Contributors
 
 - [A9rlt](https://github.com/A9rlt) - Back End Developer
-<<<<<<< HEAD
-- [AbishilS](https://github.com/AbishilS) - Role
-=======
 - [AbishilS](https://github.com/AbishilS) - Front End Developer
->>>>>>> main
 - [declaringintent](https://github.com/declaringintent) – Back End Developer
 - [Tomas-l-santos](https://github.com/Tomas-l-santos) - Front End Developer
 
