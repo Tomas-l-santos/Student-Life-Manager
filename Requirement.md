@@ -6,6 +6,8 @@
 
 - Primary stakeholders 
     Students, they use the system to create accounts, track modules/grades, manage timetables, record expenses, and view reminders/stress indicators.
+# Stakeholders
+
 
 # Specifications
 ## user and system requirements
@@ -89,6 +91,12 @@ SR-1.3	System Requirement	The system should be able to pull the account based on
 - Usability & Accessibility
     NFR-6
     NFR-8
+mermaid map of requirements
+
+
+
+
+
 
 # Useability Requirements
 
