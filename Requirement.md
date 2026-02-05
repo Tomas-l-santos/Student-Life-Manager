@@ -100,4 +100,5 @@ mermaid map of requirements
 
 # Useability Requirements
 
+Students should all be able to use this product easily as it has no learing curve and minimal, or next to no technical errors, should occur when a student is using the product. The students would be familiar with the simple design and UI of the product, consisting of a drop down menu with all the product's functions mentioned above such as Study Life, Finance Manager and Health. These have thier own functions within each of thier own respective sections such as an exam reminder, a budget tracker and a virtual notepad. (incase we decide to add more features add here)  These functions for our product are designed close to already existing actions and behaviours of other apps for familiarity such as, common timetable UI, budget pie charts from banking apps and a simple Google Docs/ Word theme notes app.  
 
