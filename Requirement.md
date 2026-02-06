@@ -43,9 +43,9 @@
 
 - The system shall calculate the average score for each module.
 
-- The system should allow users to manually create a timetable or upload a picture for automatic filling.
+- The system shall allow users to manually create a timetable or upload a picture for automatic filling.
 
-- The system should permit users to add side notes to each specific lecture entry.
+- The system shall permit users to add side notes to each specific lecture entry.
 
 - The system shall generate automated deadline reminders for each academic module.
 
@@ -55,7 +55,7 @@
 
 - The system shall allow users to set a budget limit and record daily expenses.
 
-- The system should categorize expenses(e.g,food, rent, travel) for better tracking.
+- The system shall categorize expenses(e.g,food, rent, travel) for better tracking.
 
 - The system shall generate monthly summaries of spend limits versus actual spending.
 
@@ -79,13 +79,13 @@
     The system shall prevent data corruption by verifiying the data shape before saving and loading (timetable must have date/time/module to continue).
 
 - NFR-5
-    The system shall load the dashboard page in under 2 seconds on a typical laptop with up to 200 stored timetable entries.
+    The system shall load the dashboard page in under 2 seconds with up to 200 stored timetable entries an a standard laptop.
 
 - NFR-6
-    The system shall allow key tasks such as; module score, add expense, and timetable entry.
+    The system shall allow key tasks such as; module score, add expense, and timetable entry to be completed in no more than three user interactions each.
 
 - NFR-7
-    The system should log important events locally without storing sensitive details (this would be like password changed, account created, and data deleted).
+    The system shall log important events locally without storing sensitive details (this would be like password changed, account created, and data deleted).
 
 - NFR-8
     The system shall meet WCAG 2.1 AA basics where keyboard navigation, visible focus, suffcient contrast and form lables for inputs.
