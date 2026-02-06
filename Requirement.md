@@ -11,11 +11,27 @@
 
 # Specifications
 ## user and system requirements
-Requirement ID`	Requirement Type	Requirement Statement	Rationale	Priority	Verification Method
-UR-1	User Requirement	The student shall be able to create an account	enables local browser storage of information of the student	High	Account creation attempt
-SR-1.1	System Requirement	The system should be able to collect a email, username, and password for a local account	the system will reference the student by name and lock their account to the password	Medium	Functional test
-SR-1.2	System Requirement	The system should be able to authenticate the password used	To ensure the account is secure, the password need to be of a certain character length with special characters	High	Functional test
-SR-1.3	System Requirement	The system should be able to pull the account based on the email provided, and allow a changing of the password	Ensures accessibility and security of the accounts on the website	High	Functional test
+| Requirement ID | Requirement Type   | Requirement Statement                                                                         | Rationale                                                                              | Priority | Verification Method                  |
+| -------------- | ------------------ | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------- | ------------------------------------ |
+| UR-1           | User Requirement   | The student shall be able to create a personal account                                        | enables local browser persistent storage of financial and academic data of the student | High     | User creates an account successfully |
+| SR-1.1         | System Requirement | The system shall collect an email, username, and password during account creation             | Required to uniquely identify and secure each account                                  | High     | Functional test                      |
+| SR-1.2         | System Requirement | The system shall validate password strength according to defined security rules               | Ensures minimum level of account security                                              | High     | Validation test                      |
+| SR-1.3         | System Requirement | The system shall allow authenticated users to log in using stored credentials                 | Enables secure access to stored data                                                   | High     | Login test                           |
+| SR_1.4         | System Requirement | The system shall allow users to reset or change their password                                | Improves accessibility and security                                                    | High     | Functional test                                     |
+| UR-2           | User Requirement   | A student shall be able to track their monthly expenses and income                            | Supports budgeting and provides information of distribution of expenses                | High     | Summary generated correctly          |
+| SR-2.1         | System Requirement | The system shall allow users to create income entries including amount, and date              | Enables tracing of money received                                                      | High     | Functional test                      |
+| SR-2.2         | System Requirement | The system shall allow users to create expense entries including amount, date, and categories | Enables tracking of money spent                                                        | High     | Functional test                      |
+| SR-2.3         | System Requirement | The system shall calculate total monthly income                                               | Provides financial overview of income                                                  | High     | Output verification                  |
+| SR-2.4         | System Requirement | The system shall calculate total monthly expenses                                             | Provides financial overview of expenses and enables spending awareness                 | High     | Output verification                  |
+| SR-2.5         | System Requirement | The system shall allow users to edit or delete income and expenses entries                    | Ensures accuracy of data                                                               | Medium   | Functional test                      |
+| SR-2.6         | System Requirement | The system shall store all income and expenses records persistently in local browser storage  | Ensures data is stored between sessions                                                | High     | Data persistence test                |
+| UR-3           | User Requirement   | The student shall be able to add and manage academic modules                                  | Allows organisation of academic workload                                               | High     | Module added successfully            |
+| SR-3.1         | System Requirement | The system shall allow users to create module entries with name and credit value              | Stores module information                                                              | High     | Functional test                      |
+| SR-3.2         | System Requirement | The system shall allow users to record assessment scores per module                           | Enables progress tracking                                                              | High     | Score saved                          |
+| UR-4           | User Requirement   | The system shall be able to manage academic deadlines                                         | Prevent missing submission deadlines                                                   | High     | Deadline displayed                   |
+| SR-4.1         | System Requirement | The system shall allow users to add deadlines with dates to modules                           | Stores time important tasks                                                            | High     | Entry saved                          |
+| SR-4.2         | System Requirement | The system shall generate reminders                                                           | Improves time management                                                               | Medium   | Reminder saved                       |
+| SR-4.3         | System Requirement | The system shall compute workload indicator based on deadlines                                | Visualise time critical tasks                                                          | Medium   | Output verified                      |
 
 
 
@@ -27,9 +43,9 @@ SR-1.3	System Requirement	The system should be able to pull the account based on
 
 - The system shall calculate the average score for each module.
 
-- The system should allow users to manually create a timetable or upload a picture for automatic filling.
+- The system shall allow users to manually create a timetable or upload a picture for automatic filling.
 
-- The system should permit users to add side notes to each specific lecture entry.
+- The system shall permit users to add side notes to each specific lecture entry.
 
 - The system shall generate automated deadline reminders for each academic module.
 
@@ -39,7 +55,7 @@ SR-1.3	System Requirement	The system should be able to pull the account based on
 
 - The system shall allow users to set a budget limit and record daily expenses.
 
-- The system should categorize expenses(e.g,food, rent, travel) for better tracking.
+- The system shall categorize expenses(e.g,food, rent, travel) for better tracking.
 
 - The system shall generate monthly summaries of spend limits versus actual spending.
 
@@ -63,13 +79,13 @@ SR-1.3	System Requirement	The system should be able to pull the account based on
     The system shall prevent data corruption by verifiying the data shape before saving and loading (timetable must have date/time/module to continue).
 
 - NFR-5
-    The system shall load the dashboard page in under 2 seconds on a typical laptop with up to 200 stored timetable entries.
+    The system shall load the dashboard page in under 2 seconds with up to 200 stored timetable entries an a standard laptop.
 
 - NFR-6
-    The system shall allow key tasks such as; module score, add expense, and timetable entry.
+    The system shall allow key tasks such as; module score, add expense, and timetable entry to be completed in no more than three user interactions each.
 
 - NFR-7
-    The system should log important events locally without storing sensitive details (this would be like password changed, account created, and data deleted).
+    The system shall log important events locally without storing sensitive details (this would be like password changed, account created, and data deleted).
 
 - NFR-8
     The system shall meet WCAG 2.1 AA basics where keyboard navigation, visible focus, suffcient contrast and form lables for inputs.
