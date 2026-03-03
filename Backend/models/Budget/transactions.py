@@ -16,7 +16,7 @@ class Transaction:
             "id": self.id,
             "user_id": self.user_id,                  """this is the email of the user who made the transaction, this can bea  security/privacy issue cuz it tracks peoples expenses, we can discuss if we fully add this or not"""
             "category_id": self.category_id,
-            "amount": self.amount,                          """amount of money weather income or expense, linked to catogory above to determine if its income or expense (+ or -)"""
+            "amount": self.amount,                          #amount of money weather income or expense, linked to catogory above to determine if its income or expense (+ or -)
             "description": self.description,
             "transaction_date": self.transaction_date,
             "is_recurring": self.is_recurring,
