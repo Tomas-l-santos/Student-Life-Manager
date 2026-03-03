@@ -27,7 +27,7 @@ class Transaction:
     def from_dict(data):
         return Transaction(
             id=data["id"],
-            user_email=data["user_id"],
+            user_id=data["user_id"],
             category_id=data["category_id"],
             amount=data["amount"],
             description=data.get("description", ""),
