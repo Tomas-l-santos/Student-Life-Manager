@@ -511,6 +511,7 @@
           "sidebar"
           "main";
       }
+    }
       .sidebar{ position: sticky; top:0; z-index: 10; }
       .nav{ flex-direction:row; overflow:auto; }
       .nav a{ white-space: nowrap; }
@@ -537,4 +538,3 @@
       text-decoration: underline;
       color: #cccccc;
     }
-}
