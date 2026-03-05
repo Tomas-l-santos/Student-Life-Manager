@@ -1,59 +1,127 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/styles.css";
 
 function Login() {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   return (
-    <div className="page">
-      <section className="left">
-        <div className="logo-header">
-          <div className="logo">
-            <img src="/Images/student_life_logo_5.png" />
-          </div>
-          <div className="brand">
-            <strong>Student Life Management</strong>
-            <span>Sign in to continue</span>
-          </div>
+    <div className="landing-wrapper">
+      {/* Top Bar!! */}
+      <nav className="top-nav">
+        <div className="nav-logo">
+          <img src="/Images/student_life_logo_5.png" alt="Logo" />
+          <span>Student Life</span>
         </div>
-
-        <div>
-          <label htmlFor="email">Email</label>
-          <input id="email" placeholder="Enter email" />
-        </div>
-
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Enter Password"
-            required
-          />
-        </div>
-
-        <div className="row">
-          <label>
-            <input type="checkbox" /> Remember
-          </label>
-          <Link to="/forgot-password">Forgot password</Link>
-        </div>
-
-        <button className="continue-button" type="submit">
+        <div className="nav-buttons">
           <Link
-            to="/dashboard"
-            style={{ textDecoration: "none", color: "inherit" }}
+            to="/about"
+            style={{
+              textDecoration: "none",
+              color: "#111",
+              fontWeight: "bold",
+              fontSize: "16px",
+            }}
           >
-            Continue
+            About
           </Link>
-        </button>
+          <button className="btn-red" onClick={() => setIsLoginOpen(true)}>
+            Log in
+          </button>
+          <Link to="/create-account" className="btn-grey">
+            Sign up
+          </Link>
+        </div>
+      </nav>
+
+      {/* Alligning*/}
+      <section className="hero-section">
+        <div></div>
       </section>
-      <section className="right">
-        <img
-          src="/Images/student_life_login_background.png"
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
-        />
+
+      {/* Features?*/}
+      <section className="feature-section bg-pink">
+        <div className="feature-image">
+          <img src="/Images/test.png" alt="Search" />
+        </div>
+        <div className="feature-text">
+          <h2 style={{ color: "#c31952" }}>Timetable maybe?</h2>
+          <p>Need to write something to yap about 1!!!</p>
+        </div>
       </section>
+
+      <section className="feature-section bg-teal reverse">
+        <div className="feature-text">
+          <h2 style={{ color: "#006b6c" }}>finance ?</h2>
+          <p>Need to write something to yap about 2!!!!</p>
+        </div>
+        <div className="feature-image">
+          <img src="/Images/test.png" alt="Collaborate" />
+        </div>
+      </section>
+
+      {/* login signup  */}
+      {isLoginOpen && (
+        <div className="modal-overlay">
+          <div className="login-card">
+            <button className="close-btn" onClick={() => setIsLoginOpen(false)}>
+              ✕
+            </button>
+            <img
+              src="/Images/student_life_logo_5.png"
+              alt="Logo"
+              style={{ width: "60px", marginBottom: "20px" }}
+            />
+            <h2>Welcome to SLM ig (Need to decide on a better app name smh)</h2>
+
+            <div style={{ textAlign: "left" }}>
+              <label
+                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
+              >
+                Email
+              </label>
+              <input type="email" placeholder="Email" className="pint-input" />
+            </div>
+
+            <div style={{ textAlign: "left" }}>
+              <label
+                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Password"
+                className="pint-input"
+              />
+            </div>
+
+            <div className="checkbox-row">
+              <input
+                type="checkbox"
+                id="rem"
+                style={{ width: "18px", height: "18px", cursor: "pointer" }}
+              />
+              <label htmlFor="rem">Remember me</label>
+            </div>
+
+            <Link to="/dashboard" className="btn-continue-modal">
+              Log in
+            </Link>
+            <Link
+              to="/forgot-password"
+              style={{
+                display: "block",
+                marginTop: "25px",
+                color: "#111",
+                fontWeight: "bold",
+              }}
+            >
+              Forgot your password?
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

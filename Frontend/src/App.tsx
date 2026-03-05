@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./reactpage/Login";
 import ForgotPassword from "./reactpage/ForgotPassword";
+
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
           path="/create-account"
           element={<div>Create Account Page</div>}
         />
+        <Route path="/about" element={<div>About Page</div>} />
       </Routes>
     </BrowserRouter>
   );
