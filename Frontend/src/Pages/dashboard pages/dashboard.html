@@ -1,273 +1,239 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="../../styles/styles.css">
-  <title>Student Life Management - Timetable</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../styles/dashboard-css/dashboard.css">
+  <title>Document</title>
 </head>
-
 <body>
-    
-  <div class="app">
+  <main class="content">
+  <div class="dashboard-page">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <div class="sidebar-top">
-        <div class="hamburger" aria-label="Menu" title="Menu">☰</div>
-        <div class="sidebar-title">
-          <strong>Student Life Management</strong>
-          <small>LIVE</small>
-        </div>
+    <!-- Page header / title row -->
+    <section class="dash-top">
+      <div class="dash-title">
+        <h1>Dashboard</h1>
+        <p class="dash-subtitle">Week 22 • Feb 02–06, 2026</p>
       </div>
 
-      <nav class="nav" aria-label="Primary">
-        <a class="active" href="#">
-          <span class="icon">📅</span>
-          Timetable
-        </a>
-        <a href="#">
-          <span class="icon">⏳</span>
-          Deadlines
-        </a>
-        <a href="#">
-          <span class="icon">✅</span>
-          Tasks
-        </a>
-        <a href="#">
-          <span class="icon">📚</span>
-          Modules
-        </a>
-        <a href="#">
-          <span class="icon">💷</span>
-          Budget
-        </a>
-        <a href="#">
-          <span class="icon">👤</span>
-          Profile
-        </a>
-        <a href="#">
-          <span class="icon">❓</span>
-          Help
-        </a>
-      </nav>
-
-      <div class="sidebar-bottom">
-        <div class="tz">
-          <span>🌍</span>
-          <span>Europe/London (+00:00)</span>
-        </div>
-        <div class="badge">v0.1 UI mock</div>
+      <div class="dash-top-actions">
+        <a class="btn btn-ghost" href="timetable.html">Today</a>
       </div>
-    </aside>
+    </section>
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo" title="Logo">SL</div>
-        <div>
-          <h1>Student Life Management</h1>
-          <small>Timetables</small>
-        </div>
+    <!-- Quick actions row -->
+    <section class="quick-actions" aria-label="Quick actions">
+      <!-- Keep these as links (no JS needed). Replace hrefs with your actual page paths -->
+      <a class="qa-btn" href="tasks.html">
+        <span class="qa-icon">+</span>
+        <span class="qa-text">Add Task</span>
+      </a>
+
+      <a class="qa-btn" href="deadlines.html">
+        <span class="qa-icon">+</span>
+        <span class="qa-text">Add Deadline</span>
+      </a>
+
+      <a class="qa-btn" href="timetable.html">
+        <span class="qa-icon">+</span>
+        <span class="qa-text">Add Timetable Entry</span>
+      </a>
+
+      <a class="qa-btn" href="budget.html">
+        <span class="qa-icon">+</span>
+        <span class="qa-text">Add Expense</span>
+      </a>
+
+      <a class="qa-btn" href="modules.html">
+        <span class="qa-icon">+</span>
+        <span class="qa-text">Add Module</span>
+      </a>
+    </section>
+
+    <!-- Main two-column layout -->
+    <section class="dash-grid">
+
+      <!-- LEFT COLUMN (bigger) -->
+      <div class="dash-col dash-col-left">
+
+        <!-- Today's Timetable -->
+        <article class="card">
+          <header class="card-head">
+            <div class="card-head-left">
+              <span class="icon-circle" aria-hidden="true">TT</span>
+              <h2>Today’s Timetable</h2>
+            </div>
+            <a class="card-link" href="timetable.html">View all</a>
+          </header>
+
+          <ul class="list">
+            <li class="list-item">
+              <div class="item-main">
+                <p class="item-title">ELEE1149 / ELEE1208 • Joint IT Lab</p>
+                <p class="item-meta">09:00–11:00 • Gillingham 403 (Zone C)</p>
+              </div>
+              <span class="pill pill-blue">Lab</span>
+            </li>
+
+            <li class="list-item">
+              <div class="item-main">
+                <p class="item-title">COMP1712 / COMP1946 • Joint Laboratory</p>
+                <p class="item-meta">12:00–14:00 • Gillingham 407 (Zone A)</p>
+              </div>
+              <span class="pill pill-green">Lab</span>
+            </li>
+
+            <li class="list-item">
+              <div class="item-main">
+                <p class="item-title">Study Block • Software Engineering</p>
+                <p class="item-meta">16:00–17:30 • Library (Quiet Zone)</p>
+              </div>
+              <span class="pill pill-grey">Focus</span>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Upcoming Deadlines -->
+        <article class="card">
+          <header class="card-head">
+            <div class="card-head-left">
+              <span class="icon-circle" aria-hidden="true">DL</span>
+              <h2>Upcoming Deadlines</h2>
+            </div>
+            <a class="card-link" href="deadlines.html">View all</a>
+          </header>
+
+          <ul class="list">
+            <li class="list-item">
+              <div class="item-main">
+                <p class="item-title">ELEE1149 • Requirements.md + SystemModelling.md</p>
+                <p class="item-meta">Due: Wed 04 Feb, 17:00</p>
+              </div>
+              <span class="pill pill-amber">Soon</span>
+            </li>
+
+            <li class="list-item">
+              <div class="item-main">
+                <p class="item-title">COMP1712 • Memory Subsystem Write-up Draft</p>
+                <p class="item-meta">Due: Fri 06 Feb, 23:59</p>
+              </div>
+              <span class="pill pill-red">High</span>
+            </li>
+
+            <li class="list-item">
+              <div class="item-main">
+                <p class="item-title">ELEE1148 • Sensors &amp; Networks Lab Notes</p>
+                <p class="item-meta">Due: Mon 09 Feb, 09:00</p>
+              </div>
+              <span class="pill pill-grey">Normal</span>
+            </li>
+          </ul>
+        </article>
+
       </div>
 
-      <div class="top-actions">
-        <div class="pill" title="Subscribe">SUBSCRIBE</div>
-        <div class="pill" title="Settings">⚙️</div>
-        <div class="avatar" title="User">
-          <div class="dot">T</div>
-          <span>Tomas</span>
-          <span style="opacity:.9;">▾</span>
-        </div>
-      </div>
-    </header>
+      <!-- RIGHT COLUMN (smaller) -->
+      <div class="dash-col dash-col-right">
 
-    <!-- MAIN -->
-    <main class="main">
-      <!-- Controls panel (like your screenshot filters) -->
-      <section class="controls" aria-label="Timetable Controls">
-        <div class="controls-top">
-          <div class="crumb">
-            <strong>MY TIMETABLE</strong>
-            <span class="muted">| February 02 - 06, 2026</span>
-            <span class="muted">| Week 22</span>
-          </div>
+        <!-- Tasks Due Soon -->
+        <article class="card">
+          <header class="card-head">
+            <div class="card-head-left">
+              <span class="icon-circle" aria-hidden="true">TS</span>
+              <h2>Tasks Due Soon</h2>
+            </div>
+            <a class="card-link" href="tasks.html">View all</a>
+          </header>
 
-          <div class="btnrow">
-            <div class="btn" title="Today">TODAY</div>
-            <div class="btn" title="Previous week">◀</div>
-            <div class="btn" title="Next week">▶</div>
-            <div class="btn" title="Days">Days ▾</div>
-            <div class="btn" title="Time">Time ▾</div>
-            <div class="btn" title="Multiple weeks">Multiple weeks ⭘</div>
-          </div>
-        </div>
+          <ul class="list compact">
+            <li class="list-item">
+              <div class="priority-dot prio-high" aria-hidden="true"></div>
+              <div class="item-main">
+                <p class="item-title">Finish dashboard HTML + CSS</p>
+                <p class="item-meta">Today • 18:00</p>
+              </div>
+              <span class="label label-high">High</span>
+            </li>
 
-        <div class="controls-bottom">
-          <div class="viewtoggles">
-            <span class="tiny">LANES</span>
-            <div class="btn" title="Toggle lanes">—</div>
-          </div>
+            <li class="list-item">
+              <div class="priority-dot prio-med" aria-hidden="true"></div>
+              <div class="item-main">
+                <p class="item-title">Add 3 sample modules</p>
+                <p class="item-meta">Tomorrow • 12:00</p>
+              </div>
+              <span class="label label-med">Medium</span>
+            </li>
 
-          <div class="segmented" role="tablist" aria-label="View">
-            <button class="active" role="tab" aria-selected="true">DAY</button>
-            <button role="tab" aria-selected="false">WEEK</button>
-            <button role="tab" aria-selected="false">MONTH</button>
-            <button role="tab" aria-selected="false">AGENDA</button>
-            <button role="tab" aria-selected="false">LEGEND</button>
-          </div>
-        </div>
-      </section>
+            <li class="list-item">
+              <div class="priority-dot prio-low" aria-hidden="true"></div>
+              <div class="item-main">
+                <p class="item-title">Update README screenshots</p>
+                <p class="item-meta">Thu • 20:00</p>
+              </div>
+              <span class="label label-low">Low</span>
+            </li>
 
-      <!-- Timetable -->
-      <section class="timetable-wrap" aria-label="Week Timetable">
-        <!-- header row with Mon-Fri -->
-        <div class="week-header">
-          <div class="cell"></div>
-          <div class="cell"><strong>Mon</strong><div>2</div></div>
-          <div class="cell"><strong>Tue</strong><div>3</div></div>
-          <div class="cell"><strong>Wed</strong><div>4</div></div>
-          <div class="cell"><strong>Thu</strong><div>5</div></div>
-          <div class="cell"><strong>Fri</strong><div>6</div></div>
-        </div>
+            <li class="list-item">
+              <div class="priority-dot prio-med" aria-hidden="true"></div>
+              <div class="item-main">
+                <p class="item-title">Commit: “dashboard layout + styles”</p>
+                <p class="item-meta">Thu • after testing</p>
+              </div>
+              <span class="label label-med">Medium</span>
+            </li>
+          </ul>
+        </article>
 
-        <div class="grid">
-          <!-- Time Column (08:00 - 18:00) -->
-          <div class="time-col">
-            <div class="time-slot">08:00</div>
-            <div class="time-slot">09:00</div>
-            <div class="time-slot">10:00</div>
-            <div class="time-slot">11:00</div>
-            <div class="time-slot">12:00</div>
-            <div class="time-slot">13:00</div>
-            <div class="time-slot">14:00</div>
-            <div class="time-slot">15:00</div>
-            <div class="time-slot">16:00</div>
-            <div class="time-slot">17:00</div>
-          </div>
+        <!-- Budget Snapshot -->
+        <article class="card">
+          <header class="card-head">
+            <div class="card-head-left">
+              <span class="icon-circle" aria-hidden="true">£</span>
+              <h2>Budget Snapshot</h2>
+            </div>
+            <a class="card-link" href="budget.html">View all</a>
+          </header>
 
-          <!-- Monday column -->
-          <div class="day">
-            <!-- 20 half-hour lines -->
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+          <div class="budget">
+            <div class="budget-row">
+              <div class="budget-metric">
+                <p class="metric-label">Spent this week</p>
+                <p class="metric-value">£27.40</p>
+              </div>
 
-            <!-- Example event: 16:00 - 17:00 => slot 16 (16:00) duration 2 slots (1 hour) -->
-            <div class="event orange slot-16 dur-2">
-              <div class="bar"></div>
-              <div class="content">
-                <p class="title">GEEN0031 / Lecture / 01</p>
-                <p class="meta">Lecture</p>
-                <p class="meta">📍 J206 (LT)</p>
-                <p class="meta">Date 02/02/2026 · Weeks 19–30</p>
-                <p class="meta">Description: Engineering Professional Skills 2</p>
+              <div class="budget-metric">
+                <p class="metric-label">Remaining</p>
+                <p class="metric-value">£52.60</p>
+              </div>
+            </div>
+
+            <div class="progress">
+              <div class="progress-bar" style="width: 34%;" aria-hidden="true"></div>
+            </div>
+            <p class="budget-hint">Weekly budget: £80 • 34% used</p>
+
+            <div class="budget-mini-list">
+              <div class="mini-item">
+                <span class="mini-dot"></span>
+                <span>Coffee + snack • £4.80</span>
+              </div>
+              <div class="mini-item">
+                <span class="mini-dot"></span>
+                <span>Bus (campus) • £6.20</span>
+              </div>
+              <div class="mini-item">
+                <span class="mini-dot"></span>
+                <span>Printing • £2.40</span>
               </div>
             </div>
           </div>
+        </article>
 
-          <!-- Tuesday column -->
-          <div class="day">
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+      </div>
+    </section>
 
-            <!-- 09:00 - 11:00 => slot 2 (09:00) duration 4 slots (2 hours) -->
-            <div class="event orange slot-2 dur-4">
-              <div class="bar"></div>
-              <div class="content">
-                <p class="title">ELEE1149 / ELEE1208 / Joint IT Lab / 01</p>
-                <p class="meta">IT Lab</p>
-                <p class="meta">📍 Gillingham 403 Zone C</p>
-                <p class="meta">Date 03/02/2026 · Weeks 22–30</p>
-              </div>
-            </div>
-
-            <!-- 12:00 - 14:00 => slot 8 (12:00) duration 4 slots -->
-            <div class="event cyan slot-8 dur-4">
-              <div class="bar"></div>
-              <div class="content">
-                <p class="title">COMP1712 / COMP1946 / Joint Laboratory / 01</p>
-                <p class="meta">Laboratory</p>
-                <p class="meta">📍 Gillingham 403 Zone A</p>
-                <p class="meta">Date 03/02/2026 · Weeks 22–30</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Wednesday column -->
-          <div class="day">
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <!-- No events -->
-          </div>
-
-          <!-- Thursday column -->
-          <div class="day">
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-
-            <!-- 14:00 - 16:00 => slot 12 duration 4 slots -->
-            <div class="event cyan slot-12 dur-4">
-              <div class="bar"></div>
-              <div class="content">
-                <p class="title">ELEE1148 / Laboratory / 01</p>
-                <p class="meta">Laboratory</p>
-                <p class="meta">📍 Gillingham 303 Zone B</p>
-                <p class="meta">Date 05/02/2026 · Weeks 22–30</p>
-                <p class="meta">Description: Sensors and Networks</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Friday column -->
-          <div class="day">
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <!-- No events -->
-          </div>
-        </div>
-      </section>
-    </main>
   </div>
+</main>
 </body>
 </html>

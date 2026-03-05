@@ -1,12 +1,273 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/styles.css">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="../../styles/dashboard-css/timetable.css">
+  <title>Student Life Management - Timetable</title>
+
 </head>
+
 <body>
     
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="hamburger" aria-label="Menu" title="Menu">☰</div>
+        <div class="sidebar-title">
+          <strong>Student Life Management</strong>
+          <small>LIVE</small>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="active" href="#">
+          <span class="icon">📅</span>
+          Timetable
+        </a>
+        <a href="#">
+          <span class="icon">⏳</span>
+          Deadlines
+        </a>
+        <a href="#">
+          <span class="icon">✅</span>
+          Tasks
+        </a>
+        <a href="#">
+          <span class="icon">📚</span>
+          Modules
+        </a>
+        <a href="#">
+          <span class="icon">💷</span>
+          Budget
+        </a>
+        <a href="#">
+          <span class="icon">👤</span>
+          Profile
+        </a>
+        <a href="#">
+          <span class="icon">❓</span>
+          Help
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="tz">
+          <span>🌍</span>
+          <span>Europe/London (+00:00)</span>
+        </div>
+        <div class="badge">v0.1 UI mock</div>
+      </div>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" title="Logo">SL</div>
+        <div>
+          <h1>Student Life Management</h1>
+          <small>Timetables</small>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <div class="pill" title="Subscribe">SUBSCRIBE</div>
+        <div class="pill" title="Settings">⚙️</div>
+        <div class="avatar" title="User">
+          <div class="dot">T</div>
+          <span>Tomas</span>
+          <span style="opacity:.9;">▾</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- Controls panel (like your screenshot filters) -->
+      <section class="controls" aria-label="Timetable Controls">
+        <div class="controls-top">
+          <div class="crumb">
+            <strong>MY TIMETABLE</strong>
+            <span class="muted">| February 02 - 06, 2026</span>
+            <span class="muted">| Week 22</span>
+          </div>
+
+          <div class="btnrow">
+            <div class="btn" title="Today">TODAY</div>
+            <div class="btn" title="Previous week">◀</div>
+            <div class="btn" title="Next week">▶</div>
+            <div class="btn" title="Days">Days ▾</div>
+            <div class="btn" title="Time">Time ▾</div>
+            <div class="btn" title="Multiple weeks">Multiple weeks ⭘</div>
+          </div>
+        </div>
+
+        <div class="controls-bottom">
+          <div class="viewtoggles">
+            <span class="tiny">LANES</span>
+            <div class="btn" title="Toggle lanes">—</div>
+          </div>
+
+          <div class="segmented" role="tablist" aria-label="View">
+            <button class="active" role="tab" aria-selected="true">DAY</button>
+            <button role="tab" aria-selected="false">WEEK</button>
+            <button role="tab" aria-selected="false">MONTH</button>
+            <button role="tab" aria-selected="false">AGENDA</button>
+            <button role="tab" aria-selected="false">LEGEND</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timetable -->
+      <section class="timetable-wrap" aria-label="Week Timetable">
+        <!-- header row with Mon-Fri -->
+        <div class="week-header">
+          <div class="cell"></div>
+          <div class="cell"><strong>Mon</strong><div>2</div></div>
+          <div class="cell"><strong>Tue</strong><div>3</div></div>
+          <div class="cell"><strong>Wed</strong><div>4</div></div>
+          <div class="cell"><strong>Thu</strong><div>5</div></div>
+          <div class="cell"><strong>Fri</strong><div>6</div></div>
+        </div>
+
+        <div class="grid">
+          <!-- Time Column (08:00 - 18:00) -->
+          <div class="time-col">
+            <div class="time-slot">08:00</div>
+            <div class="time-slot">09:00</div>
+            <div class="time-slot">10:00</div>
+            <div class="time-slot">11:00</div>
+            <div class="time-slot">12:00</div>
+            <div class="time-slot">13:00</div>
+            <div class="time-slot">14:00</div>
+            <div class="time-slot">15:00</div>
+            <div class="time-slot">16:00</div>
+            <div class="time-slot">17:00</div>
+          </div>
+
+          <!-- Monday column -->
+          <div class="day">
+            <!-- 20 half-hour lines -->
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+
+            <!-- Example event: 16:00 - 17:00 => slot 16 (16:00) duration 2 slots (1 hour) -->
+            <div class="event orange slot-16 dur-2">
+              <div class="bar"></div>
+              <div class="content">
+                <p class="title">GEEN0031 / Lecture / 01</p>
+                <p class="meta">Lecture</p>
+                <p class="meta">📍 J206 (LT)</p>
+                <p class="meta">Date 02/02/2026 · Weeks 19–30</p>
+                <p class="meta">Description: Engineering Professional Skills 2</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tuesday column -->
+          <div class="day">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+
+            <!-- 09:00 - 11:00 => slot 2 (09:00) duration 4 slots (2 hours) -->
+            <div class="event orange slot-2 dur-4">
+              <div class="bar"></div>
+              <div class="content">
+                <p class="title">ELEE1149 / ELEE1208 / Joint IT Lab / 01</p>
+                <p class="meta">IT Lab</p>
+                <p class="meta">📍 Gillingham 403 Zone C</p>
+                <p class="meta">Date 03/02/2026 · Weeks 22–30</p>
+              </div>
+            </div>
+
+            <!-- 12:00 - 14:00 => slot 8 (12:00) duration 4 slots -->
+            <div class="event cyan slot-8 dur-4">
+              <div class="bar"></div>
+              <div class="content">
+                <p class="title">COMP1712 / COMP1946 / Joint Laboratory / 01</p>
+                <p class="meta">Laboratory</p>
+                <p class="meta">📍 Gillingham 403 Zone A</p>
+                <p class="meta">Date 03/02/2026 · Weeks 22–30</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wednesday column -->
+          <div class="day">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <!-- No events -->
+          </div>
+
+          <!-- Thursday column -->
+          <div class="day">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+
+            <!-- 14:00 - 16:00 => slot 12 duration 4 slots -->
+            <div class="event cyan slot-12 dur-4">
+              <div class="bar"></div>
+              <div class="content">
+                <p class="title">ELEE1148 / Laboratory / 01</p>
+                <p class="meta">Laboratory</p>
+                <p class="meta">📍 Gillingham 303 Zone B</p>
+                <p class="meta">Date 05/02/2026 · Weeks 22–30</p>
+                <p class="meta">Description: Sensors and Networks</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Friday column -->
+          <div class="day">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <!-- No events -->
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
