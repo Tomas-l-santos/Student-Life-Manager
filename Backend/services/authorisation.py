@@ -108,4 +108,87 @@ class AuthService:
         if not any(not c.isalnum() for c in password):
             raise ValueError("Must contain special character")
 
+#PASSWORD RESET
 
+
+    def generate_reset_token(self, email):
+        """Generate a password reset token for a user"""
+        email = email.strip()
+        self.validate_email(email)
+
+        # Check if user exists
+        users = self.storage.read_all()
+        user_exists = any(u["email"] == email for u in users)
+
+        if not user_exists:
+            raise ValueError("User not found")
+
+        # Generate secure random token (32 characters)
+        token = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(32))
+
+        # Store token with expiration (1 hour from now)
+        expiry = time() + 3600  # 3600 seconds = 1 hour
+        self.reset_tokens[token] = {
+            "email": email,
+            "expiry": expiry
+        }
+
+        # Clean up expired tokens
+        self._cleanup_expired_tokens()
+
+        return token
+
+    def verify_reset_token(self, token):
+        """Verify if a reset token is valid"""
+        if token not in self.reset_tokens:
+            raise ValueError("Invalid or expired reset token")
+
+        token_data = self.reset_tokens[token]
+        
+        # Check if token has expired
+        if time() > token_data["expiry"]:
+            del self.reset_tokens[token]
+            raise ValueError("Reset token has expired")
+
+        return token_data["email"]
+
+    def reset_password_with_token(self, token, new_password):
+        """Reset password using a valid reset token"""
+        # Verify token and get email
+        email = self.verify_reset_token(token)
+
+        # Validate new password
+        new_password = new_password.strip()
+        self.validate_password(new_password)
+
+        # Change password
+        users = self.storage.read_all()
+
+        for u in users:
+            if u["email"] == email:
+                new_hash = bcrypt.hashpw(
+                    new_password.encode(),
+                    bcrypt.gensalt()
+                ).decode()
+                u["password_hash"] = new_hash
+                self.storage.overwrite(users)
+
+                # Delete the used token
+                del self.reset_tokens[token]
+
+                # Clear any failed login attempts
+                self.failed_attempts.pop(email, None)
+
+                return True
+
+        raise ValueError("User not found")
+
+    def _cleanup_expired_tokens(self):
+        """Remove expired reset tokens"""
+        now = time()
+        expired_tokens = [
+            token for token, data in self.reset_tokens.items()
+            if now > data["expiry"]
+        ]
+        for token in expired_tokens:
+            del self.reset_tokens[token]

@@ -4,7 +4,6 @@ import "../styles/styles.css";
 
 function Login() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-
   return (
     <div className="landing-wrapper">
       {/* Top Bar!! */}
@@ -72,7 +71,7 @@ function Login() {
               alt="Logo"
               style={{ width: "60px", marginBottom: "20px" }}
             />
-            <h2>Welcome to SLM ig (Need to decide on a better app name smh)</h2>
+            <h2>Welcome to SLM ig (Need to decide on a better app name )</h2>
 
             <div style={{ textAlign: "left" }}>
               <label

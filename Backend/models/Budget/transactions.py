@@ -1,9 +1,9 @@
 from datetime import datetime
 
 class Transaction:
-    def __init__(self, id, user_email, category_id, amount, description, transaction_date, is_recurring=False, created_at=None):
+    def __init__(self, id, user_id, category_id, amount, description, transaction_date, is_recurring=False, created_at=None):
         self.id = id
-        self.user_email = user_email
+        self.user_id = user_id
         self.category_id = category_id
         self.amount = amount
         self.description = description
@@ -14,9 +14,9 @@ class Transaction:
     def to_dict(self):
         return {
             "id": self.id,
-            "user_email": self.user_email,                  """this is the email of the user who made the transaction, this can bea  security/privacy issue cuz it tracks peoples expenses, we can discuss if we fully add this or not"""
+            "user_id": self.user_id,                  """this is the email of the user who made the transaction, this can bea  security/privacy issue cuz it tracks peoples expenses, we can discuss if we fully add this or not"""
             "category_id": self.category_id,
-            "amount": self.amount,                          """amount of money weather income or expense, linked to catogory above to determine if its income or expense (+ or -)"""
+            "amount": self.amount,                          #amount of money weather income or expense, linked to catogory above to determine if its income or expense (+ or -)
             "description": self.description,
             "transaction_date": self.transaction_date,
             "is_recurring": self.is_recurring,
@@ -27,7 +27,7 @@ class Transaction:
     def from_dict(data):
         return Transaction(
             id=data["id"],
-            user_email=data["user_email"],
+            user_id=data["user_id"],
             category_id=data["category_id"],
             amount=data["amount"],
             description=data.get("description", ""),
