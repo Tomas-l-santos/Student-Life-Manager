@@ -1,4 +1,6 @@
 import bcrypt
+import secrets
+import string
 from models.user import User
 from storage.storagerepo import JSONStorage
 import re
@@ -13,6 +15,7 @@ class AuthService:
     def __init__(self, storage_path="data/users.json"):
         self.storage = JSONStorage(storage_path)
         self.failed_attempts = {}
+        self.reset_tokens = {} 
 
     def validate_email(self, email):
         if not re.match(EMAIL_REGEX, email):
@@ -65,13 +68,16 @@ class AuthService:
 
                 if bcrypt.checkpw(password.encode(), stored_hash):
                     self.failed_attempts.pop(email, None)
-                    return True
+
+                    return User.from_dict(u)
+
                 else:
                     attempts, _ = self.failed_attempts.get(email, (0, now))
                     self.failed_attempts[email] = (attempts + 1, now)
-                    return False
+                    raise ValueError("Invalid email or password")
 
-        return False
+        raise ValueError("Invalid email or password")
+
 
     def change_password(self, email, new_password):
         email = email.strip()
