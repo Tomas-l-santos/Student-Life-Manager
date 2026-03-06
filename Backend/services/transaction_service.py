@@ -1,14 +1,14 @@
 import uuid
 from datetime import datetime
 from models.Budget.transactions import Transaction
-from storage.storagerepo import storagerepo
+from storage.storagerepo import JSONStorage
 
 class TransactionService:
 
     def __init__(self):
-        self.storage = StorageRepo("date/Transactions.json")
+        self.storage = JSONStorage("data/transactions.json")
     
-    def _validate_amount(self. amount):
+    def _validate_amount(self, amount)
         if not isinstance(amount, (int, float)):
             raise ValueError ("Amount must be a number")
 
@@ -23,6 +23,14 @@ class TransactionService:
             raise ValueError ("Description too long")
         return description.strip()
 
+    def _validate_date(self, transaction_date):
+        from datetime import datetime
+        try:
+            datetime.strptime(transaction_date, "%Y-%m-%d")
+        except ValueError:
+            raise ValueError("Invalid date format. Use YYYY-MM-DD e.g. 2026-03-06")
+        return transaction_date
+
 
     def add_transaction(self, user_id, category_id, amount, description, transaction_date, is_recurring=False):
         amount = self._validate_amount(amount)
@@ -35,7 +43,7 @@ class TransactionService:
         self.storage.append(transaction.to_dict())
         return transaction
 
-     def get_user_transactions(self, user_id):
+    def get_user_transactions(self, user_id):
         all_transactions = self.storage.read_all()  
 
         user_transactions = [
@@ -50,7 +58,7 @@ class TransactionService:
         transactions = self.storage.read_all()
 
         filtered = [
-            t for t in Transactions
+            t for t in transactions
             if not (t["id"] == transaction_id and  t["user_id"] == user_id)
         ]
         self.storage.overwrite(filtered)
