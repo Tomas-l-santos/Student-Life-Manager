@@ -45,7 +45,7 @@ class AuthService:
         user = User(email, username, password_hash)
         self.storage.append(user.to_dict())
 
-        return True
+        return user
 
     def login_user(self, email, password):
         email = email.strip()
