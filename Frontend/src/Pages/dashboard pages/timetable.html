@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="../styles/styles.css">
+  <link rel="stylesheet" href="../../styles/dashboard-css/timetable.css">
   <title>Student Life Management - Timetable</title>
 
 </head>
@@ -21,33 +21,36 @@
           <small>LIVE</small>
         </div>
       </div>
-
       <nav class="nav" aria-label="Primary">
-        <a class="active" href="#">
+        <a href="dashboard.html">
+          <span class="icon">📊</span>
+          Dashboard
+        </a>
+        <a class="active" href="timetable.html">
           <span class="icon">📅</span>
           Timetable
         </a>
-        <a href="#">
+        <a href="deadlines.html">
           <span class="icon">⏳</span>
           Deadlines
         </a>
-        <a href="#">
+        <a href="tasks.html">
           <span class="icon">✅</span>
           Tasks
         </a>
-        <a href="#">
+        <a href="modules.html">
           <span class="icon">📚</span>
           Modules
         </a>
-        <a href="#">
+        <a href="budget.html">
           <span class="icon">💷</span>
           Budget
         </a>
-        <a href="#">
+        <a href="account&security.html">
           <span class="icon">👤</span>
-          Profile
+          Account
         </a>
-        <a href="#">
+        <a href="help.html">
           <span class="icon">❓</span>
           Help
         </a>
@@ -145,6 +148,9 @@
             <div class="time-slot">15:00</div>
             <div class="time-slot">16:00</div>
             <div class="time-slot">17:00</div>
+            <div class="time-slot">18:00</div>
+            <div class="time-slot">19:00</div>
+            <div class="time-slot">20:00</div>
           </div>
 
           <!-- Monday column -->
@@ -161,21 +167,8 @@
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
 
-            <!-- Example event: 16:00 - 17:00 => slot 16 (16:00) duration 2 slots (1 hour) -->
-            <div class="event orange slot-16 dur-2">
-              <div class="bar"></div>
-              <div class="content">
-                <p class="title">GEEN0031 / Lecture / 01</p>
-                <p class="meta">Lecture</p>
-                <p class="meta">📍 J206 (LT)</p>
-                <p class="meta">Date 02/02/2026 · Weeks 19–30</p>
-                <p class="meta">Description: Engineering Professional Skills 2</p>
-              </div>
-            </div>
-          </div>
-
           <!-- Tuesday column -->
-          <div class="day">
+          <div class="day" class="grid">
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
@@ -186,32 +179,9 @@
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
-
-            <!-- 09:00 - 11:00 => slot 2 (09:00) duration 4 slots (2 hours) -->
-            <div class="event orange slot-2 dur-4">
-              <div class="bar"></div>
-              <div class="content">
-                <p class="title">ELEE1149 / ELEE1208 / Joint IT Lab / 01</p>
-                <p class="meta">IT Lab</p>
-                <p class="meta">📍 Gillingham 403 Zone C</p>
-                <p class="meta">Date 03/02/2026 · Weeks 22–30</p>
-              </div>
-            </div>
-
-            <!-- 12:00 - 14:00 => slot 8 (12:00) duration 4 slots -->
-            <div class="event cyan slot-8 dur-4">
-              <div class="bar"></div>
-              <div class="content">
-                <p class="title">COMP1712 / COMP1946 / Joint Laboratory / 01</p>
-                <p class="meta">Laboratory</p>
-                <p class="meta">📍 Gillingham 403 Zone A</p>
-                <p class="meta">Date 03/02/2026 · Weeks 22–30</p>
-              </div>
-            </div>
-          </div>
 
           <!-- Wednesday column -->
-          <div class="day">
+          <div class="day" class="grid">
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
@@ -237,19 +207,6 @@
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
-
-            <!-- 14:00 - 16:00 => slot 12 duration 4 slots -->
-            <div class="event cyan slot-12 dur-4">
-              <div class="bar"></div>
-              <div class="content">
-                <p class="title">ELEE1148 / Laboratory / 01</p>
-                <p class="meta">Laboratory</p>
-                <p class="meta">📍 Gillingham 303 Zone B</p>
-                <p class="meta">Date 05/02/2026 · Weeks 22–30</p>
-                <p class="meta">Description: Sensors and Networks</p>
-              </div>
-            </div>
-          </div>
 
           <!-- Friday column -->
           <div class="day">
