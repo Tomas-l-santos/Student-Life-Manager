@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from services.authorisations import AuthService
+from services.authorisation import AuthService
 from functools import wraps
 import jwt
 import os
@@ -254,43 +254,3 @@ def forgot_password():
     except Exception as e:
         return jsonify({'error': 'Failed to generate reset token', 'details': str(e)}), 500
 
-
-@auth_bp.route('/reset-password', methods=['POST'])
-def reset_password():
-    """Reset password using a reset token"""
-    try:
-        data = request.get_json()
-        
-        if not data or not data.get('token') or not data.get('new_password'):
-            return jsonify({'error': 'Token and new password are required'}), 400
-        
-        auth_service.reset_password_with_token(data['token'], data['new_password'])
-        
-        return jsonify({'message': 'Password reset successfully'}), 200
-        
-    except ValueError as e:
-        return jsonify({'error': str(e)}), 400
-    except Exception as e:
-        return jsonify({'error': 'Failed to reset password', 'details': str(e)}), 500
-
-
-@auth_bp.route('/verify-reset-token', methods=['POST'])
-def verify_reset_token():
-    """Verify if a reset token is valid"""
-    try:
-        data = request.get_json()
-        
-        if not data or not data.get('token'):
-            return jsonify({'error': 'Token is required'}), 400
-        
-        email = auth_service.verify_reset_token(data['token'])
-        
-        return jsonify({
-            'message': 'Token is valid',
-            'email': email
-        }), 200
-        
-    except ValueError as e:
-        return jsonify({'error': str(e)}), 400
-    except Exception as e:
-        return jsonify({'error': 'Failed to verify token', 'details': str(e)}), 500
