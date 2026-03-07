@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/styles.css";
+import { LoginModal, SignupModal } from "./Signup";
 
 function Login() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   return (
     <div className="landing-wrapper">
-      {/* Top Bar!! */}
       <nav className="top-nav">
         <div className="nav-logo">
           <img src="/Images/student_life_logo_5.png" alt="Logo" />
@@ -27,18 +28,16 @@ function Login() {
           <button className="btn-red" onClick={() => setIsLoginOpen(true)}>
             Log in
           </button>
-          <Link to="/create-account" className="btn-grey">
+          <button className="btn-grey" onClick={() => setIsSignUpOpen(true)}>
             Sign up
-          </Link>
+          </button>
         </div>
       </nav>
 
-      {/* Alligning*/}
       <section className="hero-section">
         <div></div>
       </section>
 
-      {/* Features?*/}
       <section className="feature-section bg-pink">
         <div className="feature-image">
           <img src="/Images/test.png" alt="Search" />
@@ -59,69 +58,16 @@ function Login() {
         </div>
       </section>
 
-      {/* login signup  */}
-      {isLoginOpen && (
-        <div className="modal-overlay">
-          <div className="login-card">
-            <button className="close-btn" onClick={() => setIsLoginOpen(false)}>
-              ✕
-            </button>
-            <img
-              src="/Images/student_life_logo_5.png"
-              alt="Logo"
-              style={{ width: "60px", marginBottom: "20px" }}
-            />
-            <h2>Welcome to SLM ig (Need to decide on a better app name )</h2>
+      {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
 
-            <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
-                Email
-              </label>
-              <input type="email" placeholder="Email" className="pint-input" />
-            </div>
-
-            <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                placeholder="Password"
-                className="pint-input"
-              />
-            </div>
-
-            <div className="checkbox-row">
-              <input
-                type="checkbox"
-                id="rem"
-                style={{ width: "18px", height: "18px", cursor: "pointer" }}
-              />
-              <label htmlFor="rem">Remember me</label>
-            </div>
-
-            <Link to="/dashboard" className="btn-continue-modal">
-              Log in
-            </Link>
-            <Link
-              to="/forgot-password"
-              style={{
-                display: "block",
-                marginTop: "25px",
-                color: "#111",
-                fontWeight: "bold",
-              }}
-            >
-              Forgot your password?
-            </Link>
-          </div>
-        </div>
+      {isSignUpOpen && (
+        <SignupModal
+          onClose={() => setIsSignUpOpen(false)}
+          onSwitchToLogin={() => setIsLoginOpen(true)}
+        />
       )}
     </div>
   );
 }
+
 export default Login;

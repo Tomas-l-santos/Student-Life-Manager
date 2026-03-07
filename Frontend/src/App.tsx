@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./reactpage/Login";
 import ForgotPassword from "./reactpage/ForgotPassword";
+import About from "./reactpage/about";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           path="/create-account"
           element={<div>Create Account Page</div>}
         />
-        <Route path="/about" element={<div>About Page</div>} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   );
