@@ -61,44 +61,56 @@ function About() {
         </div>
       </nav>
 
-      {/* For allignment and beauty */}
-      <section className="agency-hero"></section>
-      <section className="agency-mission"></section>
-
-      {/* Story Section */}
-      <section className="agency-story">
-        <div className="story-container">
-          <div className="story-text">
-            <h2>Our story</h2>
-            <p>
-              Founded in 2026 by a dedicated team of students, Student Life
-              Management was born from our own struggles. We were overwhelmed by
-              scattered notes, missed deadlines, and Financial negligence. We
-              wanted a better way.
-            </p>
-            <p>
-              SLM is an intuitive platform designed specifically for the modern
-              academic journey. Our service provides an elegant interface to
-              make managing courses, timetables, and finances effortless.
-            </p>
-            <p>
-              Our intuitive approach means users can navigate complex study
-              schedules with ease, trusting our system to eliminate stress and
-              foster success.
-            </p>
+      {/* NEW COMBINED SECTION: About Us Grid */}
+      <section className="premium-about-section">
+        <div className="about-grid">
+          {/* Left Side: Huge Title & Mission Text */}
+          <div className="about-left">
+            <h1 className="huge-title">
+              ABOUT
+              <br />
+              US
+            </h1>
+            <div className="about-left-text">
+              <p className="subtitle-bold">Eliminating academic burnout.</p>
+              <p>
+                Founded in 2026 by a dedicated team of students, Student Life
+                Management was born from our own struggles. We provide an
+                elegant interface to make managing courses, timetables, and
+                finances effortless.
+              </p>
+            </div>
           </div>
 
-          <div className="story-image-side">
-            <div className="abstract-shape teal-blob"></div>
-            <div className="abstract-shape yellow-triangle"></div>
-            <div className="circular-image-mask">
-              <img src="/Images/test.png" alt="Students studying" />
+          {/* Right Side: Images & Philosophy */}
+          <div className="about-right">
+            <div className="about-images">
+              <img
+                src="/Images/student_life_login_background.png"
+                alt="Workspace"
+                className="main-rounded-img"
+              />
+              <div className="philosophy-column">
+                <img
+                  src="/Images/test.png"
+                  alt="Students collaborating"
+                  className="secondary-rounded-img"
+                />
+                <div className="philosophy-text">
+                  <h2>Our Philosophy</h2>
+                  <p>
+                    Our intuitive approach means users can navigate complex
+                    study schedules with ease, trusting our system to eliminate
+                    stress and foster success.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team section */}
+      {/* Team section (Preserved exact original styling) */}
       <section className="agency-team">
         <h2>Meet your team</h2>
         <p className="team-sub">
@@ -126,10 +138,9 @@ function About() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer (Preserved exact original styling) */}
       <footer className="agency-combined-footer">
         <div className="graphic-circles footer-circle-left"></div>
-        <div className="graphic-circles top-right-small"></div>
 
         <div className="footer-cta-content">
           <h2>
@@ -180,7 +191,8 @@ function About() {
           <p>© 2026 Student Life Management. All rights reserved.</p>
         </div>
       </footer>
-      {/* Team stuff */}
+
+      {/* Team Modal */}
       {activeOwner && (
         <div
           className="agency-modal-overlay"
@@ -195,18 +207,31 @@ function About() {
             </button>
             <div className="agency-modal-left">
               <div className="agency-modal-img">
-                <img src={activeOwner.img} alt={activeOwner.name} />
+                <img
+                  src={activeOwner.img}
+                  alt={activeOwner.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
               </div>
             </div>
-            <div className="agency-modal-right">
+            <div className="agency-modal-right" style={{ padding: "2rem" }}>
               <h2>{activeOwner.name}</h2>
-              <span className="agency-modal-role">{activeOwner.role}</span>
-              <div className="agency-modal-divider"></div>
+              <span
+                className="agency-modal-role"
+                style={{ color: "var(--color-coral)", fontWeight: "bold" }}
+              >
+                {activeOwner.role}
+              </span>
+              <div
+                className="agency-modal-divider"
+                style={{ height: "1px", background: "#ccc", margin: "1rem 0" }}
+              ></div>
               <p>{activeOwner.bio}</p>
             </div>
           </div>
         </div>
       )}
+
       {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
       {showSignup && (
         <SignupModal
