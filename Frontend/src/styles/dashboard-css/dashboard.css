@@ -1,4 +1,249 @@
+/* This is the CSS for the dashboard.html file for now*/
 
+     :root{
+      --navy-900:#07144a;
+      --navy-850:#081a58;
+      --navy-800:#0a216f;
+
+      --bg:#ffffff;
+      --panel:#f5f7fb;
+      --panel-2:#eef2f8;
+      --border:#e3e8f2;
+      --text:#0b1020;
+      --muted:#63708a;
+
+      --sidebar:#081a58;
+      --sidebar-2:#0b1f66;
+      --sidebar-text:#e9eeff;
+      --sidebar-muted:#b9c6ff;
+
+      --event-orange:#f59e0b;
+      --event-cyan:#22c55e;   /* you can change these later */
+      --event-blue:#38bdf8;
+      --event-purple:#a855f7;
+
+      --shadow: 0 6px 18px rgba(10, 23, 64, 0.12);
+      --radius:12px;
+
+      --sidebar-w: 240px;
+      --topbar-h: 64px;
+
+    }
+
+    *{ box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    /* ===== App Layout ===== */
+    .app{
+      height: 100vh;
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      grid-template-rows: var(--topbar-h) 1fr;
+      grid-template-areas:
+        "sidebar topbar"
+        "sidebar main";
+    }
+
+    /* ===== Top Bar ===== */
+    .topbar{
+      grid-area: topbar;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 18px 0 18px;
+      background: linear-gradient(90deg, var(--navy-900), var(--navy-800));
+      color: #fff;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 280px;
+    }
+    .logo{
+      width:36px;
+      height:36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.14);
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      letter-spacing:0.5px;
+    }
+    .brand h1{
+      margin:0;
+      font-size:18px;
+      font-weight:650;
+    }
+    .brand small{
+      display:block;
+      font-size:12px;
+      opacity:0.85;
+      margin-top:1px;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .pill{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 13px;
+      cursor: pointer;
+      user-select:none;
+    }
+    .pill:hover{ background: rgba(255,255,255,0.14); }
+
+    .avatar{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .avatar .dot{
+      width:28px;
+      height:28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      display:grid;
+      place-items:center;
+      font-weight:700;
+      font-size: 12px;
+    }
+    .avatar span{
+      font-size: 13px;
+      opacity:0.95;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar{
+      grid-area: sidebar;
+      background: linear-gradient(180deg, var(--sidebar), var(--sidebar-2));
+      color: var(--sidebar-text);
+      display:flex;
+      flex-direction:column;
+      border-right: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .sidebar-top{
+      padding: 16px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .hamburger{
+      width:40px;
+      height:40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+    .hamburger:hover{ background: rgba(255,255,255,0.14); }
+
+    .sidebar-title{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
+      margin-right:auto;
+      margin-left:10px;
+    }
+    .sidebar-title strong{
+      font-size: 14px;
+      letter-spacing:0.3px;
+    }
+    .sidebar-title small{
+      font-size: 12px;
+      color: var(--sidebar-muted);
+      margin-top:4px;
+    }
+
+    .nav{
+      padding: 12px 10px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .nav a{
+      text-decoration:none;
+      color: var(--sidebar-text);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      opacity:0.95;
+    }
+    .nav a:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .nav a.active{
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .nav .icon{
+      width:28px;
+      height:28px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.10);
+      display:grid;
+      place-items:center;
+      font-size: 14px;
+    }
+
+    .sidebar-bottom{
+      margin-top:auto;
+      padding: 14px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      color: var(--sidebar-muted);
+      font-size: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .tz{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      opacity:0.95;
+    }
+    .tz .badge{
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--sidebar-text);
+      font-size: 12px;
+      width: fit-content;
+    }
+
+    
 .dashboard-page{
   /* Light background contrast to your dark-blue theme */
   background: #f5f7fb;

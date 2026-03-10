@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="../../styles/dashboard-css/testing.css">
-  <title>Student Life Management - testing</title>
+  <link rel="stylesheet" href="../../styles/dashboard-css/timetable.css">
+  <title>Student Life Management - Timetable</title>
 
 </head>
 
@@ -21,13 +21,12 @@
           <small>LIVE</small>
         </div>
       </div>
-
       <nav class="nav" aria-label="Primary">
-        <a class="active" href="#">
+        <a href="dashboard.html">
           <span class="icon">📊</span>
-          dashboard
+          Dashboard
         </a>
-         <a href="timetable.html">
+        <a class="active" href="timetable.html">
           <span class="icon">📅</span>
           Timetable
         </a>
@@ -72,7 +71,7 @@
         <div class="logo" title="Logo">SL</div>
         <div>
           <h1>Student Life Management</h1>
-          <small>Dashboard</small>
+          <small>Timetables</small>
         </div>
       </div>
 
@@ -80,194 +79,152 @@
         <div class="pill" title="Subscribe">SUBSCRIBE</div>
         <div class="pill" title="Settings">⚙️</div>
         <div class="avatar" title="User">
-          <div class="dot">U</div>
-          <span>Username</span>
+          <div class="dot">T</div>
+          <span>Tomas</span>
           <span style="opacity:.9;">▾</span>
         </div>
       </div>
     </header>
-<!-- Main two-column layout -->
-    <section class="dash-grid">
 
-      <!-- LEFT COLUMN (bigger) -->
-      <div class="dash-col dash-col-left">
-
-        <!-- Today's Timetable -->
-        <article class="card">
-          <header class="card-head">
-            <div class="card-head-left">
-              <span class="icon-circle" aria-hidden="true">TT</span>
-              <h2>Today’s Timetable</h2>
-            </div>
-            <a class="card-link" href="timetable.html">View all</a>
-          </header>
-
-          <ul class="list">
-            <li class="list-item">
-              <div class="item-main">
-                <p class="item-title">ELEE1149 / ELEE1208 • Joint IT Lab</p>
-                <p class="item-meta">09:00–11:00 • Gillingham 403 (Zone C)</p>
-              </div>
-              <span class="pill pill-blue">Lab</span>
-            </li>
-
-            <li class="list-item">
-              <div class="item-main">
-                <p class="item-title">COMP1712 / COMP1946 • Joint Laboratory</p>
-                <p class="item-meta">12:00–14:00 • Gillingham 407 (Zone A)</p>
-              </div>
-              <span class="pill pill-green">Lab</span>
-            </li>
-
-            <li class="list-item">
-              <div class="item-main">
-                <p class="item-title">Study Block • Software Engineering</p>
-                <p class="item-meta">16:00–17:30 • Library (Quiet Zone)</p>
-              </div>
-              <span class="pill pill-grey">Focus</span>
-            </li>
-          </ul>
-        </article>
-
-        <!-- Upcoming Deadlines -->
-        <article class="card">
-          <header class="card-head">
-            <div class="card-head-left">
-              <span class="icon-circle" aria-hidden="true">DL</span>
-              <h2>Upcoming Deadlines</h2>
-            </div>
-            <a class="card-link" href="deadlines.html">View all</a>
-          </header>
-
-          <ul class="list">
-            <li class="list-item">
-              <div class="item-main">
-                <p class="item-title">ELEE1149 • Requirements.md + SystemModelling.md</p>
-                <p class="item-meta">Due: Wed 04 Feb, 17:00</p>
-              </div>
-              <span class="pill pill-amber">Soon</span>
-            </li>
-
-            <li class="list-item">
-              <div class="item-main">
-                <p class="item-title">COMP1712 • Memory Subsystem Write-up Draft</p>
-                <p class="item-meta">Due: Fri 06 Feb, 23:59</p>
-              </div>
-              <span class="pill pill-red">High</span>
-            </li>
-
-            <li class="list-item">
-              <div class="item-main">
-                <p class="item-title">ELEE1148 • Sensors &amp; Networks Lab Notes</p>
-                <p class="item-meta">Due: Mon 09 Feb, 09:00</p>
-              </div>
-              <span class="pill pill-grey">Normal</span>
-            </li>
-          </ul>
-        </article>
-
-      </div>
-
-      <!-- RIGHT COLUMN (smaller) -->
-      <div class="dash-col dash-col-right">
-
-        <!-- Tasks Due Soon -->
-        <article class="card">
-          <header class="card-head">
-            <div class="card-head-left">
-              <span class="icon-circle" aria-hidden="true">TS</span>
-              <h2>Tasks Due Soon</h2>
-            </div>
-            <a class="card-link" href="tasks.html">View all</a>
-          </header>
-
-          <ul class="list compact">
-            <li class="list-item">
-              <div class="priority-dot prio-high" aria-hidden="true"></div>
-              <div class="item-main">
-                <p class="item-title">Finish dashboard HTML + CSS</p>
-                <p class="item-meta">Today • 18:00</p>
-              </div>
-              <span class="label label-high">High</span>
-            </li>
-
-            <li class="list-item">
-              <div class="priority-dot prio-med" aria-hidden="true"></div>
-              <div class="item-main">
-                <p class="item-title">Add 3 sample modules</p>
-                <p class="item-meta">Tomorrow • 12:00</p>
-              </div>
-              <span class="label label-med">Medium</span>
-            </li>
-
-            <li class="list-item">
-              <div class="priority-dot prio-low" aria-hidden="true"></div>
-              <div class="item-main">
-                <p class="item-title">Update README screenshots</p>
-                <p class="item-meta">Thu • 20:00</p>
-              </div>
-              <span class="label label-low">Low</span>
-            </li>
-
-            <li class="list-item">
-              <div class="priority-dot prio-med" aria-hidden="true"></div>
-              <div class="item-main">
-                <p class="item-title">Commit: “dashboard layout + styles”</p>
-                <p class="item-meta">Thu • after testing</p>
-              </div>
-              <span class="label label-med">Medium</span>
-            </li>
-          </ul>
-        </article>
-
-        <!-- Budget Snapshot -->
-        <article class="card">
-          <header class="card-head">
-            <div class="card-head-left">
-              <span class="icon-circle" aria-hidden="true">£</span>
-              <h2>Budget Snapshot</h2>
-            </div>
-            <a class="card-link" href="budget.html">View all</a>
-          </header>
-
-          <div class="budget">
-            <div class="budget-row">
-              <div class="budget-metric">
-                <p class="metric-label">Spent this week</p>
-                <p class="metric-value">£27.40</p>
-              </div>
-
-              <div class="budget-metric">
-                <p class="metric-label">Remaining</p>
-                <p class="metric-value">£52.60</p>
-              </div>
-            </div>
-
-            <div class="progress">
-              <div class="progress-bar" style="width: 34%;" aria-hidden="true"></div>
-            </div>
-            <p class="budget-hint">Weekly budget: £80 • 34% used</p>
-
-            <div class="budget-mini-list">
-              <div class="mini-item">
-                <span class="mini-dot"></span>
-                <span>Coffee + snack • £4.80</span>
-              </div>
-              <div class="mini-item">
-                <span class="mini-dot"></span>
-                <span>Bus (campus) • £6.20</span>
-              </div>
-              <div class="mini-item">
-                <span class="mini-dot"></span>
-                <span>Printing • £2.40</span>
-              </div>
-            </div>
+    <!-- MAIN -->
+    <main class="main">
+      <!-- Controls panel (like your screenshot filters) -->
+      <section class="controls" aria-label="Timetable Controls">
+        <div class="controls-top">
+          <div class="crumb">
+            <strong>MY TIMETABLE</strong>
+            <span class="muted">| February 02 - 06, 2026</span>
+            <span class="muted">| Week 22</span>
           </div>
-        </article>
 
-      </div>
-    </section>
+          <div class="btnrow">
+            <div class="btn" title="Today">TODAY</div>
+            <div class="btn" title="Previous week">◀</div>
+            <div class="btn" title="Next week">▶</div>
+            <div class="btn" title="Days">Days ▾</div>
+            <div class="btn" title="Time">Time ▾</div>
+            <div class="btn" title="Multiple weeks">Multiple weeks ⭘</div>
+          </div>
+        </div>
 
+        <div class="controls-bottom">
+          <div class="viewtoggles">
+            <span class="tiny">LANES</span>
+            <div class="btn" title="Toggle lanes">—</div>
+          </div>
+
+          <div class="segmented" role="tablist" aria-label="View">
+            <button class="active" role="tab" aria-selected="true">DAY</button>
+            <button role="tab" aria-selected="false">WEEK</button>
+            <button role="tab" aria-selected="false">MONTH</button>
+            <button role="tab" aria-selected="false">AGENDA</button>
+            <button role="tab" aria-selected="false">LEGEND</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timetable -->
+      <section class="timetable-wrap" aria-label="Week Timetable">
+        <!-- header row with Mon-Fri -->
+        <div class="week-header">
+          <div class="cell"></div>
+          <div class="cell"><strong>Mon</strong><div>2</div></div>
+          <div class="cell"><strong>Tue</strong><div>3</div></div>
+          <div class="cell"><strong>Wed</strong><div>4</div></div>
+          <div class="cell"><strong>Thu</strong><div>5</div></div>
+          <div class="cell"><strong>Fri</strong><div>6</div></div>
+        </div>
+
+        <div class="grid">
+          <!-- Time Column (08:00 - 18:00) -->
+          <div class="time-col">
+            <div class="time-slot">08:00</div>
+            <div class="time-slot">09:00</div>
+            <div class="time-slot">10:00</div>
+            <div class="time-slot">11:00</div>
+            <div class="time-slot">12:00</div>
+            <div class="time-slot">13:00</div>
+            <div class="time-slot">14:00</div>
+            <div class="time-slot">15:00</div>
+            <div class="time-slot">16:00</div>
+            <div class="time-slot">17:00</div>
+            <div class="time-slot">18:00</div>
+            <div class="time-slot">19:00</div>
+            <div class="time-slot">20:00</div>
+          </div>
+
+          <!-- Monday column -->
+          <div class="day">
+            <!-- 20 half-hour lines -->
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+
+          <!-- Tuesday column -->
+          <div class="day" class="grid">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+
+          <!-- Wednesday column -->
+          <div class="day" class="grid">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <!-- No events -->
+          </div>
+
+          <!-- Thursday column -->
+          <div class="day">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+
+          <!-- Friday column -->
+          <div class="day">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <!-- No events -->
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 </body>
 </html>
