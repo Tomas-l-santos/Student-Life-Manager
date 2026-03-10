@@ -1,12 +1,37 @@
+<<<<<<< docs-AbishilS
+from flask import Flask, jsonify, request, make_response
+from flask_cors import CORS
+from services.auth_routes import auth_bp 
+=======
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from services.authorisation import AuthService
 from services.budget_service import BudgetService
 from services.auth_routes import auth_bp  # Register the Blueprint
+>>>>>>> main
 
 app = Flask(__name__)
-CORS(app)
 
+<<<<<<< docs-AbishilS
+# 1. Broadest possible CORS settings
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+
+# 2. Manual Preflight Handler (The "Brute Force" fix)
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Allow-Headers", "*")
+        response.headers.add("Access-Control-Allow-Methods", "*")
+        return response
+
+app.register_blueprint(auth_bp)
+
+if __name__ == "__main__":
+    # host='0.0.0.0' ensures it listens on 'localhost' and '127.0.0.1'
+    app.run(debug=True, host='0.0.0.0', port=5000)
+=======
 # Register the auth Blueprint (gives you /api/auth/login, /api/auth/me, etc.)
 app.register_blueprint(auth_bp)
 
@@ -84,3 +109,4 @@ def get_categories():
 
 if __name__ == "__main__":
     app.run(debug=True)
+>>>>>>> main

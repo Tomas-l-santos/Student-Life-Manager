@@ -1,8 +1,14 @@
 from flask import Blueprint, request, jsonify
+<<<<<<< docs-AbishilS
+from .authorisation import AuthService
+=======
 from services.authorisation import AuthService
+>>>>>>> main
 from functools import wraps
 import jwt
 import os
+import smtplib
+from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
@@ -25,11 +31,10 @@ def token_required(f):
     def decorated(*args, **kwargs):
         token = None
         
-        # Get token from header
         if 'Authorization' in request.headers:
             auth_header = request.headers['Authorization']
             try:
-                token = auth_header.split(' ')[1]  # Bearer <token>
+                token = auth_header.split(' ')[1]  
             except IndexError:
                 return jsonify({'error': 'Invalid token format'}), 401
         
@@ -37,7 +42,6 @@ def token_required(f):
             return jsonify({'error': 'Token is missing'}), 401
         
         try:
-            # Decode token
             data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
             current_user_email = data['email']
         except jwt.ExpiredSignatureError:
@@ -49,31 +53,29 @@ def token_required(f):
     
     return decorated
 
-
 @auth_bp.route('/register', methods=['POST'])
 def register():
-    """Register a new user"""
     try:
         data = request.get_json()
         
-        if not data or not data.get('email') or not data.get('username') or not data.get('password'):
+        if not data or not data.get('email') or not data.get('username') or not data.get('password') or not data.get('birthdate'):
             return jsonify({'error': 'Missing required fields'}), 400
         
-        # Register user using your AuthService
         auth_service.register_user(
             email=data['email'],
             username=data['username'],
-            password=data['password']
+            password=data['password'],
+            birthdate=data['birthdate']
         )
         
-        # Generate token
         token = generate_token(data['email'])
         
         return jsonify({
             'message': 'User registered successfully',
             'user': {
                 'email': data['email'],
-                'username': data['username']
+                'username': data['username'],
+                'birthdate': data['birthdate']
             },
             'access_token': token
         }), 201
@@ -83,28 +85,23 @@ def register():
     except Exception as e:
         return jsonify({'error': 'Registration failed', 'details': str(e)}), 500
 
-
 @auth_bp.route('/login', methods=['POST'])
 def login():
-    """Login user"""
     try:
         data = request.get_json()
         
         if not data or not data.get('email') or not data.get('password'):
             return jsonify({'error': 'Missing email or password'}), 400
         
-        # Login using your AuthService
         success = auth_service.login_user(
             email=data['email'],
             password=data['password']
         )
         
         if success:
-            # Get user info
             users = auth_service.storage.read_all()
             user = next((u for u in users if u['email'] == data['email']), None)
             
-            # Generate token
             token = generate_token(data['email'])
             
             return jsonify({
@@ -123,11 +120,9 @@ def login():
     except Exception as e:
         return jsonify({'error': 'Login failed', 'details': str(e)}), 500
 
-
 @auth_bp.route('/me', methods=['GET'])
 @token_required
 def get_current_user(current_user_email):
-    """Get current logged-in user"""
     try:
         users = auth_service.storage.read_all()
         user = next((u for u in users if u['email'] == current_user_email), None)
@@ -137,17 +132,16 @@ def get_current_user(current_user_email):
         
         return jsonify({
             'email': user['email'],
-            'username': user['username']
+            'username': user['username'],
+            'birthdate': user.get('birthdate', '')
         }), 200
         
     except Exception as e:
         return jsonify({'error': 'Failed to get user', 'details': str(e)}), 500
 
-
 @auth_bp.route('/change-password', methods=['POST'])
 @token_required
 def change_password(current_user_email):
-    """Change user password"""
     try:
         data = request.get_json()
         
@@ -163,57 +157,52 @@ def change_password(current_user_email):
     except Exception as e:
         return jsonify({'error': 'Failed to change password', 'details': str(e)}), 500
 
-
-@auth_bp.route('/request-password-reset', methods=['POST'])
-def request_password_reset():
-    """Request a password reset token"""
+@auth_bp.route('/forgot-password', methods=['POST'])
+def forgot_password():
+    """Request a password reset token (6 digits)"""
     try:
         data = request.get_json()
         
         if not data or not data.get('email'):
             return jsonify({'error': 'Email is required'}), 400
         
+        # Generates the 6 digit token
         token = auth_service.generate_reset_token(data['email'])
         
-        # In production, you would send this token via email
-        # For now, we return it in the response for testing
+        print(f"\n{'='*40}")
+        print(f"SECURITY ALERT: Reset requested for {data['email']}")
+        print(f"YOUR 6-DIGIT TOKEN IS: {token}")
+        print(f"{'='*40}\n")
+
+        sender_email = "studentlife.app.noreply@gmail.com"
+        sender_password = "jgeg dihp wfce hzvt" 
+        
+        msg = MIMEText(f"Your password reset token is: {token}\nThis code is valid for 1 hour.")
+        msg['Subject'] = "Your SLM Password Reset Code"
+        msg['From'] = sender_email
+        msg['To'] = data['email']
+        
+        try:
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+                server.login(sender_email, sender_password)
+                server.send_message(msg)
+        except Exception as mail_error:
+            print(f"Failed to send email: {mail_error}")
+            return jsonify({'error': 'Could not send email. Check backend credentials.'}), 500
+
         return jsonify({
-            'message': 'Password reset token generated',
-            'reset_token': token,
-            'note': 'In production, this would be sent via email. Token expires in 1 hour.'
+            'message': 'If the email exists, a token has been sent.',
         }), 200
         
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
-        return jsonify({'error': 'Failed to generate reset token', 'details': str(e)}), 500
-
-
-@auth_bp.route('/verify-reset-token', methods=['POST'])
-def verify_reset_token():
-    """Verify if a reset token is valid"""
-    try:
-        data = request.get_json()
-        
-        if not data or not data.get('token'):
-            return jsonify({'error': 'Reset token is required'}), 400
-        
-        email = auth_service.verify_reset_token(data['token'])
-        
-        return jsonify({
-            'message': 'Token is valid',
-            'email': email
-        }), 200
-        
-    except ValueError as e:
-        return jsonify({'error': str(e)}), 400
-    except Exception as e:
-        return jsonify({'error': 'Failed to verify token', 'details': str(e)}), 500
-
+<<<<<<< docs-AbishilS
+        return jsonify({'error': 'Failed to process request', 'details': str(e)}), 500
 
 @auth_bp.route('/reset-password', methods=['POST'])
 def reset_password():
-    """Reset password using a valid reset token"""
+    """Reset password using the 6-digit token"""
     try:
         data = request.get_json()
         
@@ -229,28 +218,26 @@ def reset_password():
     except Exception as e:
         return jsonify({'error': 'Failed to reset password', 'details': str(e)}), 500
 
-
-@auth_bp.route('/forgot-password', methods=['POST'])
-def forgot_password():
-    """Request a password reset token"""
+@auth_bp.route('/verify-reset-token', methods=['POST'])
+def verify_reset_token():
     try:
         data = request.get_json()
         
-        if not data or not data.get('email'):
-            return jsonify({'error': 'Email is required'}), 400
+        if not data or not data.get('token'):
+            return jsonify({'error': 'Token is required'}), 400
         
-        token = auth_service.generate_reset_token(data['email'])
+        email = auth_service.verify_reset_token(data['token'])
         
-        # In production, send this token via email
-        # For now, return it in the response (NOT secure for production!)
         return jsonify({
-            'message': 'Password reset token generated',
-            'reset_token': token,
-            'note': 'In production, this token would be sent via email'
+            'message': 'Token is valid',
+            'email': email
         }), 200
         
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
+        return jsonify({'error': 'Failed to verify token', 'details': str(e)}), 500
+=======
         return jsonify({'error': 'Failed to generate reset token', 'details': str(e)}), 500
 
+>>>>>>> main
