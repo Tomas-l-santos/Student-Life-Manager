@@ -537,7 +537,6 @@
     .row-center a:hover {
       text-decoration: underline;
       color: #cccccc;
-<<<<<<< HEAD:Frontend/src/styles/styles.css
     }
 /* Landing  */ 
 .landing-wrapper {
@@ -1654,4 +1653,58 @@
   justify-content: center;
   border-radius: 2px;
   font-size: 11px;
+}
+/* Changed section: Professional Form Input States */
+.signup-container input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 8px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-container input:focus {
+  background-color: #fff;
+  border-color: #c9182b; /* Matches your brand red */
+  box-shadow: 0 0 0 4px rgba(201, 24, 43, 0.1);
+  outline: none;
+}
+
+.signup-container input::placeholder {
+  color: #bdbdbd;
+}
+
+.signup-container input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+/* Changed section: Success Message & Feedback UI */
+.success-overlay {
+  animation: fadeIn 0.4s ease-out;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.success-icon {
+  color: #28a745;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.success-text {
+  color: #2d3436;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
