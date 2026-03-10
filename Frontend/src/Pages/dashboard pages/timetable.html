@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="stylesheet" href="../../styles/dashboard-css/timetable.css">
   <title>Student Life Management - Timetable</title>
-
 </head>
 
 <body>
-    
   <div class="app">
 
     <!-- SIDEBAR -->
@@ -21,35 +19,43 @@
           <small>LIVE</small>
         </div>
       </div>
+
       <nav class="nav" aria-label="Primary">
         <a href="dashboard.html">
           <span class="icon">📊</span>
           Dashboard
         </a>
+
         <a class="active" href="timetable.html">
           <span class="icon">📅</span>
           Timetable
         </a>
+
         <a href="deadlines.html">
           <span class="icon">⏳</span>
           Deadlines
         </a>
+
         <a href="tasks.html">
           <span class="icon">✅</span>
           Tasks
         </a>
+
         <a href="modules.html">
           <span class="icon">📚</span>
           Modules
         </a>
+
         <a href="budget.html">
           <span class="icon">💷</span>
           Budget
         </a>
+
         <a href="account&security.html">
           <span class="icon">👤</span>
           Account
         </a>
+
         <a href="help.html">
           <span class="icon">❓</span>
           Help
@@ -80,15 +86,14 @@
         <div class="pill" title="Settings">⚙️</div>
         <div class="avatar" title="User">
           <div class="dot">T</div>
-          <span>Tomas</span>
-          <span style="opacity:.9;">▾</span>
+          <span>User</span>
+          <span class="caret">▾</span>
         </div>
       </div>
     </header>
 
     <!-- MAIN -->
     <main class="main">
-      <!-- Controls panel (like your screenshot filters) -->
       <section class="controls" aria-label="Timetable Controls">
         <div class="controls-top">
           <div class="crumb">
@@ -98,36 +103,34 @@
           </div>
 
           <div class="btnrow">
-            <div class="btn" title="Today">TODAY</div>
-            <div class="btn" title="Previous week">◀</div>
-            <div class="btn" title="Next week">▶</div>
-            <div class="btn" title="Days">Days ▾</div>
-            <div class="btn" title="Time">Time ▾</div>
-            <div class="btn" title="Multiple weeks">Multiple weeks ⭘</div>
+            <div class="btn">TODAY</div>
+            <div class="btn icon-btn">◀</div>
+            <div class="btn icon-btn">▶</div>
+            <div class="btn">Days ▾</div>
+            <div class="btn">Time ▾</div>
+            <div class="btn">Multiple weeks ○</div>
           </div>
         </div>
 
         <div class="controls-bottom">
           <div class="viewtoggles">
             <span class="tiny">LANES</span>
-            <div class="btn" title="Toggle lanes">—</div>
+            <div class="btn icon-btn">—</div>
           </div>
 
           <div class="segmented" role="tablist" aria-label="View">
-            <button class="active" role="tab" aria-selected="true">DAY</button>
-            <button role="tab" aria-selected="false">WEEK</button>
-            <button role="tab" aria-selected="false">MONTH</button>
-            <button role="tab" aria-selected="false">AGENDA</button>
-            <button role="tab" aria-selected="false">LEGEND</button>
+            <button class="active" type="button">DAY</button>
+            <button type="button">WEEK</button>
+            <button type="button">MONTH</button>
+            <button type="button">AGENDA</button>
+            <button type="button">LEGEND</button>
           </div>
         </div>
       </section>
 
-      <!-- Timetable -->
       <section class="timetable-wrap" aria-label="Week Timetable">
-        <!-- header row with Mon-Fri -->
         <div class="week-header">
-          <div class="cell"></div>
+          <div class="cell blank"></div>
           <div class="cell"><strong>Mon</strong><div>2</div></div>
           <div class="cell"><strong>Tue</strong><div>3</div></div>
           <div class="cell"><strong>Wed</strong><div>4</div></div>
@@ -136,7 +139,7 @@
         </div>
 
         <div class="grid">
-          <!-- Time Column (08:00 - 18:00) -->
+          <!-- Time column -->
           <div class="time-col">
             <div class="time-slot">08:00</div>
             <div class="time-slot">09:00</div>
@@ -150,12 +153,10 @@
             <div class="time-slot">17:00</div>
             <div class="time-slot">18:00</div>
             <div class="time-slot">19:00</div>
-            <div class="time-slot">20:00</div>
           </div>
 
-          <!-- Monday column -->
+          <!-- Monday -->
           <div class="day">
-            <!-- 20 half-hour lines -->
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
@@ -166,36 +167,11 @@
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
-
-          <!-- Tuesday column -->
-          <div class="day" class="grid">
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-
-          <!-- Wednesday column -->
-          <div class="day" class="grid">
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <!-- No events -->
           </div>
 
-          <!-- Thursday column -->
+          <!-- Tuesday -->
           <div class="day">
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
@@ -207,8 +183,11 @@
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+          </div>
 
-          <!-- Friday column -->
+          <!-- Wednesday -->
           <div class="day">
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
@@ -220,7 +199,40 @@
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
             <div class="half-hour-line"></div><div class="half-hour-line"></div>
-            <!-- No events -->
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+          </div>
+
+          <!-- Thursday -->
+          <div class="day">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+          </div>
+
+          <!-- Friday -->
+          <div class="day">
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
+            <div class="half-hour-line"></div><div class="half-hour-line"></div>
           </div>
         </div>
       </section>

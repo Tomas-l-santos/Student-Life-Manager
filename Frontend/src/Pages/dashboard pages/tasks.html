@@ -22,9 +22,9 @@
       </div>
 
       <nav class="nav" aria-label="Primary">
-        <a href="#">
+        <a href="dashboard.html">
           <span class="icon">📊</span>
-          dashboard
+          Dashboard
         </a>
          <a href="timetable.html">
           <span class="icon">📅</span>
@@ -85,6 +85,251 @@
         </div>
       </div>
     </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="tasks-main">
+      <section class="tasks-header">
+        <div>
+          <h2>Task Manager</h2>
+          <p>Organise tasks by due date, priority, status, and linked module.</p>
+        </div>
+
+        <div class="tasks-header-actions">
+          <button class="task-btn secondary-btn" id="sortTasksBtn">Sort by Nearest Due Date</button>
+          <button class="task-btn primary-btn" id="openTaskFormBtn">+ Add Task</button>
+        </div>
+      </section>
+
+      <section class="task-form-panel" id="taskFormPanel">
+        <div class="task-form-top">
+          <h3 id="formTitle">Add Task</h3>
+          <button class="close-form-btn" id="closeTaskFormBtn" type="button">✕</button>
+        </div>
+
+        <form id="taskForm" class="task-form">
+          <input type="hidden" id="editTaskIndex">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="taskTitle">Title</label>
+              <input type="text" id="taskTitle" placeholder="Enter task title" required>
+            </div>
+
+            <div class="form-group">
+              <label for="taskDueDate">Due Date</label>
+              <input type="date" id="taskDueDate" required>
+            </div>
+
+            <div class="form-group">
+              <label for="taskPriority">Priority</label>
+              <select id="taskPriority" required>
+                <option value="">Select priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="taskModule">Module Link</label>
+              <select id="taskModule" required>
+                <option value="">Select module</option>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Programming for Engineers">Programming for Engineers</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Embedded Systems">Embedded Systems</option>
+                <option value="Mobile Applications">Mobile Applications</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="task-btn primary-btn" id="saveTaskBtn">Save Task</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="task-list-section">
+        <div class="task-list-top">
+          <h3>Task List</h3>
+          <div class="task-list-count" id="taskCount">0 Tasks</div>
+        </div>
+
+        <div class="task-list" id="taskList"></div>
+      </section>
+    </main>
   </div>
+
+  <script>
+    const openTaskFormBtn = document.getElementById("openTaskFormBtn");
+    const closeTaskFormBtn = document.getElementById("closeTaskFormBtn");
+    const taskFormPanel = document.getElementById("taskFormPanel");
+    const taskForm = document.getElementById("taskForm");
+    const taskList = document.getElementById("taskList");
+    const taskCount = document.getElementById("taskCount");
+    const sortTasksBtn = document.getElementById("sortTasksBtn");
+
+    const taskTitle = document.getElementById("taskTitle");
+    const taskDueDate = document.getElementById("taskDueDate");
+    const taskPriority = document.getElementById("taskPriority");
+    const taskModule = document.getElementById("taskModule");
+    const editTaskIndex = document.getElementById("editTaskIndex");
+    const formTitle = document.getElementById("formTitle");
+
+    let tasks = [
+      {
+        title: "Complete wireframe sketches",
+        dueDate: "2026-03-12",
+        priority: "High",
+        module: "Software Engineering",
+        status: "Pending"
+      },
+      {
+        title: "Revise lecture notes",
+        dueDate: "2026-03-15",
+        priority: "Medium",
+        module: "Mathematics",
+        status: "Completed"
+      },
+      {
+        title: "Upload GitHub updates",
+        dueDate: "2026-03-11",
+        priority: "Low",
+        module: "Programming for Engineers",
+        status: "Pending"
+      }
+    ];
+
+    function openForm() {
+      taskFormPanel.style.display = "block";
+    }
+
+    function closeForm() {
+      taskFormPanel.style.display = "none";
+      taskForm.reset();
+      editTaskIndex.value = "";
+      formTitle.textContent = "Add Task";
+    }
+
+    openTaskFormBtn.addEventListener("click", openForm);
+    closeTaskFormBtn.addEventListener("click", closeForm);
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      });
+    }
+
+    function renderTasks() {
+      taskList.innerHTML = "";
+
+      if (tasks.length === 0) {
+        taskList.innerHTML = `
+          <div class="empty-state">
+            <p>No tasks added yet.</p>
+          </div>
+        `;
+        taskCount.textContent = "0 Tasks";
+        return;
+      }
+
+      tasks.forEach((task, index) => {
+        const priorityClass = task.priority.toLowerCase();
+        const statusClass = task.status.toLowerCase();
+
+        const taskCard = document.createElement("div");
+        taskCard.className = "task-card";
+
+        taskCard.innerHTML = `
+          <div class="task-card-top">
+            <div>
+              <h4>${task.title}</h4>
+              <div class="task-meta">
+                <span><strong>Due:</strong> ${formatDate(task.dueDate)}</span>
+                <span><strong>Module:</strong> ${task.module}</span>
+              </div>
+            </div>
+
+            <div class="task-labels">
+              <span class="label priority-${priorityClass}">${task.priority}</span>
+              <span class="label status-${statusClass}">${task.status}</span>
+            </div>
+          </div>
+
+          <div class="task-card-actions">
+            <button class="small-btn complete-btn" onclick="toggleComplete(${index})">
+              ${task.status === "Completed" ? "Mark as Pending" : "Mark as Completed"}
+            </button>
+            <button class="small-btn edit-btn" onclick="editTask(${index})">Edit</button>
+            <button class="small-btn delete-btn" onclick="deleteTask(${index})">Delete</button>
+          </div>
+        `;
+
+        taskList.appendChild(taskCard);
+      });
+
+      taskCount.textContent = `${tasks.length} Task${tasks.length !== 1 ? "s" : ""}`;
+    }
+
+    taskForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const newTask = {
+        title: taskTitle.value,
+        dueDate: taskDueDate.value,
+        priority: taskPriority.value,
+        module: taskModule.value,
+        status: "Pending"
+      };
+
+      if (editTaskIndex.value !== "") {
+        const existingStatus = tasks[editTaskIndex.value].status;
+        newTask.status = existingStatus;
+        tasks[editTaskIndex.value] = newTask;
+      } else {
+        tasks.push(newTask);
+      }
+
+      renderTasks();
+      closeForm();
+    });
+
+    function editTask(index) {
+      const task = tasks[index];
+
+      taskTitle.value = task.title;
+      taskDueDate.value = task.dueDate;
+      taskPriority.value = task.priority;
+      taskModule.value = task.module;
+      editTaskIndex.value = index;
+      formTitle.textContent = "Edit Task";
+
+      openForm();
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+
+    function toggleComplete(index) {
+      if (tasks[index].status === "Pending") {
+        tasks[index].status = "Completed";
+      } else {
+        tasks[index].status = "Pending";
+      }
+      renderTasks();
+    }
+
+    sortTasksBtn.addEventListener("click", function() {
+      tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+      renderTasks();
+    });
+
+    renderTasks();
+  </script>
 </body>
 </html>

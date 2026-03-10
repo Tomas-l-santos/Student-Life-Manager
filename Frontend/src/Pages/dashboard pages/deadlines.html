@@ -22,9 +22,9 @@
       </div>
 
       <nav class="nav" aria-label="Primary">
-        <a href="#">
+        <a href="dashboard.html">
           <span class="icon">📊</span>
-          dashboard
+          Dashboard
         </a>
          <a href="timetable.html">
           <span class="icon">📅</span>
@@ -85,6 +85,107 @@
         </div>
       </div>
     </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="deadlines-main">
+      <section class="deadlines-header">
+        <div>
+          <h2>Deadline Manager</h2>
+          <p>Track assignment deadlines, manage workload, and see upcoming reminders.</p>
+        </div>
+        <button id="openFormBtn" class="deadline-btn">+ Add Deadline</button>
+      </section>
+
+      <section class="deadline-summary">
+        <div class="summary-card">
+          <span class="summary-label">Total Deadlines</span>
+          <strong id="totalDeadlines">0</strong>
+        </div>
+
+        <div class="summary-card">
+          <span class="summary-label">Due Soon</span>
+          <strong id="dueSoonCount">0</strong>
+        </div>
+
+        <div class="summary-card">
+          <span class="summary-label">Overdue</span>
+          <strong id="overdueCount">0</strong>
+        </div>
+
+        <div class="summary-card stress-card">
+          <span class="summary-label">Workload / Stress</span>
+          <strong id="stressLevel">Low</strong>
+          <div class="stress-bar">
+            <div id="stressFill" class="stress-fill"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="deadlineFormSection" class="deadline-form-section hidden">
+        <h3 id="formTitle">Add New Deadline</h3>
+
+        <form id="deadlineForm" class="deadline-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="deadlineTitle">Title</label>
+              <input type="text" id="deadlineTitle" placeholder="Enter deadline title" required>
+            </div>
+
+            <div class="form-group">
+              <label for="deadlineModule">Module</label>
+              <select id="deadlineModule" required>
+                <option value="">Select module</option>
+                <option value="Programming for Engineers">Programming for Engineers</option>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Computer Architectures">Computer Architectures</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Embedded Systems">Embedded Systems</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="deadlineDate">Due Date</label>
+              <input type="date" id="deadlineDate" required>
+            </div>
+
+            <div class="form-group">
+              <label for="deadlinePriority">Priority</label>
+              <select id="deadlinePriority" required>
+                <option value="">Select priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="deadlineDescription">Description</label>
+            <textarea id="deadlineDescription" rows="4" placeholder="Add details about the deadline"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="deadline-btn">Save Deadline</button>
+            <button type="button" id="cancelFormBtn" class="deadline-btn secondary-btn">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="deadline-list-section">
+        <div class="list-header">
+          <h3>Deadline List</h3>
+          <p>Automatically sorted by closest due date first.</p>
+        </div>
+
+        <div id="deadlineList" class="deadline-list">
+          <div class="empty-state">
+            No deadlines added yet.
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
+
+  <script src="../../scripts/deadlines.js"></script>
 </body>
 </html>
