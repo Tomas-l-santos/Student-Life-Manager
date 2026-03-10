@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+<<<<<<< docs-AbishilS
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/styles.css";
 
@@ -83,11 +84,26 @@ export default function ForgotPassword() {
     } finally {
       setIsLoading(false);
     }
+=======
+import { Link } from "react-router-dom";
+import "../styles/styles.css";
+
+function ForgotPassword() {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(`Reset link will be sent to: ${email}`);
+>>>>>>> main
   };
 
   return (
     <div className="reset-password-wrapper">
+<<<<<<< docs-AbishilS
       {/*Navbar*/}
+=======
+      {/* NAVBAR */}
+>>>>>>> main
       <nav className="top-nav">
         <div className="nav-logo">
           <img src="/Images/student_life_logo_5.png" alt="Logo" />
@@ -105,6 +121,7 @@ export default function ForgotPassword() {
           </Link>
         </div>
       </nav>
+<<<<<<< docs-AbishilS
       <main className="reset-page-split">
         <section className="reset-form-side">
           <div className="reset-graphic-rings top-left-rings"></div>
@@ -289,6 +306,56 @@ export default function ForgotPassword() {
           </div>
         </section>
 
+=======
+
+      {/* Main Split Content Area */}
+      <main className="reset-page-split">
+        {/* LEFT SIDE: The Form */}
+        <section className="reset-form-side">
+          <div className="reset-graphic-rings top-left-rings"></div>
+
+          <div className="form-content-container">
+            {/* Cleaner, stacked brand header */}
+            <div className="form-brand-header">
+              <img src="/Images/student_life_logo_5.png" alt="Logo" />
+              <span>Student Life</span>
+            </div>
+
+            <form className="reset-form" onSubmit={handleSubmit}>
+              <h2 className="serif-headline">Reset your password</h2>
+              <p className="reset-description">
+                Enter the email address you used when you joined and we'll send
+                you instructions to get back into your account.
+              </p>
+
+              <div className="agency-form-row">
+                <label>Email Address</label>
+                <input
+                  type="email"
+                  placeholder="name@studentlife.com"
+                  className="premium-dark-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+
+              <button
+                className="pill-btn-premium continue-reset-btn"
+                type="submit"
+              >
+                Send Reset Link <span className="arrow">→</span>
+              </button>
+
+              <div className="back-to-login">
+                <Link to="/">← Back to Log in</Link>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        {/* RIGHT SIDE: Editorial Image */}
+>>>>>>> main
         <section className="reset-image-side">
           <div className="abstract-shape reset-teal-shape"></div>
           <div className="abstract-shape reset-yellow-shape"></div>
@@ -306,3 +373,8 @@ export default function ForgotPassword() {
     </div>
   );
 }
+<<<<<<< docs-AbishilS
+=======
+
+export default ForgotPassword;
+>>>>>>> main

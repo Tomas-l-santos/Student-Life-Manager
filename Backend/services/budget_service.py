@@ -1,7 +1,7 @@
 from storage.storagerepo import JSONStorage
-from models.transaction import Transaction
-from models.budget_model import Budget
-from models.category import Category
+from models.Budget.transactions import Transaction
+from models.Budget.budget import Budget
+from models.Budget.category import Category
 from datetime import datetime
 
 class BudgetService:

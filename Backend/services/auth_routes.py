@@ -1,5 +1,9 @@
 from flask import Blueprint, request, jsonify
+<<<<<<< docs-AbishilS
 from .authorisation import AuthService
+=======
+from services.authorisation import AuthService
+>>>>>>> main
 from functools import wraps
 import jwt
 import os
@@ -193,6 +197,7 @@ def forgot_password():
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     except Exception as e:
+<<<<<<< docs-AbishilS
         return jsonify({'error': 'Failed to process request', 'details': str(e)}), 500
 
 @auth_bp.route('/reset-password', methods=['POST'])
@@ -232,3 +237,7 @@ def verify_reset_token():
         return jsonify({'error': str(e)}), 400
     except Exception as e:
         return jsonify({'error': 'Failed to verify token', 'details': str(e)}), 500
+=======
+        return jsonify({'error': 'Failed to generate reset token', 'details': str(e)}), 500
+
+>>>>>>> main

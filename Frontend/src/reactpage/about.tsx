@@ -61,6 +61,7 @@ function About() {
         </div>
       </nav>
 
+<<<<<<< docs-AbishilS
       {/* NEW COMBINED SECTION: About Us Grid */}
       <section className="premium-about-section">
         <div className="about-grid">
@@ -105,12 +106,50 @@ function About() {
                   </p>
                 </div>
               </div>
+=======
+      {/* For allignment and beauty */}
+      <section className="agency-hero"></section>
+      <section className="agency-mission"></section>
+
+      {/* Story Section */}
+      <section className="agency-story">
+        <div className="story-container">
+          <div className="story-text">
+            <h2>Our story</h2>
+            <p>
+              Founded in 2026 by a dedicated team of students, Student Life
+              Management was born from our own struggles. We were overwhelmed by
+              scattered notes, missed deadlines, and Financial negligence. We
+              wanted a better way.
+            </p>
+            <p>
+              SLM is an intuitive platform designed specifically for the modern
+              academic journey. Our service provides an elegant interface to
+              make managing courses, timetables, and finances effortless.
+            </p>
+            <p>
+              Our intuitive approach means users can navigate complex study
+              schedules with ease, trusting our system to eliminate stress and
+              foster success.
+            </p>
+          </div>
+
+          <div className="story-image-side">
+            <div className="abstract-shape teal-blob"></div>
+            <div className="abstract-shape yellow-triangle"></div>
+            <div className="circular-image-mask">
+              <img src="/Images/test.png" alt="Students studying" />
+>>>>>>> main
             </div>
           </div>
         </div>
       </section>
 
+<<<<<<< docs-AbishilS
       {/* Team section (Preserved exact original styling) */}
+=======
+      {/* Team section */}
+>>>>>>> main
       <section className="agency-team">
         <h2>Meet your team</h2>
         <p className="team-sub">
@@ -138,9 +177,16 @@ function About() {
         </div>
       </section>
 
+<<<<<<< docs-AbishilS
       {/* Footer (Preserved exact original styling) */}
       <footer className="agency-combined-footer">
         <div className="graphic-circles footer-circle-left"></div>
+=======
+      {/* Footer */}
+      <footer className="agency-combined-footer">
+        <div className="graphic-circles footer-circle-left"></div>
+        <div className="graphic-circles top-right-small"></div>
+>>>>>>> main
 
         <div className="footer-cta-content">
           <h2>
@@ -191,8 +237,12 @@ function About() {
           <p>© 2026 Student Life Management. All rights reserved.</p>
         </div>
       </footer>
+<<<<<<< docs-AbishilS
 
       {/* Team Modal */}
+=======
+      {/* Team stuff */}
+>>>>>>> main
       {activeOwner && (
         <div
           className="agency-modal-overlay"
@@ -207,6 +257,7 @@ function About() {
             </button>
             <div className="agency-modal-left">
               <div className="agency-modal-img">
+<<<<<<< docs-AbishilS
                 <img
                   src={activeOwner.img}
                   alt={activeOwner.name}
@@ -226,12 +277,24 @@ function About() {
                 className="agency-modal-divider"
                 style={{ height: "1px", background: "#ccc", margin: "1rem 0" }}
               ></div>
+=======
+                <img src={activeOwner.img} alt={activeOwner.name} />
+              </div>
+            </div>
+            <div className="agency-modal-right">
+              <h2>{activeOwner.name}</h2>
+              <span className="agency-modal-role">{activeOwner.role}</span>
+              <div className="agency-modal-divider"></div>
+>>>>>>> main
               <p>{activeOwner.bio}</p>
             </div>
           </div>
         </div>
       )}
+<<<<<<< docs-AbishilS
 
+=======
+>>>>>>> main
       {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
       {showSignup && (
         <SignupModal
