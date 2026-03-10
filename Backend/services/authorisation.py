@@ -3,16 +3,17 @@ from models.user import User
 from storage.storagerepo import JSONStorage
 import re
 from time import time
+import secrets
+import string
 
 EMAIL_REGEX = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 USERNAME_REGEX = r"^[a-zA-Z0-9_]{3,20}$"
-
-
 
 class AuthService:
     def __init__(self, storage_path="data/users.json"):
         self.storage = JSONStorage(storage_path)
         self.failed_attempts = {}
+        self.reset_tokens = {}
 
     def validate_email(self, email):
         if not re.match(EMAIL_REGEX, email):
@@ -22,10 +23,11 @@ class AuthService:
         if not re.match(USERNAME_REGEX, username):
             raise ValueError("Invalid username")
 
-    def register_user(self, email, username, password):
+    def register_user(self, email, username, password, birthdate):
         email = email.strip()
         username = username.strip()
         password = password.strip()
+        birthdate = birthdate.strip()
 
         self.validate_email(email)
         self.validate_username(username)
@@ -42,7 +44,7 @@ class AuthService:
             bcrypt.gensalt()
         ).decode()
 
-        user = User(email, username, password_hash)
+        user = User(email, username, password_hash, birthdate)
         self.storage.append(user.to_dict())
 
         return True
@@ -108,11 +110,10 @@ class AuthService:
         if not any(not c.isalnum() for c in password):
             raise ValueError("Must contain special character")
 
-#PASSWORD RESET
-
+    # PASSWORD RESET
 
     def generate_reset_token(self, email):
-        """Generate a password reset token for a user"""
+        """Generate a 6-digit OTP for a user"""
         email = email.strip()
         self.validate_email(email)
 
@@ -123,11 +124,11 @@ class AuthService:
         if not user_exists:
             raise ValueError("User not found")
 
-        # Generate secure random token (32 characters)
-        token = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(32))
+        # GENERATES A 6-DIGIT OTP INSTEAD OF 32 CHARACTERS
+        token = ''.join(secrets.choice(string.digits) for _ in range(6))
 
-        # Store token with expiration (1 hour from now)
-        expiry = time() + 3600  # 3600 seconds = 1 hour
+        # Store token with expiration 1 hr
+        expiry = time() + 3600 
         self.reset_tokens[token] = {
             "email": email,
             "expiry": expiry
@@ -141,14 +142,13 @@ class AuthService:
     def verify_reset_token(self, token):
         """Verify if a reset token is valid"""
         if token not in self.reset_tokens:
-            raise ValueError("Invalid or expired reset token")
+            raise ValueError("Invalid or expired OTP")
 
         token_data = self.reset_tokens[token]
         
-        # Check if token has expired
         if time() > token_data["expiry"]:
             del self.reset_tokens[token]
-            raise ValueError("Reset token has expired")
+            raise ValueError("OTP has expired")
 
         return token_data["email"]
 
@@ -173,10 +173,8 @@ class AuthService:
                 u["password_hash"] = new_hash
                 self.storage.overwrite(users)
 
-                # Delete the used token
+                # Delete the used token and clear
                 del self.reset_tokens[token]
-
-                # Clear any failed login attempts
                 self.failed_attempts.pop(email, None)
 
                 return True
