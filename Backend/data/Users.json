@@ -1,26 +1,16 @@
 [
   {
-    "email": "as7253s@gre.ac.uk",
-    "username": "test",
-    "password_hash": "$2b$12$D0aNkcpdV2d1/MDsiDIVpukq2W8iPI.uPT/42Tvycg0b5woitsi6m",
-    "birthdate": "2003-10-10"
-  },
-  {
+    "user_id": "ade0f21a-8f5e-4a51-8fae-6239e967bfdf",
     "email": "abhishilsinoj@gmail.com",
-    "username": "jfgfj",
-    "password_hash": "$2b$12$tzRPXF.RuZ0pTBYPJItH/emk7rD/PC80DwId5grYAcJz7vPus0AL6",
-    "birthdate": "2005-10-10"
+    "username": "dsdsadsds",
+    "password_hash": "$2b$12$Smpk.suNJs.h.tXhqNLciOiX5/rhZy1UWrFqL.L8p9jrp5pH5PQK.",
+    "birthdate": "2003-02-10"
   },
   {
-    "email": "alen123@gmail.com",
-    "username": "Alen",
-    "password_hash": "$2b$12$DiKM0iKKPnka3TrS9g5pn.b9w0osBIx4Os4XLnuE2gNMu58Y6WFKm",
-    "birthdate": "2004-02-20"
-  },
-  {
-    "email": "ababs@gmail.com",
-    "username": "dcjhdcjhc",
-    "password_hash": "$2b$12$9uhYwhmCx1doQ30Og5S0R.jOFx08xk4q1Bs9YraXc4RYrwPglqe9O",
-    "birthdate": "2004-09-01"
+    "user_id": "a186b7a9-0f45-4262-9ed3-006a393cce2c",
+    "email": "Ameerasinoj@gmail.com",
+    "username": "Ameera",
+    "password_hash": "$2b$12$HmrwIQ9aRu62ZSVLDkpg.eRF2SMU.I2/ZRYdnbVHISbfakvbd6PAu",
+    "birthdate": "20013-10-10"
   }
 ]

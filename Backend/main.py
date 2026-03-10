@@ -1,50 +1,27 @@
-<<<<<<< docs-AbishilS
-from flask import Flask, jsonify, request, make_response
-from flask_cors import CORS
-from services.auth_routes import auth_bp 
-=======
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from services.authorisation import AuthService
 from services.budget_service import BudgetService
-from services.auth_routes import auth_bp  # Register the Blueprint
->>>>>>> main
+from services.auth_routes import auth_bp  
 
 app = Flask(__name__)
 
-<<<<<<< docs-AbishilS
-# 1. Broadest possible CORS settings
-CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+# --- CRITICAL FIX: Enabling CORS so React can communicate with Flask ---
+CORS(app)
 
-# 2. Manual Preflight Handler (The "Brute Force" fix)
-@app.before_request
-def handle_preflight():
-    if request.method == "OPTIONS":
-        response = make_response()
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add("Access-Control-Allow-Headers", "*")
-        response.headers.add("Access-Control-Allow-Methods", "*")
-        return response
-
-app.register_blueprint(auth_bp)
-
-if __name__ == "__main__":
-    # host='0.0.0.0' ensures it listens on 'localhost' and '127.0.0.1'
-    app.run(debug=True, host='0.0.0.0', port=5000)
-=======
 # Register the auth Blueprint (gives you /api/auth/login, /api/auth/me, etc.)
 app.register_blueprint(auth_bp)
 
 budget_service = BudgetService()
 
-# --- TRANSACTION ROUTES ---
+# --- TRANSACTION ROUTES (Teammate's Additions) ---
 
 @app.route("/api/transactions", methods=["POST"])
 def add_transaction():
     data = request.json
     try:
         t = budget_service.add_transaction(
-            user_email=data["user_email"],  # use email consistently
+            user_email=data["user_email"],  
             category_id=data["category_id"],
             amount=data["amount"],
             description=data["description"],
@@ -62,7 +39,7 @@ def get_transactions(user_email):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-# --- BUDGET ROUTES ---
+# --- BUDGET ROUTES (Teammate's Additions) ---
 
 @app.route("/api/budgets", methods=["POST"])
 def create_budget():
@@ -99,7 +76,7 @@ def get_budget_status(user_email):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-# --- CATEGORY ROUTES ---
+# --- CATEGORY ROUTES (Teammate's Additions) ---
 
 @app.route("/api/categories", methods=["GET"])
 def get_categories():
@@ -109,4 +86,3 @@ def get_categories():
 
 if __name__ == "__main__":
     app.run(debug=True)
->>>>>>> main

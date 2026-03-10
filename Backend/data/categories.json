@@ -1,1 +1,98 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Food & Dining",
+    "type": "expense",
+    "icon": "\uef82"
+  },
+  {
+    "id": 2,
+    "name": "Transportation",
+    "type": "expense",
+    "icon": "\udb80\udce7"
+  },
+  {
+    "id": 3,
+    "name": "Rent",
+    "type": "expense",
+    "icon": "\uef85"
+  },
+  {
+    "id": 4,
+    "name": "Utilities",
+    "type": "expense",
+    "icon": "\udb84\udf23"
+  },
+  {
+    "id": 5,
+    "name": "Entertainment",
+    "type": "expense",
+    "icon": "\uf11b"
+  },
+  {
+    "id": 6,
+    "name": "Shopping",
+    "type": "expense",
+    "icon": "\uf290"
+  },
+  {
+    "id": 7,
+    "name": "Education",
+    "type": "expense",
+    "icon": "\uede2"
+  },
+  {
+    "id": 8,
+    "name": "Healthcare",
+    "type": "expense",
+    "icon": "\uf4c8"
+  },
+  {
+    "id": 9,
+    "name": "Personal Care",
+    "type": "expense",
+    "icon": "\uf183"
+  },
+  {
+    "id": 10,
+    "name": "Other Expenses",
+    "type": "expense",
+    "icon": "\uede8"
+  },
+  {
+    "id": 11,
+    "name": "Groceries",
+    "type": "expense",
+    "icon": "\uf291"
+  },
+  {
+    "id": 12,
+    "name": "Salary",
+    "type": "income",
+    "icon": "\uefc9"
+  },
+  {
+    "id": 13,
+    "name": "Work",
+    "type": "income",
+    "icon": "\uede8"
+  },
+  {
+    "id": 14,
+    "name": "Scholarship",
+    "type": "income",
+    "icon": "\uedcb"
+  },
+  {
+    "id": 15,
+    "name": "Allowance",
+    "type": "income",
+    "icon": "\uefc8"
+  },
+  {
+    "id": 16,
+    "name": "Other Income",
+    "type": "income",
+    "icon": "\udb84\ude61"
+  }
+]

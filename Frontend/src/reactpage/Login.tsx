@@ -6,15 +6,9 @@ import { LoginModal, SignupModal } from "./Signup";
 function Login() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-<<<<<<< docs-AbishilS
 
   return (
     <div className="landing-wrapper">
-      {/*Navbar*/}
-=======
-  return (
-    <div className="landing-wrapper">
->>>>>>> main
       <nav className="top-nav">
         <div className="nav-logo">
           <img src="/Images/student_life_logo_5.png" alt="Logo" />
@@ -41,10 +35,6 @@ function Login() {
         </div>
       </nav>
 
-<<<<<<< docs-AbishilS
-      {/*Hero*/}
-=======
->>>>>>> main
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">
@@ -80,8 +70,6 @@ function Login() {
         </div>
       </section>
 
-<<<<<<< docs-AbishilS
-      {/*intro*/}
       <div className="features-intro">
         <h2 className="features-intro__title">
           Bring your student life together
@@ -92,17 +80,11 @@ function Login() {
         </p>
       </div>
 
-      {/*Timetable?*/}
       <section className="feature-section">
         <div className="feature-card-wrap feature-card-wrap--pink">
           <div className="feature-card">
             <img src="/Images/test.png" alt="Timetable preview" />
           </div>
-=======
-      <section className="feature-section bg-pink">
-        <div className="feature-image">
-          <img src="/Images/test.png" alt="Search" />
->>>>>>> main
         </div>
         <div className="feature-text">
           <h2 className="feature-text__title" style={{ color: "#c31952" }}>
@@ -121,7 +103,6 @@ function Login() {
         </div>
       </section>
 
-      {/*Finance?*/}
       <section className="feature-section feature-section--reverse">
         <div className="feature-text">
           <h2 className="feature-text__title" style={{ color: "#006b6c" }}>

@@ -1,12 +1,9 @@
 import uuid
 
 class User:
-<<<<<<< docs-AbishilS
-    def __init__(self, email, username, password_hash, birthdate=""):
-=======
-    def __init__(self, email, username, password_hash, user_id=None):
-        self.user_id = user_id or str(uuid.uuid4())
->>>>>>> main
+    def __init__(self, email, username, password_hash, birthdate, user_id=None):
+        # Automatically generates a unique ID if one isn't provided
+        self.user_id = user_id if user_id else str(uuid.uuid4())
         self.email = email
         self.username = username
         self.password_hash = password_hash
@@ -18,18 +15,15 @@ class User:
             "email": self.email,
             "username": self.username,
             "password_hash": self.password_hash,
-            "birthdate": self.birthdate 
+            "birthdate": self.birthdate
         }
 
-    @staticmethod
-    def from_dict(data):
-        return User(
-            email=data["email"],
-            username=data["username"],
-            password_hash=data["password_hash"],
-<<<<<<< docs-AbishilS
-            birthdate=data.get("birthdate", "") 
-=======
-            user_id=data.get("user_id")  
->>>>>>> main
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            email=data.get("email"),
+            username=data.get("username"),
+            password_hash=data.get("password_hash"),
+            birthdate=data.get("birthdate"),
+            user_id=data.get("user_id")
         )
