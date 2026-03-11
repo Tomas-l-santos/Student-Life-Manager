@@ -1,4 +1,4 @@
-#This service coordinates between module, assessment, and analytics classes which provides a unified interface for the routes layer
+#This service coordinates between module, assessment, analytics, and notes classes which provides a unified interface for the routes layer
 
 from models.Academics.modules import Modules
 from models.Academics.assessments import Assessments
@@ -113,3 +113,89 @@ class AcademicsService:
         
         #Get quick module summary
         return self.analytics.get_module_summary(module_id, user_email)
+    
+    
+
+    # ------ NOTES OPERATIONS ------
+    
+    def create_note(self, user_email, module_id, title, topic, content, tags=None):
+        
+        #Create a new note for a module
+        
+        # Get module info first
+        module = self.modules.get_by_id(module_id, user_email)
+        if not module:
+            raise ValueError("Module not found")
+        
+        return self.notes.create(
+            user_email=user_email,
+            module_id=module_id,
+            module_name=module["name"],
+            module_code=module["code"],
+            title=title,
+            topic=topic,
+            content=content,
+            tags=tags
+        )
+    
+    def get_module_notes(self, module_id, user_email, topic=None, include_archived=False):
+        
+        #Get all notes for a module
+        
+        # Verify module exists
+        module = self.modules.get_by_id(module_id, user_email)
+        if not module:
+            raise ValueError("Module not found")
+        
+        return self.notes.get_all_for_module(module_id, user_email, topic, include_archived)
+    
+    def get_module_topics(self, module_id, user_email):
+        
+        #Get all topics for a module's notes
+        
+        # Verify module exists
+        module = self.modules.get_by_id(module_id, user_email)
+        if not module:
+            raise ValueError("Module not found")
+        
+        return self.notes.get_topics_for_module(module_id, user_email)
+    
+    def get_note_by_id(self, note_id, user_email):
+        
+        #Get a specific note
+        return self.notes.get_by_id(note_id, user_email)
+    
+    def update_note(self, note_id, user_email, updates):
+        
+        #Update a note
+        return self.notes.update(note_id, user_email, updates)
+    
+    def delete_note(self, note_id, user_email):
+        
+        #Delete a note
+        return self.notes.delete(note_id, user_email)
+    
+    def search_notes(self, user_email, query, module_id=None):
+        
+        #Search notes
+        return self.notes.search_notes(user_email, query, module_id)
+    
+    def pin_note(self, note_id, user_email):
+        
+        #Pin a note to the top
+        return self.notes.pin_note(note_id, user_email)
+    
+    def unpin_note(self, note_id, user_email):
+        
+        #Unpin a note
+        return self.notes.unpin_note(note_id, user_email)
+    
+    def archive_note(self, note_id, user_email):
+        
+        #Archive a note
+        return self.notes.archive_note(note_id, user_email)
+    
+    def unarchive_note(self, note_id, user_email):
+        
+        #Unarchive a note
+        return self.notes.unarchive_note(note_id, user_email)
