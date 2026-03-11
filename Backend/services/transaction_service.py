@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from models.Budget.transactions import Transaction
+from models.Budget import Transaction
 from storage.storagerepo import JSONStorage
 
 class TransactionService:

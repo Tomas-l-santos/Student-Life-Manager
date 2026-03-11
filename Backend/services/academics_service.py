@@ -1,8 +1,6 @@
 #This service coordinates between module, assessment, analytics, and notes classes which provides a unified interface for the routes layer
 
-from models.Academics.modules import Modules
-from models.Academics.assessments import Assessments
-from models.Academics.analytics import AcademicAnalytics
+from models.Academics import Modules, Assessments, AcademicAnalytics, Notes
 
 
 class AcademicsService:
@@ -11,9 +9,10 @@ class AcademicsService:
         self.modules = Modules()
         self.assessments = Assessments()
         self.analytics = AcademicAnalytics()
-    
-    
-    
+        self.notes = Notes()
+
+
+
     # ------ MODULES OPERATIONS ------
     
     def create_module(self, user_email, name, code, credits, year_of_study, academic_year, status="in_progress"):

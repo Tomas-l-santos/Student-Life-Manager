@@ -1,7 +1,4 @@
-from models.Academics.modules import Modules
-from models.Academics.assessments import Assessments
-from models.Academics.grading import GradingSystem
-
+from models.Academics import Modules, Assessments, GradingSystem 
 
 class AcademicAnalytics:
     #Service for academic analytics and grade calculations
