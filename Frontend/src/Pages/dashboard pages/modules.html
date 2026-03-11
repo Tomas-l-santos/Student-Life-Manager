@@ -85,6 +85,198 @@
         </div>
       </div>
     </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="modules-main">
+      <section class="modules-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="modules-left">
+          <div class="modules-card">
+            <div class="card-header">
+              <h2>Add Module</h2>
+              <p>Create a module and connect it to tasks and deadlines.</p>
+            </div>
+
+            <form id="moduleForm" class="module-form">
+              <div class="form-group">
+                <label for="moduleName">Module Name</label>
+                <input type="text" id="moduleName" placeholder="e.g. Software Engineering" required>
+              </div>
+
+              <div class="form-group">
+                <label for="moduleCode">Module Code</label>
+                <input type="text" id="moduleCode" placeholder="e.g. COMP1234" required>
+              </div>
+
+              <div class="form-group">
+                <label for="moduleScore">Assessment Score (%)</label>
+                <input type="number" id="moduleScore" placeholder="e.g. 68" min="0" max="100" required>
+              </div>
+
+              <div class="form-group">
+                <label for="linkedTask">Linked Task</label>
+                <input type="text" id="linkedTask" placeholder="e.g. Finish report draft">
+              </div>
+
+              <div class="form-group">
+                <label for="linkedDeadline">Linked Deadline</label>
+                <input type="date" id="linkedDeadline">
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="main-btn">Add Module</button>
+                <button type="button" class="secondary-btn" id="clearBtn">Clear</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="modules-card">
+            <div class="card-header">
+              <h2>Average Score</h2>
+              <p>Calculated from all module assessment scores.</p>
+            </div>
+
+            <div class="average-box">
+              <div class="average-number" id="averageScore">0%</div>
+              <div class="average-text">Current module average</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="modules-right">
+          <div class="modules-card">
+            <div class="card-header">
+              <h2>Module List</h2>
+              <p>View, edit, delete and manage linked information.</p>
+            </div>
+
+            <div id="moduleList" class="module-list">
+              <div class="empty-state">No modules added yet.</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
   </div>
+
+  <script>
+    const moduleForm = document.getElementById("moduleForm");
+    const moduleList = document.getElementById("moduleList");
+    const averageScore = document.getElementById("averageScore");
+    const clearBtn = document.getElementById("clearBtn");
+
+    const moduleName = document.getElementById("moduleName");
+    const moduleCode = document.getElementById("moduleCode");
+    const moduleScore = document.getElementById("moduleScore");
+    const linkedTask = document.getElementById("linkedTask");
+    const linkedDeadline = document.getElementById("linkedDeadline");
+
+    let modules = [];
+    let editIndex = -1;
+
+    function renderModules() {
+      moduleList.innerHTML = "";
+
+      if (modules.length === 0) {
+        moduleList.innerHTML = '<div class="empty-state">No modules added yet.</div>';
+        averageScore.textContent = "0%";
+        return;
+      }
+
+      let total = 0;
+
+      modules.forEach((module, index) => {
+        total += Number(module.score);
+
+        const card = document.createElement("div");
+        card.className = "module-item";
+
+        card.innerHTML = `
+          <div class="module-top">
+            <div>
+              <h3>${module.name}</h3>
+              <span class="module-code">${module.code}</span>
+            </div>
+            <div class="score-badge">${module.score}%</div>
+          </div>
+
+          <div class="module-details">
+            <p><strong>Linked Task:</strong> ${module.task || "None"}</p>
+            <p><strong>Linked Deadline:</strong> ${module.deadline || "None"}</p>
+          </div>
+
+          <div class="module-actions">
+            <button class="edit-btn" onclick="editModule(${index})">Edit</button>
+            <button class="delete-btn" onclick="deleteModule(${index})">Delete</button>
+          </div>
+        `;
+
+        moduleList.appendChild(card);
+      });
+
+      const average = total / modules.length;
+      averageScore.textContent = average.toFixed(1) + "%";
+    }
+
+    moduleForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const moduleData = {
+        name: moduleName.value.trim(),
+        code: moduleCode.value.trim(),
+        score: moduleScore.value.trim(),
+        task: linkedTask.value.trim(),
+        deadline: linkedDeadline.value
+      };
+
+      if (editIndex === -1) {
+        modules.push(moduleData);
+      } else {
+        modules[editIndex] = moduleData;
+        editIndex = -1;
+        document.querySelector(".main-btn").textContent = "Add Module";
+      }
+
+      moduleForm.reset();
+      renderModules();
+    });
+
+    clearBtn.addEventListener("click", function() {
+      moduleForm.reset();
+      editIndex = -1;
+      document.querySelector(".main-btn").textContent = "Add Module";
+    });
+
+    function editModule(index) {
+      const module = modules[index];
+
+      moduleName.value = module.name;
+      moduleCode.value = module.code;
+      moduleScore.value = module.score;
+      linkedTask.value = module.task;
+      linkedDeadline.value = module.deadline;
+
+      editIndex = index;
+      document.querySelector(".main-btn").textContent = "Update Module";
+    }
+
+    function deleteModule(index) {
+      modules.splice(index, 1);
+
+      if (editIndex === index) {
+        moduleForm.reset();
+        editIndex = -1;
+        document.querySelector(".main-btn").textContent = "Add Module";
+      }
+
+      renderModules();
+    }
+
+    renderModules();
+  </script>
 </body>
 </html>
