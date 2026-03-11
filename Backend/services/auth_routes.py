@@ -13,10 +13,10 @@ auth_service = AuthService()
 # Secret key for JWT - use environment variable in production
 SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret-key-change-in-production')
 
-def generate_token(email):
-    """Generate JWT token"""
+def generate_token(email, user_id):
     payload = {
         'email': email,
+        'user_id': user_id,
         'exp': datetime.utcnow() + timedelta(hours=24)
     }
     return jwt.encode(payload, SECRET_KEY, algorithm='HS256')
