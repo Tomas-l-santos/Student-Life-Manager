@@ -8,7 +8,7 @@ class TransactionService:
     def __init__(self):
         self.storage = JSONStorage("data/transactions.json")
     
-    def _validate_amount(self, amount)
+    def _validate_amount(self, amount):
         if not isinstance(amount, (int, float)):
             raise ValueError ("Amount must be a number")
 
