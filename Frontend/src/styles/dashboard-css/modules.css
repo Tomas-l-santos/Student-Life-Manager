@@ -241,4 +241,221 @@
       width: fit-content;
     }
 
+    /* ===== Modules Main Content ===== */
+.modules-main{
+  grid-area: main;
+  background: var(--panel);
+  padding: 18px;
+  overflow-y: auto;
+}
+
+.modules-grid{
+  display:grid;
+  grid-template-columns: 360px 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+.modules-left,
+.modules-right{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.modules-card{
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.card-header h2{
+  margin:0;
+  font-size:18px;
+  font-weight:650;
+  color: var(--text);
+}
+
+.card-header p{
+  margin:6px 0 0 0;
+  font-size:13px;
+  color: var(--muted);
+}
+
+.module-form{
+  margin-top:16px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.form-group label{
+  font-size:13px;
+  font-weight:600;
+  color: var(--text);
+}
+
+.form-group input{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:13px;
+  color: var(--text);
+  background:#fff;
+  outline:none;
+}
+
+.form-group input:focus{
+  border-color: var(--navy-800);
+}
+
+.form-actions{
+  display:flex;
+  gap:10px;
+  margin-top:4px;
+}
+
+.main-btn,
+.secondary-btn,
+.edit-btn,
+.delete-btn{
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.main-btn{
+  background: var(--navy-800);
+  color:#fff;
+}
+
+.secondary-btn{
+  background: var(--panel-2);
+  color: var(--text);
+  border:1px solid var(--border);
+}
+
+.average-box{
+  margin-top:16px;
+  text-align:center;
+  padding:20px 10px;
+  background: var(--panel);
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+.average-number{
+  font-size:28px;
+  font-weight:700;
+  color: var(--navy-800);
+}
+
+.average-text{
+  margin-top:6px;
+  font-size:13px;
+  color: var(--muted);
+}
+
+.module-list{
+  margin-top:16px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.module-item{
+  border:1px solid var(--border);
+  border-radius:12px;
+  background: var(--panel);
+  padding:14px;
+}
+
+.module-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:10px;
+}
+
+.module-top h3{
+  margin:0;
+  font-size:16px;
+  font-weight:650;
+  color: var(--text);
+}
+
+.module-code{
+  display:inline-block;
+  margin-top:4px;
+  font-size:12px;
+  color: var(--muted);
+}
+
+.score-badge{
+  background: rgba(56, 189, 248, 0.14);
+  color: var(--navy-800);
+  border:1px solid rgba(56, 189, 248, 0.30);
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.module-details{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.module-details p{
+  margin:0;
+  font-size:13px;
+  color: var(--text);
+}
+
+.module-actions{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+}
+
+.edit-btn{
+  background: var(--event-orange);
+  color:#fff;
+}
+
+.delete-btn{
+  background: #dc2626;
+  color:#fff;
+}
+
+.empty-state{
+  text-align:center;
+  padding:30px 14px;
+  font-size:13px;
+  color: var(--muted);
+  border:1px dashed var(--border);
+  border-radius:12px;
+  background: var(--panel);
+}
+
+@media (max-width: 1000px){
+  .modules-grid{
+    grid-template-columns: 1fr;
+  }
+}
     

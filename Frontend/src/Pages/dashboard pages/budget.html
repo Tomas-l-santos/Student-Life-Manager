@@ -85,6 +85,283 @@
         </div>
       </div>
     </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="budget-main">
+      <section class="budget-header">
+        <div>
+          <h2>Budget Overview</h2>
+          <p>Track income, expenses and monthly balance</p>
+        </div>
+      </section>
+
+      <section class="budget-summary-grid">
+        <article class="summary-card">
+          <h3>Monthly Income</h3>
+          <p class="summary-amount" id="monthlyIncome">£0.00</p>
+        </article>
+
+        <article class="summary-card">
+          <h3>Monthly Expenses</h3>
+          <p class="summary-amount" id="monthlyExpense">£0.00</p>
+        </article>
+
+        <article class="summary-card">
+          <h3>Remaining Balance</h3>
+          <p class="summary-amount" id="remainingBalance">£0.00</p>
+        </article>
+      </section>
+
+      <section class="budget-content-grid">
+        <div class="budget-panel">
+          <div class="panel-head">
+            <h3>Add Income</h3>
+          </div>
+
+          <form id="incomeForm" class="budget-form">
+            <label for="incomeTitle">Income source</label>
+            <input type="text" id="incomeTitle" placeholder="e.g. Part-time job" required>
+
+            <label for="incomeAmount">Amount (£)</label>
+            <input type="number" id="incomeAmount" placeholder="e.g. 250" step="0.01" min="0" required>
+
+            <label for="incomeDate">Date</label>
+            <input type="date" id="incomeDate" required>
+
+            <button type="submit" class="budget-btn">Add Income</button>
+          </form>
+        </div>
+
+        <div class="budget-panel">
+          <div class="panel-head">
+            <h3>Add Expense</h3>
+          </div>
+
+          <form id="expenseForm" class="budget-form">
+            <label for="expenseTitle">Expense name</label>
+            <input type="text" id="expenseTitle" placeholder="e.g. Food shopping" required>
+
+            <label for="expenseAmount">Amount (£)</label>
+            <input type="number" id="expenseAmount" placeholder="e.g. 45" step="0.01" min="0" required>
+
+            <label for="expenseCategory">Category</label>
+            <select id="expenseCategory" required>
+              <option value="">Select category</option>
+              <option value="Food">Food</option>
+              <option value="Travel">Travel</option>
+              <option value="Rent">Rent</option>
+              <option value="Bills">Bills</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <label for="expenseDate">Date</label>
+            <input type="date" id="expenseDate" required>
+
+            <button type="submit" class="budget-btn">Add Expense</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="budget-panel transaction-panel">
+        <div class="panel-head panel-head-row">
+          <h3>Transaction List</h3>
+          <button id="clearAllBtn" class="budget-btn secondary-btn" type="button">Clear All</button>
+        </div>
+
+        <div class="transaction-table-wrap">
+          <table class="transaction-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactionList">
+              <tr>
+                <td colspan="6" class="empty-row">No transactions added yet</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
   </div>
+
+  <script>
+    const incomeForm = document.getElementById("incomeForm");
+    const expenseForm = document.getElementById("expenseForm");
+    const transactionList = document.getElementById("transactionList");
+    const monthlyIncome = document.getElementById("monthlyIncome");
+    const monthlyExpense = document.getElementById("monthlyExpense");
+    const remainingBalance = document.getElementById("remainingBalance");
+    const clearAllBtn = document.getElementById("clearAllBtn");
+
+    let transactions = JSON.parse(localStorage.getItem("budgetTransactions")) || [];
+    let editId = null;
+
+    function saveTransactions() {
+      localStorage.setItem("budgetTransactions", JSON.stringify(transactions));
+    }
+
+    function formatCurrency(amount) {
+      return "£" + Number(amount).toFixed(2);
+    }
+
+    function renderTransactions() {
+      transactionList.innerHTML = "";
+
+      if (transactions.length === 0) {
+        transactionList.innerHTML = `
+          <tr>
+            <td colspan="6" class="empty-row">No transactions added yet</td>
+          </tr>
+        `;
+      } else {
+        transactions.forEach((transaction) => {
+          const row = document.createElement("tr");
+
+          row.innerHTML = `
+            <td>${transaction.type}</td>
+            <td>${transaction.title}</td>
+            <td>${transaction.category ? transaction.category : "-"}</td>
+            <td>${formatCurrency(transaction.amount)}</td>
+            <td>${transaction.date}</td>
+            <td class="action-cell">
+              <button class="table-btn edit-btn" onclick="editTransaction(${transaction.id})">Edit</button>
+              <button class="table-btn delete-btn" onclick="deleteTransaction(${transaction.id})">Delete</button>
+            </td>
+          `;
+
+          transactionList.appendChild(row);
+        });
+      }
+
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const incomeTotal = transactions
+        .filter(transaction => transaction.type === "Income")
+        .reduce((sum, transaction) => sum + Number(transaction.amount), 0);
+
+      const expenseTotal = transactions
+        .filter(transaction => transaction.type === "Expense")
+        .reduce((sum, transaction) => sum + Number(transaction.amount), 0);
+
+      const balance = incomeTotal - expenseTotal;
+
+      monthlyIncome.textContent = formatCurrency(incomeTotal);
+      monthlyExpense.textContent = formatCurrency(expenseTotal);
+      remainingBalance.textContent = formatCurrency(balance);
+    }
+
+    incomeForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const title = document.getElementById("incomeTitle").value;
+      const amount = document.getElementById("incomeAmount").value;
+      const date = document.getElementById("incomeDate").value;
+
+      if (editId !== null) {
+        const transaction = transactions.find(item => item.id === editId);
+        transaction.type = "Income";
+        transaction.title = title;
+        transaction.amount = amount;
+        transaction.category = "";
+        transaction.date = date;
+        editId = null;
+      } else {
+        const newTransaction = {
+          id: Date.now(),
+          type: "Income",
+          title: title,
+          category: "",
+          amount: amount,
+          date: date
+        };
+        transactions.push(newTransaction);
+      }
+
+      saveTransactions();
+      renderTransactions();
+      incomeForm.reset();
+    });
+
+    expenseForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const title = document.getElementById("expenseTitle").value;
+      const amount = document.getElementById("expenseAmount").value;
+      const category = document.getElementById("expenseCategory").value;
+      const date = document.getElementById("expenseDate").value;
+
+      if (editId !== null) {
+        const transaction = transactions.find(item => item.id === editId);
+        transaction.type = "Expense";
+        transaction.title = title;
+        transaction.amount = amount;
+        transaction.category = category;
+        transaction.date = date;
+        editId = null;
+      } else {
+        const newTransaction = {
+          id: Date.now(),
+          type: "Expense",
+          title: title,
+          category: category,
+          amount: amount,
+          date: date
+        };
+        transactions.push(newTransaction);
+      }
+
+      saveTransactions();
+      renderTransactions();
+      expenseForm.reset();
+    });
+
+    function deleteTransaction(id) {
+      transactions = transactions.filter(transaction => transaction.id !== id);
+      saveTransactions();
+      renderTransactions();
+    }
+
+    function editTransaction(id) {
+      const transaction = transactions.find(transaction => transaction.id === id);
+      if (!transaction) return;
+
+      editId = id;
+
+      if (transaction.type === "Income") {
+        document.getElementById("incomeTitle").value = transaction.title;
+        document.getElementById("incomeAmount").value = transaction.amount;
+        document.getElementById("incomeDate").value = transaction.date;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        document.getElementById("expenseTitle").value = transaction.title;
+        document.getElementById("expenseAmount").value = transaction.amount;
+        document.getElementById("expenseCategory").value = transaction.category;
+        document.getElementById("expenseDate").value = transaction.date;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    clearAllBtn.addEventListener("click", function() {
+      transactions = [];
+      saveTransactions();
+      renderTransactions();
+      incomeForm.reset();
+      expenseForm.reset();
+      editId = null;
+    });
+
+    renderTransactions();
+  </script>
 </body>
 </html>

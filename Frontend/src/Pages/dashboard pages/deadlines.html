@@ -93,7 +93,11 @@
           <h2>Deadline Manager</h2>
           <p>Track assignment deadlines, manage workload, and see upcoming reminders.</p>
         </div>
-        <button id="openFormBtn" class="deadline-btn">+ Add Deadline</button>
+
+        <div class="deadlines-header-actions">
+          <button id="sortDeadlinesBtn" class="deadline-btn secondary-btn" type="button">Sort by Nearest Due Date</button>
+          <button id="openFormBtn" class="deadline-btn" type="button">+ Add Deadline</button>
+        </div>
       </section>
 
       <section class="deadline-summary">
@@ -122,9 +126,14 @@
       </section>
 
       <section id="deadlineFormSection" class="deadline-form-section hidden">
-        <h3 id="formTitle">Add New Deadline</h3>
+        <div class="deadline-form-top">
+          <h3 id="formTitle">Add New Deadline</h3>
+          <button type="button" id="closeFormBtn" class="close-form-btn">✕</button>
+        </div>
 
         <form id="deadlineForm" class="deadline-form">
+          <input type="hidden" id="editDeadlineIndex">
+
           <div class="form-grid">
             <div class="form-group">
               <label for="deadlineTitle">Title</label>
@@ -173,8 +182,11 @@
 
       <section class="deadline-list-section">
         <div class="list-header">
-          <h3>Deadline List</h3>
-          <p>Automatically sorted by closest due date first.</p>
+          <div>
+            <h3>Deadline List</h3>
+            <p>Automatically sorted by closest due date first.</p>
+          </div>
+          <div class="deadline-list-count" id="deadlineCount">0 Deadlines</div>
         </div>
 
         <div id="deadlineList" class="deadline-list">
