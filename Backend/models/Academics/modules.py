@@ -41,7 +41,7 @@ class Modules:
         except ValueError:
             raise ValueError("Invalid year of study")
         
-        # Check for duplicates
+        # Check for duplicate module
         if self._module_exists(user_email, code, academic_year):
             raise ValueError("Module with this code already exists for this academic year")
         
