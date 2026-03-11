@@ -66,7 +66,7 @@ class BudgetService:
             return 1
         return max(t["id"] for t in transactions) + 1
 
-    def add_transaction(self, user_email, category_id, amount, description, transaction_date, is_recurring=False):
+    def add_transaction(self, user_id, category_id, amount, description, transaction_date, is_recurring=False):
         """Add a new transaction"""
         # Validate category exists
         category = self.get_category_by_id(category_id)
@@ -89,7 +89,7 @@ class BudgetService:
 
         transaction = Transaction(
             id=self._generate_transaction_id(),
-            user_email=user_email,
+            user_id=user_id,
             category_id=category_id,
             amount=amount,
             description=description,
@@ -100,10 +100,10 @@ class BudgetService:
         self.transactions_storage.append(transaction.to_dict())
         return transaction.to_dict()
 
-    def get_user_transactions(self, user_email, category_id=None, month=None, year=None):
+    def get_user_transactions(self, user_id, category_id=None, month=None, year=None):
         """Get all transactions for a user with optional filters"""
         transactions = self.transactions_storage.read_all()
-        user_transactions = [t for t in transactions if t["user_email"] == user_email]
+        user_transactions = [t for t in transactions if t["user_id"] == user_id]
 
         # Apply filters
         if category_id:
@@ -130,21 +130,21 @@ class BudgetService:
 
         return user_transactions
 
-    def get_transaction_by_id(self, transaction_id, user_email):
+    def get_transaction_by_id(self, transaction_id, user_id):
         """Get a specific transaction"""
         transactions = self.transactions_storage.read_all()
         for t in transactions:
-            if t["id"] == transaction_id and t["user_email"] == user_email:
+            if t["id"] == transaction_id and t["user_id"] == user_id:
                 t["category"] = self.get_category_by_id(t["category_id"])
                 return t
         return None
 
-    def update_transaction(self, transaction_id, user_email, updates):
+    def update_transaction(self, transaction_id, user_id, updates):
         """Update an existing transaction"""
         transactions = self.transactions_storage.read_all()
         
         for i, t in enumerate(transactions):
-            if t["id"] == transaction_id and t["user_email"] == user_email:
+            if t["id"] == transaction_id and t["user_id"] == user_id:
                 # Update fields
                 if "category_id" in updates:
                     if not self.get_category_by_id(updates["category_id"]):
@@ -177,21 +177,21 @@ class BudgetService:
         
         raise ValueError("Transaction not found")
 
-    def delete_transaction(self, transaction_id, user_email):
+    def delete_transaction(self, transaction_id, user_id):
         """Delete a transaction"""
         transactions = self.transactions_storage.read_all()
         
         for i, t in enumerate(transactions):
-            if t["id"] == transaction_id and t["user_email"] == user_email:
+            if t["id"] == transaction_id and t["user_id"] == user_id:
                 transactions.pop(i)
                 self.transactions_storage.overwrite(transactions)
                 return True
         
         raise ValueError("Transaction not found")
 
-    def get_transaction_summary(self, user_email, month, year):
+    def get_transaction_summary(self, user_id, month, year):
         """Get summary of income, expenses, and balance for a month"""
-        transactions = self.get_user_transactions(user_email, month=month, year=year)
+        transactions = self.get_user_transactions(user_id, month=month, year=year)
         
         total_income = sum(t["amount"] for t in transactions if t["category"]["type"] == "income")
         total_expenses = sum(t["amount"] for t in transactions if t["category"]["type"] == "expense")
@@ -229,7 +229,7 @@ class BudgetService:
             return 1
         return max(b["id"] for b in budgets) + 1
 
-    def create_budget(self, user_email, category_id, amount, month, year):
+    def create_budget(self, user_id, category_id, amount, month, year):
         """Create a new budget"""
         # Validate category
         category = self.get_category_by_id(category_id)
@@ -254,7 +254,7 @@ class BudgetService:
         # Check if budget already exists
         budgets = self.budgets_storage.read_all()
         for b in budgets:
-            if (b["user_email"] == user_email and 
+            if (b["user_id"] == user_id and 
                 b["category_id"] == category_id and 
                 b["month"] == month and 
                 b["year"] == year):
@@ -262,7 +262,7 @@ class BudgetService:
 
         budget = Budget(
             id=self._generate_budget_id(),
-            user_email=user_email,
+            user_id=user_id,
             category_id=category_id,
             amount=amount,
             month=month,
