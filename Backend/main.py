@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from services.authorisation import AuthService
 from services.budget_service import BudgetService
-from services.auth_routes import auth_bp  
+from services.auth_routes import auth_bp, token_required
 
 app = Flask(__name__)
 
@@ -43,11 +43,12 @@ def get_transactions(current_user_email, current_user_id):
 # --- BUDGET ROUTES (Teammate's Additions) ---
 
 @app.route("/api/budgets", methods=["POST"])
-def create_budget():
+@token_required
+def create_budget(current_user_email, current_user_id):
     data = request.json
     try:
         b = budget_service.create_budget(
-            user_email=data["user_email"],
+            user_id=current_user_id,   # ← from token, not request body
             category_id=data["category_id"],
             amount=data["amount"],
             month=data["month"],
@@ -57,26 +58,25 @@ def create_budget():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-@app.route("/api/budgets/<user_email>", methods=["GET"])
-def get_budgets(user_email):
+@app.route("/api/budgets", methods=["GET"])
+@token_required
+def get_budgets(current_user_email, current_user_id):
     month = request.args.get("month", type=int)
     year = request.args.get("year", type=int)
     try:
-        result = budget_service.get_user_budgets(user_email, month=month, year=year)
-        return jsonify(result), 200
+        return jsonify(budget_service.get_user_budgets(current_user_id, month=month, year=year)), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-@app.route("/api/budgets/status/<user_email>", methods=["GET"])
-def get_budget_status(user_email):
+@app.route("/api/budgets/status", methods=["GET"])
+@token_required
+def get_budget_status(current_user_email, current_user_id):
     month = request.args.get("month", type=int)
     year = request.args.get("year", type=int)
     try:
-        result = budget_service.get_budget_status(user_email, month=month, year=year)
-        return jsonify(result), 200
+        return jsonify(budget_service.get_budget_status(current_user_id, month=month, year=year)), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 # --- CATEGORY ROUTES (Teammate's Additions) ---
 
 @app.route("/api/categories", methods=["GET"])
