@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 class Modules:
-    #manages academic modules
+    #Manages academic modules
     
     def __init__(self, storage_path="data/modules.json"):
         self.storage = JSONStorage(storage_path)
