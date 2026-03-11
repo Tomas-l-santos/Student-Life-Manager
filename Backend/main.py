@@ -17,11 +17,12 @@ budget_service = BudgetService()
 # --- TRANSACTION ROUTES (Teammate's Additions) ---
 
 @app.route("/api/transactions", methods=["POST"])
-def add_transaction():
+@token_required
+def add_transaction(current_user_email, current_user_id):
     data = request.json
     try:
         t = budget_service.add_transaction(
-            user_email=data["user_email"],  
+            user_id=current_user_id,
             category_id=data["category_id"],
             amount=data["amount"],
             description=data["description"],
@@ -31,11 +32,11 @@ def add_transaction():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-@app.route("/api/transactions/<user_email>", methods=["GET"])
-def get_transactions(user_email):
+@app.route("/api/transactions", methods=["GET"])
+@token_required
+def get_transactions(current_user_email, current_user_id):
     try:
-        result = budget_service.get_user_transactions(user_email)
-        return jsonify(result), 200
+        return jsonify(budget_service.get_user_transactions(current_user_id)), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
