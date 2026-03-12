@@ -1,5 +1,5 @@
 from storage.storagerepo import JSONStorage
-from models.Academics.grading import GradingSystem, UKGradingSystem
+from models.Academics.grading import GradingSystem
 from datetime import datetime
 
 

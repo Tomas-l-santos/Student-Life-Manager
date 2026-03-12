@@ -85,6 +85,410 @@
         </div>
       </div>
     </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <section class="page-header">
+        <div>
+          <h2>Account & Security</h2>
+          <p>Manage user details, login access, password safety, and account protection settings.</p>
+        </div>
+      </section>
+
+      <section class="account-grid">
+
+        <!-- Account Information Display -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Account Information</h3>
+            <span class="status-badge">Active</span>
+          </div>
+
+          <div class="info-list">
+            <div class="info-row">
+              <span class="label">Full Name</span>
+              <span id="displayName">Tomás Loureiro Santos</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Username</span>
+              <span id="displayUsername">Username</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Email</span>
+              <span id="displayEmail">student@email.com</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Account Type</span>
+              <span>Student</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Last Login</span>
+              <span id="lastLogin">Not yet recorded</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login System -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Login System</h3>
+            <span class="mini-note">User authentication</span>
+          </div>
+
+          <form id="loginForm" class="form-block">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Enter email" required>
+
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password" required>
+
+            <button type="submit" class="primary-btn">Login</button>
+            <p id="loginMessage" class="message-text"></p>
+          </form>
+        </div>
+
+        <!-- Account Creation -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Create Account</h3>
+            <span class="mini-note">New user setup</span>
+          </div>
+
+          <form id="createAccountForm" class="form-block">
+            <label for="createName">Full Name</label>
+            <input type="text" id="createName" placeholder="Enter full name" required>
+
+            <label for="createUsername">Username</label>
+            <input type="text" id="createUsername" placeholder="Create username" required>
+
+            <label for="createEmail">Email</label>
+            <input type="email" id="createEmail" placeholder="Enter email" required>
+
+            <label for="createPassword">Password</label>
+            <input type="password" id="createPassword" placeholder="Create password" required>
+
+            <div class="strength-wrap">
+              <div class="strength-bar">
+                <div id="strengthFill" class="strength-fill"></div>
+              </div>
+              <span id="strengthText">Password strength: None</span>
+            </div>
+
+            <button type="submit" class="primary-btn">Create Account</button>
+            <p id="createMessage" class="message-text"></p>
+          </form>
+        </div>
+
+        <!-- Change Password Function -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Change Password</h3>
+            <span class="mini-note">Security update</span>
+          </div>
+
+          <form id="changePasswordForm" class="form-block">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" placeholder="Enter current password" required>
+
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" placeholder="Enter new password" required>
+
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm new password" required>
+
+            <button type="submit" class="primary-btn">Change Password</button>
+            <p id="changePasswordMessage" class="message-text"></p>
+          </form>
+        </div>
+
+        <!-- Login Lockout Protection -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Login Protection</h3>
+            <span class="mini-note">Lockout monitoring</span>
+          </div>
+
+          <div class="info-list">
+            <div class="info-row">
+              <span class="label">Failed Attempts</span>
+              <span id="failedAttempts">0</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Lockout Status</span>
+              <span id="lockoutStatus">Unlocked</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Maximum Attempts</span>
+              <span>3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delete Account & Data Function -->
+        <div class="card danger-card">
+          <div class="card-header">
+            <h3>Delete Account & Data</h3>
+            <span class="danger-badge">Danger Zone</span>
+          </div>
+
+          <p class="danger-text">
+            This action removes account details, password data, and stored security history from the browser.
+          </p>
+
+          <button id="deleteAccountBtn" class="danger-btn">Delete Account</button>
+          <p id="deleteMessage" class="message-text"></p>
+        </div>
+
+        <!-- Security Event Logging -->
+        <div class="card log-card">
+          <div class="card-header">
+            <h3>Security Event Log</h3>
+            <span class="mini-note">Recent account actions</span>
+          </div>
+
+          <div id="securityLog" class="log-box">
+            <div class="log-entry">No security events recorded yet.</div>
+          </div>
+        </div>
+
+      </section>
+    </main>
   </div>
+
+  <script>
+    let savedAccount = JSON.parse(localStorage.getItem("accountData")) || null;
+    let failedLoginAttempts = Number(localStorage.getItem("failedLoginAttempts")) || 0;
+    let isLocked = localStorage.getItem("isLocked") === "true";
+
+    const displayName = document.getElementById("displayName");
+    const displayUsername = document.getElementById("displayUsername");
+    const displayEmail = document.getElementById("displayEmail");
+    const lastLogin = document.getElementById("lastLogin");
+
+    const failedAttemptsText = document.getElementById("failedAttempts");
+    const lockoutStatus = document.getElementById("lockoutStatus");
+    const securityLog = document.getElementById("securityLog");
+
+    function updateAccountDisplay() {
+      if (savedAccount) {
+        displayName.textContent = savedAccount.name;
+        displayUsername.textContent = savedAccount.username;
+        displayEmail.textContent = savedAccount.email;
+        lastLogin.textContent = savedAccount.lastLogin || "Not yet recorded";
+      } else {
+        displayName.textContent = "No account created";
+        displayUsername.textContent = "-";
+        displayEmail.textContent = "-";
+        lastLogin.textContent = "Not yet recorded";
+      }
+    }
+
+    function updateProtectionDisplay() {
+      failedAttemptsText.textContent = failedLoginAttempts;
+      lockoutStatus.textContent = isLocked ? "Locked" : "Unlocked";
+    }
+
+    function addSecurityLog(message) {
+      const currentTime = new Date().toLocaleString();
+      const newEntry = document.createElement("div");
+      newEntry.className = "log-entry";
+      newEntry.textContent = currentTime + " - " + message;
+
+      if (securityLog.textContent.includes("No security events recorded yet.")) {
+        securityLog.innerHTML = "";
+      }
+
+      securityLog.prepend(newEntry);
+
+      let logs = JSON.parse(localStorage.getItem("securityLogs")) || [];
+      logs.unshift(currentTime + " - " + message);
+      localStorage.setItem("securityLogs", JSON.stringify(logs));
+    }
+
+    function loadSecurityLogs() {
+      let logs = JSON.parse(localStorage.getItem("securityLogs")) || [];
+      if (logs.length > 0) {
+        securityLog.innerHTML = "";
+        logs.forEach(function(log) {
+          const entry = document.createElement("div");
+          entry.className = "log-entry";
+          entry.textContent = log;
+          securityLog.appendChild(entry);
+        });
+      }
+    }
+
+    function checkPasswordStrength(password) {
+      let strength = 0;
+
+      if (password.length >= 8) strength++;
+      if (/[A-Z]/.test(password)) strength++;
+      if (/[a-z]/.test(password)) strength++;
+      if (/[0-9]/.test(password)) strength++;
+      if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+      return strength;
+    }
+
+    const createPasswordInput = document.getElementById("createPassword");
+    const strengthFill = document.getElementById("strengthFill");
+    const strengthText = document.getElementById("strengthText");
+
+    createPasswordInput.addEventListener("input", function() {
+      const password = createPasswordInput.value;
+      const strength = checkPasswordStrength(password);
+
+      if (strength === 0) {
+        strengthFill.style.width = "0%";
+        strengthText.textContent = "Password strength: None";
+      } else if (strength <= 2) {
+        strengthFill.style.width = "33%";
+        strengthText.textContent = "Password strength: Weak";
+      } else if (strength <= 4) {
+        strengthFill.style.width = "66%";
+        strengthText.textContent = "Password strength: Medium";
+      } else {
+        strengthFill.style.width = "100%";
+        strengthText.textContent = "Password strength: Strong";
+      }
+    });
+
+    document.getElementById("createAccountForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("createName").value;
+      const username = document.getElementById("createUsername").value;
+      const email = document.getElementById("createEmail").value;
+      const password = document.getElementById("createPassword").value;
+      const createMessage = document.getElementById("createMessage");
+
+      if (checkPasswordStrength(password) < 3) {
+        createMessage.textContent = "Password is too weak. Please make it stronger.";
+        return;
+      }
+
+      savedAccount = {
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+        lastLogin: "Not yet recorded"
+      };
+
+      localStorage.setItem("accountData", JSON.stringify(savedAccount));
+      createMessage.textContent = "Account created successfully.";
+      updateAccountDisplay();
+      addSecurityLog("Account created for " + email);
+      this.reset();
+      strengthFill.style.width = "0%";
+      strengthText.textContent = "Password strength: None";
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      const loginMessage = document.getElementById("loginMessage");
+
+      if (isLocked) {
+        loginMessage.textContent = "Account is locked due to too many failed login attempts.";
+        addSecurityLog("Blocked login attempt while account was locked");
+        return;
+      }
+
+      if (savedAccount && email === savedAccount.email && password === savedAccount.password) {
+        loginMessage.textContent = "Login successful.";
+        failedLoginAttempts = 0;
+        isLocked = false;
+        savedAccount.lastLogin = new Date().toLocaleString();
+        localStorage.setItem("accountData", JSON.stringify(savedAccount));
+        localStorage.setItem("failedLoginAttempts", failedLoginAttempts);
+        localStorage.setItem("isLocked", isLocked);
+        updateAccountDisplay();
+        updateProtectionDisplay();
+        addSecurityLog("Successful login for " + email);
+      } else {
+        failedLoginAttempts++;
+        localStorage.setItem("failedLoginAttempts", failedLoginAttempts);
+        loginMessage.textContent = "Incorrect email or password.";
+
+        if (failedLoginAttempts >= 3) {
+          isLocked = true;
+          localStorage.setItem("isLocked", isLocked);
+          loginMessage.textContent = "Too many failed attempts. Account locked.";
+          addSecurityLog("Account locked after repeated failed login attempts");
+        } else {
+          addSecurityLog("Failed login attempt for " + email);
+        }
+
+        updateProtectionDisplay();
+      }
+    });
+
+    document.getElementById("changePasswordForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const currentPassword = document.getElementById("currentPassword").value;
+      const newPassword = document.getElementById("newPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const changePasswordMessage = document.getElementById("changePasswordMessage");
+
+      if (!savedAccount) {
+        changePasswordMessage.textContent = "No account exists yet.";
+        return;
+      }
+
+      if (currentPassword !== savedAccount.password) {
+        changePasswordMessage.textContent = "Current password is incorrect.";
+        addSecurityLog("Incorrect current password used in password change attempt");
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        changePasswordMessage.textContent = "New passwords do not match.";
+        return;
+      }
+
+      if (checkPasswordStrength(newPassword) < 3) {
+        changePasswordMessage.textContent = "New password is too weak.";
+        return;
+      }
+
+      savedAccount.password = newPassword;
+      localStorage.setItem("accountData", JSON.stringify(savedAccount));
+      changePasswordMessage.textContent = "Password changed successfully.";
+      addSecurityLog("Password changed successfully");
+      this.reset();
+    });
+
+    document.getElementById("deleteAccountBtn").addEventListener("click", function() {
+      const deleteMessage = document.getElementById("deleteMessage");
+
+      if (!savedAccount) {
+        deleteMessage.textContent = "There is no account to delete.";
+        return;
+      }
+
+      localStorage.removeItem("accountData");
+      localStorage.removeItem("failedLoginAttempts");
+      localStorage.removeItem("isLocked");
+      localStorage.removeItem("securityLogs");
+
+      savedAccount = null;
+      failedLoginAttempts = 0;
+      isLocked = false;
+
+      deleteMessage.textContent = "Account and stored data deleted.";
+      securityLog.innerHTML = '<div class="log-entry">No security events recorded yet.</div>';
+
+      updateAccountDisplay();
+      updateProtectionDisplay();
+    });
+
+    updateAccountDisplay();
+    updateProtectionDisplay();
+    loadSecurityLogs();
+  </script>
 </body>
 </html>
