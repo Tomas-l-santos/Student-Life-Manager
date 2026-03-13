@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime
-from models.Budget.transactions import Transaction
+from models.Budget import Transaction
 from storage.storagerepo import JSONStorage
 
 class TransactionService:
@@ -8,7 +8,7 @@ class TransactionService:
     def __init__(self):
         self.storage = JSONStorage("data/transactions.json")
     
-    def _validate_amount(self, amount)
+    def _validate_amount(self, amount):
         if not isinstance(amount, (int, float)):
             raise ValueError ("Amount must be a number")
 
