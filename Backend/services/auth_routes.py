@@ -13,10 +13,10 @@ auth_service = AuthService()
 # Secret key for JWT - use environment variable in production
 SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret-key-change-in-production')
 
-def generate_token(email):
-    """Generate JWT token"""
+def generate_token(email, user_id):
     payload = {
         'email': email,
+        'user_id': user_id,
         'exp': datetime.utcnow() + timedelta(hours=24)
     }
     return jwt.encode(payload, SECRET_KEY, algorithm='HS256')
@@ -40,12 +40,13 @@ def token_required(f):
         try:
             data = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
             current_user_email = data['email']
+            current_user_id = data['user_id']
         except jwt.ExpiredSignatureError:
             return jsonify({'error': 'Token has expired'}), 401
         except jwt.InvalidTokenError:
             return jsonify({'error': 'Invalid token'}), 401
         
-        return f(current_user_email, *args, **kwargs)
+        return f(current_user_email, current_user_id, *args, **kwargs)
     
     return decorated
 
@@ -57,14 +58,14 @@ def register():
         if not data or not data.get('email') or not data.get('username') or not data.get('password') or not data.get('birthdate'):
             return jsonify({'error': 'Missing required fields'}), 400
         
-        auth_service.register_user(
+        user = auth_service.register_user(
             email=data['email'],
             username=data['username'],
             password=data['password'],
             birthdate=data['birthdate']
         )
         
-        token = generate_token(data['email'])
+        token = generate_token(data['email'], user.user_id)
         
         return jsonify({
             'message': 'User registered successfully',
@@ -98,7 +99,7 @@ def login():
             users = auth_service.storage.read_all()
             user = next((u for u in users if u['email'] == data['email']), None)
             
-            token = generate_token(data['email'])
+            token = generate_token(user['email'], user['user_id'])
             
             return jsonify({
                 'message': 'Login successful',
@@ -118,7 +119,7 @@ def login():
 
 @auth_bp.route('/me', methods=['GET'])
 @token_required
-def get_current_user(current_user_email):
+def get_current_user(current_user_email, current_user_id):
     try:
         users = auth_service.storage.read_all()
         user = next((u for u in users if u['email'] == current_user_email), None)
@@ -137,7 +138,7 @@ def get_current_user(current_user_email):
 
 @auth_bp.route('/change-password', methods=['POST'])
 @token_required
-def change_password(current_user_email):
+def change_password(current_user_email, current_user_id):
     try:
         data = request.get_json()
         
@@ -170,7 +171,10 @@ def forgot_password():
         print(f"{'='*40}\n")
 
         sender_email = "studentlife.app.noreply@gmail.com"
-        sender_password = "jgeg dihp wfce hzvt" 
+        sender_password = os.getenv('GMAIL_APP_PASSWORD')
+        if not sender_password:
+            print("Warning: GMAIL_APP_PASSWORD not set")
+            return jsonify({'error': 'Email service not configured'}), 500
         
         msg = MIMEText(f"Your password reset token is: {token}\nThis code is valid for 1 hour.")
         msg['Subject'] = "Your SLM Password Reset Code"
