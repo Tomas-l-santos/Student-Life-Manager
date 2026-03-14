@@ -995,3 +995,7 @@ body{
 .legend-item.inactive {
   opacity: 0.4;
 }
+[data-theme="dark"] input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
