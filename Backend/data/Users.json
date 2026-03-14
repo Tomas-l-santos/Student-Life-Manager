@@ -12,5 +12,19 @@
     "username": "Ameera",
     "password_hash": "$2b$12$HmrwIQ9aRu62ZSVLDkpg.eRF2SMU.I2/ZRYdnbVHISbfakvbd6PAu",
     "birthdate": "20013-10-10"
+  },
+  {
+    "user_id": "3943e652-f87a-4f0e-908a-f7daedb1692d",
+    "email": "ambilysinoj@gmail.com",
+    "username": "Ambily",
+    "password_hash": "$2b$12$RbbLELbY091TbHyGA5CM7OELlOhhgNR.DevYOV8kD.bJEOrXHGEIi",
+    "birthdate": "1992-02-10"
+  },
+  {
+    "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
+    "email": "as7253s@gre.ac.uk",
+    "username": "test",
+    "password_hash": "$2b$12$JFMDh9iXSVD/cR1VKZ9XQuR7FGm0vtbLReV/z.zNmH3yr/i6bQCp6",
+    "birthdate": "2002-10-10"
   }
 ]
