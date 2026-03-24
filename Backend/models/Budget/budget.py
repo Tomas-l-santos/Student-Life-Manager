@@ -1,9 +1,9 @@
 from datetime import datetime
 
 class Budget:
-    def __init__(self, id, user_email, category_id, amount, month, year, created_at=None):
+    def __init__(self, id, user_id, category_id, amount, month, year, created_at=None):
         self.id = id
-        self.user_email = user_email
+        self.user_id = user_id
         self.category_id = category_id
         self.amount = amount
         self.month = month                                              #Number of the month (1-12)
@@ -13,7 +13,7 @@ class Budget:
     def to_dict(self):
         return {
             "id": self.id,
-            "user_email": self.user_email,
+            "user_id": self.user_id,
             "category_id": self.category_id,
             "amount": self.amount,
             "month": self.month,
@@ -25,7 +25,7 @@ class Budget:
     def from_dict(data):
         return Budget(
             id=data["id"],
-            user_email=data["user_email"],
+            user_id=data["user_id"],
             category_id=data["category_id"],
             amount=data["amount"],
             month=data["month"],

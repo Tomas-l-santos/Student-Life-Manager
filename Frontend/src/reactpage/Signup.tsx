@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { saveSession } from "../services/storage";
 
 export function LoginModal({ onClose }: { onClose: () => void }) {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
       }
 
       // Success state and routing
-      localStorage.setItem("token", data.access_token);
+      saveSession(data.access_token, data.user.email, data.user.username);
       setIsLoggedIn(true);
       setTimeout(() => {
         onClose();
@@ -233,7 +234,7 @@ export function SignupModal({
       }
 
       setErrorField(null);
-      localStorage.setItem("token", data.access_token);
+      saveSession(data.access_token, data.user.email, data.user.username);
 
       setIsRegistered(true);
       setTimeout(() => {
