@@ -4,6 +4,7 @@ import ForgotPassword from "./reactpage/ForgotPassword";
 import About from "./reactpage/about";
 import Dashboard from "./reactpage/Dashboard RP/dashboard";
 import Timetable from "./reactpage/Dashboard RP/timetable";
+import Deadlines from "./reactpage/Dashboard RP/deadlines";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/timetable" element={<Timetable />} />
+        <Route path="/deadlines" element={<Deadlines />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route
           path="/create-account"
