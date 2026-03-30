@@ -6,6 +6,8 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+load_dotenv()
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
 auth_service = AuthService()
@@ -170,10 +172,12 @@ def forgot_password():
         print(f"YOUR 6-DIGIT TOKEN IS: {token}")
         print(f"{'='*40}\n")
 
-        sender_email = "studentlife.app.noreply@gmail.com"
+        # Pulls from .env, falls back to the hardcoded one if EMAIL_USER isn't set
+        sender_email = os.getenv('EMAIL_USER', "studentlife.app.noreply@gmail.com")
         sender_password = os.getenv('GMAIL_APP_PASSWORD')
+        
         if not sender_password:
-            print("Warning: GMAIL_APP_PASSWORD not set")
+            print("Warning: GMAIL_APP_PASSWORD not set in .env file")
             return jsonify({'error': 'Email service not configured'}), 500
         
         msg = MIMEText(f"Your password reset token is: {token}\nThis code is valid for 1 hour.")
