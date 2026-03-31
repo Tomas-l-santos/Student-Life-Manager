@@ -51,28 +51,27 @@
   --topbar-text: #ffffff;
 }
 
-/* light theme */
+/* NEW LIGHT THEME ("Front Page" Ultra-Clean & Red) */
 [data-theme="new-light"] {
-  --bg: #f8fafc;
+  --bg: #ffffff;
   --panel: #ffffff;
-  --panel-2: #f1f5f9;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --muted: #64748b;
-  --shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  --panel-2: #f8f9fa;
+  --border: #eaeaea;
+  --text: #111111;
+  --muted: #666666;
+  --shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
 
   --navy-900: #ffffff;
   --navy-850: #ffffff;
   --navy-800: #ffffff;
   --sidebar: #ffffff;
   --sidebar-2: #ffffff;
-  --sidebar-text: #0f172a;
-  --sidebar-muted: #64748b;
+  --sidebar-text: #111111;
+  --sidebar-muted: #666666;
 
-  --event-blue: #06b6d4; 
-  --event-purple: #d946ef; 
-  
-  --topbar-text: #0f172a;
+  /* Front Page Brand Red */
+  --event-cyan: #e60023; 
+  --topbar-text: #111111;
 }
 
 /* --- Theme Override Fixes --- */

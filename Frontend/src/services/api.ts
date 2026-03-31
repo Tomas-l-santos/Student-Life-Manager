@@ -7,6 +7,7 @@ function authHeaders() {
     Authorization: `Bearer ${token}`,
   };
 }
+// Authentication
 
 export async function login(email: string, password: string) {
   const res = await fetch(`${BASE_URL}/api/auth/login`, {
@@ -49,6 +50,8 @@ export async function resetPassword(token: string, new_password: string, email: 
   return res.json();
 }
 
+// Budget
+
 export async function getTransactions() {
   const res = await fetch(`${BASE_URL}/api/transactions`, {
     headers: authHeaders(),
@@ -84,4 +87,70 @@ export async function getBudgetStatus(month: number, year: number) {
     { headers: authHeaders() }
   );
   return res.json();
+}
+export async function deleteTransaction(id: string | number) {
+  const res = await fetch(`${BASE_URL}/api/transactions/${id}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Failed to delete transaction");
+  return result;
+}
+// modules 
+
+export async function getModules() {
+  const res = await fetch(`${BASE_URL}/api/modules`, {
+    headers: authHeaders(),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Failed to load modules");
+  return data;
+}
+
+export async function addModule(data: {
+  name: string;
+  code: string;
+  credits: number;
+  year_of_study: number;
+  academic_year: string;
+  deadline: string;
+}) {
+  const res = await fetch(`${BASE_URL}/api/modules`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Failed to add module");
+  return result;
+}
+
+export async function deleteModule(moduleId: string) {
+  const res = await fetch(`${BASE_URL}/api/modules/${moduleId}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Failed to delete module");
+  return result;
+}
+
+export async function addAssessment(data: {
+  module_id: string;
+  name: string;
+  assessment_type: string;
+  score: number;
+  max_score: number;
+  weight: number;
+  date: string;
+}) {
+  const res = await fetch(`${BASE_URL}/api/assessments`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Failed to add assessment");
+  return result;
 }
