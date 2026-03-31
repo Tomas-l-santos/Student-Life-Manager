@@ -15,10 +15,10 @@ class AcademicsService:
 
     # ------ MODULES OPERATIONS ------
     
-    def create_module(self, user_email, name, code, credits, year_of_study, academic_year, status="in_progress"):
+    def create_module(self, user_email, name, code, credits, year_of_study, academic_year, deadline, status="in_progress"):
         
         #Create a new module
-        return self.modules.create(user_email, name, code, credits, year_of_study, academic_year, status)
+        return self.modules.create(user_email, name, code, credits, year_of_study, academic_year, deadline, status)
     
     def get_user_modules(self, user_email, year_of_study=None, academic_year=None, status=None):
         
