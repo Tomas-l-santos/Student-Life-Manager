@@ -254,12 +254,13 @@ html, body {
 }
 
 .sidebar-top {
-  padding: 16px 14px;
+  height: var(--topbar-h); 
+  padding: 0 14px;        
   border-bottom: 1px solid rgba(100,100,100,0.15);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 .hamburger {
   width:40px;
