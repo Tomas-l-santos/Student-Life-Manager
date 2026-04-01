@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/dashboard-css/tasks.css">
-    <title>Tasks</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../styles/dashboard-css/tasks.css">
+  <title>Tasks</title>
 </head>
-
 <body>
-    
   <div class="app">
-
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-top">
@@ -23,36 +20,28 @@
 
       <nav class="nav" aria-label="Primary">
         <a href="dashboard.html">
-          <span class="icon">📊</span>
-          Dashboard
+          <span class="icon">📊</span> Dashboard
         </a>
-         <a href="timetable.html">
-          <span class="icon">📅</span>
-          Timetable
+        <a href="timetable.html">
+          <span class="icon">📅</span> Timetable
         </a>
         <a href="deadlines.html">
-          <span class="icon">⏳</span>
-          Deadlines
+          <span class="icon">⏳</span> Deadlines
         </a>
         <a class="active" href="tasks.html">
-          <span class="icon">✅</span>
-          Tasks
+          <span class="icon">✅</span> Tasks
         </a>
         <a href="modules.html">
-          <span class="icon">📚</span>
-          Modules
+          <span class="icon">📚</span> Modules
         </a>
         <a href="budget.html">
-          <span class="icon">💷</span>
-          Budget
+          <span class="icon">💷</span> Budget
         </a>
         <a href="account&security.html">
-          <span class="icon">👤</span>
-          Account
+          <span class="icon">👤</span> Account
         </a>
         <a href="help.html">
-          <span class="icon">❓</span>
-          Help
+          <span class="icon">❓</span> Help
         </a>
       </nav>
 
@@ -87,249 +76,138 @@
     </header>
 
     <!-- MAIN CONTENT -->
-    <main class="tasks-main">
-      <section class="tasks-header">
-        <div>
-          <h2>Task Manager</h2>
-          <p>Organise tasks by due date, priority, status, and linked module.</p>
+    <main class="main-content">
+      <section class="tasks-toolbar">
+        <div class="tasks-heading">
+          <h2>Tasks Board</h2>
+          <p>Organise tasks by status, due date, priority and linked module.</p>
         </div>
 
-        <div class="tasks-header-actions">
-          <button class="task-btn secondary-btn" id="sortTasksBtn">Sort by Nearest Due Date</button>
-          <button class="task-btn primary-btn" id="openTaskFormBtn">+ Add Task</button>
+        <div class="tasks-toolbar-actions">
+          <button class="task-btn primary-btn" id="openTaskModalBtn">+ Add Task</button>
+          <button class="task-btn secondary-btn" id="sortDueDateBtn">Sort by nearest due date</button>
         </div>
       </section>
 
-      <section class="task-form-panel" id="taskFormPanel">
-        <div class="task-form-top">
-          <h3 id="formTitle">Add Task</h3>
-          <button class="close-form-btn" id="closeTaskFormBtn" type="button">✕</button>
-        </div>
-
-        <form id="taskForm" class="task-form">
-          <input type="hidden" id="editTaskIndex">
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="taskTitle">Title</label>
-              <input type="text" id="taskTitle" placeholder="Enter task title" required>
+      <section class="tasks-layout">
+        <!-- Kanban -->
+        <div class="kanban-board">
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <h3>To-Do</h3>
+              <span id="todoCount">0</span>
             </div>
-
-            <div class="form-group">
-              <label for="taskDueDate">Due Date</label>
-              <input type="date" id="taskDueDate" required>
-            </div>
-
-            <div class="form-group">
-              <label for="taskPriority">Priority</label>
-              <select id="taskPriority" required>
-                <option value="">Select priority</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="taskModule">Module Link</label>
-              <select id="taskModule" required>
-                <option value="">Select module</option>
-                <option value="Software Engineering">Software Engineering</option>
-                <option value="Programming for Engineers">Programming for Engineers</option>
-                <option value="Mathematics">Mathematics</option>
-                <option value="Embedded Systems">Embedded Systems</option>
-                <option value="Mobile Applications">Mobile Applications</option>
-              </select>
-            </div>
+            <div class="kanban-cards" id="todoColumn"></div>
           </div>
 
-          <div class="form-actions">
-            <button type="submit" class="task-btn primary-btn" id="saveTaskBtn">Save Task</button>
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <h3>In Progress</h3>
+              <span id="progressCount">0</span>
+            </div>
+            <div class="kanban-cards" id="progressColumn"></div>
           </div>
-        </form>
-      </section>
 
-      <section class="task-list-section">
-        <div class="task-list-top">
-          <h3>Task List</h3>
-          <div class="task-list-count" id="taskCount">0 Tasks</div>
+          <div class="kanban-column">
+            <div class="kanban-column-header">
+              <h3>Done</h3>
+              <span id="doneCount">0</span>
+            </div>
+            <div class="kanban-cards" id="doneColumn"></div>
+          </div>
         </div>
 
-        <div class="task-list" id="taskList"></div>
+        <!-- Writing panel -->
+        <aside class="task-editor-panel">
+          <div class="task-editor-header">
+            <h3>📝 Task Notes</h3>
+            <span id="editorTaskStatus">Select a task</span>
+          </div>
+
+          <div class="task-editor-body">
+            <label for="editorTaskTitle">Task Title</label>
+            <input type="text" id="editorTaskTitle" placeholder="Click a task to edit title">
+
+            <label for="editorTaskNotes">Notebook Area</label>
+            <textarea id="editorTaskNotes" placeholder="Distraction-free writing space for task details, planning, ideas, or progress notes..."></textarea>
+
+            <div class="editor-meta">
+              <div class="editor-meta-box">
+                <strong>Due Date</strong>
+                <span id="editorDueDate">-</span>
+              </div>
+              <div class="editor-meta-box">
+                <strong>Priority</strong>
+                <span id="editorPriority">-</span>
+              </div>
+              <div class="editor-meta-box">
+                <strong>Module</strong>
+                <span id="editorModule">-</span>
+              </div>
+            </div>
+
+            <div class="editor-actions">
+              <button class="task-btn secondary-btn" id="saveNotesBtn">Save Changes</button>
+              <button class="task-btn done-btn" id="markCompletedBtn">Mark as Completed</button>
+            </div>
+          </div>
+        </aside>
       </section>
     </main>
   </div>
 
-  <script>
-    const openTaskFormBtn = document.getElementById("openTaskFormBtn");
-    const closeTaskFormBtn = document.getElementById("closeTaskFormBtn");
-    const taskFormPanel = document.getElementById("taskFormPanel");
-    const taskForm = document.getElementById("taskForm");
-    const taskList = document.getElementById("taskList");
-    const taskCount = document.getElementById("taskCount");
-    const sortTasksBtn = document.getElementById("sortTasksBtn");
+  <!-- ADD / EDIT TASK MODAL -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="task-modal">
+      <div class="task-modal-header">
+        <h3 id="modalTitle">Add Task</h3>
+        <button class="close-modal-btn" id="closeTaskModalBtn">&times;</button>
+      </div>
 
-    const taskTitle = document.getElementById("taskTitle");
-    const taskDueDate = document.getElementById("taskDueDate");
-    const taskPriority = document.getElementById("taskPriority");
-    const taskModule = document.getElementById("taskModule");
-    const editTaskIndex = document.getElementById("editTaskIndex");
-    const formTitle = document.getElementById("formTitle");
+      <form id="taskForm">
+        <div class="form-group">
+          <label for="taskTitle">Title</label>
+          <input type="text" id="taskTitle" required>
+        </div>
 
-    let tasks = [
-      {
-        title: "Complete wireframe sketches",
-        dueDate: "2026-03-12",
-        priority: "High",
-        module: "Software Engineering",
-        status: "Pending"
-      },
-      {
-        title: "Revise lecture notes",
-        dueDate: "2026-03-15",
-        priority: "Medium",
-        module: "Mathematics",
-        status: "Completed"
-      },
-      {
-        title: "Upload GitHub updates",
-        dueDate: "2026-03-11",
-        priority: "Low",
-        module: "Programming for Engineers",
-        status: "Pending"
-      }
-    ];
+        <div class="form-group">
+          <label for="taskDueDate">Due Date</label>
+          <input type="date" id="taskDueDate" required>
+        </div>
 
-    function openForm() {
-      taskFormPanel.style.display = "block";
-    }
+        <div class="form-group">
+          <label for="taskPriority">Priority</label>
+          <select id="taskPriority" required>
+            <option value="Low">Low</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
 
-    function closeForm() {
-      taskFormPanel.style.display = "none";
-      taskForm.reset();
-      editTaskIndex.value = "";
-      formTitle.textContent = "Add Task";
-    }
+        <div class="form-group">
+          <label for="taskModule">Module Link</label>
+          <input type="text" id="taskModule" placeholder="e.g. Software Engineering">
+        </div>
 
-    openTaskFormBtn.addEventListener("click", openForm);
-    closeTaskFormBtn.addEventListener("click", closeForm);
+        <div class="form-group">
+          <label for="taskStatus">Status</label>
+          <select id="taskStatus" required>
+            <option value="To-Do">To-Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
+        </div>
 
-    function formatDate(dateString) {
-      const date = new Date(dateString);
-      return date.toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric"
-      });
-    }
+        <div class="form-group">
+          <label for="taskNotes">Task Notes</label>
+          <textarea id="taskNotes" rows="5" placeholder="Write details for this task..."></textarea>
+        </div>
 
-    function renderTasks() {
-      taskList.innerHTML = "";
-
-      if (tasks.length === 0) {
-        taskList.innerHTML = `
-          <div class="empty-state">
-            <p>No tasks added yet.</p>
-          </div>
-        `;
-        taskCount.textContent = "0 Tasks";
-        return;
-      }
-
-      tasks.forEach((task, index) => {
-        const priorityClass = task.priority.toLowerCase();
-        const statusClass = task.status.toLowerCase();
-
-        const taskCard = document.createElement("div");
-        taskCard.className = "task-card";
-
-        taskCard.innerHTML = `
-          <div class="task-card-top">
-            <div>
-              <h4>${task.title}</h4>
-              <div class="task-meta">
-                <span><strong>Due:</strong> ${formatDate(task.dueDate)}</span>
-                <span><strong>Module:</strong> ${task.module}</span>
-              </div>
-            </div>
-
-            <div class="task-labels">
-              <span class="label priority-${priorityClass}">${task.priority}</span>
-              <span class="label status-${statusClass}">${task.status}</span>
-            </div>
-          </div>
-
-          <div class="task-card-actions">
-            <button class="small-btn complete-btn" onclick="toggleComplete(${index})">
-              ${task.status === "Completed" ? "Mark as Pending" : "Mark as Completed"}
-            </button>
-            <button class="small-btn edit-btn" onclick="editTask(${index})">Edit</button>
-            <button class="small-btn delete-btn" onclick="deleteTask(${index})">Delete</button>
-          </div>
-        `;
-
-        taskList.appendChild(taskCard);
-      });
-
-      taskCount.textContent = `${tasks.length} Task${tasks.length !== 1 ? "s" : ""}`;
-    }
-
-    taskForm.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const newTask = {
-        title: taskTitle.value,
-        dueDate: taskDueDate.value,
-        priority: taskPriority.value,
-        module: taskModule.value,
-        status: "Pending"
-      };
-
-      if (editTaskIndex.value !== "") {
-        const existingStatus = tasks[editTaskIndex.value].status;
-        newTask.status = existingStatus;
-        tasks[editTaskIndex.value] = newTask;
-      } else {
-        tasks.push(newTask);
-      }
-
-      renderTasks();
-      closeForm();
-    });
-
-    function editTask(index) {
-      const task = tasks[index];
-
-      taskTitle.value = task.title;
-      taskDueDate.value = task.dueDate;
-      taskPriority.value = task.priority;
-      taskModule.value = task.module;
-      editTaskIndex.value = index;
-      formTitle.textContent = "Edit Task";
-
-      openForm();
-    }
-
-    function deleteTask(index) {
-      tasks.splice(index, 1);
-      renderTasks();
-    }
-
-    function toggleComplete(index) {
-      if (tasks[index].status === "Pending") {
-        tasks[index].status = "Completed";
-      } else {
-        tasks[index].status = "Pending";
-      }
-      renderTasks();
-    }
-
-    sortTasksBtn.addEventListener("click", function() {
-      tasks.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-      renderTasks();
-    });
-
-    renderTasks();
-  </script>
+        <div class="modal-actions">
+          <button type="submit" class="task-btn primary-btn">Save Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
