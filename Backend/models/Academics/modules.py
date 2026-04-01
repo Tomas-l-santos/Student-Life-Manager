@@ -1,5 +1,5 @@
 from storage.storagerepo import JSONStorage
-from models.Academics import GradingSystem
+from models.Academics.grading import GradingSystem
 from datetime import datetime
 
 
@@ -18,7 +18,7 @@ class Modules:
             return 1
         return max(m["id"] for m in modules) + 1
     
-    def create(self, user_email, name, code, credits, year_of_study, academic_year, status="in_progress"):
+    def create(self, user_email, name, code, credits, year_of_study, academic_year, deadline="", status="in_progress"):
 
         # Validate inputs
         if not name or not code:
@@ -53,6 +53,7 @@ class Modules:
             "credits": credits,
             "year_of_study": year_of_study,
             "academic_year": academic_year,
+            "deadline": deadline,  # 2. ADD IT TO THE DICTIONARY HERE
             "status": status,
             "created_at": datetime.now().isoformat()
         }

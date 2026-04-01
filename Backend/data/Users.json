@@ -3,7 +3,7 @@
     "user_id": "ade0f21a-8f5e-4a51-8fae-6239e967bfdf",
     "email": "abhishilsinoj@gmail.com",
     "username": "dsdsadsds",
-    "password_hash": "$2b$12$Smpk.suNJs.h.tXhqNLciOiX5/rhZy1UWrFqL.L8p9jrp5pH5PQK.",
+    "password_hash": "$2b$12$7.x73J8bcwjKIgqEZuQC/OihK/D5OodhUkwZN8xIus5Ma3Rd8Chnm",
     "birthdate": "2003-02-10"
   },
   {
@@ -26,5 +26,12 @@
     "username": "test",
     "password_hash": "$2b$12$JFMDh9iXSVD/cR1VKZ9XQuR7FGm0vtbLReV/z.zNmH3yr/i6bQCp6",
     "birthdate": "2002-10-10"
+  },
+  {
+    "user_id": "f5033ea2-be83-4fef-8b68-31a26c0baf22",
+    "email": "Ameera@gmail.com",
+    "username": "Ameera",
+    "password_hash": "$2b$12$otRfuSHJbi5LB.YtY.acl.cp6aleN302VH8vzoF5jzdwrksHSLdzC",
+    "birthdate": "2005-02-10"
   }
 ]

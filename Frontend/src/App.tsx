@@ -5,7 +5,11 @@ import ForgotPassword from "./reactpage/ForgotPassword";
 import About from "./reactpage/about";
 import Dashboard from "./reactpage/Dashboard RP/dashboard";
 import Timetable from "./reactpage/Dashboard RP/timetable";
+import Deadlines from "./reactpage/Dashboard RP/deadlines";
+import Modules from "./reactpage/Dashboard RP/modules";
 import { isLoggedIn } from "./services/storage";
+import Budget from "./reactpage/Dashboard RP/budget";
+import Tasks from "./reactpage/Dashboard RP/tasks";
 
 function PrivateRoute({ children }: { children: ReactNode }) {
   return isLoggedIn() ? children : <Navigate to="/" replace />;
@@ -18,11 +22,51 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route
           path="/dashboard"
-          element={<PrivateRoute><Dashboard /></PrivateRoute>}
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
         />
         <Route
           path="/timetable"
-          element={<PrivateRoute><Timetable /></PrivateRoute>}
+          element={
+            <PrivateRoute>
+              <Timetable />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/deadlines"
+          element={
+            <PrivateRoute>
+              <Deadlines />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/modules"
+          element={
+            <PrivateRoute>
+              <Modules />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/budget"
+          element={
+            <PrivateRoute>
+              <Budget />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/tasks"
+          element={
+            <PrivateRoute>
+              <Tasks />
+            </PrivateRoute>
+          }
         />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route
