@@ -4,6 +4,8 @@ from services.authorisation import AuthService
 from services.budget_service import BudgetService
 from services.academics_service import AcademicsService
 from services.auth_routes import auth_bp, token_required
+from services.deadline_service import DeadlineService
+from services.timetable_service import TimetableService
 
 app = Flask(__name__)
 
@@ -15,6 +17,8 @@ app.register_blueprint(auth_bp)
 
 budget_service = BudgetService()
 academics_service = AcademicsService()
+deadline_service = DeadlineService()
+timetable_service = TimetableService()
 
 @app.route("/api/transactions", methods=["POST"])
 @token_required
@@ -157,5 +161,101 @@ def add_assessment(current_user_email, current_user_id):
         print(f"Backend Error creating assessment: {e}")
         return jsonify({"error": str(e)}), 400
 
+
+# Deadline Routes
+@app.route("/api/deadlines", methods=["POST"])
+@token_required
+def add_deadline(current_user_email, current_user_id):
+    data = request.json
+    try:
+        d = deadline_service.add_deadline(
+            user_id=current_user_id,
+            module_name=data.get("module_name", ""),
+            title=data["title"],
+            due_date=data["due_date"],
+            priority=data.get("priority", "normal")
+        )
+        return jsonify(d), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/api/deadlines", methods=["GET"])
+@token_required
+def get_deadlines(current_user_email, current_user_id):
+    completed = request.args.get("completed")
+    if completed is not None:
+        completed = completed.lower() == "true"
+    try:
+        return jsonify(deadline_service.get_user_deadlines(current_user_id, completed=completed)), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/api/deadlines/<int:deadline_id>", methods=["PUT"])
+@token_required
+def update_deadline(current_user_email, current_user_id, deadline_id):
+    try:
+        d = deadline_service.update_deadline(deadline_id, current_user_id, request.json)
+        return jsonify(d), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/api/deadlines/<int:deadline_id>", methods=["DELETE"])
+@token_required
+def delete_deadline(current_user_email, current_user_id, deadline_id):
+    try:
+        deadline_service.delete_deadline(deadline_id, current_user_id)
+        return jsonify({"message": "Deleted"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+# Timetable Routes
+@app.route("/api/timetable", methods=["POST"])
+@token_required
+def add_timetable_entry(current_user_email, current_user_id):
+    data = request.json
+    try:
+        e = timetable_service.add_entry(
+            user_id=current_user_id,
+            module_name=data["module_name"],
+            location=data.get("location", ""),
+            entry_type=data.get("entry_type", "lecture"),
+            day=data["day"],
+            start_time=data["start_time"],
+            end_time=data["end_time"]
+        )
+        return jsonify(e), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/api/timetable", methods=["GET"])
+@token_required
+def get_timetable(current_user_email, current_user_id):
+    day = request.args.get("day")
+    try:
+        return jsonify(timetable_service.get_user_timetable(current_user_id, day=day)), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/api/timetable/<int:entry_id>", methods=["PUT"])
+@token_required
+def update_timetable_entry(current_user_email, current_user_id, entry_id):
+    try:
+        e = timetable_service.update_entry(entry_id, current_user_id, request.json)
+        return jsonify(e), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/api/timetable/<int:entry_id>", methods=["DELETE"])
+@token_required
+def delete_timetable_entry(current_user_email, current_user_id, entry_id):
+    try:
+        timetable_service.delete_entry(entry_id, current_user_id)
+        return jsonify({"message": "Deleted"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+        
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+

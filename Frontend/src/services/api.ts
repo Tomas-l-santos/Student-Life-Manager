@@ -154,3 +154,71 @@ export async function addAssessment(data: {
   if (!res.ok) throw new Error(result.error || "Failed to add assessment");
   return result;
 }
+
+// deadlines
+export async function getDeadlines() {
+  const res = await fetch(`${BASE_URL}/api/deadlines`, { headers: authHeaders() });
+  return res.json();
+}
+
+export async function addDeadline(data: {
+  title: string;
+  module_name: string;
+  due_date: string;
+  priority: string;
+}) {
+  const res = await fetch(`${BASE_URL}/api/deadlines`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
+export async function updateDeadline(id: number, updates: object) {
+  const res = await fetch(`${BASE_URL}/api/deadlines/${id}`, {
+    method: "PUT",
+    headers: authHeaders(),
+    body: JSON.stringify(updates),
+  });
+  return res.json();
+}
+
+export async function deleteDeadline(id: number) {
+  const res = await fetch(`${BASE_URL}/api/deadlines/${id}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  return res.json();
+}
+
+// timetable
+export async function getTimetable(day?: string) {
+  const url = day ? `${BASE_URL}/api/timetable?day=${day}` : `${BASE_URL}/api/timetable`;
+  const res = await fetch(url, { headers: authHeaders() });
+  return res.json();
+}
+
+export async function addTimetableEntry(data: {
+  module_name: string;
+  location: string;
+  entry_type: string;
+  day: string;
+  start_time: string;
+  end_time: string;
+}) {
+  const res = await fetch(`${BASE_URL}/api/timetable`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  return res.json();
+}
+
+export async function deleteTimetableEntry(id: number) {
+  const res = await fetch(`${BASE_URL}/api/timetable/${id}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  return res.json();
+}
