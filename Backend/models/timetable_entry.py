@@ -1,7 +1,7 @@
 from datetime import datetime
 
 class TimetableEntry:
-    def __init__(self, id, user_id, module_name, location, entry_type, day, start_time, end_time, created_at=None):
+    def __init__(self, id, user_id, module_name, location, entry_type, day, start_time, end_time, start_date=None, end_date=None, created_at=None):
         self.id = id
         self.user_id = user_id
         self.module_name = module_name
@@ -10,6 +10,8 @@ class TimetableEntry:
         self.day = day                    # "Monday", "Tuesday", etc.
         self.start_time = start_time      # "09:00"
         self.end_time = end_time          # "11:00"
+        self.start_date = start_date     
+        self.end_date = end_date          
         self.created_at = created_at or datetime.now().isoformat()
 
     def to_dict(self):
@@ -22,6 +24,8 @@ class TimetableEntry:
             "day": self.day,
             "start_time": self.start_time,
             "end_time": self.end_time,
+            "start_date": self.start_date, 
+            "end_date": self.end_date,     
             "created_at": self.created_at
         }
 
@@ -36,5 +40,7 @@ class TimetableEntry:
             day=data["day"],
             start_time=data["start_time"],
             end_time=data["end_time"],
+            start_date=data.get("start_date"), 
+            end_date=data.get("end_date"),    
             created_at=data.get("created_at")
         )
