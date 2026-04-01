@@ -43,8 +43,8 @@ def get_transactions(current_user_email, current_user_id):
         return jsonify(budget_service.get_user_transactions(current_user_id)), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-@app.route("/api/transactions/<int:transaction_id>", methods=["DELETE"])
 
+@app.route("/api/transactions/<int:transaction_id>", methods=["DELETE"])
 @token_required
 def remove_transaction(current_user_email, current_user_id, transaction_id):
     try:
@@ -88,7 +88,6 @@ def get_budget_status(current_user_email, current_user_id):
         return jsonify(budget_service.get_budget_status(current_user_id, month=month, year=year)), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 @app.route("/api/categories", methods=["GET"])
 def get_categories():
@@ -161,7 +160,6 @@ def add_assessment(current_user_email, current_user_id):
         print(f"Backend Error creating assessment: {e}")
         return jsonify({"error": str(e)}), 400
 
-
 # Deadline Routes
 @app.route("/api/deadlines", methods=["POST"])
 @token_required
@@ -221,7 +219,9 @@ def add_timetable_entry(current_user_email, current_user_id):
             entry_type=data.get("entry_type", "lecture"),
             day=data["day"],
             start_time=data["start_time"],
-            end_time=data["end_time"]
+            end_time=data["end_time"],
+            start_date=data.get("start_date"),  # Added extraction
+            end_date=data.get("end_date")       # Added extraction
         )
         return jsonify(e), 201
     except Exception as e:
@@ -257,5 +257,3 @@ def delete_timetable_entry(current_user_email, current_user_id, entry_id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
