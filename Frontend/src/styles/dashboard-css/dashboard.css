@@ -707,3 +707,37 @@ html, body {
   .nav a { white-space: nowrap; }
   .sidebar-bottom { display: none; }
 }
+
+body.sidebar-collapsed {
+  --sidebar-w: 80px;
+}
+
+body.sidebar-collapsed .sidebar-title,
+body.sidebar-collapsed .nav-text,
+body.sidebar-collapsed .sidebar-bottom .badge,
+body.sidebar-collapsed .tz span:nth-child(2) {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-top {
+  justify-content: center;
+  padding: 16px 0;
+}
+
+body.sidebar-collapsed .nav a {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+body.sidebar-collapsed .sidebar-bottom {
+  align-items: center;
+  padding: 14px 0;
+}
+
+.app {
+  transition: grid-template-columns 0.3s ease;
+}
+
+.sidebar-title, .nav-text {
+  white-space: nowrap;
+}

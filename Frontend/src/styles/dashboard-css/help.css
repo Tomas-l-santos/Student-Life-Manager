@@ -1,4 +1,4 @@
-/* This is the CSS for the dashboard.html file for now*/
+/* This is the CSS for the help page */
 
 :root{
   --navy-900:#07144a;
@@ -18,7 +18,7 @@
   --sidebar-muted:#b9c6ff;
 
   --event-orange:#f59e0b;
-  --event-cyan:#22c55e;   /* you can change these later */
+  --event-cyan:#22c55e;   
   --event-blue:#38bdf8;
   --event-purple:#a855f7;
 
@@ -27,6 +27,43 @@
 
   --sidebar-w: 240px;
   --topbar-h: 64px;
+  --primary: var(--navy-800);
+}
+
+/* Dark */
+[data-theme="dark"] {
+  --bg: #000000;
+  --panel: #121212;
+  --panel-2: #1a1a1a;
+  --border: #27272a;
+  --text: #ffffff;
+  --muted: #a1a1aa;
+
+  --sidebar: #000000;
+  --sidebar-2: #050505;
+  --sidebar-text: #ffffff;
+  --sidebar-muted: #a1a1aa;
+
+  --primary: #06b6d4; 
+  --shadow: 0 8px 24px rgba(6, 182, 212, 0.1);
+}
+
+/*Light */
+[data-theme="new-light"] {
+  --bg: #faf9f7;
+  --panel: #ffffff;
+  --panel-2: #f2f0eb;
+  --border: #e6e4df;
+  --text: #111111;
+  --muted: #555555;
+
+  --sidebar: #ffffff;
+  --sidebar-2: #ffffff;
+  --sidebar-text: #111111;
+  --sidebar-muted: #555555;
+
+  --primary: #e60023; 
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
 }
 
 *{ box-sizing: border-box; }
@@ -39,7 +76,6 @@ body{
   background: var(--bg);
 }
 
-/* ===== App Layout ===== */
 .app{
   height: 100vh;
   display: grid;
@@ -50,7 +86,7 @@ body{
     "sidebar main";
 }
 
-/* ===== Top Bar ===== */
+/* topbar*/
 .topbar{
   grid-area: topbar;
   display:flex;
@@ -61,6 +97,7 @@ body{
   color: #fff;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+[data-theme="dark"] .topbar, [data-theme="new-light"] .topbar { background: var(--panel); border-color: var(--border); color: var(--text); }
 
 .brand{
   display:flex;
@@ -79,6 +116,7 @@ body{
   font-weight:700;
   letter-spacing:0.5px;
 }
+[data-theme="dark"] .logo, [data-theme="new-light"] .logo { background: var(--primary); color: #fff; }
 
 .brand h1{
   margin:0;
@@ -92,6 +130,8 @@ body{
   opacity:0.85;
   margin-top:1px;
 }
+[data-theme="dark"] .brand h1, [data-theme="new-light"] .brand h1, 
+[data-theme="dark"] .brand small, [data-theme="new-light"] .brand small { color: var(--text); }
 
 .top-actions{
   display:flex;
@@ -115,6 +155,7 @@ body{
 .pill:hover{
   background: rgba(255,255,255,0.14);
 }
+[data-theme="dark"] .pill, [data-theme="new-light"] .pill { background: var(--bg); border-color: var(--border); color: var(--text); }
 
 .avatar{
   display:flex;
@@ -125,6 +166,7 @@ body{
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.14);
 }
+[data-theme="dark"] .avatar, [data-theme="new-light"] .avatar { background: var(--bg); border-color: var(--border); color: var(--text); }
 
 .avatar .dot{
   width:28px;
@@ -136,13 +178,14 @@ body{
   font-weight:700;
   font-size: 12px;
 }
+[data-theme="dark"] .avatar .dot, [data-theme="new-light"] .avatar .dot { background: var(--primary); color: #fff; }
 
 .avatar span{
   font-size: 13px;
   opacity:0.95;
 }
 
-/* ===== Sidebar ===== */
+/*sidebar*/
 .sidebar{
   grid-area: sidebar;
   background: linear-gradient(180deg, var(--sidebar), var(--sidebar-2));
@@ -151,6 +194,7 @@ body{
   flex-direction:column;
   border-right: 1px solid rgba(255,255,255,0.10);
 }
+[data-theme="new-light"] .sidebar { background: var(--sidebar); border-color: var(--border); }
 
 .sidebar-top{
   padding: 16px 14px;
@@ -160,6 +204,7 @@ body{
   justify-content:space-between;
   gap:10px;
 }
+[data-theme="dark"] .sidebar-top, [data-theme="new-light"] .sidebar-top { border-color: var(--border); }
 
 .hamburger{
   width:40px;
@@ -175,6 +220,7 @@ body{
 .hamburger:hover{
   background: rgba(255,255,255,0.14);
 }
+[data-theme="dark"] .hamburger, [data-theme="new-light"] .hamburger { background: var(--bg); border-color: var(--border); color: var(--text); }
 
 .sidebar-title{
   display:flex;
@@ -212,6 +258,7 @@ body{
   border-radius: 12px;
   border: 1px solid transparent;
   opacity:0.95;
+  transition: 0.2s;
 }
 
 .nav a:hover{
@@ -223,6 +270,9 @@ body{
   background: rgba(255,255,255,0.14);
   border-color: rgba(255,255,255,0.18);
 }
+[data-theme="dark"] .nav a:hover, [data-theme="new-light"] .nav a:hover { background: var(--panel-2); }
+[data-theme="dark"] .nav a.active { background: rgba(6, 182, 212, 0.15); border-color: var(--event-cyan); color: var(--event-cyan); }
+[data-theme="new-light"] .nav a.active { background: rgba(230, 0, 35, 0.1); border-color: var(--event-cyan); color: var(--event-cyan); }
 
 .nav .icon{
   width:28px;
@@ -233,6 +283,7 @@ body{
   place-items:center;
   font-size: 14px;
 }
+[data-theme="dark"] .nav .icon, [data-theme="new-light"] .nav .icon { background: var(--border); }
 
 .sidebar-bottom{
   margin-top:auto;
@@ -244,6 +295,7 @@ body{
   flex-direction:column;
   gap:8px;
 }
+[data-theme="dark"] .sidebar-bottom, [data-theme="new-light"] .sidebar-bottom { border-color: var(--border); }
 
 .tz{
   display:flex;
@@ -261,12 +313,13 @@ body{
   font-size: 12px;
   width: fit-content;
 }
+[data-theme="dark"] .tz .badge, [data-theme="new-light"] .tz .badge { background: var(--border); border-color: var(--border); color: var(--text); }
 
 /* ===== Main Content ===== */
 .main-content{
   grid-area: main;
-  padding: 20px;
-  background: var(--panel);
+  padding: 24px;
+  background: var(--bg);
   overflow-y: auto;
 }
 
@@ -277,7 +330,7 @@ body{
 }
 
 .card{
-  background: #fff;
+  background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -296,7 +349,7 @@ body{
   margin:0;
   font-size:18px;
   font-weight:650;
-  color: var(--navy-900);
+  color: var(--text);
 }
 
 .card-tag{
@@ -308,6 +361,7 @@ body{
   color: var(--muted);
   white-space: nowrap;
 }
+[data-theme="dark"] .card-tag, [data-theme="new-light"] .card-tag { background: var(--bg); }
 
 .card p{
   margin: 0 0 10px 0;
@@ -342,7 +396,7 @@ body{
   margin: 0 0 6px 0;
   font-size: 15px;
   font-weight: 600;
-  color: var(--navy-850);
+  color: var(--text);
 }
 
 .quick-links-grid{
@@ -354,7 +408,7 @@ body{
 .quick-link-box{
   text-decoration:none;
   color: var(--text);
-  background: var(--panel);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 14px 12px;
@@ -366,7 +420,7 @@ body{
 
 .quick-link-box:hover{
   background: var(--panel-2);
-  border-color: #cfd8e6;
+  border-color: var(--primary);
 }
 
 .contact-support p{
