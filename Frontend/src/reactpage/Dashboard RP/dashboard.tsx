@@ -6,20 +6,43 @@ import {
   getDeadlines,
   getTransactions,
 } from "../../services/api";
+import { getUsername } from "../../services/storage";
 
 // Sidebar
 export const Sidebar = () => {
   const location = useLocation();
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    return localStorage.getItem("sidebarCollapsed") === "true";
+  });
+  useEffect(() => {
+    if (isCollapsed) {
+      document.body.classList.add("sidebar-collapsed");
+    } else {
+      document.body.classList.remove("sidebar-collapsed");
+    }
+  }, [isCollapsed]);
+
+  const toggleSidebar = () => {
+    const newVal = !isCollapsed;
+    setIsCollapsed(newVal);
+    localStorage.setItem("sidebarCollapsed", String(newVal));
+  };
 
   return (
     <aside className="sidebar">
       <div className="sidebar-top">
-        <div className="hamburger" aria-label="Menu" title="Menu">
+        <div
+          className="hamburger"
+          aria-label="Menu"
+          title="Menu"
+          onClick={toggleSidebar}
+        >
           ☰
         </div>
         <div className="sidebar-title">
-          <strong>Student Life Management</strong>
-          <small>LIVE</small>
+          <strong style={{ fontSize: "22px", letterSpacing: "1.5px" }}>
+            SLM
+          </strong>
         </div>
       </div>
 
@@ -28,56 +51,64 @@ export const Sidebar = () => {
           className={location.pathname === "/dashboard" ? "active" : ""}
           to="/dashboard"
         >
-          <span className="icon">📊</span> Dashboard
+          <span className="icon">📊</span>{" "}
+          <span className="nav-text">Dashboard</span>
         </Link>
         <Link
           className={location.pathname === "/timetable" ? "active" : ""}
           to="/timetable"
         >
-          <span className="icon">📅</span> Timetable
+          <span className="icon">📅</span>{" "}
+          <span className="nav-text">Timetable</span>
         </Link>
         <Link
           className={location.pathname === "/deadlines" ? "active" : ""}
           to="/deadlines"
         >
-          <span className="icon">⏳</span> Deadlines
+          <span className="icon">⏳</span>{" "}
+          <span className="nav-text">Deadlines</span>
         </Link>
         <Link
           className={location.pathname === "/tasks" ? "active" : ""}
           to="/tasks"
         >
-          <span className="icon">✅</span> Tasks
+          <span className="icon">✅</span>{" "}
+          <span className="nav-text">Tasks</span>
         </Link>
         <Link
           className={location.pathname === "/modules" ? "active" : ""}
           to="/modules"
         >
-          <span className="icon">📚</span> Modules
+          <span className="icon">📚</span>{" "}
+          <span className="nav-text">Modules</span>
         </Link>
         <Link
           className={location.pathname === "/budget" ? "active" : ""}
           to="/budget"
         >
-          <span className="icon">💷</span> Budget
+          <span className="icon">💷</span>{" "}
+          <span className="nav-text">Budget</span>
         </Link>
         <Link
           className={location.pathname === "/account" ? "active" : ""}
           to="/account"
         >
-          <span className="icon">👤</span> Account
+          <span className="icon">👤</span>{" "}
+          <span className="nav-text">Account</span>
         </Link>
         <Link
           className={location.pathname === "/help" ? "active" : ""}
           to="/help"
         >
-          <span className="icon">❓</span> Help
+          <span className="icon">❓</span>{" "}
+          <span className="nav-text">Help</span>
         </Link>
       </nav>
 
       <div className="sidebar-bottom">
         <div className="tz">
           <span>🌍</span>
-          <span>Europe/London (+00:00)</span>
+          <span className="nav-text">Europe/London (+00:00)</span>
         </div>
         <div className="badge">v0.1 UI mock</div>
       </div>
@@ -88,14 +119,20 @@ export const Sidebar = () => {
 // topbar
 export const Topbar = () => {
   const [theme, setTheme] = useState("original");
+  const [username, setUsername] = useState("Student");
 
   useEffect(() => {
+    // Load theme
     const savedTheme = localStorage.getItem("theme") || "original";
     setTheme(savedTheme);
     if (savedTheme === "original") {
       document.body.removeAttribute("data-theme");
     } else {
       document.body.setAttribute("data-theme", savedTheme);
+    }
+    const storedName = getUsername();
+    if (storedName) {
+      setUsername(storedName);
     }
   }, []);
 
@@ -124,32 +161,57 @@ export const Topbar = () => {
       </div>
 
       <div className="top-actions">
-        <select
-          className="pill theme-dropdown"
-          value={theme}
-          onChange={handleThemeChange}
+        <div
+          style={{
+            position: "relative",
+            display: "inline-flex",
+            alignItems: "center",
+          }}
         >
-          <option value="original">🔵 Classic</option>
-          <option value="new-light">☀️ Light</option>
-          <option value="dark">🌙 Dark</option>
-        </select>
-        <div className="pill" title="Subscribe">
-          SUBSCRIBE
+          <select
+            className="pill theme-dropdown"
+            value={theme}
+            onChange={handleThemeChange}
+            style={{
+              appearance: "none",
+              cursor: "pointer",
+              paddingRight: "28px",
+              color: theme === "original" ? "#ffffff" : "inherit",
+            }}
+          >
+            <option value="original" style={{ color: "#111" }}>
+              🔵 Classic
+            </option>
+            <option value="new-light" style={{ color: "#111" }}>
+              ☀️ Light
+            </option>
+            <option value="dark" style={{ color: "#111" }}>
+              🌙 Dark
+            </option>
+          </select>
+
+          <span
+            style={{
+              position: "absolute",
+              right: "12px",
+              pointerEvents: "none",
+              fontSize: "14px",
+              color: theme === "original" ? "#ffffff" : "inherit",
+              opacity: 0.8,
+            }}
+          >
+            ▾
+          </span>
         </div>
-        <div className="pill" title="Settings">
-          ⚙️
-        </div>
+
         <div className="avatar" title="User">
-          <div className="dot">U</div>
-          <span>Username</span>
-          <span style={{ opacity: 0.9 }}>▾</span>
+          <div className="dot">{username.charAt(0).toUpperCase()}</div>
+          <span>{username}</span>
         </div>
       </div>
     </header>
   );
 };
-
-// main dashboard
 export default function Dashboard() {
   const [todaysClasses, setTodaysClasses] = useState<any[]>([]);
   const [upcomingDeadlines, setUpcomingDeadlines] = useState<any[]>([]);
@@ -190,7 +252,7 @@ export default function Dashboard() {
           setTodaysClasses(todays);
         }
 
-        // Process Deadlines,3
+        // Process Deadlines
         if (
           deadlinesRes.status === "fulfilled" &&
           Array.isArray(deadlinesRes.value)
