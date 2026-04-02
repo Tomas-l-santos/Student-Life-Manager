@@ -26,19 +26,6 @@
     "created_at": "2026-04-01T16:18:30.664150"
   },
   {
-    "id": 4,
-    "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
-    "module_name": "Sensors",
-    "location": "H2202",
-    "entry_type": "lab",
-    "day": "Thursday",
-    "start_time": "16:00",
-    "end_time": "18:00",
-    "start_date": "2026-04-01",
-    "end_date": "2026-04-30",
-    "created_at": "2026-04-01T16:20:22.975537"
-  },
-  {
     "id": 5,
     "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
     "module_name": "Exam",
@@ -63,18 +50,5 @@
     "start_date": "2026-04-08",
     "end_date": "2026-04-15",
     "created_at": "2026-04-01T16:24:19.983742"
-  },
-  {
-    "id": 7,
-    "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
-    "module_name": "Test",
-    "location": "IDK",
-    "entry_type": "seminar",
-    "day": "Wednesday",
-    "start_time": "13:00",
-    "end_time": "15:30",
-    "start_date": "2026-04-01",
-    "end_date": "2026-05-01",
-    "created_at": "2026-04-01T16:25:23.986212"
   }
 ]

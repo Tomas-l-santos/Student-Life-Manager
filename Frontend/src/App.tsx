@@ -10,6 +10,8 @@ import Modules from "./reactpage/Dashboard RP/modules";
 import { isLoggedIn } from "./services/storage";
 import Budget from "./reactpage/Dashboard RP/budget";
 import Tasks from "./reactpage/Dashboard RP/tasks";
+import Help from "./reactpage/Dashboard RP/help";
+import Account from "./reactpage/Dashboard RP/account";
 
 function PrivateRoute({ children }: { children: ReactNode }) {
   return isLoggedIn() ? children : <Navigate to="/" replace />;
@@ -65,6 +67,22 @@ function App() {
           element={
             <PrivateRoute>
               <Tasks />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/help"
+          element={
+            <PrivateRoute>
+              <Help />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <PrivateRoute>
+              <Account />
             </PrivateRoute>
           }
         />
