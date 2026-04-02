@@ -28,7 +28,6 @@
   --sidebar-w: 240px;
   --topbar-h: 64px;
 
-  /* --- Added for Modern Tracker & Themes --- */
   --primary: var(--navy-800);
   --card-bg-subtle: var(--panel);
   --command-gradient-start: var(--navy-900);
@@ -39,7 +38,7 @@
   --donut-track: rgba(0, 0, 0, 0.3);
 }
 
-/* 2. DARK THEME ("Lost in Crowd" Pitch Black) */
+/* dark */
 [data-theme="dark"] {
   --bg: #000000;
   --panel: #121212;
@@ -66,7 +65,7 @@
   --donut-track: rgba(255, 255, 255, 0.1);
 }
 
-/* 3. NEW LIGHT THEME ("Front Page" Ultra-Clean & Red) */
+/* light */
 [data-theme="new-light"] {
   --bg: #faf9f7;
   --panel: #ffffff;
@@ -102,7 +101,6 @@ body{
   background: var(--bg);
 }
 
-/* ===== App Layout ===== */
 .app{
   height: 100vh;
   display: grid;
@@ -113,7 +111,6 @@ body{
     "sidebar main";
 }
 
-/* ===== Top Bar ===== */
 .topbar{
   grid-area: topbar;
   display:flex;
@@ -207,7 +204,7 @@ body{
   opacity:0.95;
 }
 
-/* ===== Sidebar ===== */
+/* sidebar */
 .sidebar{
   grid-area: sidebar;
   background: linear-gradient(180deg, var(--sidebar), var(--sidebar-2));
@@ -219,7 +216,8 @@ body{
 [data-theme="new-light"] .sidebar { background: var(--sidebar); border-color: var(--border); }
 
 .sidebar-top{
-  padding: 16px 14px;
+  height: var(--topbar-h);
+  padding: 0 14px;
   border-bottom: 1px solid rgba(255,255,255,0.10);
   display:flex;
   align-items:center;
@@ -343,7 +341,15 @@ body{
   align-items:start;
 }
 
-.modules-left,
+.modules-left{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+  position: sticky;
+  top: 24px;
+  align-self: start;
+}
+
 .modules-right{
   display:flex;
   flex-direction:column;
@@ -555,13 +561,21 @@ body{
   border-radius:12px;
   background: var(--panel);
   padding:14px;
+  height: max-content; 
 }
 [data-theme="dark"] .module-item, [data-theme="new-light"] .module-item { background: var(--card-bg-subtle); border-color: var(--border); }
 
 /* Modern React Item Addition */
 .modern-module-item{
-  border:1px solid var(--border); border-radius:16px; background: var(--panel); padding:20px;
-  display: flex; flex-direction: column; gap: 16px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  border:1px solid var(--border); 
+  border-radius:16px; 
+  background: var(--panel); 
+  padding:20px;
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+  height: max-content; 
 }
 
 .module-top, .module-card-top-row{
@@ -634,7 +648,8 @@ body{
 }
 
 .module-actions{
-  margin-top:12px;
+  margin-top: auto;
+  padding-top: 12px;
   display:flex;
   gap:10px;
   justify-content: flex-end;

@@ -14,7 +14,7 @@ class TimetableService:
             return 1
         return max(e["id"] for e in entries) + 1
 
-    def add_entry(self, user_id, module_name, location, entry_type, day, start_time, end_time):
+    def add_entry(self, user_id, module_name, location, entry_type, day, start_time, end_time, start_date=None, end_date=None):
         if day not in VALID_DAYS:
             raise ValueError(f"Day must be one of: {', '.join(VALID_DAYS)}")
         if entry_type not in VALID_TYPES:
@@ -30,7 +30,9 @@ class TimetableService:
             entry_type=entry_type,
             day=day,
             start_time=start_time,
-            end_time=end_time
+            end_time=end_time,
+            start_date=start_date, # Added
+            end_date=end_date      # Added
         )
         self.storage.append(entry.to_dict())
         return entry.to_dict()
@@ -67,6 +69,10 @@ class TimetableService:
                     e["start_time"] = updates["start_time"]
                 if "end_time" in updates:
                     e["end_time"] = updates["end_time"]
+                if "start_date" in updates:                 
+                    e["start_date"] = updates["start_date"] 
+                if "end_date" in updates:                   
+                    e["end_date"] = updates["end_date"]     
                 entries[i] = e
                 self.storage.overwrite(entries)
                 return e

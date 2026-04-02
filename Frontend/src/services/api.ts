@@ -97,6 +97,21 @@ export async function deleteTransaction(id: string | number) {
   if (!res.ok) throw new Error(result.error || "Failed to delete transaction");
   return result;
 }
+export async function setBudgetLimit(data: {
+  category_id: number;
+  amount: number;
+  month: number;
+  year: number;
+}) {
+  const res = await fetch(`${BASE_URL}/api/budgets`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(data),
+  });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Failed to set budget limit");
+  return result;
+}
 // modules 
 
 export async function getModules() {
