@@ -59,7 +59,7 @@ def create_budget(current_user_email, current_user_id):
     data = request.json
     try:
         b = budget_service.create_budget(
-            user_id=current_user_id,   # ← from token, not request body
+            user_id=current_user_id,   
             category_id=data["category_id"],
             amount=data["amount"],
             month=data["month"],
@@ -86,6 +86,14 @@ def get_budget_status(current_user_email, current_user_id):
     year = request.args.get("year", type=int)
     try:
         return jsonify(budget_service.get_budget_status(current_user_id, month=month, year=year)), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+@app.route("/api/budgets/<int:budget_id>", methods=["DELETE"])
+@token_required
+def delete_budget(current_user_email, current_user_id, budget_id):
+    try:
+        budget_service.delete_budget(budget_id, current_user_id)
+        return jsonify({"success": True}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
@@ -171,7 +179,9 @@ def add_deadline(current_user_email, current_user_id):
             module_name=data.get("module_name", ""),
             title=data["title"],
             due_date=data["due_date"],
-            priority=data.get("priority", "normal")
+            priority=data.get("priority", "normal"),
+            status=data.get("status", "To-Do"), 
+            notes=data.get("notes", "")         
         )
         return jsonify(d), 201
     except Exception as e:
@@ -220,8 +230,8 @@ def add_timetable_entry(current_user_email, current_user_id):
             day=data["day"],
             start_time=data["start_time"],
             end_time=data["end_time"],
-            start_date=data.get("start_date"),  # Added extraction
-            end_date=data.get("end_date")       # Added extraction
+            start_date=data.get("start_date"),  
+            end_date=data.get("end_date")       
         )
         return jsonify(e), 201
     except Exception as e:
