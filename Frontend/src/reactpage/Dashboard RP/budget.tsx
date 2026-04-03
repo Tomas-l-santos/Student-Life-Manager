@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Sidebar, Topbar } from "./dashboard";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import "../../styles/dashboard-css/budget.css";
 import {
   getTransactions,
@@ -97,10 +90,7 @@ export default function Budget() {
       let exp = 0;
       fetchedTx.forEach((t: Transaction) => {
         const tDate = new Date(t.transaction_date);
-        if (
-          tDate.getMonth() + 1 === currentMonth &&
-          tDate.getFullYear() === currentYear
-        ) {
+        if (tDate.getMonth() + 1 === currentMonth && tDate.getFullYear() === currentYear) {
           if (t.category.type === "income") inc += t.amount;
           if (t.category.type === "expense") exp += t.amount;
         }
@@ -191,17 +181,10 @@ export default function Budget() {
           acc[t.category.name].value += t.amount;
           return acc;
         },
-        {} as Record<string, { name: string; value: number }>,
-      ),
+        {} as Record<string, { name: string; value: number }>
+      )
   );
-  const EXPENSE_COLORS = [
-    "#38bdf8",
-    "#a855f7",
-    "#f59e0b",
-    "#14b8a6",
-    "#ec4899",
-    "#f97316",
-  ];
+  const EXPENSE_COLORS = ["#38bdf8", "#a855f7", "#f59e0b", "#14b8a6", "#ec4899", "#f97316"];
 
   return (
     <div className="app">
@@ -217,15 +200,11 @@ export default function Budget() {
         <section className="budget-summary-grid">
           <div className="summary-card">
             <h3>Monthly Income</h3>
-            <p className="summary-amount amount-income">
-              £{summary.income.toFixed(2)}
-            </p>
+            <p className="summary-amount amount-income">£{summary.income.toFixed(2)}</p>
           </div>
           <div className="summary-card">
             <h3>Monthly Expenses</h3>
-            <p className="summary-amount amount-expense">
-              £{summary.expenses.toFixed(2)}
-            </p>
+            <p className="summary-amount amount-expense">£{summary.expenses.toFixed(2)}</p>
           </div>
           <div className="summary-card">
             <h3>Remaining Balance</h3>
@@ -245,18 +224,14 @@ export default function Budget() {
                 <button
                   type="button"
                   className={`table-btn ${txForm.type === "income" ? "btn-income" : "secondary-btn"}`}
-                  onClick={() =>
-                    setTxForm({ ...txForm, type: "income", category_id: "" })
-                  }
+                  onClick={() => setTxForm({ ...txForm, type: "income", category_id: "" })}
                 >
                   Income
                 </button>
                 <button
                   type="button"
                   className={`table-btn ${txForm.type === "expense" ? "btn-expense" : "secondary-btn"}`}
-                  onClick={() =>
-                    setTxForm({ ...txForm, type: "expense", category_id: "" })
-                  }
+                  onClick={() => setTxForm({ ...txForm, type: "expense", category_id: "" })}
                 >
                   Expense
                 </button>
@@ -269,9 +244,7 @@ export default function Budget() {
                 type="text"
                 placeholder="e.g. Part-time job or Food shopping"
                 value={txForm.description}
-                onChange={(e) =>
-                  setTxForm({ ...txForm, description: e.target.value })
-                }
+                onChange={(e) => setTxForm({ ...txForm, description: e.target.value })}
                 required
               />
 
@@ -281,18 +254,14 @@ export default function Budget() {
                 step="0.01"
                 placeholder="e.g. 50.00"
                 value={txForm.amount}
-                onChange={(e) =>
-                  setTxForm({ ...txForm, amount: e.target.value })
-                }
+                onChange={(e) => setTxForm({ ...txForm, amount: e.target.value })}
                 required
               />
 
               <label>Category</label>
               <select
                 value={txForm.category_id}
-                onChange={(e) =>
-                  setTxForm({ ...txForm, category_id: e.target.value })
-                }
+                onChange={(e) => setTxForm({ ...txForm, category_id: e.target.value })}
                 required
               >
                 <option value="">Select category...</option>
@@ -307,9 +276,7 @@ export default function Budget() {
               <input
                 type="date"
                 value={txForm.transaction_date}
-                onChange={(e) =>
-                  setTxForm({ ...txForm, transaction_date: e.target.value })
-                }
+                onChange={(e) => setTxForm({ ...txForm, transaction_date: e.target.value })}
                 required
               />
 
@@ -342,9 +309,7 @@ export default function Budget() {
               <label>Expense Category</label>
               <select
                 value={limitForm.category_id}
-                onChange={(e) =>
-                  setLimitForm({ ...limitForm, category_id: e.target.value })
-                }
+                onChange={(e) => setLimitForm({ ...limitForm, category_id: e.target.value })}
                 required
               >
                 <option value="">Select expense category...</option>
@@ -361,17 +326,11 @@ export default function Budget() {
                 step="0.01"
                 placeholder="e.g. 150.00"
                 value={limitForm.amount}
-                onChange={(e) =>
-                  setLimitForm({ ...limitForm, amount: e.target.value })
-                }
+                onChange={(e) => setLimitForm({ ...limitForm, amount: e.target.value })}
                 required
               />
 
-              <button
-                type="submit"
-                className="budget-btn"
-                style={{ marginTop: "12px" }}
-              >
+              <button type="submit" className="budget-btn" style={{ marginTop: "12px" }}>
                 Save Limit
               </button>
             </form>
@@ -406,15 +365,10 @@ export default function Budget() {
                       dataKey="value"
                     >
                       {cashFlowData.map((_, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={cashFlowColors[index]}
-                        />
+                        <Cell key={`cell-${index}`} fill={cashFlowColors[index]} />
                       ))}
                     </Pie>
-                    <Tooltip
-                      formatter={(value: any) => `£${Number(value).toFixed(2)}`}
-                    />
+                    <Tooltip formatter={(value: any) => `£${Number(value).toFixed(2)}`} />
                     <Legend verticalAlign="bottom" height={36} />
                   </PieChart>
                 </ResponsiveContainer>
@@ -455,9 +409,7 @@ export default function Budget() {
                         />
                       ))}
                     </Pie>
-                    <Tooltip
-                      formatter={(value: any) => `£${Number(value).toFixed(2)}`}
-                    />
+                    <Tooltip formatter={(value: any) => `£${Number(value).toFixed(2)}`} />
                     <Legend verticalAlign="bottom" height={36} />
                   </PieChart>
                 </ResponsiveContainer>
@@ -472,9 +424,7 @@ export default function Budget() {
             <div className="panel-head">
               <h3>Spend vs. Limits</h3>
             </div>
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-            >
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               {budgetStatus.length === 0 ? (
                 <p
                   style={{
@@ -513,8 +463,7 @@ export default function Budget() {
                         }}
                       >
                         <span>
-                          {stat.budget.category.icon}{" "}
-                          {stat.budget.category.name}
+                          {stat.budget.category.icon} {stat.budget.category.name}
                         </span>
                         {stat.status === "exceeded" && (
                           <span
@@ -559,8 +508,7 @@ export default function Budget() {
                                 : "var(--text)",
                         }}
                       >
-                        £{stat.spent.toFixed(2)} / £
-                        {stat.budget.amount.toFixed(2)}
+                        £{stat.spent.toFixed(2)} / £{stat.budget.amount.toFixed(2)}
                       </span>
                     </div>
 
@@ -605,10 +553,7 @@ export default function Budget() {
           </div>
 
           {/* Transactions Table */}
-          <div
-            className="budget-panel transaction-panel"
-            style={{ marginBottom: 0 }}
-          >
+          <div className="budget-panel transaction-panel" style={{ marginBottom: 0 }}>
             <div className="panel-head">
               <h3>Recent Transactions</h3>
             </div>
@@ -651,8 +596,7 @@ export default function Budget() {
                             <span
                               className={`pill-type ${t.category.type === "income" ? "pill-income" : "pill-expense"}`}
                             >
-                              {t.category.type.charAt(0).toUpperCase() +
-                                t.category.type.slice(1)}
+                              {t.category.type.charAt(0).toUpperCase() + t.category.type.slice(1)}
                             </span>
                           </td>
                           <td style={{ fontWeight: "600" }}>{t.description}</td>
@@ -662,21 +606,16 @@ export default function Budget() {
                           <td
                             style={{ fontWeight: "700" }}
                             className={
-                              t.category.type === "income"
-                                ? "amount-income"
-                                : "amount-expense"
+                              t.category.type === "income" ? "amount-income" : "amount-expense"
                             }
                           >
-                            {t.category.type === "income" ? "+" : "-"}£
-                            {t.amount.toFixed(2)}
+                            {t.category.type === "income" ? "+" : "-"}£{t.amount.toFixed(2)}
                           </td>
-                          <td
-                            style={{ color: "var(--muted)", fontSize: "12px" }}
-                          >
-                            {new Date(t.transaction_date).toLocaleDateString(
-                              "en-US",
-                              { month: "short", day: "numeric" },
-                            )}
+                          <td style={{ color: "var(--muted)", fontSize: "12px" }}>
+                            {new Date(t.transaction_date).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                            })}
                           </td>
                           <td>
                             <button
