@@ -107,7 +107,38 @@ class AuthService:
         if not any(not c.isalnum() for c in password):
             raise ValueError("Must contain special character")
 
-    # PASSWORD RESET
+    def delete_account(self, email, user_id):
+        users = self.storage.read_all()
+        initial_len = len(users)
+        users = [u for u in users if u.get("email") != email and u.get("user_id") != user_id]
+        
+        if len(users) == initial_len:
+            raise ValueError("User not found")
+            
+        self.storage.overwrite(users)
+        for filename in ["data/transactions.json", "data/budgets.json", "data/deadlines.json", "data/timetable.json"]:
+            try:
+                store = JSONStorage(filename)
+                data = store.read_all()
+                filtered = [item for item in data if item.get("user_id") != user_id]
+                store.overwrite(filtered)
+            except Exception as e:
+                print(f"Error cleaning {filename}: {e}")
+        for filename in ["data/modules.json", "data/assessments.json", "data/notes.json"]:
+            try:
+                store = JSONStorage(filename)
+                data = store.read_all()
+                filtered = [item for item in data if item.get("user_email") != email]
+                store.overwrite(filtered)
+            except Exception as e:
+                print(f"Error cleaning {filename}: {e}")
+        self.failed_attempts.pop(email, None)
+        tokens_to_remove = [t for t, d in self.reset_tokens.items() if d["email"] == email]
+        for t in tokens_to_remove:
+            del self.reset_tokens[t]
+
+        return True
+
 
     def generate_reset_token(self, email):
         """Generate a 6-digit OTP for a user"""

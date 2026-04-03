@@ -273,4 +273,16 @@ def verify_reset_token():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     except Exception as e:
-        return jsonify({"error": "Failed to verify token", "details": str(e)}), 500
+        return jsonify({'error': 'Failed to verify token', 'details': str(e)}), 500
+
+@auth_bp.route('/delete-account', methods=['DELETE'])
+@token_required
+def delete_account(current_user_email, current_user_id):
+    """Permanently delete user and all associated data"""
+    try:
+        auth_service.delete_account(current_user_email, current_user_id)
+        return jsonify({'message': 'Account and all associated data deleted successfully'}), 200
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    except Exception as e:
+        return jsonify({'error': 'Failed to delete account', 'details': str(e)}), 500
