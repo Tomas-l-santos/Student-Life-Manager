@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "id": 1,
+    "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
+    "category_id": 15,
+    "amount": 1000.0,
+    "description": "DAD ",
+    "transaction_date": "2026-04-03",
+    "is_recurring": false,
+    "created_at": "2026-04-03T17:11:54.200719"
+  },
+  {
+    "id": 2,
+    "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
+    "category_id": 1,
+    "amount": 100.0,
+    "description": "Food",
+    "transaction_date": "2026-04-03",
+    "is_recurring": false,
+    "created_at": "2026-04-03T17:12:05.853199"
+  },
+  {
+    "id": 3,
+    "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
+    "category_id": 2,
+    "amount": 100.0,
+    "description": "train",
+    "transaction_date": "2026-04-03",
+    "is_recurring": false,
+    "created_at": "2026-04-03T17:12:23.144786"
+  },
+  {
+    "id": 4,
+    "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
+    "category_id": 3,
+    "amount": 450.0,
+    "description": "Rent",
+    "transaction_date": "2026-04-03",
+    "is_recurring": false,
+    "created_at": "2026-04-03T20:56:59.512092"
+  }
+]
