@@ -104,18 +104,9 @@ export const Sidebar = () => {
           <span className="nav-text">Help</span>
         </Link>
       </nav>
-
-      <div className="sidebar-bottom">
-        <div className="tz">
-          <span>🌍</span>
-          <span className="nav-text">Europe/London (+00:00)</span>
-        </div>
-        <div className="badge">v0.1 UI mock</div>
-      </div>
     </aside>
   );
 };
-
 // topbar
 export const Topbar = () => {
   const [theme, setTheme] = useState("original");
@@ -252,7 +243,7 @@ export default function Dashboard() {
           setTodaysClasses(todays);
         }
 
-        // Process Deadlines
+        // Process Deadlines AND Tasks (They are the exact same data source now!)
         if (
           deadlinesRes.status === "fulfilled" &&
           Array.isArray(deadlinesRes.value)
@@ -262,9 +253,10 @@ export default function Dashboard() {
             .sort(
               (a, b) =>
                 new Date(a.due_date).getTime() - new Date(b.due_date).getTime(),
-            )
-            .slice(0, 3);
-          setUpcomingDeadlines(upcoming);
+            );
+
+          setUpcomingDeadlines(upcoming.slice(0, 3)); // Top 3 for the deadlines widget
+          setTasksDueSoon(upcoming.slice(0, 4)); // Top 4 for the tasks widget
         }
 
         // Process Budget
@@ -454,7 +446,9 @@ export default function Dashboard() {
               {tasksDueSoon.length > 0 ? (
                 tasksDueSoon.map((task) => (
                   <li className="list-item" key={task.id}>
-                    <div className={`priority-dot prio-${task.priority}`}></div>
+                    <div
+                      className={`priority-dot prio-${task.priority === "normal" ? "med" : task.priority}`}
+                    ></div>
                     <div className="item-main">
                       <p className="item-title" style={{ fontSize: "13px" }}>
                         {task.title}
