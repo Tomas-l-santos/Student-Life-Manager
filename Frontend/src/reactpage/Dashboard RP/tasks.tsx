@@ -1,290 +1,465 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Sidebar, Topbar } from "./dashboard";
 import "../../styles/dashboard-css/tasks.css";
+import {
+  getDeadlines,
+  addDeadline,
+  updateDeadline,
+  deleteDeadline,
+} from "../../services/api";
 
 interface Task {
   id: number;
   title: string;
-  dueDate: string;
-  priority: string;
-  module: string;
-  status: string;
+  due_date: string;
+  priority: "low" | "normal" | "high";
+  module_name: string;
+  status: "To-Do" | "In Progress" | "Done";
+  notes: string;
+  completed: boolean;
 }
 
 export default function Tasks() {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [sortOrder, setSortOrder] = useState("nearest");
+  const [loading, setLoading] = useState(true);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<
+    "idle" | "saving" | "saved" | "error"
+  >("idle");
 
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [editTaskId, setEditTaskId] = useState<number | null>(null);
-
-  const [formData, setFormData] = useState({
+  const [newTask, setNewTask] = useState<Partial<Task>>({
     title: "",
-    dueDate: "",
-    priority: "",
-    module: "",
+    due_date: "",
+    priority: "normal",
+    module_name: "",
+    status: "To-Do",
+    notes: "",
   });
 
-  const openForm = () => setIsFormOpen(true);
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
-  const closeForm = () => {
-    setIsFormOpen(false);
-    setEditTaskId(null);
-    setFormData({ title: "", dueDate: "", priority: "", module: "" });
+  const fetchTasks = async () => {
+    try {
+      const data = await getDeadlines();
+      setTasks(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Failed to load tasks:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  // Auto-save logic
+  useEffect(() => {
+    if (!selectedTask) return;
+
+    const timer = setTimeout(async () => {
+      setSaveStatus("saving");
+      try {
+        await updateDeadline(selectedTask.id, {
+          title: selectedTask.title,
+          notes: selectedTask.notes,
+        });
+        setSaveStatus("saved");
+        setTimeout(() => setSaveStatus("idle"), 2000);
+      } catch (error) {
+        console.error("Auto-save failed:", error);
+        setSaveStatus("error");
+      }
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [selectedTask?.notes, selectedTask?.title]);
+
+  const handleOpenTask = (task: Task) => {
+    setSelectedTask(task);
+    setSaveStatus("idle");
+  };
+
+  const handleUpdateNotes = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (selectedTask) {
+      const updated = { ...selectedTask, notes: e.target.value };
+      setSelectedTask(updated);
+      setTasks(tasks.map((t) => (t.id === updated.id ? updated : t)));
+    }
+  };
+
+  const handleUpdateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (selectedTask) {
+      const updated = { ...selectedTask, title: e.target.value };
+      setSelectedTask(updated);
+      setTasks(tasks.map((t) => (t.id === updated.id ? updated : t)));
+    }
+  };
+
+  const handleDeleteTask = async (e: React.MouseEvent, id: number) => {
+    e.stopPropagation();
+    if (window.confirm("Permanently delete this task?")) {
+      try {
+        await deleteDeadline(id);
+        setTasks(tasks.filter((t) => t.id !== id));
+        if (selectedTask?.id === id) setSelectedTask(null);
+      } catch (error) {
+        console.error("Failed to delete task:", error);
+      }
+    }
+  };
+
+  const moveTaskStatus = async (
+    e: React.MouseEvent,
+    task: Task,
+    newStatus: Task["status"],
   ) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (editTaskId !== null) {
-      // Update existing task
-      setTasks(
-        tasks.map((t) => (t.id === editTaskId ? { ...t, ...formData } : t)),
-      );
-    } else {
-      // Add new task
-      const newTask: Task = {
-        id: Date.now(),
-        title: formData.title,
-        dueDate: formData.dueDate,
-        priority: formData.priority,
-        module: formData.module,
-        status: "Pending",
-      };
-      setTasks([...tasks, newTask]);
-    }
-    closeForm();
-  };
-
-  const handleEdit = (id: number) => {
-    const task = tasks.find((t) => t.id === id);
-    if (task) {
-      setFormData({
-        title: task.title,
-        dueDate: task.dueDate,
-        priority: task.priority,
-        module: task.module,
+    e.stopPropagation();
+    try {
+      const isCompleted = newStatus === "Done";
+      const updated = await updateDeadline(task.id, {
+        status: newStatus,
+        completed: isCompleted,
       });
-      setEditTaskId(id);
-      openForm();
+      setTasks(tasks.map((t) => (t.id === task.id ? updated : t)));
+      if (selectedTask?.id === task.id) {
+        setSelectedTask(updated);
+      }
+    } catch (error) {
+      console.error("Failed to move task:", error);
     }
   };
 
-  const handleDelete = (id: number) => {
-    setTasks(tasks.filter((t) => t.id !== id));
+  const handleAddTaskSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const created = await addDeadline({
+        title: newTask.title || "Untitled Task",
+        due_date: newTask.due_date || "",
+        priority: newTask.priority || "normal",
+        module_name: newTask.module_name || "",
+        status: newTask.status || "To-Do",
+        notes: newTask.notes || "",
+      });
+
+      setTasks([...tasks, created]);
+      setIsModalOpen(false);
+      setNewTask({
+        title: "",
+        due_date: "",
+        priority: "normal",
+        module_name: "",
+        status: "To-Do",
+        notes: "",
+      });
+    } catch (error) {
+      console.error("Failed to create task:", error);
+      alert("Failed to create task.");
+    }
   };
 
-  const toggleStatus = (id: number) => {
-    setTasks(
-      tasks.map((t) =>
-        t.id === id
-          ? { ...t, status: t.status === "Pending" ? "Completed" : "Pending" }
-          : t,
-      ),
+  const renderKanbanColumn = (status: Task["status"]) => {
+    const columnTasks = tasks.filter((t) => t.status === status);
+
+    return (
+      <div className="kanban-column">
+        <div className="kanban-column-header">
+          <h3>{status}</h3>
+          <span className="task-count">{columnTasks.length}</span>
+        </div>
+        <div className="kanban-cards">
+          {columnTasks.map((task) => (
+            <div
+              key={task.id}
+              className={`task-card ${selectedTask?.id === task.id ? "active-card" : ""}`}
+              onClick={() => handleOpenTask(task)}
+            >
+              <div className="task-card-top">
+                <h4>{task.title}</h4>
+              </div>
+
+              <div className="task-card-meta">
+                <span className={`task-label status-label`}>{task.status}</span>
+                <span
+                  className={`task-label priority-${task.priority.toLowerCase() === "normal" ? "medium" : task.priority.toLowerCase()}`}
+                >
+                  {task.priority === "normal"
+                    ? "Medium"
+                    : task.priority.charAt(0).toUpperCase() +
+                      task.priority.slice(1)}
+                </span>
+              </div>
+
+              <div className="task-card-info">
+                {task.due_date && (
+                  <p>
+                    <strong>Due:</strong>{" "}
+                    {new Date(task.due_date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </p>
+                )}
+                {task.module_name && (
+                  <p>
+                    <strong>Module:</strong> {task.module_name}
+                  </p>
+                )}
+              </div>
+
+              <div className="task-card-actions">
+                {status === "To-Do" && (
+                  <button
+                    className="card-action-btn btn-move"
+                    onClick={(e) => moveTaskStatus(e, task, "In Progress")}
+                  >
+                    Start →
+                  </button>
+                )}
+                {status === "In Progress" && (
+                  <button
+                    className="card-action-btn btn-move"
+                    onClick={(e) => moveTaskStatus(e, task, "Done")}
+                  >
+                    Complete ✓
+                  </button>
+                )}
+                {status === "Done" && (
+                  <button
+                    className="card-action-btn btn-move"
+                    onClick={(e) => moveTaskStatus(e, task, "In Progress")}
+                  >
+                    ← Reopen
+                  </button>
+                )}
+                <button
+                  className="card-action-btn btn-delete"
+                  onClick={(e) => handleDeleteTask(e, task.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     );
   };
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  };
-
-  // Sorting logic
-  const priorityWeight: Record<string, number> = { High: 3, Medium: 2, Low: 1 };
-
-  const sortedTasks = [...tasks].sort((a, b) => {
-    if (sortOrder === "priority") {
-      const diff =
-        (priorityWeight[b.priority] || 0) - (priorityWeight[a.priority] || 0);
-      if (diff !== 0) return diff;
-      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
-    } else {
-      // Nearest Due Date
-      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
-    }
-  });
 
   return (
     <div className="app">
       <Sidebar />
       <Topbar />
 
-      <main className="tasks-main">
-        <section className="tasks-header">
-          <div>
-            <h2>Task Manager</h2>
-            <p>Organise tasks by due date, priority.</p>
+      <main className="main-content">
+        <section className="tasks-toolbar">
+          <div className="tasks-heading">
+            <h2>Tasks Board</h2>
+            <p>Organise tasks by due date and priority.</p>
           </div>
 
-          <div className="tasks-header-actions">
-            <select
-              className="task-btn secondary-btn"
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-              style={{ outline: "none", cursor: "pointer" }}
+          <div className="tasks-toolbar-actions">
+            <button
+              className="task-btn"
+              style={{
+                background: "var(--primary)",
+                color: "#fff",
+                border: "none",
+              }}
+              onClick={() => setIsModalOpen(true)}
             >
-              <option value="nearest">Sort by Nearest Due Date</option>
-              <option value="priority">Sort by Priority</option>
-            </select>
-            <button className="task-btn primary-btn" onClick={openForm}>
               + Add Task
+            </button>
+            <button
+              className="task-btn secondary-btn"
+              onClick={() => {
+                const sorted = [...tasks].sort(
+                  (a, b) =>
+                    new Date(a.due_date).getTime() -
+                    new Date(b.due_date).getTime(),
+                );
+                setTasks(sorted);
+              }}
+            >
+              Sort by Date
             </button>
           </div>
         </section>
 
-        {isFormOpen && (
-          <section className="task-form-panel">
-            <div className="task-form-top">
-              <h3>{editTaskId !== null ? "Edit Task" : "Add Task"}</h3>
-              <button className="close-form-btn" onClick={closeForm}>
-                ✕
-              </button>
+        {loading ? (
+          <p
+            style={{
+              textAlign: "center",
+              color: "var(--muted)",
+              marginTop: "40px",
+            }}
+          >
+            Loading your tasks...
+          </p>
+        ) : (
+          <section className="tasks-layout">
+            <div className="kanban-board">
+              {renderKanbanColumn("To-Do")}
+              {renderKanbanColumn("In Progress")}
+              {renderKanbanColumn("Done")}
             </div>
 
-            <form className="task-form" onSubmit={handleSubmit}>
-              <div className="form-grid">
-                <div className="form-group">
-                  <label htmlFor="title">Title</label>
-                  <input
-                    type="text"
-                    id="title"
-                    placeholder="Enter task title"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
+            <aside className="task-editor-panel auto-save-panel">
+              {selectedTask ? (
+                <div className="editor-full-layout">
+                  <div className="editor-title-row">
+                    <input
+                      type="text"
+                      className="editor-title-input massive-title"
+                      value={selectedTask.title}
+                      onChange={handleUpdateTitle}
+                      placeholder="Task Title..."
+                    />
+                    <span className={`save-indicator ${saveStatus}`}>
+                      {saveStatus === "saving" && "Saving..."}
+                      {saveStatus === "saved" && "Saved ✓"}
+                      {saveStatus === "error" && "⚠️ Error"}
+                    </span>
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="dueDate">Due Date</label>
-                  <input
-                    type="date"
-                    id="dueDate"
-                    value={formData.dueDate}
-                    onChange={handleInputChange}
-                    required
-                  />
+                  <textarea
+                    className="editor-notes-area full-bleed-textarea"
+                    value={selectedTask.notes}
+                    onChange={handleUpdateNotes}
+                    placeholder="Start..."
+                  ></textarea>
                 </div>
-
-                <div className="form-group">
-                  <label htmlFor="priority">Priority</label>
-                  <select
-                    id="priority"
-                    value={formData.priority}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    <option value="">Select priority</option>
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
-                  </select>
+              ) : (
+                <div className="editor-empty-state">
+                  <h3 style={{ margin: "0 0 8px 0", color: "var(--text)" }}>
+                    No Task Selected
+                  </h3>
+                  <p style={{ margin: 0 }}>
+                    Select a task from the board to start writing notes.
+                  </p>
                 </div>
-
-                <div className="form-group">
-                  <label htmlFor="module">Module</label>
-                  <input
-                    type="text"
-                    id="module"
-                    placeholder="e.g. Software Engineering"
-                    value={formData.module}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="form-actions">
-                <button type="submit" className="task-btn primary-btn">
-                  Save Task
-                </button>
-              </div>
-            </form>
+              )}
+            </aside>
           </section>
         )}
-
-        <section className="task-list-section">
-          <div className="task-list-top">
-            <h3>Task List</h3>
-            <div className="task-list-count">
-              {tasks.length} Task{tasks.length !== 1 ? "s" : ""}
-            </div>
-          </div>
-
-          <div className="task-list">
-            {sortedTasks.length === 0 ? (
-              <div className="empty-state">
-                <p>No tasks added yet.</p>
-              </div>
-            ) : (
-              sortedTasks.map((task) => {
-                const priorityClass = task.priority.toLowerCase();
-                const statusClass = task.status.toLowerCase();
-
-                return (
-                  <div className="task-card" key={task.id}>
-                    <div className="task-card-top">
-                      <div>
-                        <h4>{task.title}</h4>
-                        <div className="task-meta">
-                          <span>
-                            <strong>Due:</strong> {formatDate(task.dueDate)}
-                          </span>
-                          <span>
-                            <strong>Module:</strong> {task.module}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="task-labels">
-                        <span className={`label priority-${priorityClass}`}>
-                          {task.priority}
-                        </span>
-                        <span className={`label status-${statusClass}`}>
-                          {task.status}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="task-card-actions">
-                      <button
-                        className="small-btn complete-btn"
-                        onClick={() => toggleStatus(task.id)}
-                      >
-                        {task.status === "Completed"
-                          ? "Mark as Pending"
-                          : "Mark as Completed"}
-                      </button>
-                      <button
-                        className="small-btn edit-btn"
-                        onClick={() => handleEdit(task.id)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="small-btn delete-btn"
-                        onClick={() => handleDelete(task.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </section>
       </main>
+
+      <div
+        className={`modal-overlay ${isModalOpen ? "show" : ""}`}
+        style={isModalOpen ? { display: "flex" } : { display: "none" }}
+        onClick={() => setIsModalOpen(false)}
+      >
+        <div className="task-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="task-modal-header">
+            <h3>Add New Task</h3>
+            <button
+              className="close-modal-btn"
+              onClick={() => setIsModalOpen(false)}
+            >
+              &times;
+            </button>
+          </div>
+
+          <form onSubmit={handleAddTaskSubmit}>
+            <div className="form-group">
+              <label>Title</label>
+              <input
+                type="text"
+                required
+                value={newTask.title}
+                onChange={(e) =>
+                  setNewTask({ ...newTask, title: e.target.value })
+                }
+              />
+            </div>
+
+            <div className="form-row-split">
+              <div className="form-group">
+                <label>Due Date</label>
+                <input
+                  type="date"
+                  required
+                  value={newTask.due_date}
+                  onChange={(e) =>
+                    setNewTask({ ...newTask, due_date: e.target.value })
+                  }
+                />
+              </div>
+              <div className="form-group">
+                <label>Priority</label>
+                <select
+                  required
+                  value={newTask.priority}
+                  onChange={(e) =>
+                    setNewTask({ ...newTask, priority: e.target.value as any })
+                  }
+                >
+                  <option value="low">Low</option>
+                  <option value="normal">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form-row-split">
+              <div className="form-group">
+                <label>Module Link</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Software Engineering"
+                  value={newTask.module_name}
+                  onChange={(e) =>
+                    setNewTask({ ...newTask, module_name: e.target.value })
+                  }
+                />
+              </div>
+              <div className="form-group">
+                <label>Status</label>
+                <select
+                  required
+                  value={newTask.status}
+                  onChange={(e) =>
+                    setNewTask({ ...newTask, status: e.target.value as any })
+                  }
+                >
+                  <option value="To-Do">To-Do</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Done">Done</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Task Notes (Optional)</label>
+              <textarea
+                rows={4}
+                placeholder="Write details for this task..."
+                value={newTask.notes}
+                onChange={(e) =>
+                  setNewTask({ ...newTask, notes: e.target.value })
+                }
+              ></textarea>
+            </div>
+
+            <div className="modal-actions">
+              <button
+                type="submit"
+                style={{
+                  width: "100%",
+                  background: "var(--primary)",
+                  color: "#ffffff",
+                  border: "none",
+                  padding: "14px",
+                  borderRadius: "10px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                }}
+              >
+                Save Task
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
