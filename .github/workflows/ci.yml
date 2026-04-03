@@ -24,7 +24,10 @@ jobs:
           cd Backend
           pip install -r requirements.txt
 
-      - name: Check syntax (all Python files)
+      - name: Install dev tools
+        run: pip install flake8
+
+      - name: Check syntax 
         run: |
           cd Backend
           python -m py_compile $(git ls-files '*.py')
@@ -32,7 +35,8 @@ jobs:
       - name: Lint with flake8
         run: |
           cd Backend
-          flake8 .
+          python -m flake8 .
+
   frontend:
     name: Frontend Build
     runs-on: ubuntu-latest
