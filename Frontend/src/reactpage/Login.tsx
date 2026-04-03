@@ -83,7 +83,7 @@ function Login() {
       <section className="feature-section">
         <div className="feature-card-wrap feature-card-wrap--pink">
           <div className="feature-card">
-            <img src="/Images/test.png" alt="Timetable preview" />
+            <img src="/Images/testing2.png" alt="Timetable preview" />
           </div>
         </div>
         <div className="feature-text">
@@ -121,7 +121,7 @@ function Login() {
         </div>
         <div className="feature-card-wrap feature-card-wrap--teal">
           <div className="feature-card">
-            <img src="/Images/test.png" alt="Finance tracker preview" />
+            <img src="/Images/testing.png" alt="Finance tracker preview" />
           </div>
         </div>
       </section>
