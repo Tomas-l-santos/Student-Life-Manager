@@ -33,9 +33,7 @@ export default function Tasks() {
     setFormData({ title: "", dueDate: "", priority: "", module: "" });
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
@@ -44,9 +42,7 @@ export default function Tasks() {
 
     if (editTaskId !== null) {
       // Update existing task
-      setTasks(
-        tasks.map((t) => (t.id === editTaskId ? { ...t, ...formData } : t)),
-      );
+      setTasks(tasks.map((t) => (t.id === editTaskId ? { ...t, ...formData } : t)));
     } else {
       // Add new task
       const newTask: Task = {
@@ -83,10 +79,8 @@ export default function Tasks() {
   const toggleStatus = (id: number) => {
     setTasks(
       tasks.map((t) =>
-        t.id === id
-          ? { ...t, status: t.status === "Pending" ? "Completed" : "Pending" }
-          : t,
-      ),
+        t.id === id ? { ...t, status: t.status === "Pending" ? "Completed" : "Pending" } : t
+      )
     );
   };
 
@@ -104,8 +98,7 @@ export default function Tasks() {
 
   const sortedTasks = [...tasks].sort((a, b) => {
     if (sortOrder === "priority") {
-      const diff =
-        (priorityWeight[b.priority] || 0) - (priorityWeight[a.priority] || 0);
+      const diff = (priorityWeight[b.priority] || 0) - (priorityWeight[a.priority] || 0);
       if (diff !== 0) return diff;
       return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
     } else {
@@ -247,12 +240,8 @@ export default function Tasks() {
                       </div>
 
                       <div className="task-labels">
-                        <span className={`label priority-${priorityClass}`}>
-                          {task.priority}
-                        </span>
-                        <span className={`label status-${statusClass}`}>
-                          {task.status}
-                        </span>
+                        <span className={`label priority-${priorityClass}`}>{task.priority}</span>
+                        <span className={`label status-${statusClass}`}>{task.status}</span>
                       </div>
                     </div>
 
@@ -261,14 +250,9 @@ export default function Tasks() {
                         className="small-btn complete-btn"
                         onClick={() => toggleStatus(task.id)}
                       >
-                        {task.status === "Completed"
-                          ? "Mark as Pending"
-                          : "Mark as Completed"}
+                        {task.status === "Completed" ? "Mark as Pending" : "Mark as Completed"}
                       </button>
-                      <button
-                        className="small-btn edit-btn"
-                        onClick={() => handleEdit(task.id)}
-                      >
+                      <button className="small-btn edit-btn" onClick={() => handleEdit(task.id)}>
                         Edit
                       </button>
                       <button

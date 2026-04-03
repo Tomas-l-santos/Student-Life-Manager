@@ -1,8 +1,8 @@
-#Grading system for UK 
+# Grading system for UK
+
 
 class GradingSystem:
 
-    
     @staticmethod
     def calculate_grade(percentage):
 
@@ -16,7 +16,7 @@ class GradingSystem:
             return "Third Class (3rd)"
         else:
             return "Fail"
-    
+
     @staticmethod
     def get_classification(overall_percentage):
 
@@ -24,38 +24,38 @@ class GradingSystem:
             return {
                 "classification": "First Class Honours",
                 "abbreviation": "1st",
-                "description": "Excellent achievement"
+                "description": "Excellent achievement",
             }
         elif overall_percentage >= 60:
             return {
                 "classification": "Upper Second Class Honours",
                 "abbreviation": "2:1",
-                "description": "Good achievement"
+                "description": "Good achievement",
             }
         elif overall_percentage >= 50:
             return {
                 "classification": "Lower Second Class Honours",
                 "abbreviation": "2:2",
-                "description": "Satisfactory achievement"
+                "description": "Satisfactory achievement",
             }
         elif overall_percentage >= 40:
             return {
                 "classification": "Third Class Honours",
                 "abbreviation": "3rd",
-                "description": "Pass"
+                "description": "Pass",
             }
         else:
             return {
                 "classification": "Fail",
                 "abbreviation": "Fail",
-                "description": "Below pass standard"
+                "description": "Below pass standard",
             }
-    
+
     @staticmethod
     def validate_uk_credits(credits):
 
         return credits in [10, 15, 20, 30, 40, 60]
-    
+
     @staticmethod
     def get_valid_credit_values():
 

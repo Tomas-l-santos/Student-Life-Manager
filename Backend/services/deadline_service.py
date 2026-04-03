@@ -2,6 +2,7 @@ from datetime import datetime
 from models.deadline import Deadline
 from storage.storagerepo import JSONStorage
 
+
 class DeadlineService:
     def __init__(self, storage_path="data/deadlines.json"):
         self.storage = JSONStorage(storage_path)
@@ -32,7 +33,7 @@ class DeadlineService:
             module_name=module_name,
             title=title.strip(),
             due_date=due_date,
-            priority=priority
+            priority=priority,
         )
         self.storage.append(deadline.to_dict())
         return deadline.to_dict()
@@ -76,7 +77,11 @@ class DeadlineService:
 
     def delete_deadline(self, deadline_id, user_id):
         deadlines = self.storage.read_all()
-        filtered = [d for d in deadlines if not (d["id"] == deadline_id and d["user_id"] == user_id)]
+        filtered = [
+            d
+            for d in deadlines
+            if not (d["id"] == deadline_id and d["user_id"] == user_id)
+        ]
         if len(filtered) == len(deadlines):
             raise ValueError("Deadline not found")
         self.storage.overwrite(filtered)

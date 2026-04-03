@@ -74,10 +74,9 @@ function About() {
             <div className="about-left-text">
               <p className="subtitle-bold">Eliminating academic burnout.</p>
               <p>
-                Founded in 2026 by a dedicated team of students, Student Life
-                Management was born from our own struggles. We provide an
-                elegant interface to make managing courses, timetables, and
-                finances effortless.
+                Founded in 2026 by a dedicated team of students, Student Life Management was born
+                from our own struggles. We provide an elegant interface to make managing courses,
+                timetables, and finances effortless.
               </p>
             </div>
           </div>
@@ -99,9 +98,8 @@ function About() {
                 <div className="philosophy-text">
                   <h2>Our Philosophy</h2>
                   <p>
-                    Our intuitive approach means users can navigate complex
-                    study schedules with ease, trusting our system to eliminate
-                    stress and foster success.
+                    Our intuitive approach means users can navigate complex study schedules with
+                    ease, trusting our system to eliminate stress and foster success.
                   </p>
                 </div>
               </div>
@@ -114,17 +112,13 @@ function About() {
       <section className="agency-team">
         <h2>Meet your team</h2>
         <p className="team-sub">
-          Our experienced, friendly team help to deliver a first-class, personal
-          service to students worldwide.
+          Our experienced, friendly team help to deliver a first-class, personal service to students
+          worldwide.
         </p>
 
         <div className="team-carousel">
           {teamData.map((owner) => (
-            <div
-              className="team-member"
-              key={owner.id}
-              onClick={() => setActiveOwner(owner)}
-            >
+            <div className="team-member" key={owner.id} onClick={() => setActiveOwner(owner)}>
               <div className="member-image-container">
                 <div className="abstract-shape coral-blob"></div>
                 <div className="member-circular-mask">
@@ -149,10 +143,7 @@ function About() {
             goals and timetables
           </h2>
           <p>Find out what our intuitive platform could do for you.</p>
-          <button
-            className="pill-btn-premium"
-            onClick={() => setShowSignup(true)}
-          >
+          <button className="pill-btn-premium" onClick={() => setShowSignup(true)}>
             Let's get started <span className="arrow">→</span>
           </button>
         </div>
@@ -166,8 +157,8 @@ function About() {
               <span>Student Life</span>
             </div>
             <p className="footer-tagline">
-              Curating academic success for students worldwide through intuitive
-              design and collaboration.
+              Curating academic success for students worldwide through intuitive design and
+              collaboration.
             </p>
           </div>
 
@@ -194,15 +185,9 @@ function About() {
 
       {/* Team Modal */}
       {activeOwner && (
-        <div
-          className="agency-modal-overlay"
-          onClick={() => setActiveOwner(null)}
-        >
+        <div className="agency-modal-overlay" onClick={() => setActiveOwner(null)}>
           <div className="agency-modal" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="agency-modal-close"
-              onClick={() => setActiveOwner(null)}
-            >
+            <button className="agency-modal-close" onClick={() => setActiveOwner(null)}>
               ✕
             </button>
             <div className="agency-modal-left">

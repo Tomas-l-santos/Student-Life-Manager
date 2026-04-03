@@ -2,11 +2,14 @@ from storage.storagerepo import JSONStorage
 from models.Budget import Transaction, Budget, Category
 from datetime import datetime
 
+
 class BudgetService:
-    def __init__(self, 
-                 transactions_path="data/transactions.json",
-                 budgets_path="data/budgets.json",
-                 categories_path="data/categories.json"):
+    def __init__(
+        self,
+        transactions_path="data/transactions.json",
+        budgets_path="data/budgets.json",
+        categories_path="data/categories.json",
+    ):
         self.transactions_storage = JSONStorage(transactions_path)
         self.budgets_storage = JSONStorage(budgets_path)
         self.categories_storage = JSONStorage(categories_path)
@@ -57,7 +60,15 @@ class BudgetService:
             return 1
         return max(t["id"] for t in transactions) + 1
 
-    def add_transaction(self, user_id, category_id, amount, description, transaction_date, is_recurring=False):
+    def add_transaction(
+        self,
+        user_id,
+        category_id,
+        amount,
+        description,
+        transaction_date,
+        is_recurring=False,
+    ):
         category = self.get_category_by_id(category_id)
         if not category:
             raise ValueError("Category not found")
@@ -81,7 +92,7 @@ class BudgetService:
             amount=amount,
             description=description,
             transaction_date=transaction_date,
-            is_recurring=is_recurring
+            is_recurring=is_recurring,
         )
 
         self.transactions_storage.append(transaction.to_dict())
@@ -92,22 +103,26 @@ class BudgetService:
         user_transactions = [t for t in transactions if t.get("user_id") == user_id]
 
         if category_id:
-            user_transactions = [t for t in user_transactions if t.get("category_id") == category_id]
+            user_transactions = [
+                t for t in user_transactions if t.get("category_id") == category_id
+            ]
 
         if month and year:
             user_transactions = [
-                t for t in user_transactions
+                t
+                for t in user_transactions
                 if datetime.strptime(t["transaction_date"], "%Y-%m-%d").month == month
                 and datetime.strptime(t["transaction_date"], "%Y-%m-%d").year == year
             ]
         elif year:
             user_transactions = [
-                t for t in user_transactions
+                t
+                for t in user_transactions
                 if datetime.strptime(t["transaction_date"], "%Y-%m-%d").year == year
             ]
 
         user_transactions.sort(key=lambda x: x["transaction_date"], reverse=True)
-        
+
         for t in user_transactions:
             t["category"] = self.get_category_by_id(t["category_id"])
 
@@ -131,7 +146,8 @@ class BudgetService:
                     t["category_id"] = updates["category_id"]
                 if "amount" in updates:
                     amount = float(updates["amount"])
-                    if amount <= 0: raise ValueError("Amount must be positive")
+                    if amount <= 0:
+                        raise ValueError("Amount must be positive")
                     t["amount"] = amount
                 if "description" in updates:
                     t["description"] = updates["description"]
@@ -140,7 +156,7 @@ class BudgetService:
                     t["transaction_date"] = updates["transaction_date"]
                 if "is_recurring" in updates:
                     t["is_recurring"] = updates["is_recurring"]
-                
+
                 transactions[i] = t
                 self.transactions_storage.overwrite(transactions)
                 t["category"] = self.get_category_by_id(t["category_id"])
@@ -158,19 +174,27 @@ class BudgetService:
 
     def get_transaction_summary(self, user_id, month, year):
         transactions = self.get_user_transactions(user_id, month=month, year=year)
-        
-        total_income = sum(t["amount"] for t in transactions if t["category"]["type"] == "income")
-        total_expenses = sum(t["amount"] for t in transactions if t["category"]["type"] == "expense")
+
+        total_income = sum(
+            t["amount"] for t in transactions if t["category"]["type"] == "income"
+        )
+        total_expenses = sum(
+            t["amount"] for t in transactions if t["category"]["type"] == "expense"
+        )
         balance = total_income - total_expenses
-        
+
         category_breakdown = {}
         for t in transactions:
             cat_name = t["category"]["name"]
             if cat_name not in category_breakdown:
-                category_breakdown[cat_name] = {"type": t["category"]["type"], "total": 0, "count": 0}
+                category_breakdown[cat_name] = {
+                    "type": t["category"]["type"],
+                    "total": 0,
+                    "count": 0,
+                }
             category_breakdown[cat_name]["total"] += t["amount"]
             category_breakdown[cat_name]["count"] += 1
-            
+
         return {
             "month": month,
             "year": year,
@@ -178,7 +202,7 @@ class BudgetService:
             "total_expenses": round(total_expenses, 2),
             "balance": round(balance, 2),
             "transaction_count": len(transactions),
-            "category_breakdown": category_breakdown
+            "category_breakdown": category_breakdown,
         }
 
     # limit
@@ -198,19 +222,22 @@ class BudgetService:
 
         try:
             amount = float(amount)
-            if amount <= 0: raise ValueError("Amount must be positive")
+            if amount <= 0:
+                raise ValueError("Amount must be positive")
         except ValueError:
             raise ValueError("Invalid amount")
 
         budgets = self.budgets_storage.read_all()
-        
+
         # if budget exists, replace it
         for b in budgets:
-            if (b.get("user_id") == user_id and 
-                b.get("category_id") == category_id and 
-                b.get("month") == month and 
-                b.get("year") == year):
-                
+            if (
+                b.get("user_id") == user_id
+                and b.get("category_id") == category_id
+                and b.get("month") == month
+                and b.get("year") == year
+            ):
+
                 b["amount"] = amount
                 self.budgets_storage.overwrite(budgets)
                 b["category"] = category
@@ -222,7 +249,7 @@ class BudgetService:
             category_id=category_id,
             amount=amount,
             month=month,
-            year=year
+            year=year,
         )
 
         self.budgets_storage.append(budget.to_dict())
@@ -232,11 +259,15 @@ class BudgetService:
 
     def get_user_budgets(self, user_id, month=None, year=None):
         budgets = self.budgets_storage.read_all()
-        
+
         user_budgets = [b for b in budgets if b.get("user_id") == user_id]
 
         if month and year:
-            user_budgets = [b for b in user_budgets if b.get("month") == month and b.get("year") == year]
+            user_budgets = [
+                b
+                for b in user_budgets
+                if b.get("month") == month and b.get("year") == year
+            ]
         elif year:
             user_budgets = [b for b in user_budgets if b.get("year") == year]
 
@@ -259,10 +290,11 @@ class BudgetService:
             if b["id"] == budget_id and b.get("user_id") == user_id:
                 try:
                     amount = float(amount)
-                    if amount <= 0: raise ValueError("Amount must be positive")
+                    if amount <= 0:
+                        raise ValueError("Amount must be positive")
                 except ValueError:
                     raise ValueError("Invalid amount")
-                
+
                 b["amount"] = amount
                 budgets[i] = b
                 self.budgets_storage.overwrite(budgets)
@@ -286,29 +318,30 @@ class BudgetService:
 
         for budget in budgets:
             transactions = self.get_user_transactions(
-                user_id, 
-                category_id=budget["category_id"], 
-                month=month, 
-                year=year
+                user_id, category_id=budget["category_id"], month=month, year=year
             )
             spent = sum(t["amount"] for t in transactions)
             remaining = budget["amount"] - spent
-            percentage_used = (spent / budget["amount"] * 100) if budget["amount"] > 0 else 0
-            
+            percentage_used = (
+                (spent / budget["amount"] * 100) if budget["amount"] > 0 else 0
+            )
+
             if percentage_used >= 100:
                 status = "exceeded"
             elif percentage_used >= 80:
                 status = "warning"
             else:
                 status = "on_track"
-            
-            budget_status.append({
-                "budget": budget,
-                "spent": round(spent, 2),
-                "remaining": round(remaining, 2),
-                "percentage_used": round(percentage_used, 2),
-                "status": status
-            })
+
+            budget_status.append(
+                {
+                    "budget": budget,
+                    "spent": round(spent, 2),
+                    "remaining": round(remaining, 2),
+                    "percentage_used": round(percentage_used, 2),
+                    "status": status,
+                }
+            )
 
         total_budget = sum(b["budget"]["amount"] for b in budget_status)
         total_spent = sum(b["spent"] for b in budget_status)
@@ -321,5 +354,7 @@ class BudgetService:
             "total_budget": round(total_budget, 2),
             "total_spent": round(total_spent, 2),
             "total_remaining": round(total_remaining, 2),
-            "overall_percentage_used": round((total_spent / total_budget * 100) if total_budget > 0 else 0, 2)
+            "overall_percentage_used": round(
+                (total_spent / total_budget * 100) if total_budget > 0 else 0, 2
+            ),
         }

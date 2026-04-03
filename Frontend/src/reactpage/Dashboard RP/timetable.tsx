@@ -2,11 +2,7 @@ import { Sidebar, Topbar } from "./dashboard";
 import "../../styles/dashboard-css/timetable.css";
 import { useState, useEffect } from "react";
 
-import {
-  getTimetable,
-  addTimetableEntry,
-  deleteTimetableEntry,
-} from "../../services/api";
+import { getTimetable, addTimetableEntry, deleteTimetableEntry } from "../../services/api";
 
 interface TimetableEntry {
   id: number;
@@ -51,9 +47,7 @@ export default function Timetable() {
 
   // UI state
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedEntry, setSelectedEntry] = useState<TimetableEntry | null>(
-    null,
-  );
+  const [selectedEntry, setSelectedEntry] = useState<TimetableEntry | null>(null);
   const [viewMode, setViewMode] = useState("WEEK");
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activeFilters, setActiveFilters] = useState(Object.keys(ENTRY_TYPES));
@@ -148,17 +142,10 @@ export default function Timetable() {
 
   const getWeekNumber = (d: Date) => {
     const firstDay = new Date(d.getFullYear(), 0, 1);
-    return Math.ceil(
-      ((d.getTime() - firstDay.getTime()) / 86400000 + firstDay.getDay() + 1) /
-        7,
-    );
+    return Math.ceil(((d.getTime() - firstDay.getTime()) / 86400000 + firstDay.getDay() + 1) / 7);
   };
 
-  const isDateInRange = (
-    dateToCheck: Date,
-    startDateStr?: string,
-    endDateStr?: string,
-  ) => {
+  const isDateInRange = (dateToCheck: Date, startDateStr?: string, endDateStr?: string) => {
     if (!startDateStr || !endDateStr) return true;
     const start = new Date(startDateStr);
     start.setHours(0, 0, 0, 0);
@@ -200,9 +187,7 @@ export default function Timetable() {
   };
 
   const renderHalfHourLines = () =>
-    Array.from({ length: 24 }).map((_, i) => (
-      <div key={i} className="half-hour-line"></div>
-    ));
+    Array.from({ length: 24 }).map((_, i) => <div key={i} className="half-hour-line"></div>);
 
   const renderEntriesForDay = (dayName: string, dateToCheck: Date) => {
     return entries
@@ -210,7 +195,7 @@ export default function Timetable() {
         (e) =>
           e.day === dayName &&
           activeFilters.includes(e.entry_type) &&
-          isDateInRange(dateToCheck, e.start_date, e.end_date),
+          isDateInRange(dateToCheck, e.start_date, e.end_date)
       )
       .map((entry) => {
         const startHour = parseInt(entry.start_time.split(":")[0]);
@@ -220,8 +205,7 @@ export default function Timetable() {
 
         const pxPerMinute = 68 / 60;
         const topOffset = ((startHour - 8) * 60 + startMin) * pxPerMinute;
-        const height =
-          ((endHour - startHour) * 60 + (endMin - startMin)) * pxPerMinute;
+        const height = ((endHour - startHour) * 60 + (endMin - startMin)) * pxPerMinute;
 
         return (
           <div
@@ -233,8 +217,7 @@ export default function Timetable() {
               height: `${height - 5}px`,
               left: "6px",
               right: "6px",
-              background:
-                ENTRY_TYPES[entry.entry_type]?.color || "var(--event-blue)",
+              background: ENTRY_TYPES[entry.entry_type]?.color || "var(--event-blue)",
               borderRadius: "8px",
               padding: "8px 10px",
               color: "#fff",
@@ -294,7 +277,7 @@ export default function Timetable() {
           (e) =>
             e.day === dayName &&
             activeFilters.includes(e.entry_type) &&
-            isDateInRange(cellDate, e.start_date, e.end_date),
+            isDateInRange(cellDate, e.start_date, e.end_date)
         );
       }
 
@@ -330,8 +313,7 @@ export default function Timetable() {
                 key={entry.id}
                 onClick={() => setSelectedEntry(entry)}
                 style={{
-                  background:
-                    ENTRY_TYPES[entry.entry_type]?.color || "var(--event-blue)",
+                  background: ENTRY_TYPES[entry.entry_type]?.color || "var(--event-blue)",
                   color: "#fff",
                   fontSize: "11px",
                   fontWeight: "600",
@@ -375,10 +357,7 @@ export default function Timetable() {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>Add Timetable Entry</h2>
-              <button
-                className="close-btn"
-                onClick={() => setIsModalOpen(false)}
-              >
+              <button className="close-btn" onClick={() => setIsModalOpen(false)}>
                 ✕
               </button>
             </div>
@@ -398,9 +377,7 @@ export default function Timetable() {
                   type="text"
                   placeholder="e.g. Software Engineering"
                   value={formData.module_name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, module_name: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, module_name: e.target.value })}
                   required
                 />
               </div>
@@ -411,9 +388,7 @@ export default function Timetable() {
                   type="text"
                   placeholder="e.g. Room 401"
                   value={formData.location}
-                  onChange={(e) =>
-                    setFormData({ ...formData, location: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                 />
               </div>
 
@@ -428,9 +403,7 @@ export default function Timetable() {
                   <label>Type</label>
                   <select
                     value={formData.entry_type}
-                    onChange={(e) =>
-                      setFormData({ ...formData, entry_type: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, entry_type: e.target.value })}
                   >
                     {Object.entries(ENTRY_TYPES).map(([key, { label }]) => (
                       <option key={key} value={key}>
@@ -443,9 +416,7 @@ export default function Timetable() {
                   <label>Day</label>
                   <select
                     value={formData.day}
-                    onChange={(e) =>
-                      setFormData({ ...formData, day: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, day: e.target.value })}
                   >
                     {DAYS.map((d) => (
                       <option key={d} value={d}>
@@ -468,9 +439,7 @@ export default function Timetable() {
                   <input
                     type="date"
                     value={formData.start_date}
-                    onChange={(e) =>
-                      setFormData({ ...formData, start_date: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, start_date: e.target.value })}
                     required
                   />
                 </div>
@@ -479,9 +448,7 @@ export default function Timetable() {
                   <input
                     type="date"
                     value={formData.end_date}
-                    onChange={(e) =>
-                      setFormData({ ...formData, end_date: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, end_date: e.target.value })}
                     required
                   />
                 </div>
@@ -499,9 +466,7 @@ export default function Timetable() {
                   <input
                     type="time"
                     value={formData.start_time}
-                    onChange={(e) =>
-                      setFormData({ ...formData, start_time: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, start_time: e.target.value })}
                     required
                   />
                 </div>
@@ -510,19 +475,13 @@ export default function Timetable() {
                   <input
                     type="time"
                     value={formData.end_time}
-                    onChange={(e) =>
-                      setFormData({ ...formData, end_time: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, end_time: e.target.value })}
                     required
                   />
                 </div>
               </div>
 
-              <button
-                type="submit"
-                className="submit-btn"
-                style={{ marginTop: "8px" }}
-              >
+              <button type="submit" className="submit-btn" style={{ marginTop: "8px" }}>
                 Add Entry
               </button>
             </form>
@@ -539,10 +498,7 @@ export default function Timetable() {
           >
             <div className="modal-header">
               <h2>{selectedEntry.module_name}</h2>
-              <button
-                className="close-btn"
-                onClick={() => setSelectedEntry(null)}
-              >
+              <button className="close-btn" onClick={() => setSelectedEntry(null)}>
                 ✕
               </button>
             </div>
@@ -557,20 +513,17 @@ export default function Timetable() {
             >
               <p style={{ margin: 0 }}>
                 <strong>Type:</strong>{" "}
-                <span style={{ textTransform: "capitalize" }}>
-                  {selectedEntry.entry_type}
-                </span>
+                <span style={{ textTransform: "capitalize" }}>{selectedEntry.entry_type}</span>
               </p>
               <p style={{ margin: 0 }}>
                 <strong>Location:</strong> {selectedEntry.location || "TBA"}
               </p>
               <p style={{ margin: 0 }}>
-                <strong>Time:</strong> {selectedEntry.day}s,{" "}
-                {selectedEntry.start_time} - {selectedEntry.end_time}
+                <strong>Time:</strong> {selectedEntry.day}s, {selectedEntry.start_time} -{" "}
+                {selectedEntry.end_time}
               </p>
               <p style={{ margin: 0 }}>
-                <strong>Duration:</strong>{" "}
-                {selectedEntry.start_date || "Always"} to{" "}
+                <strong>Duration:</strong> {selectedEntry.start_date || "Always"} to{" "}
                 {selectedEntry.end_date || "Always"}
               </p>
 
@@ -657,18 +610,14 @@ export default function Timetable() {
                     className={`legend-item ${activeFilters.includes(key) ? "active" : "inactive"}`}
                     onClick={() =>
                       setActiveFilters((prev) =>
-                        prev.includes(key)
-                          ? prev.filter((t) => t !== key)
-                          : [...prev, key],
+                        prev.includes(key) ? prev.filter((t) => t !== key) : [...prev, key]
                       )
                     }
                   >
                     <span
                       className="color-box"
                       style={{
-                        background: activeFilters.includes(key)
-                          ? item.color
-                          : "transparent",
+                        background: activeFilters.includes(key) ? item.color : "transparent",
                         border: `2px solid ${item.color}`,
                         borderRadius: "4px",
                       }}
@@ -682,9 +631,7 @@ export default function Timetable() {
         </section>
 
         {loading ? (
-          <p style={{ padding: "20px", color: "var(--muted)" }}>
-            Loading timetable...
-          </p>
+          <p style={{ padding: "20px", color: "var(--muted)" }}>Loading timetable...</p>
         ) : (
           <section className="timetable-wrap">
             {viewMode === "WEEK" && (
@@ -739,10 +686,7 @@ export default function Timetable() {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="grid"
-                  style={{ gridTemplateColumns: "var(--time-col-w) 1fr" }}
-                >
+                <div className="grid" style={{ gridTemplateColumns: "var(--time-col-w) 1fr" }}>
                   <div className="time-col">
                     {TIME_SLOTS.map((time) => (
                       <div key={time} className="time-slot">
@@ -756,7 +700,7 @@ export default function Timetable() {
                       currentDate.toLocaleDateString("en-US", {
                         weekday: "long",
                       }),
-                      currentDate,
+                      currentDate
                     )}
                   </div>
                 </div>

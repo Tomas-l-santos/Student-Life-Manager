@@ -21,14 +21,11 @@ export default function ForgotPassword() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/forgot-password",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
-        },
-      );
+      const response = await fetch("http://localhost:5000/api/auth/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
 
       const data = await response.json();
 
@@ -47,25 +44,21 @@ export default function ForgotPassword() {
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!otp || !newPassword) return setErrorMsg("Please fill out all fields.");
-    if (newPassword.length < 8)
-      return setErrorMsg("Password must be at least 8 characters.");
+    if (newPassword.length < 8) return setErrorMsg("Password must be at least 8 characters.");
 
     setErrorMsg("");
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/reset-password",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: email,
-            token: otp,
-            new_password: newPassword,
-          }),
-        },
-      );
+      const response = await fetch("http://localhost:5000/api/auth/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          token: otp,
+          new_password: newPassword,
+        }),
+      });
 
       const data = await response.json();
 
@@ -137,8 +130,8 @@ export default function ForgotPassword() {
                 <form onSubmit={handleRequestOTP}>
                   <h2 className="serif-headline">Reset your password</h2>
                   <p className="reset-description">
-                    Enter the email address you used when you joined and we'll
-                    send you a 6-digit OTP to get back into your account.
+                    Enter the email address you used when you joined and we'll send you a 6-digit
+                    OTP to get back into your account.
                   </p>
 
                   <div className="agency-form-row">
@@ -162,8 +155,7 @@ export default function ForgotPassword() {
                     type="submit"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Sending..." : "Send Reset Code"}{" "}
-                    <span className="arrow">→</span>
+                    {isLoading ? "Sending..." : "Send Reset Code"} <span className="arrow">→</span>
                   </button>
 
                   <div className="back-to-login">
@@ -177,14 +169,11 @@ export default function ForgotPassword() {
                 <form onSubmit={handleResetPassword}>
                   <h2 className="serif-headline">Check your email</h2>
                   <p className="reset-description">
-                    We sent a 6-digit code to <strong>{email}</strong>. Enter it
-                    below along with your new password.
+                    We sent a 6-digit code to <strong>{email}</strong>. Enter it below along with
+                    your new password.
                   </p>
 
-                  <div
-                    className="agency-form-row"
-                    style={{ marginBottom: "15px" }}
-                  >
+                  <div className="agency-form-row" style={{ marginBottom: "15px" }}>
                     <label>6-Digit OTP</label>
                     <input
                       type="text"
@@ -227,8 +216,7 @@ export default function ForgotPassword() {
                     type="submit"
                     disabled={isLoading}
                   >
-                    {isLoading ? "Resetting..." : "Reset Password"}{" "}
-                    <span className="arrow">→</span>
+                    {isLoading ? "Resetting..." : "Reset Password"} <span className="arrow">→</span>
                   </button>
 
                   <div className="back-to-login">
@@ -275,15 +263,12 @@ export default function ForgotPassword() {
                   >
                     ✓
                   </div>
-                  <h2
-                    className="serif-headline"
-                    style={{ marginBottom: "10px" }}
-                  >
+                  <h2 className="serif-headline" style={{ marginBottom: "10px" }}>
                     Password Updated
                   </h2>
                   <p className="reset-description">
-                    Your password has been successfully reset. Redirecting you
-                    back to the login page...
+                    Your password has been successfully reset. Redirecting you back to the login
+                    page...
                   </p>
                 </div>
               )}
@@ -297,10 +282,7 @@ export default function ForgotPassword() {
 
           <div className="reset-image-container">
             <div className="reset-mask-circle">
-              <img
-                src="/Images/student_life_login_background.png"
-                alt="Workspace background"
-              />
+              <img src="/Images/student_life_login_background.png" alt="Workspace background" />
             </div>
           </div>
         </section>

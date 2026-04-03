@@ -9,11 +9,12 @@ from storage.storagerepo import JSONStorage
 EMAIL_REGEX = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 USERNAME_REGEX = r"^[a-zA-Z0-9_]{3,20}$"
 
+
 class AuthService:
     def __init__(self, storage_path="data/users.json"):
         self.storage = JSONStorage(storage_path)
         self.failed_attempts = {}
-        self.reset_tokens = {} 
+        self.reset_tokens = {}
 
     def validate_email(self, email):
         if not re.match(EMAIL_REGEX, email):
@@ -39,10 +40,7 @@ class AuthService:
             if u["email"] == email:
                 raise ValueError("Email already exists")
 
-        password_hash = bcrypt.hashpw(
-            password.encode(),
-            bcrypt.gensalt()
-        ).decode()
+        password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
 
         user = User(email, username, password_hash, birthdate)
         self.storage.append(user.to_dict())
@@ -75,7 +73,6 @@ class AuthService:
 
         raise ValueError("Invalid email or password")
 
-
     def change_password(self, email, new_password):
         email = email.strip()
         new_password = new_password.strip()
@@ -86,8 +83,7 @@ class AuthService:
         for u in users:
             if u["email"] == email:
                 new_hash = bcrypt.hashpw(
-                    new_password.encode(),
-                    bcrypt.gensalt()
+                    new_password.encode(), bcrypt.gensalt()
                 ).decode()
                 u["password_hash"] = new_hash
                 self.storage.overwrite(users)
@@ -157,14 +153,11 @@ class AuthService:
             raise ValueError("User not found")
 
         # GENERATES A 6-DIGIT OTP INSTEAD OF 32 CHARACTERS
-        token = ''.join(secrets.choice(string.digits) for _ in range(6))
+        token = "".join(secrets.choice(string.digits) for _ in range(6))
 
         # Store token with expiration 1 hr
-        expiry = time() + 3600 
-        self.reset_tokens[token] = {
-            "email": email,
-            "expiry": expiry
-        }
+        expiry = time() + 3600
+        self.reset_tokens[token] = {"email": email, "expiry": expiry}
 
         # Clean up expired tokens
         self._cleanup_expired_tokens()
@@ -177,7 +170,7 @@ class AuthService:
             raise ValueError("Invalid or expired OTP")
 
         token_data = self.reset_tokens[token]
-        
+
         if time() > token_data["expiry"]:
             del self.reset_tokens[token]
             raise ValueError("OTP has expired")
@@ -199,8 +192,7 @@ class AuthService:
         for u in users:
             if u["email"] == email:
                 new_hash = bcrypt.hashpw(
-                    new_password.encode(),
-                    bcrypt.gensalt()
+                    new_password.encode(), bcrypt.gensalt()
                 ).decode()
                 u["password_hash"] = new_hash
                 self.storage.overwrite(users)
@@ -217,8 +209,7 @@ class AuthService:
         """Remove expired reset tokens"""
         now = time()
         expired_tokens = [
-            token for token, data in self.reset_tokens.items()
-            if now > data["expiry"]
+            token for token, data in self.reset_tokens.items() if now > data["expiry"]
         ]
         for token in expired_tokens:
             del self.reset_tokens[token]

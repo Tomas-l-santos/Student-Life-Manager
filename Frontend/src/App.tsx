@@ -87,10 +87,7 @@ function App() {
           }
         />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route
-          path="/create-account"
-          element={<div>Create Account Page</div>}
-        />
+        <Route path="/create-account" element={<div>Create Account Page</div>} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>

@@ -25,7 +25,7 @@ export default function Account() {
 
   const handleDeleteAccount = () => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete your account and all stored data? This action cannot be undone.",
+      "Are you sure you want to delete your account and all stored data? This action cannot be undone."
     );
 
     if (confirmDelete) {
@@ -43,10 +43,7 @@ export default function Account() {
         <section className="page-header">
           <div>
             <h2>Account & Security</h2>
-            <p>
-              Manage user details, password safety, and account protection
-              settings.
-            </p>
+            <p>Manage user details, password safety, and account protection settings.</p>
           </div>
         </section>
 
@@ -74,10 +71,7 @@ export default function Account() {
             </div>
 
             <div className="card-footer">
-              <button
-                onClick={handleLogout}
-                className="secondary-btn logout-btn"
-              >
+              <button onClick={handleLogout} className="secondary-btn logout-btn">
                 Log out
               </button>
             </div>
@@ -92,8 +86,8 @@ export default function Account() {
               </div>
 
               <p className="card-desc">
-                Keep your account secure by updating your password regularly.
-                You will be redirected to the secure password reset page.
+                Keep your account secure by updating your password regularly. You will be redirected
+                to the secure password reset page.
               </p>
 
               <button onClick={handleChangePassword} className="primary-btn">
@@ -109,9 +103,8 @@ export default function Account() {
               </div>
 
               <p className="danger-text">
-                This action permanently removes your account details, timetable,
-                financial data, and security history. Once deleted, your data
-                cannot be recovered.
+                This action permanently removes your account details, timetable, financial data, and
+                security history. Once deleted, your data cannot be recovered.
               </p>
 
               <button onClick={handleDeleteAccount} className="danger-btn">

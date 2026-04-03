@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Sidebar, Topbar } from "./dashboard";
 import "../../styles/dashboard-css/deadlines.css";
-import {
-  getDeadlines,
-  addDeadline,
-  updateDeadline,
-  deleteDeadline,
-} from "../../services/api";
+import { getDeadlines, addDeadline, updateDeadline, deleteDeadline } from "../../services/api";
 
 interface Deadline {
   id: number;
@@ -69,9 +64,7 @@ export default function Deadlines() {
 
       const due = new Date(d.due_date);
       due.setHours(0, 0, 0, 0);
-      const diffDays = Math.ceil(
-        (due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
-      );
+      const diffDays = Math.ceil((due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
       if (diffDays < 0) overdueCount++;
       else if (diffDays <= 3) dueSoonCount++;
@@ -106,9 +99,7 @@ export default function Deadlines() {
     });
   }, [deadlines]);
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
@@ -165,8 +156,7 @@ export default function Deadlines() {
   };
 
   const handleDelete = async (id: number) => {
-    if (!window.confirm("Are you sure you want to delete this deadline?"))
-      return;
+    if (!window.confirm("Are you sure you want to delete this deadline?")) return;
     try {
       await deleteDeadline(id);
       setDeadlines(deadlines.filter((d) => d.id !== id));
@@ -194,9 +184,7 @@ export default function Deadlines() {
     const due = new Date(dateString);
     due.setHours(0, 0, 0, 0);
 
-    const diffDays = Math.ceil(
-      (due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24),
-    );
+    const diffDays = Math.ceil((due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
     if (diffDays < 0) return { class: "overdue", text: "Overdue" };
     if (diffDays <= 3) return { class: "due-soon", text: "Due Soon" };
@@ -209,14 +197,13 @@ export default function Deadlines() {
     .filter(
       (d) =>
         d.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        d.module_name?.toLowerCase().includes(searchQuery.toLowerCase()),
+        d.module_name?.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .sort((a, b) => {
       if (a.completed !== b.completed) return a.completed ? 1 : -1;
 
       if (sortOrder === "priority") {
-        const diff =
-          (priorityWeight[b.priority] || 0) - (priorityWeight[a.priority] || 0);
+        const diff = (priorityWeight[b.priority] || 0) - (priorityWeight[a.priority] || 0);
         if (diff !== 0) return diff;
       }
       return new Date(a.due_date).getTime() - new Date(b.due_date).getTime();
@@ -233,20 +220,14 @@ export default function Deadlines() {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{editingId ? "Edit Deadline" : "Add New Deadline"}</h2>
-              <button
-                className="close-btn"
-                onClick={() => setIsModalOpen(false)}
-              >
+              <button className="close-btn" onClick={() => setIsModalOpen(false)}>
                 ✕
               </button>
             </div>
 
             <div className="modal-body">
               <form className="deadline-form" onSubmit={handleSaveDeadline}>
-                <div
-                  className="form-group full-width"
-                  style={{ marginBottom: "16px" }}
-                >
+                <div className="form-group full-width" style={{ marginBottom: "16px" }}>
                   <label htmlFor="title">Task Name</label>
                   <input
                     type="text"
@@ -286,10 +267,7 @@ export default function Deadlines() {
                   </div>
                 </div>
 
-                <div
-                  className="form-group full-width"
-                  style={{ marginTop: "16px" }}
-                >
+                <div className="form-group full-width" style={{ marginTop: "16px" }}>
                   <label htmlFor="module_name">Module Name (Optional)</label>
                   <input
                     type="text"
@@ -325,10 +303,7 @@ export default function Deadlines() {
             <span className="header-icon"></span>
             <div>
               <h2>Deadline Manager</h2>
-              <p>
-                Track assignment deadlines, manage workload, and see upcoming
-                reminders.
-              </p>
+              <p>Track assignment deadlines, manage workload, and see upcoming reminders.</p>
             </div>
           </div>
 
@@ -341,11 +316,7 @@ export default function Deadlines() {
               <option value="nearest">Sort by Nearest Due Date</option>
               <option value="priority">Sort by Priority</option>
             </select>
-            <button
-              className="deadline-btn primary-btn"
-              type="button"
-              onClick={openAddModal}
-            >
+            <button className="deadline-btn primary-btn" type="button" onClick={openAddModal}>
               + Add Deadline
             </button>
           </div>
@@ -363,9 +334,7 @@ export default function Deadlines() {
 
           <div className="summary-card">
             <div className="card-top">
-              <span className="summary-label badge-label warning-badge">
-                Due Soon
-              </span>
+              <span className="summary-label badge-label warning-badge">Due Soon</span>
               <span className="card-icon warning-icon"></span>
             </div>
             <strong className="warning-text">{stats.dueSoon}</strong>
@@ -373,9 +342,7 @@ export default function Deadlines() {
 
           <div className="summary-card">
             <div className="card-top">
-              <span className="summary-label badge-label danger-badge">
-                Overdue
-              </span>
+              <span className="summary-label badge-label danger-badge">Overdue</span>
               <span className="card-icon danger-icon"></span>
             </div>
             <strong className="danger-text">{stats.overdue}</strong>
@@ -405,10 +372,7 @@ export default function Deadlines() {
           <div className="table-header-area">
             <div>
               <h3>Current Deadlines ({stats.total})</h3>
-              <p>
-                Sorted by{" "}
-                {sortOrder === "nearest" ? "Nearest Due Date" : "Priority"}
-              </p>
+              <p>Sorted by {sortOrder === "nearest" ? "Nearest Due Date" : "Priority"}</p>
             </div>
             <div className="search-box">
               <span className="search-icon">🔍</span>
@@ -452,34 +416,25 @@ export default function Deadlines() {
                     </tr>
                   ) : (
                     filteredDeadlines.map((deadline) => {
-                      const status = getStatus(
-                        deadline.due_date,
-                        deadline.completed,
+                      const status = getStatus(deadline.due_date, deadline.completed);
+                      const formattedDate = new Date(deadline.due_date).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        }
                       );
-                      const formattedDate = new Date(
-                        deadline.due_date,
-                      ).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      });
 
                       const uiPriorityClass =
-                        deadline.priority === "normal"
-                          ? "med"
-                          : deadline.priority;
+                        deadline.priority === "normal" ? "med" : deadline.priority;
 
                       return (
-                        <tr
-                          key={deadline.id}
-                          style={{ opacity: deadline.completed ? 0.6 : 1 }}
-                        >
+                        <tr key={deadline.id} style={{ opacity: deadline.completed ? 0.6 : 1 }}>
                           <td className="task-name-cell">
                             <strong
                               style={{
-                                textDecoration: deadline.completed
-                                  ? "line-through"
-                                  : "none",
+                                textDecoration: deadline.completed ? "line-through" : "none",
                               }}
                             >
                               {deadline.title}
@@ -498,16 +453,12 @@ export default function Deadlines() {
                           </td>
                           <td className="date-cell">{formattedDate}</td>
                           <td>
-                            <span
-                              className={`pill status-pill ${status.class}`}
-                            >
+                            <span className={`pill status-pill ${status.class}`}>
                               {status.text}
                             </span>
                           </td>
                           <td>
-                            <span
-                              className={`pill priority-pill ${uiPriorityClass}`}
-                            >
+                            <span className={`pill priority-pill ${uiPriorityClass}`}>
                               {deadline.priority.charAt(0).toUpperCase() +
                                 deadline.priority.slice(1)}
                             </span>
@@ -515,17 +466,8 @@ export default function Deadlines() {
                           <td className="actions-cell">
                             <button
                               className="icon-action-btn"
-                              title={
-                                deadline.completed
-                                  ? "Mark incomplete"
-                                  : "Mark complete"
-                              }
-                              onClick={() =>
-                                handleToggleComplete(
-                                  deadline.id,
-                                  deadline.completed,
-                                )
-                              }
+                              title={deadline.completed ? "Mark incomplete" : "Mark complete"}
+                              onClick={() => handleToggleComplete(deadline.id, deadline.completed)}
                             >
                               {deadline.completed ? "↩️" : "☑️"}
                             </button>
