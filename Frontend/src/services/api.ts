@@ -74,18 +74,15 @@ export async function addTransaction(data: {
 }
 
 export async function getCategories(type?: "income" | "expense") {
-  const url = type
-    ? `${BASE_URL}/api/categories?type=${type}`
-    : `${BASE_URL}/api/categories`;
+  const url = type ? `${BASE_URL}/api/categories?type=${type}` : `${BASE_URL}/api/categories`;
   const res = await fetch(url, { headers: authHeaders() });
   return res.json();
 }
 
 export async function getBudgetStatus(month: number, year: number) {
-  const res = await fetch(
-    `${BASE_URL}/api/budgets/status?month=${month}&year=${year}`,
-    { headers: authHeaders() }
-  );
+  const res = await fetch(`${BASE_URL}/api/budgets/status?month=${month}&year=${year}`, {
+    headers: authHeaders(),
+  });
   return res.json();
 }
 export async function deleteTransaction(id: string | number) {
@@ -112,7 +109,7 @@ export async function setBudgetLimit(data: {
   if (!res.ok) throw new Error(result.error || "Failed to set budget limit");
   return result;
 }
-// modules 
+// modules
 
 export async function getModules() {
   const res = await fetch(`${BASE_URL}/api/modules`, {

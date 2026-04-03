@@ -1,5 +1,6 @@
 import uuid
 
+
 class User:
     def __init__(self, email, username, password_hash, birthdate, user_id=None):
         # Automatically generates a unique ID if one isn't provided
@@ -15,7 +16,7 @@ class User:
             "email": self.email,
             "username": self.username,
             "password_hash": self.password_hash,
-            "birthdate": self.birthdate
+            "birthdate": self.birthdate,
         }
 
     @classmethod
@@ -25,5 +26,5 @@ class User:
             username=data.get("username"),
             password_hash=data.get("password_hash"),
             birthdate=data.get("birthdate"),
-            user_id=data.get("user_id")
+            user_id=data.get("user_id"),
         )

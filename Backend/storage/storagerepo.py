@@ -2,6 +2,7 @@ import json
 import os
 from threading import Lock
 
+
 class JSONStorage:
     def __init__(self, filepath):
         self.filepath = filepath

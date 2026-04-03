@@ -78,9 +78,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             >
               Welcome Back!
             </h3>
-            <p style={{ color: "#666", fontSize: "1rem" }}>
-              Taking you to your dashboard...
-            </p>
+            <p style={{ color: "#666", fontSize: "1rem" }}>Taking you to your dashboard...</p>
           </div>
         ) : (
           <>
@@ -92,11 +90,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             <h2>Welcome to SLM</h2>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
-                Email
-              </label>
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>Email</label>
               <div className="input-wrapper">
                 <input
                   type="email"
@@ -118,9 +112,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Password
               </label>
               <div className="input-wrapper">
@@ -148,11 +140,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
               <label htmlFor="rem">Remember me</label>
             </div>
 
-            <button
-              onClick={handleLogin}
-              className="btn-continue-modal"
-              disabled={isLoading}
-            >
+            <button onClick={handleLogin} className="btn-continue-modal" disabled={isLoading}>
               {isLoading ? "Logging in..." : "Log in"}
             </button>
             <Link
@@ -282,16 +270,12 @@ export function SignupModal({
               style={{ width: "60px", marginBottom: "15px" }}
             />
             <h2 style={{ marginBottom: "5px" }}>Welcome to SLM</h2>
-            <p
-              style={{ color: "#333", marginBottom: "25px", fontSize: "16px" }}
-            >
+            <p style={{ color: "#333", marginBottom: "25px", fontSize: "16px" }}>
               Create your account
             </p>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Username
               </label>
               <div className="input-wrapper">
@@ -308,19 +292,14 @@ export function SignupModal({
                 />
                 {errorField === "username" && (
                   <div className="custom-error-tooltip">
-                    <span className="tooltip-icon">!</span> Please fill out this
-                    field.
+                    <span className="tooltip-icon">!</span> Please fill out this field.
                   </div>
                 )}
               </div>
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
-                Email
-              </label>
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>Email</label>
               <div className="input-wrapper">
                 <input
                   type="email"
@@ -335,17 +314,14 @@ export function SignupModal({
                 />
                 {errorField === "email" && (
                   <div className="custom-error-tooltip">
-                    <span className="tooltip-icon">!</span> Please fill out this
-                    field.
+                    <span className="tooltip-icon">!</span> Please fill out this field.
                   </div>
                 )}
               </div>
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Password
               </label>
               <div className="input-wrapper">
@@ -375,15 +351,13 @@ export function SignupModal({
                   marginLeft: "2px",
                 }}
               >
-                Passwords should be 8 characters, using upper/lowercase letters,
-                numbers and symbols.
+                Passwords should be 8 characters, using upper/lowercase letters, numbers and
+                symbols.
               </div>
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Birthdate
               </label>
               <div className="input-wrapper">

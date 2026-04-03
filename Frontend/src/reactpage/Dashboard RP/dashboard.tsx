@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../../styles/dashboard-css/dashboard.css";
-import {
-  getTimetable,
-  getDeadlines,
-  getTransactions,
-} from "../../services/api";
+import { getTimetable, getDeadlines, getTransactions } from "../../services/api";
 import { getUsername } from "../../services/storage";
 
 // Sidebar
@@ -31,77 +27,38 @@ export const Sidebar = () => {
   return (
     <aside className="sidebar">
       <div className="sidebar-top">
-        <div
-          className="hamburger"
-          aria-label="Menu"
-          title="Menu"
-          onClick={toggleSidebar}
-        >
+        <div className="hamburger" aria-label="Menu" title="Menu" onClick={toggleSidebar}>
           ☰
         </div>
         <div className="sidebar-title">
-          <strong style={{ fontSize: "22px", letterSpacing: "1.5px" }}>
-            SLM
-          </strong>
+          <strong style={{ fontSize: "22px", letterSpacing: "1.5px" }}>SLM</strong>
         </div>
       </div>
 
       <nav className="nav" aria-label="Primary">
-        <Link
-          className={location.pathname === "/dashboard" ? "active" : ""}
-          to="/dashboard"
-        >
-          <span className="icon">📊</span>{" "}
-          <span className="nav-text">Dashboard</span>
+        <Link className={location.pathname === "/dashboard" ? "active" : ""} to="/dashboard">
+          <span className="icon">📊</span> <span className="nav-text">Dashboard</span>
         </Link>
-        <Link
-          className={location.pathname === "/timetable" ? "active" : ""}
-          to="/timetable"
-        >
-          <span className="icon">📅</span>{" "}
-          <span className="nav-text">Timetable</span>
+        <Link className={location.pathname === "/timetable" ? "active" : ""} to="/timetable">
+          <span className="icon">📅</span> <span className="nav-text">Timetable</span>
         </Link>
-        <Link
-          className={location.pathname === "/deadlines" ? "active" : ""}
-          to="/deadlines"
-        >
-          <span className="icon">⏳</span>{" "}
-          <span className="nav-text">Deadlines</span>
+        <Link className={location.pathname === "/deadlines" ? "active" : ""} to="/deadlines">
+          <span className="icon">⏳</span> <span className="nav-text">Deadlines</span>
         </Link>
-        <Link
-          className={location.pathname === "/tasks" ? "active" : ""}
-          to="/tasks"
-        >
-          <span className="icon">✅</span>{" "}
-          <span className="nav-text">Tasks</span>
+        <Link className={location.pathname === "/tasks" ? "active" : ""} to="/tasks">
+          <span className="icon">✅</span> <span className="nav-text">Tasks</span>
         </Link>
-        <Link
-          className={location.pathname === "/modules" ? "active" : ""}
-          to="/modules"
-        >
-          <span className="icon">📚</span>{" "}
-          <span className="nav-text">Modules</span>
+        <Link className={location.pathname === "/modules" ? "active" : ""} to="/modules">
+          <span className="icon">📚</span> <span className="nav-text">Modules</span>
         </Link>
-        <Link
-          className={location.pathname === "/budget" ? "active" : ""}
-          to="/budget"
-        >
-          <span className="icon">💷</span>{" "}
-          <span className="nav-text">Budget</span>
+        <Link className={location.pathname === "/budget" ? "active" : ""} to="/budget">
+          <span className="icon">💷</span> <span className="nav-text">Budget</span>
         </Link>
-        <Link
-          className={location.pathname === "/account" ? "active" : ""}
-          to="/account"
-        >
-          <span className="icon">👤</span>{" "}
-          <span className="nav-text">Account</span>
+        <Link className={location.pathname === "/account" ? "active" : ""} to="/account">
+          <span className="icon">👤</span> <span className="nav-text">Account</span>
         </Link>
-        <Link
-          className={location.pathname === "/help" ? "active" : ""}
-          to="/help"
-        >
-          <span className="icon">❓</span>{" "}
-          <span className="nav-text">Help</span>
+        <Link className={location.pathname === "/help" ? "active" : ""} to="/help">
+          <span className="icon">❓</span> <span className="nav-text">Help</span>
         </Link>
       </nav>
 
@@ -234,18 +191,14 @@ export default function Dashboard() {
         const currentYear = today.getFullYear();
 
         // Fetch Timetable, Deadlines, and Transactions simultaneously
-        const [timetableRes, deadlinesRes, transactionsRes] =
-          await Promise.allSettled([
-            getTimetable(),
-            getDeadlines(),
-            getTransactions(),
-          ]);
+        const [timetableRes, deadlinesRes, transactionsRes] = await Promise.allSettled([
+          getTimetable(),
+          getDeadlines(),
+          getTransactions(),
+        ]);
 
         // Process Timetable
-        if (
-          timetableRes.status === "fulfilled" &&
-          Array.isArray(timetableRes.value)
-        ) {
+        if (timetableRes.status === "fulfilled" && Array.isArray(timetableRes.value)) {
           const todays = timetableRes.value
             .filter((entry) => entry.day === todayName)
             .sort((a, b) => a.start_time.localeCompare(b.start_time));
@@ -253,31 +206,19 @@ export default function Dashboard() {
         }
 
         // Process Deadlines
-        if (
-          deadlinesRes.status === "fulfilled" &&
-          Array.isArray(deadlinesRes.value)
-        ) {
+        if (deadlinesRes.status === "fulfilled" && Array.isArray(deadlinesRes.value)) {
           const upcoming = deadlinesRes.value
             .filter((d) => !d.completed)
-            .sort(
-              (a, b) =>
-                new Date(a.due_date).getTime() - new Date(b.due_date).getTime(),
-            )
+            .sort((a, b) => new Date(a.due_date).getTime() - new Date(b.due_date).getTime())
             .slice(0, 3);
           setUpcomingDeadlines(upcoming);
         }
 
         // Process Budget
-        if (
-          transactionsRes.status === "fulfilled" &&
-          Array.isArray(transactionsRes.value)
-        ) {
+        if (transactionsRes.status === "fulfilled" && Array.isArray(transactionsRes.value)) {
           const currentMonthTransactions = transactionsRes.value.filter((t) => {
             const tDate = new Date(t.transaction_date);
-            return (
-              tDate.getMonth() + 1 === currentMonth &&
-              tDate.getFullYear() === currentYear
-            );
+            return tDate.getMonth() + 1 === currentMonth && tDate.getFullYear() === currentYear;
           });
 
           let spent = 0;
@@ -494,15 +435,11 @@ export default function Dashboard() {
               <div className="budget-row">
                 <div className="budget-metric">
                   <p className="metric-label">Spent</p>
-                  <p className="metric-value">
-                    £{budgetSnapshot.spent.toFixed(2)}
-                  </p>
+                  <p className="metric-value">£{budgetSnapshot.spent.toFixed(2)}</p>
                 </div>
                 <div className="budget-metric">
                   <p className="metric-label">Income</p>
-                  <p className="metric-value">
-                    £{budgetSnapshot.income.toFixed(2)}
-                  </p>
+                  <p className="metric-value">£{budgetSnapshot.income.toFixed(2)}</p>
                 </div>
               </div>
 
@@ -521,10 +458,7 @@ export default function Dashboard() {
                   aria-hidden="true"
                 ></div>
               </div>
-              <p
-                className="budget-hint"
-                style={{ textAlign: "right", marginTop: "6px" }}
-              >
+              <p className="budget-hint" style={{ textAlign: "right", marginTop: "6px" }}>
                 {budgetSnapshot.percentage.toFixed(0)}% of income spent
               </p>
             </div>

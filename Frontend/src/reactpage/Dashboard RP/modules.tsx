@@ -1,12 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Sidebar, Topbar } from "./dashboard";
 import "../../styles/dashboard-css/modules.css";
-import {
-  getModules,
-  addModule,
-  deleteModule,
-  addAssessment,
-} from "../../services/api";
+import { getModules, addModule, deleteModule, addAssessment } from "../../services/api";
 
 interface Assessment {
   id: string;
@@ -83,16 +78,13 @@ export default function Modules() {
   };
 
   const stats = useMemo(() => {
-    const activeModules = modules.filter(
-      (m) => m.assessments && m.assessments.length > 0,
-    );
+    const activeModules = modules.filter((m) => m.assessments && m.assessments.length > 0);
     let totalAverages = 0;
     activeModules.forEach((m) => {
       totalAverages += getModuleAverage(m);
     });
 
-    const currentAverage =
-      activeModules.length > 0 ? totalAverages / activeModules.length : 0;
+    const currentAverage = activeModules.length > 0 ? totalAverages / activeModules.length : 0;
     const remainingModules = totalTargetModules - activeModules.length;
     const distinctionTarget = 70 * totalTargetModules;
     const pointsNeeded = distinctionTarget - totalAverages;
@@ -103,9 +95,7 @@ export default function Modules() {
     if (remainingModules > 0) {
       const neededAverage = pointsNeeded / remainingModules;
       neededAverageMessage =
-        neededAverage > 100
-          ? "Distinction out of reach"
-          : `${neededAverage.toFixed(1)}% needed`;
+        neededAverage > 100 ? "Distinction out of reach" : `${neededAverage.toFixed(1)}% needed`;
       chartFill = (currentAverage / 70) * 100;
     } else {
       neededAverageMessage = "Modules Complete";
@@ -121,9 +111,7 @@ export default function Modules() {
   }, [modules, totalTargetModules]);
 
   // handlers
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
@@ -163,10 +151,8 @@ export default function Modules() {
 
       setModules(
         modules.map((m) =>
-          m.id === activeModuleId
-            ? { ...m, assessments: [...(m.assessments || []), result] }
-            : m,
-        ),
+          m.id === activeModuleId ? { ...m, assessments: [...(m.assessments || []), result] } : m
+        )
       );
       setActiveModuleId(null);
       setAssessmentForm({ ...assessmentForm, score: "" });
@@ -176,12 +162,7 @@ export default function Modules() {
   };
 
   const handleRemoveModule = async (id: string) => {
-    if (
-      !window.confirm(
-        "Are you sure? This will delete all linked data for this module.",
-      )
-    )
-      return;
+    if (!window.confirm("Are you sure? This will delete all linked data for this module.")) return;
     try {
       await deleteModule(id);
       setModules(modules.filter((m) => m.id !== id));
@@ -214,9 +195,7 @@ export default function Modules() {
                         <select
                           id="targetModules"
                           value={totalTargetModules}
-                          onChange={(e) =>
-                            setTotalTargetModules(Number(e.target.value))
-                          }
+                          onChange={(e) => setTotalTargetModules(Number(e.target.value))}
                         >
                           {[4, 6, 8, 10].map((val) => (
                             <option key={val} value={val}>
@@ -237,17 +216,13 @@ export default function Modules() {
                         }}
                       >
                         <div className="donut-hole">
-                          <strong className="donut-text">
-                            {stats.currentAverage.toFixed(1)}%
-                          </strong>
+                          <strong className="donut-text">{stats.currentAverage.toFixed(1)}%</strong>
                           <span className="donut-sub">Average</span>
                         </div>
                       </div>
                     </div>
                     <div className="tracker-info">
-                      <strong className="stat-hero">
-                        {stats.neededAverageMessage}
-                      </strong>
+                      <strong className="stat-hero">{stats.neededAverageMessage}</strong>
                       <span className="stat-label">
                         On remaining {stats.remainingModules} modules
                       </span>
@@ -365,16 +340,12 @@ export default function Modules() {
                     modules.map((module) => {
                       const avg = getModuleAverage(module);
                       return (
-                        <div
-                          key={module.id}
-                          className="module-item modern-module-item"
-                        >
+                        <div key={module.id} className="module-item modern-module-item">
                           <div className="module-card-top-row">
                             <div className="module-title-group">
                               <h3>{module.name}</h3>
                               <span className="module-code">
-                                {module.code} • Yr {module.year_of_study} •{" "}
-                                {module.credits} Credits
+                                {module.code} • Yr {module.year_of_study} • {module.credits} Credits
                               </span>
                             </div>
                             <div
@@ -395,8 +366,7 @@ export default function Modules() {
                           <div className="module-card-details-row">
                             {module.deadline && (
                               <div className="detail-pill">
-                                Due:{" "}
-                                {new Date(module.deadline).toLocaleDateString()}
+                                Due: {new Date(module.deadline).toLocaleDateString()}
                               </div>
                             )}
                           </div>
@@ -488,9 +458,7 @@ export default function Modules() {
                   </div>
                 </div>
                 <div className="form-group">
-                  <label style={{ color: "var(--event-cyan)" }}>
-                    Achieved Score
-                  </label>
+                  <label style={{ color: "var(--event-cyan)" }}>Achieved Score</label>
                   <input
                     type="number"
                     value={assessmentForm.score}

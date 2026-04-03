@@ -1,8 +1,17 @@
 from models.timetable_entry import TimetableEntry
 from storage.storagerepo import JSONStorage
 
-VALID_DAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+VALID_DAYS = (
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+)
 VALID_TYPES = ("lecture", "lab", "seminar", "tutorial", "other")
+
 
 class TimetableService:
     def __init__(self, storage_path="data/timetable.json"):
@@ -14,7 +23,18 @@ class TimetableService:
             return 1
         return max(e["id"] for e in entries) + 1
 
-    def add_entry(self, user_id, module_name, location, entry_type, day, start_time, end_time, start_date=None, end_date=None):
+    def add_entry(
+        self,
+        user_id,
+        module_name,
+        location,
+        entry_type,
+        day,
+        start_time,
+        end_time,
+        start_date=None,
+        end_date=None,
+    ):
         if day not in VALID_DAYS:
             raise ValueError(f"Day must be one of: {', '.join(VALID_DAYS)}")
         if entry_type not in VALID_TYPES:
@@ -31,8 +51,8 @@ class TimetableService:
             day=day,
             start_time=start_time,
             end_time=end_time,
-            start_date=start_date, # Added
-            end_date=end_date      # Added
+            start_date=start_date,  # Added
+            end_date=end_date,  # Added
         )
         self.storage.append(entry.to_dict())
         return entry.to_dict()
@@ -59,7 +79,9 @@ class TimetableService:
                     e["location"] = updates["location"].strip()
                 if "entry_type" in updates:
                     if updates["entry_type"] not in VALID_TYPES:
-                        raise ValueError(f"Type must be one of: {', '.join(VALID_TYPES)}")
+                        raise ValueError(
+                            f"Type must be one of: {', '.join(VALID_TYPES)}"
+                        )
                     e["entry_type"] = updates["entry_type"]
                 if "day" in updates:
                     if updates["day"] not in VALID_DAYS:
@@ -69,10 +91,10 @@ class TimetableService:
                     e["start_time"] = updates["start_time"]
                 if "end_time" in updates:
                     e["end_time"] = updates["end_time"]
-                if "start_date" in updates:                 
-                    e["start_date"] = updates["start_date"] 
-                if "end_date" in updates:                   
-                    e["end_date"] = updates["end_date"]     
+                if "start_date" in updates:
+                    e["start_date"] = updates["start_date"]
+                if "end_date" in updates:
+                    e["end_date"] = updates["end_date"]
                 entries[i] = e
                 self.storage.overwrite(entries)
                 return e
@@ -80,7 +102,9 @@ class TimetableService:
 
     def delete_entry(self, entry_id, user_id):
         entries = self.storage.read_all()
-        filtered = [e for e in entries if not (e["id"] == entry_id and e["user_id"] == user_id)]
+        filtered = [
+            e for e in entries if not (e["id"] == entry_id and e["user_id"] == user_id)
+        ]
         if len(filtered) == len(entries):
             raise ValueError("Timetable entry not found")
         self.storage.overwrite(filtered)
