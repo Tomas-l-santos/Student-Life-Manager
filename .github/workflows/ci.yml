@@ -30,9 +30,10 @@ jobs:
           python -m py_compile main.py
           python -m py_compile services/authorisation.py
           python -m py_compile services/budget_service.py
-          python -m py_compile services/task_service.py
+          python -m py_compile services/transaction_service.py
           python -m py_compile services/deadline_service.py
           python -m py_compile services/timetable_service.py
+          python -m py_compile services/academics_service.py
 
       - name: Lint with flake8
         run: |
