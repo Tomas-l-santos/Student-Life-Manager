@@ -64,7 +64,7 @@ export default function Deadlines() {
     let activeDeadlines = 0;
 
     deadlines.forEach((d) => {
-      if (d.completed) return; // Don't stress over completed tasks
+      if (d.completed) return;
       activeDeadlines++;
 
       const due = new Date(d.due_date);
@@ -178,16 +178,18 @@ export default function Deadlines() {
 
   const handleToggleComplete = async (id: number, current: boolean) => {
     try {
-      const updated = await updateDeadline(id, { completed: !current });
+      const updated = await updateDeadline(id, {
+        completed: !current,
+        status: !current ? "Done" : "To-Do",
+      });
       setDeadlines(deadlines.map((d) => (d.id === id ? updated : d)));
     } catch (err) {
       console.error("Failed to update deadline:", err);
     }
   };
 
-  // --- RENDER HELPERS ---
   const getStatus = (dateString: string, completed: boolean) => {
-    if (completed) return { class: "future", text: "Completed" }; // Uses green pill styling
+    if (completed) return { class: "future", text: "Completed" };
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -213,7 +215,6 @@ export default function Deadlines() {
     )
     .sort((a, b) => {
       if (a.completed !== b.completed) return a.completed ? 1 : -1;
-
       if (sortOrder === "priority") {
         const diff =
           (priorityWeight[b.priority] || 0) - (priorityWeight[a.priority] || 0);
@@ -227,9 +228,12 @@ export default function Deadlines() {
       <Sidebar />
       <Topbar />
 
-      {/* add,edit */}
       {isModalOpen && (
-        <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
+        <div
+          className="modal-overlay"
+          style={{ display: "flex" }}
+          onClick={() => setIsModalOpen(false)}
+        >
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h2>{editingId ? "Edit Deadline" : "Add New Deadline"}</h2>
@@ -301,7 +305,18 @@ export default function Deadlines() {
                 </div>
 
                 <div className="form-actions" style={{ marginTop: "24px" }}>
-                  <button type="submit" className="deadline-btn primary-btn">
+                  <button
+                    type="submit"
+                    style={{
+                      background: "var(--primary)",
+                      color: "#ffffff",
+                      border: "none",
+                      padding: "12px 24px",
+                      borderRadius: "10px",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
                     {editingId ? "Update Deadline" : "Save Deadline"}
                   </button>
                   <button
@@ -318,7 +333,6 @@ export default function Deadlines() {
         </div>
       )}
 
-      {/* main */}
       <main className="deadlines-main">
         <section className="deadlines-header">
           <div className="header-title-group">
@@ -342,7 +356,15 @@ export default function Deadlines() {
               <option value="priority">Sort by Priority</option>
             </select>
             <button
-              className="deadline-btn primary-btn"
+              style={{
+                background: "var(--primary)",
+                color: "#ffffff",
+                border: "none",
+                padding: "10px 20px",
+                borderRadius: "10px",
+                fontWeight: "bold",
+                cursor: "pointer",
+              }}
               type="button"
               onClick={openAddModal}
             >
@@ -351,7 +373,6 @@ export default function Deadlines() {
           </div>
         </section>
 
-        {/* --- DASHBOARD CARDS --- */}
         <section className="deadline-summary">
           <div className="summary-card">
             <div className="card-top">
@@ -400,7 +421,6 @@ export default function Deadlines() {
           </div>
         </section>
 
-        {/* table*/}
         <section className="deadline-table-section">
           <div className="table-header-area">
             <div>
@@ -463,7 +483,6 @@ export default function Deadlines() {
                         day: "numeric",
                         year: "numeric",
                       });
-
                       const uiPriorityClass =
                         deadline.priority === "normal"
                           ? "med"
