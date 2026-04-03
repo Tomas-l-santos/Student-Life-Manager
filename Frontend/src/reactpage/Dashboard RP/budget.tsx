@@ -16,6 +16,7 @@ import {
   getCategories,
   getBudgetStatus,
   setBudgetLimit,
+  deleteBudget,
 } from "../../services/api";
 
 interface Category {
@@ -24,7 +25,6 @@ interface Category {
   type: string;
   icon: string;
 }
-
 interface Transaction {
   id: number;
   amount: number;
@@ -32,7 +32,6 @@ interface Transaction {
   transaction_date: string;
   category: Category;
 }
-
 interface BudgetStatus {
   budget: { id: number; amount: number; category: Category };
   spent: number;
@@ -47,7 +46,6 @@ export default function Budget() {
   const [budgetStatus, setBudgetStatusData] = useState<BudgetStatus[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Summary State
   const [summary, setSummary] = useState({
     income: 0,
     expenses: 0,
@@ -57,7 +55,6 @@ export default function Budget() {
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
 
-  // Transaction
   const [txForm, setTxForm] = useState({
     type: "expense",
     category_id: "",
@@ -66,11 +63,7 @@ export default function Budget() {
     transaction_date: new Date().toISOString().split("T")[0],
   });
 
-  // Budget Limit
-  const [limitForm, setLimitForm] = useState({
-    category_id: "",
-    amount: "",
-  });
+  const [limitForm, setLimitForm] = useState({ category_id: "", amount: "" });
 
   useEffect(() => {
     fetchData();
@@ -92,7 +85,6 @@ export default function Budget() {
         setBudgetStatusData(statusData.budgets);
       }
 
-      // Calculate summaries for current month
       let inc = 0;
       let exp = 0;
       fetchedTx.forEach((t: Transaction) => {
@@ -124,7 +116,6 @@ export default function Budget() {
         description: txForm.description,
         transaction_date: txForm.transaction_date,
       });
-
       setTxForm({ ...txForm, amount: "", description: "" });
       fetchData();
     } catch (error) {
@@ -144,7 +135,6 @@ export default function Budget() {
         month: currentMonth,
         year: currentYear,
       });
-
       setLimitForm({ category_id: "", amount: "" });
       fetchData();
     } catch (error: any) {
@@ -163,10 +153,19 @@ export default function Budget() {
     }
   };
 
+  const handleDeleteBudgetLimit = async (id: number) => {
+    if (!window.confirm("Remove this budget limit?")) return;
+    try {
+      await deleteBudget(id);
+      fetchData();
+    } catch (error) {
+      console.error("Failed to delete budget limit:", error);
+    }
+  };
+
   const filteredCategories = categories.filter((c) => c.type === txForm.type);
   const expenseCategories = categories.filter((c) => c.type === "expense");
 
-  // chart data
   const cashFlowData = [
     { name: "Income", value: summary.income },
     { name: "Expenses", value: summary.expenses },
@@ -194,6 +193,7 @@ export default function Budget() {
         {} as Record<string, { name: string; value: number }>,
       ),
   );
+
   const EXPENSE_COLORS = [
     "#38bdf8",
     "#a855f7",
@@ -323,7 +323,6 @@ export default function Budget() {
             </form>
           </div>
 
-          {/* Set Budget Limit Form */}
           <div className="budget-panel">
             <div className="panel-head">
               <h3>Set Category Budget Limit</h3>
@@ -370,7 +369,11 @@ export default function Budget() {
               <button
                 type="submit"
                 className="budget-btn"
-                style={{ marginTop: "12px" }}
+                style={{
+                  marginTop: "12px",
+                  background: "var(--primary)",
+                  color: "#fff",
+                }}
               >
                 Save Limit
               </button>
@@ -379,7 +382,6 @@ export default function Budget() {
         </section>
 
         <section className="budget-content-grid">
-          {/* Cash Flow Chart */}
           <div className="budget-panel">
             <div className="panel-head">
               <h3>Cash Flow</h3>
@@ -422,7 +424,6 @@ export default function Budget() {
             </div>
           </div>
 
-          {/* Expense Breakdown Chart */}
           <div className="budget-panel">
             <div className="panel-head">
               <h3>Expense Breakdown</h3>
@@ -467,7 +468,6 @@ export default function Budget() {
         </section>
 
         <section className="budget-content-grid">
-          {/* Spend vs Limits Status */}
           <div className="budget-panel">
             <div className="panel-head">
               <h3>Spend vs. Limits</h3>
@@ -549,21 +549,38 @@ export default function Budget() {
                           </span>
                         )}
                       </div>
-                      <span
+                      <div
                         style={{
-                          color:
-                            stat.status === "exceeded"
-                              ? "var(--expense-color)"
-                              : stat.status === "warning"
-                                ? "#d97706"
-                                : "var(--text)",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
                         }}
                       >
-                        £{stat.spent.toFixed(2)} / £
-                        {stat.budget.amount.toFixed(2)}
-                      </span>
+                        <span
+                          style={{
+                            color:
+                              stat.status === "exceeded"
+                                ? "var(--expense-color)"
+                                : stat.status === "warning"
+                                  ? "#d97706"
+                                  : "var(--text)",
+                          }}
+                        >
+                          £{stat.spent.toFixed(2)} / £
+                          {stat.budget.amount.toFixed(2)}
+                        </span>
+                        <button
+                          onClick={() =>
+                            handleDeleteBudgetLimit(stat.budget.id)
+                          }
+                          className="table-btn delete-btn"
+                          title="Remove Limit"
+                          style={{ padding: "4px 8px", lineHeight: 1 }}
+                        >
+                          ✕
+                        </button>
+                      </div>
                     </div>
-
                     <div
                       style={{
                         width: "100%",
@@ -604,7 +621,6 @@ export default function Budget() {
             </div>
           </div>
 
-          {/* Transactions Table */}
           <div
             className="budget-panel transaction-panel"
             style={{ marginBottom: 0 }}
@@ -612,7 +628,6 @@ export default function Budget() {
             <div className="panel-head">
               <h3>Recent Transactions</h3>
             </div>
-
             <div className="transaction-table-wrap">
               {loading ? (
                 <p
