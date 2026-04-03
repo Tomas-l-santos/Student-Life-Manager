@@ -112,6 +112,15 @@ export async function setBudgetLimit(data: {
   if (!res.ok) throw new Error(result.error || "Failed to set budget limit");
   return result;
 }
+export async function deleteBudget(id: number) {
+  const res = await fetch(`${BASE_URL}/api/budgets/${id}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Failed to delete budget limit");
+  return result;
+}
 // modules 
 
 export async function getModules() {
@@ -181,13 +190,17 @@ export async function addDeadline(data: {
   module_name: string;
   due_date: string;
   priority: string;
+  status?: string; 
+  notes?: string;  
 }) {
   const res = await fetch(`${BASE_URL}/api/deadlines`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(data),
   });
-  return res.json();
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Failed to add deadline");
+  return result;
 }
 
 export async function updateDeadline(id: number, updates: object) {
@@ -196,7 +209,9 @@ export async function updateDeadline(id: number, updates: object) {
     headers: authHeaders(),
     body: JSON.stringify(updates),
   });
-  return res.json();
+  const result = await res.json();
+  if (!res.ok) throw new Error(result.error || "Failed to update deadline");
+  return result;
 }
 
 export async function deleteDeadline(id: number) {
