@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sidebar, Topbar } from "./dashboard";
 import { logout, getUserEmail, getUsername } from "../../services/storage";
+import { deleteAccount } from "../../services/api";
 import "../../styles/dashboard-css/account&security.css";
 
 export default function Account() {
@@ -23,14 +24,20 @@ export default function Account() {
     navigate("/forgot-password");
   };
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete your account and all stored data? This action cannot be undone."
     );
 
     if (confirmDelete) {
-      logout();
-      navigate("/");
+      try {
+        await deleteAccount(); // Tell the backend to wipe the JSON files
+        logout(); // Clear the browser session
+        navigate("/"); // Go back to login
+      } catch (error: any) {
+        console.error("Failed to delete account:", error);
+        alert(error.message || "Failed to delete account.");
+      }
     }
   };
 
