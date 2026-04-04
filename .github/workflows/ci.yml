@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          cd Backend
+          pip install -r requirements.txt
+
+      - name: Install dev tools
+        run: pip install flake8
+
+      - name: Check syntax 
+        run: |
+          cd Backend
+          python -m py_compile $(git ls-files '*.py')
+
+      - name: Lint with flake8
+        run: |
+          cd Backend
+          python -m flake8 .
+
+  frontend:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          cd Frontend
+          npm install
+
+      - name: TypeScript type check
+        run: |
+          cd Frontend
+          npx tsc --noEmit
+
+      - name: Build
+        run: |
+          cd Frontend
+          npm run build
+
+      - name: Lint with ESLint
+        run: |
+          cd Frontend
+          npm run lint

@@ -30,7 +30,7 @@ def add_transaction(current_user_email, current_user_id):
             category_id=data["category_id"],
             amount=data["amount"],
             description=data["description"],
-            transaction_date=data["transaction_date"]
+            transaction_date=data["transaction_date"],
         )
         return jsonify(t), 201
     except Exception as e:
@@ -59,11 +59,11 @@ def create_budget(current_user_email, current_user_id):
     data = request.json
     try:
         b = budget_service.create_budget(
-            user_id=current_user_id,   
+            user_id=current_user_id,  # ← from token, not request body
             category_id=data["category_id"],
             amount=data["amount"],
             month=data["month"],
-            year=data["year"]
+            year=data["year"],
         )
         return jsonify(b), 201
     except Exception as e:
@@ -75,7 +75,12 @@ def get_budgets(current_user_email, current_user_id):
     month = request.args.get("month", type=int)
     year = request.args.get("year", type=int)
     try:
-        return jsonify(budget_service.get_user_budgets(current_user_id, month=month, year=year)), 200
+        return (
+            jsonify(
+                budget_service.get_user_budgets(current_user_id, month=month, year=year)
+            ),
+            200,
+        )
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
@@ -85,9 +90,17 @@ def get_budget_status(current_user_email, current_user_id):
     month = request.args.get("month", type=int)
     year = request.args.get("year", type=int)
     try:
-        return jsonify(budget_service.get_budget_status(current_user_id, month=month, year=year)), 200
+        return (
+            jsonify(
+                budget_service.get_budget_status(
+                    current_user_id, month=month, year=year
+                )
+            ),
+            200,
+        )
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
 @app.route("/api/budgets/<int:budget_id>", methods=["DELETE"])
 @token_required
 def delete_budget(current_user_email, current_user_id, budget_id):
@@ -103,18 +116,19 @@ def get_categories():
     result = budget_service.get_all_categories(category_type=cat_type)
     return jsonify(result), 200
 
-# Accademic routes 
-
+# Accademic routes
 @app.route("/api/modules", methods=["GET"])
 @token_required
 def get_modules(current_user_email, current_user_id):
     try:
         modules = academics_service.get_user_modules(current_user_email)
-        
+
         for module in modules:
-            assessments = academics_service.get_module_assessments(module["id"], current_user_email)
+            assessments = academics_service.get_module_assessments(
+                module["id"], current_user_email
+            )
             module["assessments"] = assessments
-            
+
         return jsonify(modules), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
@@ -125,13 +139,13 @@ def create_module(current_user_email, current_user_id):
     data = request.json
     try:
         new_module = academics_service.create_module(
-            user_email=current_user_email, # Secure identity
-            name=data.get('name'),
-            code=data.get('code'),
-            credits=data.get('credits'),
-            year_of_study=data.get('year_of_study'),
-            academic_year=data.get('academic_year'),
-            deadline=data.get('deadline', "")
+            user_email=current_user_email,  # Secure identity
+            name=data.get("name"),
+            code=data.get("code"),
+            credits=data.get("credits"),
+            year_of_study=data.get("year_of_study"),
+            academic_year=data.get("academic_year"),
+            deadline=data.get("deadline", ""),
         )
         return jsonify(new_module), 201
     except Exception as e:
@@ -155,13 +169,13 @@ def add_assessment(current_user_email, current_user_id):
     try:
         new_assessment = academics_service.create_assessment(
             user_email=current_user_email,
-            module_id=int(data.get('module_id')),
-            name=data.get('name'),
-            assessment_type=data.get('assessment_type'),
-            score=data.get('score'),
-            max_score=data.get('max_score'),
-            weight=data.get('weight'),
-            date=data.get('date')
+            module_id=int(data.get("module_id")),
+            name=data.get("name"),
+            assessment_type=data.get("assessment_type"),
+            score=data.get("score"),
+            max_score=data.get("max_score"),
+            weight=data.get("weight"),
+            date=data.get("date"),
         )
         return jsonify(new_assessment), 201
     except Exception as e:
@@ -194,7 +208,14 @@ def get_deadlines(current_user_email, current_user_id):
     if completed is not None:
         completed = completed.lower() == "true"
     try:
-        return jsonify(deadline_service.get_user_deadlines(current_user_id, completed=completed)), 200
+        return (
+            jsonify(
+                deadline_service.get_user_deadlines(
+                    current_user_id, completed=completed
+                )
+            ),
+            200,
+        )
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
@@ -230,8 +251,8 @@ def add_timetable_entry(current_user_email, current_user_id):
             day=data["day"],
             start_time=data["start_time"],
             end_time=data["end_time"],
-            start_date=data.get("start_date"),  
-            end_date=data.get("end_date")       
+            start_date=data.get("start_date"),  # Added extraction
+            end_date=data.get("end_date"),  # Added extraction
         )
         return jsonify(e), 201
     except Exception as e:
@@ -242,7 +263,10 @@ def add_timetable_entry(current_user_email, current_user_id):
 def get_timetable(current_user_email, current_user_id):
     day = request.args.get("day")
     try:
-        return jsonify(timetable_service.get_user_timetable(current_user_id, day=day)), 200
+        return (
+            jsonify(timetable_service.get_user_timetable(current_user_id, day=day)),
+            200,
+        )
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
@@ -263,7 +287,6 @@ def delete_timetable_entry(current_user_email, current_user_id, entry_id):
         return jsonify({"message": "Deleted"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-        
 
 if __name__ == "__main__":
     app.run(debug=True)

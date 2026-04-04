@@ -254,7 +254,7 @@ export default function Tasks() {
         <section className="tasks-toolbar">
           <div className="tasks-heading">
             <h2>Tasks Board</h2>
-            <p>Organise tasks by due date and priority.</p>
+            <p>Organise tasks by status, due date, priority and linked module.</p>
           </div>
 
           <div className="tasks-toolbar-actions">
@@ -325,7 +325,7 @@ export default function Tasks() {
                     className="editor-notes-area full-bleed-textarea"
                     value={selectedTask.notes}
                     onChange={handleUpdateNotes}
-                    placeholder="Start..."
+                    placeholder="Start typing your notes here. Everything saves automatically..."
                   ></textarea>
                 </div>
               ) : (

@@ -79,7 +79,11 @@ class DeadlineService:
 
     def delete_deadline(self, deadline_id, user_id):
         deadlines = self.storage.read_all()
-        filtered = [d for d in deadlines if not (d["id"] == deadline_id and d["user_id"] == user_id)]
+        filtered = [
+            d
+            for d in deadlines
+            if not (d["id"] == deadline_id and d["user_id"] == user_id)
+        ]
         if len(filtered) == len(deadlines):
             raise ValueError("Deadline not found")
         self.storage.overwrite(filtered)

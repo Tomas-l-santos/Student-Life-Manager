@@ -1,13 +1,25 @@
 from datetime import datetime
 
 class Deadline:
-    def __init__(self, id, user_id, module_name, title, due_date, priority="normal", completed=False, status="To-Do", notes="", created_at=None):
+    def __init__(
+        self,
+        id,
+        user_id,
+        module_name,
+        title,
+        due_date,
+        priority="normal",
+        completed=False,
+        status="To-Do",
+        notes="",
+        created_at=None,
+    ):
         self.id = id
         self.user_id = user_id
         self.module_name = module_name
         self.title = title
-        self.due_date = due_date          
-        self.priority = priority          
+        self.due_date = due_date  # "YYYY-MM-DD"
+        self.priority = priority  # "high", "normal", "low"
         self.completed = completed
         self.status = status              
         self.notes = notes                
@@ -24,7 +36,7 @@ class Deadline:
             "completed": self.completed,
             "status": self.status,
             "notes": self.notes,
-            "created_at": self.created_at
+            "created_at": self.created_at,
         }
 
     @staticmethod
@@ -39,5 +51,5 @@ class Deadline:
             completed=data.get("completed", False),
             status=data.get("status", "To-Do"),
             notes=data.get("notes", ""),
-            created_at=data.get("created_at")
+            created_at=data.get("created_at"),
         )

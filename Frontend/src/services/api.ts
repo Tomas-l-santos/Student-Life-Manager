@@ -7,8 +7,8 @@ function authHeaders() {
     Authorization: `Bearer ${token}`,
   };
 }
-// Authentication
 
+// Authentication
 export async function login(email: string, password: string) {
   const res = await fetch(`${BASE_URL}/api/auth/login`, {
     method: "POST",
@@ -51,7 +51,6 @@ export async function resetPassword(token: string, new_password: string, email: 
 }
 
 // Budget
-
 export async function getTransactions() {
   const res = await fetch(`${BASE_URL}/api/transactions`, {
     headers: authHeaders(),
@@ -74,20 +73,18 @@ export async function addTransaction(data: {
 }
 
 export async function getCategories(type?: "income" | "expense") {
-  const url = type
-    ? `${BASE_URL}/api/categories?type=${type}`
-    : `${BASE_URL}/api/categories`;
+  const url = type ? `${BASE_URL}/api/categories?type=${type}` : `${BASE_URL}/api/categories`;
   const res = await fetch(url, { headers: authHeaders() });
   return res.json();
 }
 
 export async function getBudgetStatus(month: number, year: number) {
-  const res = await fetch(
-    `${BASE_URL}/api/budgets/status?month=${month}&year=${year}`,
-    { headers: authHeaders() }
-  );
+  const res = await fetch(`${BASE_URL}/api/budgets/status?month=${month}&year=${year}`, {
+    headers: authHeaders(),
+  });
   return res.json();
 }
+
 export async function deleteTransaction(id: string | number) {
   const res = await fetch(`${BASE_URL}/api/transactions/${id}`, {
     method: "DELETE",
@@ -97,6 +94,7 @@ export async function deleteTransaction(id: string | number) {
   if (!res.ok) throw new Error(result.error || "Failed to delete transaction");
   return result;
 }
+
 export async function setBudgetLimit(data: {
   category_id: number;
   amount: number;
@@ -112,6 +110,7 @@ export async function setBudgetLimit(data: {
   if (!res.ok) throw new Error(result.error || "Failed to set budget limit");
   return result;
 }
+
 export async function deleteBudget(id: number) {
   const res = await fetch(`${BASE_URL}/api/budgets/${id}`, {
     method: "DELETE",
@@ -121,8 +120,8 @@ export async function deleteBudget(id: number) {
   if (!res.ok) throw new Error(result.error || "Failed to delete budget limit");
   return result;
 }
-// modules 
 
+// modules 
 export async function getModules() {
   const res = await fetch(`${BASE_URL}/api/modules`, {
     headers: authHeaders(),

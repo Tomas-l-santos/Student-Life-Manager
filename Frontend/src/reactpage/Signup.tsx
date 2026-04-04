@@ -77,9 +77,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             >
               Welcome Back!
             </h3>
-            <p style={{ color: "#666", fontSize: "1rem" }}>
-              Taking you to your dashboard...
-            </p>
+            <p style={{ color: "#666", fontSize: "1rem" }}>Taking you to your dashboard...</p>
           </div>
         ) : (
           <form onSubmit={handleLogin}>
@@ -127,9 +125,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Password
               </label>
               <input
@@ -283,9 +279,7 @@ export function SignupModal({
               style={{ width: "60px", marginBottom: "15px" }}
             />
             <h2 style={{ marginBottom: "5px" }}>Welcome to SLM</h2>
-            <p
-              style={{ color: "#333", marginBottom: "25px", fontSize: "16px" }}
-            >
+            <p style={{ color: "#333", marginBottom: "25px", fontSize: "16px" }}>
               Create your account
             </p>
 
@@ -307,9 +301,7 @@ export function SignupModal({
             )}
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Username
               </label>
               <input
@@ -345,9 +337,7 @@ export function SignupModal({
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Password
               </label>
               <input
@@ -370,15 +360,13 @@ export function SignupModal({
                   marginLeft: "2px",
                 }}
               >
-                Passwords should be 8 characters, using upper/lowercase letters,
-                numbers and symbols.
+                Passwords should be 8 characters, using upper/lowercase letters, numbers and
+                symbols.
               </div>
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Birthdate
               </label>
               <input

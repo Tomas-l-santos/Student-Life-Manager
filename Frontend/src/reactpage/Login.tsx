@@ -38,17 +38,13 @@ function Login() {
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">
-            Your ultimate <span className="hero-accent">student life</span>{" "}
-            manager.
+            Your ultimate <span className="hero-accent">student life</span> manager.
           </h1>
           <p className="hero-subtitle">
-            Organize your timetable, track your finances, and stay on top of
-            your coursework — all in one seamless dashboard.
+            Organize your timetable, track your finances, and stay on top of your coursework — all
+            in one seamless dashboard.
           </p>
-          <button
-            className="btn-red hero-cta"
-            onClick={() => setIsSignUpOpen(true)}
-          >
+          <button className="btn-red hero-cta" onClick={() => setIsSignUpOpen(true)}>
             Start for free
           </button>
         </div>
@@ -71,12 +67,10 @@ function Login() {
       </section>
 
       <div className="features-intro">
-        <h2 className="features-intro__title">
-          Bring your student life together
-        </h2>
+        <h2 className="features-intro__title">Bring your student life together</h2>
         <p className="features-intro__sub">
-          Student Life gives you the tools to stay organised, save money, and
-          never fall behind on coursework.
+          Student Life gives you the tools to stay organised, save money, and never fall behind on
+          coursework.
         </p>
       </div>
 
@@ -91,13 +85,10 @@ function Login() {
             Never miss a lecture again
           </h2>
           <p className="feature-text__body">
-            Sync your classes, deadlines, and assignments in one clean
-            timetable. Get ahead, not stressed.
+            Sync your classes, deadlines, and assignments in one clean timetable. Get ahead, not
+            stressed.
           </p>
-          <button
-            className="btn-feature btn-feature--red"
-            onClick={() => setIsSignUpOpen(true)}
-          >
+          <button className="btn-feature btn-feature--red" onClick={() => setIsSignUpOpen(true)}>
             Join Student Life
           </button>
         </div>
@@ -109,13 +100,10 @@ function Login() {
             Take control of your money
           </h2>
           <p className="feature-text__body">
-            Track spending, manage your student loan, and hit your savings goals
-            without the spreadsheet headache.
+            Track spending, manage your student loan, and hit your savings goals without the
+            spreadsheet headache.
           </p>
-          <button
-            className="btn-feature btn-feature--teal"
-            onClick={() => setIsSignUpOpen(true)}
-          >
+          <button className="btn-feature btn-feature--teal" onClick={() => setIsSignUpOpen(true)}>
             Join Student Life
           </button>
         </div>
