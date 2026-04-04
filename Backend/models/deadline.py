@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 class Deadline:
     def __init__(
         self,
@@ -11,6 +10,8 @@ class Deadline:
         due_date,
         priority="normal",
         completed=False,
+        status="To-Do",
+        notes="",
         created_at=None,
     ):
         self.id = id
@@ -20,6 +21,8 @@ class Deadline:
         self.due_date = due_date  # "YYYY-MM-DD"
         self.priority = priority  # "high", "normal", "low"
         self.completed = completed
+        self.status = status              
+        self.notes = notes                
         self.created_at = created_at or datetime.now().isoformat()
 
     def to_dict(self):
@@ -31,6 +34,8 @@ class Deadline:
             "due_date": self.due_date,
             "priority": self.priority,
             "completed": self.completed,
+            "status": self.status,
+            "notes": self.notes,
             "created_at": self.created_at,
         }
 
@@ -44,5 +49,7 @@ class Deadline:
             due_date=data["due_date"],
             priority=data.get("priority", "normal"),
             completed=data.get("completed", False),
+            status=data.get("status", "To-Do"),
+            notes=data.get("notes", ""),
             created_at=data.get("created_at"),
         )

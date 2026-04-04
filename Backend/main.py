@@ -20,7 +20,6 @@ academics_service = AcademicsService()
 deadline_service = DeadlineService()
 timetable_service = TimetableService()
 
-
 @app.route("/api/transactions", methods=["POST"])
 @token_required
 def add_transaction(current_user_email, current_user_id):
@@ -37,7 +36,6 @@ def add_transaction(current_user_email, current_user_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-
 @app.route("/api/transactions", methods=["GET"])
 @token_required
 def get_transactions(current_user_email, current_user_id):
@@ -45,7 +43,6 @@ def get_transactions(current_user_email, current_user_id):
         return jsonify(budget_service.get_user_transactions(current_user_id)), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 @app.route("/api/transactions/<int:transaction_id>", methods=["DELETE"])
 @token_required
@@ -55,7 +52,6 @@ def remove_transaction(current_user_email, current_user_id, transaction_id):
         return jsonify({"success": True}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 @app.route("/api/budgets", methods=["POST"])
 @token_required
@@ -73,7 +69,6 @@ def create_budget(current_user_email, current_user_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-
 @app.route("/api/budgets", methods=["GET"])
 @token_required
 def get_budgets(current_user_email, current_user_id):
@@ -88,7 +83,6 @@ def get_budgets(current_user_email, current_user_id):
         )
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 @app.route("/api/budgets/status", methods=["GET"])
 @token_required
@@ -107,6 +101,14 @@ def get_budget_status(current_user_email, current_user_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+@app.route("/api/budgets/<int:budget_id>", methods=["DELETE"])
+@token_required
+def delete_budget(current_user_email, current_user_id, budget_id):
+    try:
+        budget_service.delete_budget(budget_id, current_user_id)
+        return jsonify({"success": True}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
 @app.route("/api/categories", methods=["GET"])
 def get_categories():
@@ -114,10 +116,7 @@ def get_categories():
     result = budget_service.get_all_categories(category_type=cat_type)
     return jsonify(result), 200
 
-
 # Accademic routes
-
-
 @app.route("/api/modules", methods=["GET"])
 @token_required
 def get_modules(current_user_email, current_user_id):
@@ -133,7 +132,6 @@ def get_modules(current_user_email, current_user_id):
         return jsonify(modules), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 @app.route("/api/modules", methods=["POST"])
 @token_required
@@ -154,7 +152,6 @@ def create_module(current_user_email, current_user_id):
         print(f"Backend Error creating module: {e}")
         return jsonify({"error": str(e)}), 400
 
-
 @app.route("/api/modules/<int:module_id>", methods=["DELETE"])
 @token_required
 def delete_module(current_user_email, current_user_id, module_id):
@@ -164,7 +161,6 @@ def delete_module(current_user_email, current_user_id, module_id):
     except Exception as e:
         print(f"Backend Error deleting module: {e}")
         return jsonify({"error": str(e)}), 400
-
 
 @app.route("/api/assessments", methods=["POST"])
 @token_required
@@ -186,7 +182,6 @@ def add_assessment(current_user_email, current_user_id):
         print(f"Backend Error creating assessment: {e}")
         return jsonify({"error": str(e)}), 400
 
-
 # Deadline Routes
 @app.route("/api/deadlines", methods=["POST"])
 @token_required
@@ -199,11 +194,12 @@ def add_deadline(current_user_email, current_user_id):
             title=data["title"],
             due_date=data["due_date"],
             priority=data.get("priority", "normal"),
+            status=data.get("status", "To-Do"), 
+            notes=data.get("notes", "")         
         )
         return jsonify(d), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 @app.route("/api/deadlines", methods=["GET"])
 @token_required
@@ -223,7 +219,6 @@ def get_deadlines(current_user_email, current_user_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-
 @app.route("/api/deadlines/<int:deadline_id>", methods=["PUT"])
 @token_required
 def update_deadline(current_user_email, current_user_id, deadline_id):
@@ -233,7 +228,6 @@ def update_deadline(current_user_email, current_user_id, deadline_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-
 @app.route("/api/deadlines/<int:deadline_id>", methods=["DELETE"])
 @token_required
 def delete_deadline(current_user_email, current_user_id, deadline_id):
@@ -242,7 +236,6 @@ def delete_deadline(current_user_email, current_user_id, deadline_id):
         return jsonify({"message": "Deleted"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 # Timetable Routes
 @app.route("/api/timetable", methods=["POST"])
@@ -265,7 +258,6 @@ def add_timetable_entry(current_user_email, current_user_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-
 @app.route("/api/timetable", methods=["GET"])
 @token_required
 def get_timetable(current_user_email, current_user_id):
@@ -278,7 +270,6 @@ def get_timetable(current_user_email, current_user_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-
 @app.route("/api/timetable/<int:entry_id>", methods=["PUT"])
 @token_required
 def update_timetable_entry(current_user_email, current_user_id, entry_id):
@@ -288,7 +279,6 @@ def update_timetable_entry(current_user_email, current_user_id, entry_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
-
 @app.route("/api/timetable/<int:entry_id>", methods=["DELETE"])
 @token_required
 def delete_timetable_entry(current_user_email, current_user_id, entry_id):
@@ -297,7 +287,6 @@ def delete_timetable_entry(current_user_email, current_user_id, entry_id):
         return jsonify({"message": "Deleted"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
-
 
 if __name__ == "__main__":
     app.run(debug=True)
