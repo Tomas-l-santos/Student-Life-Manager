@@ -38,11 +38,11 @@ function Login() {
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">
-            Your ultimate <span className="hero-accent">student life</span> manager.
+            Your ultimate <span className="hero-accent">student life</span> manager
           </h1>
           <p className="hero-subtitle">
-            Organize your timetable, track your finances, and stay on top of your coursework — all
-            in one seamless dashboard.
+            Organize your timetable, track your finances, and stay on top of your coursework all in
+            one seamless dashboard.
           </p>
           <button className="btn-red hero-cta" onClick={() => setIsSignUpOpen(true)}>
             Start for free
