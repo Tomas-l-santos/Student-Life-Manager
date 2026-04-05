@@ -142,7 +142,7 @@ class AuthService:
     def generate_reset_token(self, email):
         """Generate a 6-digit OTP for a user"""
         email = email.strip()
-            self.validate_email(email)
+        self.validate_email(email)
 
         # Check if user exists
         users = self.storage.read_all()
