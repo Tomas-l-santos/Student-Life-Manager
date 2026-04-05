@@ -46,19 +46,13 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
       }, 1500);
     } catch (error) {
       console.error("Critical Fetch Error:", error);
-      setErrorMessage(
-        "Server offline. Ensure your Flask backend is running on port 5000.",
-      );
+      setErrorMessage("Server offline. Ensure your Flask backend is running on port 5000.");
       setIsLoading(false);
     }
   };
 
   return (
-    <div
-      className="modal-overlay"
-      style={{ display: "flex" }}
-      onClick={onClose}
-    >
+    <div className="modal-overlay" style={{ display: "flex" }} onClick={onClose}>
       <div className="login-card" onClick={(e) => e.stopPropagation()}>
         <button type="button" className="close-btn" onClick={onClose}>
           ✕
@@ -106,11 +100,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             )}
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
-                Email
-              </label>
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>Email</label>
               <input
                 type="email"
                 placeholder="Email"
@@ -138,19 +128,11 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
                   setErrorMessage("");
                 }}
                 disabled={isLoading}
+                style={{ marginBottom: "25px" }}
               />
             </div>
 
-            <div className="checkbox-row">
-              <input type="checkbox" id="rem" />
-              <label htmlFor="rem">Remember me</label>
-            </div>
-
-            <button
-              type="submit"
-              className="btn-continue-modal"
-              disabled={isLoading}
-            >
+            <button type="submit" className="btn-continue-modal" disabled={isLoading}>
               {isLoading ? "Logging in..." : "Log in"}
             </button>
 
@@ -219,9 +201,7 @@ export function SignupModal({
       const data = await response.json();
 
       if (!response.ok) {
-        setErrorMessage(
-          data.error || "Registration failed. Email might be in use.",
-        );
+        setErrorMessage(data.error || "Registration failed. Email might be in use.");
         setIsLoading(false);
         return;
       }
@@ -235,19 +215,13 @@ export function SignupModal({
       }, 1500);
     } catch (error) {
       console.error("Critical Fetch Error:", error);
-      setErrorMessage(
-        "Server offline. Ensure your Flask backend is running on port 5000.",
-      );
+      setErrorMessage("Server offline. Ensure your Flask backend is running on port 5000.");
       setIsLoading(false);
     }
   };
 
   return (
-    <div
-      className="modal-overlay"
-      style={{ display: "flex" }}
-      onClick={onClose}
-    >
+    <div className="modal-overlay" style={{ display: "flex" }} onClick={onClose}>
       <div className="login-card" onClick={(e) => e.stopPropagation()}>
         <button type="button" className="close-btn" onClick={onClose}>
           ✕
@@ -267,8 +241,7 @@ export function SignupModal({
               Account Created!
             </h3>
             <p style={{ color: "#666", fontSize: "1rem" }}>
-              Welcome to SLM, <strong>{username}</strong>.<br /> Preparing your
-              dashboard...
+              Welcome to SLM, <strong>{username}</strong>.<br /> Preparing your dashboard...
             </p>
           </div>
         ) : (
@@ -318,11 +291,7 @@ export function SignupModal({
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label
-                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
-              >
-                Email
-              </label>
+              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>Email</label>
               <input
                 type="email"
                 placeholder="Email"

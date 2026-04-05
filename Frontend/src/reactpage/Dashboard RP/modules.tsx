@@ -85,6 +85,30 @@ export default function Modules() {
     });
 
     const currentAverage = activeModules.length > 0 ? totalAverages / activeModules.length : 0;
+
+    // grading
+    let currentClassification = "No Grades Logged";
+    let classColor = "var(--tracker-muted)";
+
+    if (activeModules.length > 0) {
+      if (currentAverage >= 70) {
+        currentClassification = "1st Class (Distinction)";
+        classColor = "#4ade80"; // Green
+      } else if (currentAverage >= 60) {
+        currentClassification = "2:1 (Upper Second)";
+        classColor = "#38bdf8"; // Blue
+      } else if (currentAverage >= 50) {
+        currentClassification = "2:2 (Lower Second)";
+        classColor = "#f59e0b"; // Orange
+      } else if (currentAverage >= 40) {
+        currentClassification = "3rd Class (Pass)";
+        classColor = "#f472b6"; // Pink
+      } else {
+        currentClassification = "Fail";
+        classColor = "#ef4444"; // Red
+      }
+    }
+
     const remainingModules = totalTargetModules - activeModules.length;
     const distinctionTarget = 70 * totalTargetModules;
     const pointsNeeded = distinctionTarget - totalAverages;
@@ -95,7 +119,9 @@ export default function Modules() {
     if (remainingModules > 0) {
       const neededAverage = pointsNeeded / remainingModules;
       neededAverageMessage =
-        neededAverage > 100 ? "Distinction out of reach" : `${neededAverage.toFixed(1)}% needed`;
+        neededAverage > 100
+          ? "1st Class out of reach"
+          : `${neededAverage.toFixed(1)}% needed for a 1st`;
       chartFill = (currentAverage / 70) * 100;
     } else {
       neededAverageMessage = "Modules Complete";
@@ -104,6 +130,8 @@ export default function Modules() {
 
     return {
       currentAverage,
+      currentClassification,
+      classColor,
       remainingModules,
       neededAverageMessage,
       chartFill: Math.min(chartFill, 100),
@@ -129,7 +157,6 @@ export default function Modules() {
       setModules([...modules, { ...result, assessments: [] }]);
       setFormData({ ...formData, name: "", code: "", deadline: "" });
     } catch (err: any) {
-      // ---> THE FIX: NO MORE HARDCODED STRINGS <---
       alert(`Backend Error: ${err.message}`);
     }
   };
@@ -186,8 +213,13 @@ export default function Modules() {
                 <div className="tracker-inner-gradient">
                   <div className="card-header tracker-header">
                     <div>
-                      <h2>Distinction Calculator</h2>
-                      <p>Target: 70%+ Average Grade</p>
+                      <h2>Degree Tracker</h2>
+                      <p>
+                        Level:{" "}
+                        <strong style={{ color: stats.classColor, fontSize: "14px" }}>
+                          {stats.currentClassification}
+                        </strong>
+                      </p>
                     </div>
                     <div className="target-select">
                       <label>Total modules for year</label>

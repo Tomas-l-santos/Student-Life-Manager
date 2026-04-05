@@ -33,12 +33,5 @@
     "username": "Ameera",
     "password_hash": "$2b$12$otRfuSHJbi5LB.YtY.acl.cp6aleN302VH8vzoF5jzdwrksHSLdzC",
     "birthdate": "2005-02-10"
-  },
-  {
-    "user_id": "92721b7b-bf50-4f1b-9642-88e2dffdf252",
-    "email": "d@gmail.com",
-    "username": "Tomas",
-    "password_hash": "$2b$12$BiJ7XjWoH7I2FXE5U6eyvuIMUmyNWR5nhDfgihZxK0wSdSMrR/XHK",
-    "birthdate": "2004-02-12"
   }
 ]
