@@ -1,4 +1,4 @@
-/* 2. DARK THEME  */
+/* DARK THEME  */
 [data-theme="dark"] {
   --bg: #000000;
   --panel: #121212;
@@ -22,7 +22,7 @@
   --topbar-text: #ffffff;
 }
 
-/* NEW LIGHT THEME ("Front Page" Ultra-Clean & Red) */
+/* Light */
 [data-theme="new-light"] {
   --bg: #ffffff;
   --panel: #ffffff;
@@ -44,7 +44,6 @@
   --event-cyan: #e60023; 
   --topbar-text: #111111;
 }
-
 
 .topbar { color: var(--topbar-text, #fff); }
 .topbar .brand h1, .topbar .brand small, .avatar span { color: var(--topbar-text, #fff); }
@@ -87,8 +86,6 @@
 [data-theme="dark"] .icon-action-btn:hover, [data-theme="new-light"] .icon-action-btn:hover { background: var(--panel-2); }
 [data-theme="dark"] .close-btn, [data-theme="new-light"] .close-btn { color: var(--muted); }
 [data-theme="dark"] .close-btn:hover, [data-theme="new-light"] .close-btn:hover { color: var(--text); }
-
-
 
 /* Fix native date picker icon in dark mode */
 [data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }

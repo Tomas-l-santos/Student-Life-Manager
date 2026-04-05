@@ -6,30 +6,24 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorField, setErrorField] = useState<string | null>(null);
 
-  // Restored missing states
-  const [loginErrorMsg, setLoginErrorMsg] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (e: React.MouseEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) {
-      setLoginErrorMsg("Please enter your email.");
-      return setErrorField("email");
-    }
-    if (!password) {
-      setLoginErrorMsg("Please enter your password.");
-      return setErrorField("password");
+    setErrorMessage("");
+
+    if (!email || !password) {
+      setErrorMessage("Please enter both your email and password.");
+      return;
     }
 
-    setErrorField(null);
     setIsLoading(true);
 
     try {
-      // Restored backend connection
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("http://127.0.0.1:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -38,30 +32,35 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
       const data = await response.json();
 
       if (!response.ok) {
-        setLoginErrorMsg(data.error || "Invalid email or password.");
-        setErrorField("password");
+        setErrorMessage(data.error || "Invalid email or password.");
+        setIsLoading(false);
         return;
       }
 
-      // Success state and routing
       saveSession(data.access_token, data.user.email, data.user.username);
       setIsLoggedIn(true);
+
       setTimeout(() => {
         onClose();
         navigate("/dashboard");
-      }, 2000);
+      }, 1500);
     } catch (error) {
-      setLoginErrorMsg("Cannot connect to server.");
-      setErrorField("password");
-    } finally {
+      console.error("Critical Fetch Error:", error);
+      setErrorMessage(
+        "Server offline. Ensure your Flask backend is running on port 5000.",
+      );
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div
+      className="modal-overlay"
+      style={{ display: "flex" }}
+      onClick={onClose}
+    >
       <div className="login-card" onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>
+        <button type="button" className="close-btn" onClick={onClose}>
           ✕
         </button>
 
@@ -81,7 +80,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             <p style={{ color: "#666", fontSize: "1rem" }}>Taking you to your dashboard...</p>
           </div>
         ) : (
-          <>
+          <form onSubmit={handleLogin}>
             <img
               src="/Images/student_life_logo_5.png"
               alt="Logo"
@@ -89,50 +88,57 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             />
             <h2>Welcome to SLM</h2>
 
-            <div style={{ textAlign: "left" }}>
-              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>Email</label>
-              <div className="input-wrapper">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="pint-input"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setErrorField(null);
-                  }}
-                  disabled={isLoading}
-                />
-                {errorField === "email" && (
-                  <div className="custom-error-tooltip">
-                    <span className="tooltip-icon">!</span> {loginErrorMsg}
-                  </div>
-                )}
+            {errorMessage && (
+              <div
+                style={{
+                  background: "#fee2e2",
+                  color: "#b91c1c",
+                  padding: "12px",
+                  borderRadius: "8px",
+                  marginBottom: "20px",
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                  border: "1px solid #fca5a5",
+                }}
+              >
+                ⚠️ {errorMessage}
               </div>
+            )}
+
+            <div style={{ textAlign: "left" }}>
+              <label
+                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder="Email"
+                className="pint-input"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setErrorMessage("");
+                }}
+                disabled={isLoading}
+              />
             </div>
 
             <div style={{ textAlign: "left" }}>
               <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Password
               </label>
-              <div className="input-wrapper">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="pint-input"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setErrorField(null);
-                  }}
-                  disabled={isLoading}
-                />
-                {errorField === "password" && (
-                  <div className="custom-error-tooltip">
-                    <span className="tooltip-icon">!</span> {loginErrorMsg}
-                  </div>
-                )}
-              </div>
+              <input
+                type="password"
+                placeholder="Password"
+                className="pint-input"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setErrorMessage("");
+                }}
+                disabled={isLoading}
+              />
             </div>
 
             <div className="checkbox-row">
@@ -140,9 +146,14 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
               <label htmlFor="rem">Remember me</label>
             </div>
 
-            <button onClick={handleLogin} className="btn-continue-modal" disabled={isLoading}>
+            <button
+              type="submit"
+              className="btn-continue-modal"
+              disabled={isLoading}
+            >
               {isLoading ? "Logging in..." : "Log in"}
             </button>
+
             <Link
               to="/forgot-password"
               onClick={onClose}
@@ -155,7 +166,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             >
               Forgot your password?
             </Link>
-          </>
+          </form>
         )}
       </div>
     </div>
@@ -174,40 +185,32 @@ export function SignupModal({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [birthdate, setBirthdate] = useState("");
-  const [errorField, setErrorField] = useState<string | null>(null);
-  const [passwordErrorMsg, setPasswordErrorMsg] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState("");
   const [isRegistered, setIsRegistered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSignup = async (e: React.MouseEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username) return setErrorField("username");
-    if (!email) return setErrorField("email");
-    if (!password) {
-      setPasswordErrorMsg("Please fill out this field.");
-      return setErrorField("password");
+    setErrorMessage("");
+
+    if (!username || !email || !password || !birthdate) {
+      return setErrorMessage("Please fill out all fields.");
     }
     if (password.length < 8) {
-      setPasswordErrorMsg("Must be at least 8 characters.");
-      return setErrorField("password");
+      return setErrorMessage("Password must be at least 8 characters.");
     }
     if (!/[A-Z]/.test(password)) {
-      setPasswordErrorMsg("Must contain a capital letter.");
-      return setErrorField("password");
+      return setErrorMessage("Password must contain a capital letter.");
     }
     if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      setPasswordErrorMsg("Must contain a special character.");
-      return setErrorField("password");
-    }
-    if (!birthdate) {
-      setPasswordErrorMsg("Please select your birthdate.");
-      return setErrorField("birthdate");
+      return setErrorMessage("Password must contain a special character.");
     }
 
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch("http://127.0.0.1:5000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, username, password, birthdate }),
@@ -216,31 +219,37 @@ export function SignupModal({
       const data = await response.json();
 
       if (!response.ok) {
-        setPasswordErrorMsg(data.error || "Registration failed");
-        setErrorField("password");
+        setErrorMessage(
+          data.error || "Registration failed. Email might be in use.",
+        );
+        setIsLoading(false);
         return;
       }
 
-      setErrorField(null);
       saveSession(data.access_token, data.user.email, data.user.username);
-
       setIsRegistered(true);
+
       setTimeout(() => {
         onClose();
         navigate("/dashboard");
-      }, 2000);
+      }, 1500);
     } catch (error) {
-      setPasswordErrorMsg("Cannot connect to server.");
-      setErrorField("password");
-    } finally {
+      console.error("Critical Fetch Error:", error);
+      setErrorMessage(
+        "Server offline. Ensure your Flask backend is running on port 5000.",
+      );
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div
+      className="modal-overlay"
+      style={{ display: "flex" }}
+      onClick={onClose}
+    >
       <div className="login-card" onClick={(e) => e.stopPropagation()}>
-        <button className="close-btn" onClick={onClose}>
+        <button type="button" className="close-btn" onClick={onClose}>
           ✕
         </button>
 
@@ -258,12 +267,12 @@ export function SignupModal({
               Account Created!
             </h3>
             <p style={{ color: "#666", fontSize: "1rem" }}>
-              Welcome to SLM, <strong>{username}</strong>.<br />
-              Preparing your dashboard...
+              Welcome to SLM, <strong>{username}</strong>.<br /> Preparing your
+              dashboard...
             </p>
           </div>
         ) : (
-          <>
+          <form onSubmit={handleSignup}>
             <img
               src="/Images/student_life_logo_5.png"
               alt="Logo"
@@ -274,75 +283,75 @@ export function SignupModal({
               Create your account
             </p>
 
+            {errorMessage && (
+              <div
+                style={{
+                  background: "#fee2e2",
+                  color: "#b91c1c",
+                  padding: "12px",
+                  borderRadius: "8px",
+                  marginBottom: "20px",
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                  border: "1px solid #fca5a5",
+                }}
+              >
+                ⚠️ {errorMessage}
+              </div>
+            )}
+
             <div style={{ textAlign: "left" }}>
               <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Username
               </label>
-              <div className="input-wrapper">
-                <input
-                  type="text"
-                  placeholder="Choose a username"
-                  className="pint-input"
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                    setErrorField(null);
-                  }}
-                  disabled={isLoading}
-                />
-                {errorField === "username" && (
-                  <div className="custom-error-tooltip">
-                    <span className="tooltip-icon">!</span> Please fill out this field.
-                  </div>
-                )}
-              </div>
+              <input
+                type="text"
+                placeholder="Choose a username"
+                className="pint-input"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  setErrorMessage("");
+                }}
+                disabled={isLoading}
+              />
             </div>
 
             <div style={{ textAlign: "left" }}>
-              <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>Email</label>
-              <div className="input-wrapper">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="pint-input"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setErrorField(null);
-                  }}
-                  disabled={isLoading}
-                />
-                {errorField === "email" && (
-                  <div className="custom-error-tooltip">
-                    <span className="tooltip-icon">!</span> Please fill out this field.
-                  </div>
-                )}
-              </div>
+              <label
+                style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                placeholder="Email"
+                className="pint-input"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setErrorMessage("");
+                }}
+                disabled={isLoading}
+              />
             </div>
 
             <div style={{ textAlign: "left" }}>
               <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Password
               </label>
-              <div className="input-wrapper">
-                <input
-                  type="password"
-                  placeholder="Create a password"
-                  className="pint-input"
-                  style={{ marginBottom: "5px" }}
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    setErrorField(null);
-                  }}
-                  disabled={isLoading}
-                />
-                {errorField === "password" && (
-                  <div className="custom-error-tooltip">
-                    <span className="tooltip-icon">!</span> {passwordErrorMsg}
-                  </div>
-                )}
-              </div>
+              <input
+                type="password"
+                placeholder="Create a password"
+                className="pint-input"
+                style={{ marginBottom: "5px" }}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setErrorMessage("");
+                }}
+                disabled={isLoading}
+              />
               <div
                 style={{
                   fontSize: "12px",
@@ -360,27 +369,20 @@ export function SignupModal({
               <label style={{ fontWeight: "bold", fontSize: "14px", color: "#111" }}>
                 Birthdate
               </label>
-              <div className="input-wrapper">
-                <input
-                  type="date"
-                  className="pint-input"
-                  value={birthdate}
-                  onChange={(e) => {
-                    setBirthdate(e.target.value);
-                    setErrorField(null);
-                  }}
-                  disabled={isLoading}
-                />
-                {errorField === "birthdate" && (
-                  <div className="custom-error-tooltip">
-                    <span className="tooltip-icon">!</span> {passwordErrorMsg}
-                  </div>
-                )}
-              </div>
+              <input
+                type="date"
+                className="pint-input"
+                value={birthdate}
+                onChange={(e) => {
+                  setBirthdate(e.target.value);
+                  setErrorMessage("");
+                }}
+                disabled={isLoading}
+              />
             </div>
 
             <button
-              onClick={handleSignup}
+              type="submit"
               className="btn-continue-modal"
               style={{ marginTop: "10px" }}
               disabled={isLoading}
@@ -391,6 +393,7 @@ export function SignupModal({
             <div style={{ marginTop: "20px", fontSize: "14px", color: "#333" }}>
               Already a member?{" "}
               <button
+                type="button"
                 onClick={() => {
                   onClose();
                   onSwitchToLogin();
@@ -408,7 +411,7 @@ export function SignupModal({
                 Log in
               </button>
             </div>
-          </>
+          </form>
         )}
       </div>
     </div>

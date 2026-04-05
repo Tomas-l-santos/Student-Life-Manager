@@ -2,7 +2,6 @@ from datetime import datetime
 from models.deadline import Deadline
 from storage.storagerepo import JSONStorage
 
-
 class DeadlineService:
     def __init__(self, storage_path="data/deadlines.json"):
         self.storage = JSONStorage(storage_path)
@@ -13,12 +12,10 @@ class DeadlineService:
             return 1
         return max(d["id"] for d in deadlines) + 1
 
-    def add_deadline(self, user_id, module_name, title, due_date, priority="normal"):
-        # Validate priority
+    def add_deadline(self, user_id, module_name, title, due_date, priority="normal", status="To-Do", notes=""):
         if priority not in ("high", "normal", "low"):
             raise ValueError("Priority must be high, normal, or low")
 
-        # Validate date
         try:
             datetime.strptime(due_date, "%Y-%m-%d")
         except ValueError:
@@ -34,6 +31,8 @@ class DeadlineService:
             title=title.strip(),
             due_date=due_date,
             priority=priority,
+            status=status,
+            notes=notes
         )
         self.storage.append(deadline.to_dict())
         return deadline.to_dict()
@@ -42,11 +41,9 @@ class DeadlineService:
         deadlines = self.storage.read_all()
         result = [d for d in deadlines if d["user_id"] == user_id]
 
-        # Optionally filter by completed status
         if completed is not None:
             result = [d for d in result if d["completed"] == completed]
 
-        # Sort by due date soonest first
         result.sort(key=lambda x: x["due_date"])
         return result
 
@@ -70,6 +67,11 @@ class DeadlineService:
                     d["priority"] = updates["priority"]
                 if "completed" in updates:
                     d["completed"] = bool(updates["completed"])
+                if "status" in updates:
+                    d["status"] = updates["status"]
+                if "notes" in updates:
+                    d["notes"] = updates["notes"]
+                    
                 deadlines[i] = d
                 self.storage.overwrite(deadlines)
                 return d
