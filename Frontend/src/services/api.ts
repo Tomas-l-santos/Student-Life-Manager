@@ -49,6 +49,7 @@ export async function resetPassword(token: string, new_password: string, email: 
   });
   return res.json();
 }
+
 export async function deleteAccount() {
   const res = await fetch(`${BASE_URL}/api/auth/delete-account`, {
     method: "DELETE",
@@ -58,6 +59,7 @@ export async function deleteAccount() {
   if (!res.ok) throw new Error(result.error || "Failed to delete account");
   return result;
 }
+
 // Budget
 export async function getTransactions() {
   const res = await fetch(`${BASE_URL}/api/transactions`, {
@@ -129,7 +131,7 @@ export async function deleteBudget(id: number) {
   return result;
 }
 
-// modules 
+// modules
 export async function getModules() {
   const res = await fetch(`${BASE_URL}/api/modules`, {
     headers: authHeaders(),
@@ -197,8 +199,8 @@ export async function addDeadline(data: {
   module_name: string;
   due_date: string;
   priority: string;
-  status?: string; 
-  notes?: string;  
+  status?: string;
+  notes?: string;
 }) {
   const res = await fetch(`${BASE_URL}/api/deadlines`, {
     method: "POST",
