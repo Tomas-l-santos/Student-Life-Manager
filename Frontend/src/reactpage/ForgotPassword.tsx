@@ -34,8 +34,9 @@ export default function ForgotPassword() {
       }
 
       setStep(2);
-    } catch (error: any) {
-      setErrorMsg(error.message || "Cannot connect to server.");
+    } catch (error: unknown) {
+      const err = error as Error;
+      setErrorMsg(err.message || "Cannot connect to server.");
     } finally {
       setIsLoading(false);
     }
@@ -70,8 +71,9 @@ export default function ForgotPassword() {
       setTimeout(() => {
         navigate("/");
       }, 3000);
-    } catch (error: any) {
-      setErrorMsg(error.message || "Cannot connect to server.");
+    } catch (error: unknown) {
+      const err = error as Error;
+      setErrorMsg(err.message || "Cannot connect to server.");
     } finally {
       setIsLoading(false);
     }

@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Sidebar, Topbar } from "./dashboard";
 import "../../styles/dashboard-css/tasks.css";
-import {
-  getDeadlines,
-  addDeadline,
-  updateDeadline,
-  deleteDeadline,
-} from "../../services/api";
+import { getDeadlines, addDeadline, updateDeadline, deleteDeadline } from "../../services/api";
 
 interface Task {
   id: number;
@@ -24,9 +19,7 @@ export default function Tasks() {
   const [loading, setLoading] = useState(true);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [saveStatus, setSaveStatus] = useState<
-    "idle" | "saving" | "saved" | "error"
-  >("idle");
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
 
   const [newTask, setNewTask] = useState<Partial<Task>>({
     title: "",
@@ -72,7 +65,7 @@ export default function Tasks() {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [selectedTask?.notes, selectedTask?.title]);
+  }, [selectedTask]);
 
   const handleOpenTask = (task: Task) => {
     setSelectedTask(task);
@@ -108,11 +101,7 @@ export default function Tasks() {
     }
   };
 
-  const moveTaskStatus = async (
-    e: React.MouseEvent,
-    task: Task,
-    newStatus: Task["status"],
-  ) => {
+  const moveTaskStatus = async (e: React.MouseEvent, task: Task, newStatus: Task["status"]) => {
     e.stopPropagation();
     try {
       const isCompleted = newStatus === "Done";
@@ -184,8 +173,7 @@ export default function Tasks() {
                 >
                   {task.priority === "normal"
                     ? "Medium"
-                    : task.priority.charAt(0).toUpperCase() +
-                      task.priority.slice(1)}
+                    : task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
                 </span>
               </div>
 
@@ -273,9 +261,7 @@ export default function Tasks() {
               className="task-btn secondary-btn"
               onClick={() => {
                 const sorted = [...tasks].sort(
-                  (a, b) =>
-                    new Date(a.due_date).getTime() -
-                    new Date(b.due_date).getTime(),
+                  (a, b) => new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
                 );
                 setTasks(sorted);
               }}
@@ -330,12 +316,8 @@ export default function Tasks() {
                 </div>
               ) : (
                 <div className="editor-empty-state">
-                  <h3 style={{ margin: "0 0 8px 0", color: "var(--text)" }}>
-                    No Task Selected
-                  </h3>
-                  <p style={{ margin: 0 }}>
-                    Select a task from the board to start writing notes.
-                  </p>
+                  <h3 style={{ margin: "0 0 8px 0", color: "var(--text)" }}>No Task Selected</h3>
+                  <p style={{ margin: 0 }}>Select a task from the board to start writing notes.</p>
                 </div>
               )}
             </aside>
@@ -351,10 +333,7 @@ export default function Tasks() {
         <div className="task-modal" onClick={(e) => e.stopPropagation()}>
           <div className="task-modal-header">
             <h3>Add New Task</h3>
-            <button
-              className="close-modal-btn"
-              onClick={() => setIsModalOpen(false)}
-            >
+            <button className="close-modal-btn" onClick={() => setIsModalOpen(false)}>
               &times;
             </button>
           </div>
@@ -366,9 +345,7 @@ export default function Tasks() {
                 type="text"
                 required
                 value={newTask.title}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, title: e.target.value })
-                }
+                onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
               />
             </div>
 
@@ -379,9 +356,7 @@ export default function Tasks() {
                   type="date"
                   required
                   value={newTask.due_date}
-                  onChange={(e) =>
-                    setNewTask({ ...newTask, due_date: e.target.value })
-                  }
+                  onChange={(e) => setNewTask({ ...newTask, due_date: e.target.value })}
                 />
               </div>
               <div className="form-group">
@@ -390,7 +365,7 @@ export default function Tasks() {
                   required
                   value={newTask.priority}
                   onChange={(e) =>
-                    setNewTask({ ...newTask, priority: e.target.value as any })
+                    setNewTask({ ...newTask, priority: e.target.value as Task["priority"] })
                   }
                 >
                   <option value="low">Low</option>
@@ -407,9 +382,7 @@ export default function Tasks() {
                   type="text"
                   placeholder="e.g. Software Engineering"
                   value={newTask.module_name}
-                  onChange={(e) =>
-                    setNewTask({ ...newTask, module_name: e.target.value })
-                  }
+                  onChange={(e) => setNewTask({ ...newTask, module_name: e.target.value })}
                 />
               </div>
               <div className="form-group">
@@ -418,7 +391,7 @@ export default function Tasks() {
                   required
                   value={newTask.status}
                   onChange={(e) =>
-                    setNewTask({ ...newTask, status: e.target.value as any })
+                    setNewTask({ ...newTask, status: e.target.value as Task["status"] })
                   }
                 >
                   <option value="To-Do">To-Do</option>
@@ -434,9 +407,7 @@ export default function Tasks() {
                 rows={4}
                 placeholder="Write details for this task..."
                 value={newTask.notes}
-                onChange={(e) =>
-                  setNewTask({ ...newTask, notes: e.target.value })
-                }
+                onChange={(e) => setNewTask({ ...newTask, notes: e.target.value })}
               ></textarea>
             </div>
 

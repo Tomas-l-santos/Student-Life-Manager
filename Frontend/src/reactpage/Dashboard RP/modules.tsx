@@ -26,7 +26,12 @@ interface Module {
 
 export default function Modules() {
   const [modules, setModules] = useState<Module[]>([]);
-  const [totalTargetModules, setTotalTargetModules] = useState(8);
+
+  const [totalTargetModules, setTotalTargetModules] = useState(() => {
+    const savedTarget = localStorage.getItem("totalTargetModules");
+    return savedTarget ? parseInt(savedTarget, 10) : 8;
+  });
+
   const [loading, setLoading] = useState(true);
 
   // Modal State for Assessment
@@ -86,7 +91,7 @@ export default function Modules() {
 
     const currentAverage = activeModules.length > 0 ? totalAverages / activeModules.length : 0;
 
-    // grading
+    // --- MATCHING THE PYTHON BACKEND GRADING SYSTEM ---
     let currentClassification = "No Grades Logged";
     let classColor = "var(--tracker-muted)";
 
@@ -143,6 +148,12 @@ export default function Modules() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  const handleTargetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newVal = Number(e.target.value);
+    setTotalTargetModules(newVal);
+    localStorage.setItem("totalTargetModules", String(newVal));
+  };
+
   const handleAddModule = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -156,7 +167,8 @@ export default function Modules() {
       });
       setModules([...modules, { ...result, assessments: [] }]);
       setFormData({ ...formData, name: "", code: "", deadline: "" });
-    } catch (err: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       alert(`Backend Error: ${err.message}`);
     }
   };
@@ -183,7 +195,8 @@ export default function Modules() {
       );
       setActiveModuleId(null);
       setAssessmentForm({ ...assessmentForm, score: "" });
-    } catch (err: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       alert(`Backend Error: ${err.message}`);
     }
   };
@@ -193,7 +206,8 @@ export default function Modules() {
     try {
       await deleteModule(id);
       setModules(modules.filter((m) => m.id !== id));
-    } catch (err: any) {
+    } catch (error: unknown) {
+      const err = error as Error;
       alert(`Backend Error: ${err.message}`);
     }
   };
@@ -227,7 +241,7 @@ export default function Modules() {
                         <select
                           id="targetModules"
                           value={totalTargetModules}
-                          onChange={(e) => setTotalTargetModules(Number(e.target.value))}
+                          onChange={handleTargetChange}
                         >
                           {[4, 6, 8, 10].map((val) => (
                             <option key={val} value={val}>

@@ -219,7 +219,7 @@ html, body {
 }
 .pill:hover { background: rgba(255,255,255,0.14); }
 
-.avatar {
+.avatar{
   display:flex;
   align-items:center;
   gap:10px;
@@ -227,20 +227,22 @@ html, body {
   border-radius: 999px;
   background: rgba(255,255,255,0.10);
   border: 1px solid rgba(255,255,255,0.14);
+  transition: opacity 0.2s ease, background 0.2s ease;
 }
-.avatar .dot {
-  width:28px;
-  height:28px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  display:grid;
-  place-items:center;
-  font-weight:700;
-  font-size: 12px;
+
+.avatar:hover {
+  opacity: 0.85;
+  background: rgba(255,255,255,0.15);
 }
-.avatar span {
-  font-size: 13px;
-  opacity:0.95;
+
+[data-theme="dark"] .avatar, [data-theme="new-light"] .avatar {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+[data-theme="dark"] .avatar:hover, [data-theme="new-light"] .avatar:hover {
+  background: var(--panel-2);
 }
 
 /* ===== Sidebar ===== */
