@@ -193,10 +193,10 @@ def forgot_password():
 
         token = auth_service.generate_reset_token(data["email"])
 
-        print(f"\n{'='*40}")
+        print(f"\n{'=' * 40}")
         print(f"SECURITY ALERT: Reset requested for {data['email']}")
         print(f"YOUR 6-DIGIT TOKEN IS: {token}")
-        print(f"{'='*40}\n")
+        print(f"{'=' * 40}\n")
 
         # Pulls from .env, falls back to the hardcoded one if EMAIL_USER isn't set
         sender_email = os.getenv("EMAIL_USER", "studentlife.app.noreply@gmail.com")
@@ -273,16 +273,22 @@ def verify_reset_token():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     except Exception as e:
-        return jsonify({'error': 'Failed to verify token', 'details': str(e)}), 500
+        return jsonify({"error": "Failed to verify token", "details": str(e)}), 500
 
-@auth_bp.route('/delete-account', methods=['DELETE'])
+
+@auth_bp.route("/delete-account", methods=["DELETE"])
 @token_required
 def delete_account(current_user_email, current_user_id):
     """Permanently delete user and all associated data"""
     try:
         auth_service.delete_account(current_user_email, current_user_id)
-        return jsonify({'message': 'Account and all associated data deleted successfully'}), 200
+        return (
+            jsonify(
+                {"message": "Account and all associated data deleted successfully"}
+            ),
+            200,
+        )
     except ValueError as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({"error": str(e)}), 400
     except Exception as e:
-        return jsonify({'error': 'Failed to delete account', 'details': str(e)}), 500
+        return jsonify({"error": "Failed to delete account", "details": str(e)}), 500

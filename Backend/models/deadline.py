@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Deadline:
     def __init__(
         self,
@@ -21,8 +22,8 @@ class Deadline:
         self.due_date = due_date  # "YYYY-MM-DD"
         self.priority = priority  # "high", "normal", "low"
         self.completed = completed
-        self.status = status              
-        self.notes = notes                
+        self.status = status
+        self.notes = notes
         self.created_at = created_at or datetime.now().isoformat()
 
     def to_dict(self):
