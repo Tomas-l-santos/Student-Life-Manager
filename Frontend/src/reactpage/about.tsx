@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import "../styles/styles.css";
 import { LoginModal, SignupModal } from "./Signup";
 
-const teamData = [
+interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  img: string;
+  bio: string;
+}
+
+const teamData: TeamMember[] = [
   {
     id: 1,
     name: "Abhishil Sinoj",
@@ -35,7 +43,7 @@ const teamData = [
 ];
 
 function About() {
-  const [activeOwner, setActiveOwner] = useState<any>(null);
+  const [activeOwner, setActiveOwner] = useState<TeamMember | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
 

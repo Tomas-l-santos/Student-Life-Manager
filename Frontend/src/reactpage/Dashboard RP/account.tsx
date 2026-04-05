@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sidebar, Topbar } from "./dashboard";
 import { logout, getUserEmail, getUsername } from "../../services/storage";
@@ -7,13 +7,8 @@ import "../../styles/dashboard-css/account&security.css";
 
 export default function Account() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    setEmail(getUserEmail() || "student@email.com");
-    setUsername(getUsername() || "Student");
-  }, []);
+  const [email] = useState(() => getUserEmail() || "student@email.com");
+  const [username] = useState(() => getUsername() || "Student");
 
   const handleLogout = () => {
     logout();
@@ -31,12 +26,13 @@ export default function Account() {
 
     if (confirmDelete) {
       try {
-        await deleteAccount(); // Tell the backend to wipe the JSON files
-        logout(); // Clear the browser session
-        navigate("/"); // Go back to login
-      } catch (error: any) {
+        await deleteAccount();
+        logout();
+        navigate("/");
+      } catch (error: unknown) {
         console.error("Failed to delete account:", error);
-        alert(error.message || "Failed to delete account.");
+        const err = error as Error;
+        alert(err.message || "Failed to delete account.");
       }
     }
   };
@@ -55,7 +51,6 @@ export default function Account() {
         </section>
 
         <section className="account-grid">
-          {/* Account Information Display */}
           <div className="card account-card">
             <div className="card-header">
               <h3>Account Information</h3>
@@ -85,35 +80,29 @@ export default function Account() {
           </div>
 
           <div className="security-column">
-            {/* Change Password Redirect */}
             <div className="card password-card">
               <div className="card-header">
                 <h3>Change Password</h3>
                 <span className="mini-note">Security update</span>
               </div>
-
               <p className="card-desc">
                 Keep your account secure by updating your password regularly. You will be redirected
                 to the secure password reset page.
               </p>
-
               <button onClick={handleChangePassword} className="primary-btn">
                 Change Password
               </button>
             </div>
 
-            {/* Delete Account & Data Function */}
             <div className="card danger-card">
               <div className="card-header">
                 <h3>Delete Account & Data</h3>
                 <span className="danger-badge">Danger Zone</span>
               </div>
-
               <p className="danger-text">
                 This action permanently removes your account details, timetable, financial data, and
                 security history. Once deleted, your data cannot be recovered.
               </p>
-
               <button onClick={handleDeleteAccount} className="danger-btn">
                 Delete Account
               </button>

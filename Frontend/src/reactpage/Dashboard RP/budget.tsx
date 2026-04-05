@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Sidebar, Topbar } from "./dashboard";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import "../../styles/dashboard-css/budget.css";
@@ -58,11 +58,7 @@ export default function Budget() {
 
   const [limitForm, setLimitForm] = useState({ category_id: "", amount: "" });
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     try {
       const [txData, catData, statusData] = await Promise.all([
         getTransactions(),
@@ -93,7 +89,11 @@ export default function Budget() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [currentMonth, currentYear]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleAddTransaction = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,9 +127,10 @@ export default function Budget() {
       });
       setLimitForm({ category_id: "", amount: "" });
       fetchData();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Failed to set limit:", error);
-      alert(error.message || "Failed to set budget limit.");
+      const err = error as Error;
+      alert(err.message || "Failed to set budget limit.");
     }
   };
 
@@ -374,7 +375,7 @@ export default function Budget() {
                         <Cell key={`cell-${index}`} fill={cashFlowColors[index]} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value: any) => `£${Number(value).toFixed(2)}`} />
+                    <Tooltip formatter={(value) => `£${Number(value || 0).toFixed(2)}`} />
                     <Legend verticalAlign="bottom" height={36} />
                   </PieChart>
                 </ResponsiveContainer>
@@ -414,7 +415,7 @@ export default function Budget() {
                         />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value: any) => `£${Number(value).toFixed(2)}`} />
+                    <Tooltip formatter={(value) => `£${Number(value || 0).toFixed(2)}`} />
                     <Legend verticalAlign="bottom" height={36} />
                   </PieChart>
                 </ResponsiveContainer>
@@ -519,13 +520,10 @@ export default function Budget() {
                                   : "var(--text)",
                           }}
                         >
-                          £{stat.spent.toFixed(2)} / £
-                          {stat.budget.amount.toFixed(2)}
+                          £{stat.spent.toFixed(2)} / £{stat.budget.amount.toFixed(2)}
                         </span>
                         <button
-                          onClick={() =>
-                            handleDeleteBudgetLimit(stat.budget.id)
-                          }
+                          onClick={() => handleDeleteBudgetLimit(stat.budget.id)}
                           className="table-btn delete-btn"
                           title="Remove Limit"
                           style={{ padding: "4px 8px", lineHeight: 1 }}
