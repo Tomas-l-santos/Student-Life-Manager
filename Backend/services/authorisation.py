@@ -111,10 +111,10 @@ class AuthService:
         users = self.storage.read_all()
         initial_len = len(users)
         users = [u for u in users if u.get("email") != email and u.get("user_id") != user_id]
-        
+
         if len(users) == initial_len:
             raise ValueError("User not found")
-            
+
         self.storage.overwrite(users)
         for filename in ["data/transactions.json", "data/budgets.json", "data/deadlines.json", "data/timetable.json"]:
             try:
@@ -139,11 +139,10 @@ class AuthService:
 
         return True
 
-
     def generate_reset_token(self, email):
         """Generate a 6-digit OTP for a user"""
         email = email.strip()
-        self.validate_email(email)
+            self.validate_email(email)
 
         # Check if user exists
         users = self.storage.read_all()

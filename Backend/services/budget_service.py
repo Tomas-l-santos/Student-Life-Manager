@@ -1,5 +1,5 @@
 from storage.storagerepo import JSONStorage
-from models.Budget import Transaction, Budget, Category
+from models.Budget import Transaction, Budget 
 from datetime import datetime
 
 

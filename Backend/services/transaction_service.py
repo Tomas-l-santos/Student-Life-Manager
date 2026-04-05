@@ -24,8 +24,6 @@ class TransactionService:
         return description.strip()
 
     def _validate_date(self, transaction_date):
-        from datetime import datetime
-
         try:
             datetime.strptime(transaction_date, "%Y-%m-%d")
         except ValueError:
