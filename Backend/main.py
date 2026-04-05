@@ -1,6 +1,5 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from services.authorisation import AuthService
 from services.budget_service import BudgetService
 from services.academics_service import AcademicsService
 from services.auth_routes import auth_bp, token_required
@@ -14,7 +13,6 @@ CORS(app)
 
 # Register the auth Blueprint (gives you /api/auth/login, /api/auth/me, etc.)
 app.register_blueprint(auth_bp)
-
 budget_service = BudgetService()
 academics_service = AcademicsService()
 deadline_service = DeadlineService()
