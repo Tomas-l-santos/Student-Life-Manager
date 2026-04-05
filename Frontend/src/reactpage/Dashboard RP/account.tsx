@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sidebar, Topbar } from "./dashboard";
 import { logout, getUserEmail, getUsername } from "../../services/storage";
@@ -7,13 +7,8 @@ import "../../styles/dashboard-css/account&security.css";
 
 export default function Account() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-
-  useEffect(() => {
-    setEmail(getUserEmail() || "student@email.com");
-    setUsername(getUsername() || "Student");
-  }, []);
+  const [email] = useState(getUserEmail() || "student@email.com");
+  const [username] = useState(getUsername() || "Student");
 
   const handleLogout = () => {
     logout();
