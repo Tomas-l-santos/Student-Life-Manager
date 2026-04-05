@@ -35,6 +35,7 @@ jobs:
       - name: Lint with flake8
         run: |
           cd Backend
+          pip install flake8 black
           python -m flake8 .
 
   frontend:
