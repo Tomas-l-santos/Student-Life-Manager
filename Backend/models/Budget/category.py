@@ -1,6 +1,3 @@
-from datetime import datetime
-
-
 class Category:
     def __init__(self, id, name, type, icon=None):
         self.id = id  # unique identifier for the category
