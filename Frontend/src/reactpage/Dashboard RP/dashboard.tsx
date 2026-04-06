@@ -1,8 +1,33 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../../styles/dashboard-css/dashboard.css";
 import { getTimetable, getDeadlines, getTransactions } from "../../services/api";
 import { getUsername } from "../../services/storage";
+
+interface TimetableEntry {
+  id: number;
+  module_name: string;
+  location: string;
+  entry_type: string;
+  day: string;
+  start_time: string;
+  end_time: string;
+}
+
+interface DeadlineEntry {
+  id: number;
+  title: string;
+  due_date: string;
+  priority: string;
+  module_name?: string;
+  completed: boolean;
+}
+
+interface BudgetTransaction {
+  amount: number;
+  transaction_date: string;
+  category: { type: string };
+}
 
 // Sidebar
 export const Sidebar = () => {
@@ -66,34 +91,22 @@ export const Sidebar = () => {
 };
 // topbar
 export const Topbar = () => {
-  const [theme, setTheme] = useState("original");
-  const [username, setUsername] = useState("Student");
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "original");
+  const [username] = useState(() => getUsername() || "Student");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Load theme
-    const savedTheme = localStorage.getItem("theme") || "original";
-    setTheme(savedTheme);
-    if (savedTheme === "original") {
+    if (theme === "original") {
       document.body.removeAttribute("data-theme");
     } else {
-      document.body.setAttribute("data-theme", savedTheme);
+      document.body.setAttribute("data-theme", theme);
     }
-    const storedName = getUsername();
-    if (storedName) {
-      setUsername(storedName);
-    }
-  }, []);
+  }, [theme]);
 
   const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedTheme = e.target.value;
     setTheme(selectedTheme);
     localStorage.setItem("theme", selectedTheme);
-
-    if (selectedTheme === "original") {
-      document.body.removeAttribute("data-theme");
-    } else {
-      document.body.setAttribute("data-theme", selectedTheme);
-    }
   };
 
   return (
@@ -152,7 +165,12 @@ export const Topbar = () => {
           </span>
         </div>
 
-        <div className="avatar" title="User">
+        <div
+          className="avatar"
+          title="Account Settings"
+          onClick={() => navigate("/account")}
+          style={{ cursor: "pointer" }}
+        >
           <div className="dot">{username.charAt(0).toUpperCase()}</div>
           <span>{username}</span>
         </div>
@@ -161,9 +179,9 @@ export const Topbar = () => {
   );
 };
 export default function Dashboard() {
-  const [todaysClasses, setTodaysClasses] = useState<any[]>([]);
-  const [upcomingDeadlines, setUpcomingDeadlines] = useState<any[]>([]);
-  const [tasksDueSoon, setTasksDueSoon] = useState<any[]>([]);
+  const [todaysClasses, setTodaysClasses] = useState<TimetableEntry[]>([]);
+  const [upcomingDeadlines, setUpcomingDeadlines] = useState<DeadlineEntry[]>([]);
+  const [tasksDueSoon, setTasksDueSoon] = useState<DeadlineEntry[]>([]);
   const [budgetSnapshot, setBudgetSnapshot] = useState({
     spent: 0,
     income: 0,
@@ -181,40 +199,35 @@ export default function Dashboard() {
         const currentMonth = today.getMonth() + 1;
         const currentYear = today.getFullYear();
 
-        // Fetch Timetable, Deadlines, and Transactions simultaneously
         const [timetableRes, deadlinesRes, transactionsRes] = await Promise.allSettled([
           getTimetable(),
           getDeadlines(),
           getTransactions(),
         ]);
 
-        // Process Timetable
         if (timetableRes.status === "fulfilled" && Array.isArray(timetableRes.value)) {
           const todays = timetableRes.value
-            .filter((entry) => entry.day === todayName)
-            .sort((a, b) => a.start_time.localeCompare(b.start_time));
+            .filter((entry: TimetableEntry) => entry.day === todayName)
+            .sort((a: TimetableEntry, b: TimetableEntry) =>
+              a.start_time.localeCompare(b.start_time)
+            );
           setTodaysClasses(todays);
         }
 
-        // Process Deadlines AND Tasks (They are the exact same data source now!)
-        if (
-          deadlinesRes.status === "fulfilled" &&
-          Array.isArray(deadlinesRes.value)
-        ) {
+        if (deadlinesRes.status === "fulfilled" && Array.isArray(deadlinesRes.value)) {
           const upcoming = deadlinesRes.value
-            .filter((d) => !d.completed)
+            .filter((d: DeadlineEntry) => !d.completed)
             .sort(
-              (a, b) =>
-                new Date(a.due_date).getTime() - new Date(b.due_date).getTime(),
+              (a: DeadlineEntry, b: DeadlineEntry) =>
+                new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
             );
 
-          setUpcomingDeadlines(upcoming.slice(0, 3)); // Top 3 for the deadlines widget
-          setTasksDueSoon(upcoming.slice(0, 4)); // Top 4 for the tasks widget
+          setUpcomingDeadlines(upcoming.slice(0, 3));
+          setTasksDueSoon(upcoming.slice(0, 4));
         }
 
-        // Process Budget
         if (transactionsRes.status === "fulfilled" && Array.isArray(transactionsRes.value)) {
-          const currentMonthTransactions = transactionsRes.value.filter((t) => {
+          const currentMonthTransactions = transactionsRes.value.filter((t: BudgetTransaction) => {
             const tDate = new Date(t.transaction_date);
             return tDate.getMonth() + 1 === currentMonth && tDate.getFullYear() === currentYear;
           });
@@ -222,7 +235,7 @@ export default function Dashboard() {
           let spent = 0;
           let income = 0;
 
-          currentMonthTransactions.forEach((t) => {
+          currentMonthTransactions.forEach((t: BudgetTransaction) => {
             if (t.category?.type === "expense") spent += t.amount;
             if (t.category?.type === "income") income += t.amount;
           });

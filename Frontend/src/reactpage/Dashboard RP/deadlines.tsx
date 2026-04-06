@@ -441,13 +441,14 @@ export default function Deadlines() {
                   ) : (
                     filteredDeadlines.map((deadline) => {
                       const status = getStatus(deadline.due_date, deadline.completed);
-                      const formattedDate = new Date(
-                        deadline.due_date,
-                      ).toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      });
+                      const formattedDate = new Date(deadline.due_date).toLocaleDateString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      );
                       const uiPriorityClass =
                         deadline.priority === "normal" ? "med" : deadline.priority;
 
