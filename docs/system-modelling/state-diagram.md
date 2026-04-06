@@ -11,6 +11,7 @@ https://mermaid.live/view#pako:eNqFVE2P0zAQ_SuWj6hfmyVtmgPSqiskJNCuCtoDhIMVT1NrE
 
 ## State Diagram 1: User Authentication and Password Recovery
 
+```mermaid
 stateDiagram-v2
     [*] --> LoggedOut
 
