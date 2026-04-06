@@ -1,5 +1,6 @@
-/*Wrappers and global variables*/
+/* GLOBAL VARIABLES & BASE WRAPPERS */
 
+/* Global color palette and typography variables */
 :root {
   --color-dark: #1d1d1f;
   --color-cream: #f8f6f0;
@@ -15,6 +16,7 @@
   box-sizing: border-box;
 }
 
+/* Base wrapper for the public landing and about pages */
 .landing-wrapper, .agency-wrapper {
   font-family: var(--font-sans);
   margin: 0;
@@ -28,9 +30,11 @@
   flex-direction: column;
 }
 
-/* ============================================================
-   2. TOP NAVIGATION (Glassmorphism)
-   ============================================================ */
+/*TOP NAVIGATION BAR */
+
+/* This navigation logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "make the top navbar transparent but blur the background behind it"
+   The output was reviewed, modified, and tested by the author. */
 .top-nav {
   display: flex;
   justify-content: space-between;
@@ -48,6 +52,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
+/* Logo styling */
 .nav-logo {
   display: flex;
   align-items: center;
@@ -69,6 +74,7 @@
   gap: 20px;
 }
 
+/* Navbar links and standard buttons */
 .nav-link { 
   text-decoration: none; 
   color: #111; 
@@ -111,7 +117,9 @@
   transform: translateY(-1px);
 }
 
-/*LandingPage(Hero & Pinterest Features)*/
+/*  LANDING PAGE */
+
+/* Main hero banner layout */
 .hero-section {
   display: flex;
   align-items: center;
@@ -157,7 +165,7 @@
   border-radius: 50px;
 }
 
-/* Two overlapping floating cards */
+/* Floating hero image cards */
 .hero-image-container {
   flex: 1;
   position: relative;
@@ -181,6 +189,9 @@
   display: block;
 }
 
+/* This floating animation logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "create a smooth infinite floating animation for the hero images"
+   The output was reviewed, modified, and tested by the author. */
 .hero-card--main {
   width: 340px;
   height: 420px;
@@ -231,6 +242,7 @@
   }
 }
 
+/* Marketing feature blocks */
 .features-intro {
   text-align: center;
   padding: 90px 24px 10px;
@@ -377,15 +389,17 @@
   .feature-text__title { font-size: 1.9rem; }
 }
 
-/* ============================================================
-   4. ABOUT PAGE (GRID, TEAM, FOOTER)
-   ============================================================ */
+/*  ABOUT PAGE*/
+
 .premium-about-section {
   padding: 160px 5% 100px; 
   background-color: var(--color-cream);
   color: #111;
 }
 
+/* This CSS grid layout logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "create a two column grid layout for the about section that collapses on smaller screens"
+   The output was reviewed, modified, and tested by the author. */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -475,6 +489,7 @@
   color: #555;
 }
 
+/* Team section */
 .agency-team {
   background-color: var(--color-teal);
   padding: 120px 5%;
@@ -573,6 +588,9 @@
   align-items: center;
 }
 
+/* This background shapes logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "make a decorative overlapping circle background"
+   The output was reviewed, modified, and tested by the author. */
 .graphic-circles {
   position: absolute;
   width: 400px; height: 400px;
@@ -749,7 +767,11 @@
   }
 }
 
-/*Authentication */
+/* AUTHENTICATION & MODALS*/
+
+/* This modal overlay logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "create a fixed modal background that blurs the screen and centers the popup"
+   The output was reviewed, modified, and tested by the author. */
 .modal-overlay, .agency-modal-overlay {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -910,9 +932,9 @@
 .agency-modal-divider { width: 60px; height: 3px; background: var(--color-yellow); margin: 25px 0; }
 .agency-modal-right p { font-size: 18px; line-height: 1.7; color: #444; margin: 0; }
 
-/* ============================================================
-   6. PASSWORD RESET PAGE
-   ============================================================ */
+/* PASSWORD RESET PAGE */
+
+/* Fullscreen takeover layout */
 .reset-password-wrapper {
   position: absolute;
   top: 0; left: 0; width: 100vw; min-height: 100vh;
@@ -1081,7 +1103,7 @@
   .reset-image-side { display: none; } 
 }
 
-/* Error and success */
+/*ERROR AND SUCCESS COMPONENTS */
 .input-wrapper {
   position: relative;
   width: 100%;
@@ -1110,6 +1132,9 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* This tooltip arrow logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "make a little triangle pointer"
+   The output was reviewed, modified, and tested by the author. */
 .custom-error-tooltip::before {
   content: "";
   position: absolute;
@@ -1139,6 +1164,9 @@
   animation: smoothFadeIn 0.5s ease-out;
 }
 
+/* This success animation logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "create a popping popScale keyframe animation for a success badge"
+   The output was reviewed, modified, and tested by the author. */
 .success-badge {
   width: 72px;
   height: 72px;
