@@ -1,24 +1,24 @@
 :root {
-  --navy-900: #07144a;
-  --navy-850: #081a58;
-  --navy-800: #0a216f;
+  --navy-900:  #07144a;
+  --navy-850:  #081a58;
+  --navy-800:  #0a216f;
 
-  --bg: #ffffff;
-  --panel: #f5f7fb;
-  --panel-2: #eef2f8;
-  --border: #e3e8f2;
-  --text: #0b1020;
-  --muted: #63708a;
+  --bg:  #ffffff;
+  --panel:  #f5f7fb;
+  --panel-2:  #eef2f8;
+  --border:  #e3e8f2;
+  --text:  #0b1020;
+  --muted:  #63708a;
 
-  --sidebar: #081a58;
-  --sidebar-2: #0b1f66;
-  --sidebar-text: #e9eeff;
-  --sidebar-muted: #b9c6ff;
+  --sidebar:  #081a58;
+  --sidebar-2:  #0b1f66;
+  --sidebar-text:  #e9eeff;
+  --sidebar-muted:  #b9c6ff;
 
-  --event-orange: #f59e0b;
-  --event-cyan: #22c55e;
-  --event-blue: #38bdf8;
-  --event-purple: #a855f7;
+  --event-orange:  #f59e0b;
+  --event-cyan:  #22c55e;
+  --event-blue:  #38bdf8;
+  --event-purple:  #a855f7;
 
   --shadow: 0 6px 18px rgba(10, 23, 64, 0.12);
   --radius: 12px;
@@ -38,7 +38,6 @@ body {
   background: var(--bg);
 }
 
-/* ===== App Layout ===== */
 .app {
   height: 100vh;
   display: grid;
@@ -57,7 +56,7 @@ body {
   justify-content: space-between;
   padding: 0 18px 0 18px;
   background: linear-gradient(90deg, var(--navy-900), var(--navy-800));
-  color: #fff;
+  color:  #fff;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -274,7 +273,7 @@ body {
 }
 
 .card {
-  background: #fff;
+  background:  #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -305,7 +304,7 @@ body {
 
 .status-badge {
   background: rgba(34, 197, 94, 0.12);
-  color: #15803d;
+  color:  #15803d;
 }
 
 .mini-note {
@@ -315,7 +314,7 @@ body {
 
 .danger-badge {
   background: rgba(239, 68, 68, 0.10);
-  color: #b91c1c;
+  color:  #b91c1c;
 }
 
 .info-list {
@@ -360,7 +359,7 @@ body {
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: #fff;
+  background:  #fff;
   font-size: 13px;
   outline: none;
 }
@@ -375,7 +374,7 @@ body {
   border: none;
   border-radius: 10px;
   background: var(--navy-800);
-  color: #fff;
+  color:  #fff;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -430,15 +429,15 @@ body {
   padding: 10px 14px;
   border: none;
   border-radius: 10px;
-  background: #dc2626;
-  color: #fff;
+  background:  #dc2626;
+  color:  #fff;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .danger-btn:hover {
-  background: #b91c1c;
+  background:  #b91c1c;
 }
 
 .log-card {
@@ -585,11 +584,14 @@ body {
 }
 
 /* React Premium Buttons */
+/* This button animation styling was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "create a smooth hover effect that lifts the button up"
+   The output was reviewed, modified, and tested by the author. */
 .account-main .primary-btn {
   padding: 12px 24px;
   border-radius: 12px;
   background: var(--primary);
-  color: #fff;
+  color:  #fff;
   font-size: 14px;
   font-weight: 700;
   width: max-content;
@@ -648,11 +650,11 @@ body {
 [data-theme="dark"] .account-main .card:hover {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
 }
-[data-theme="dark"] .account-main .status-badge { color: #4ade80; background: rgba(74, 222, 128, 0.15); }
-[data-theme="dark"] .account-main .danger-badge { color: #f87171; background: rgba(248, 113, 113, 0.15); }
+[data-theme="dark"] .account-main .status-badge { color:  #4ade80; background: rgba(74, 222, 128, 0.15); }
+[data-theme="dark"] .account-main .danger-badge { color:  #f87171; background: rgba(248, 113, 113, 0.15); }
 [data-theme="dark"] .account-main .danger-card { background: linear-gradient(to bottom right, var(--panel), rgba(248, 113, 113, 0.05)); border-color: rgba(248, 113, 113, 0.2); }
-[data-theme="dark"] .account-main .primary-btn { color: #000; }
-[data-theme="new-light"] .account-main .primary-btn { background: var(--primary); color: #fff; }
+[data-theme="dark"] .account-main .primary-btn { color:  #000; }
+[data-theme="new-light"] .account-main .primary-btn { background: var(--primary); color:  #fff; }
 [data-theme="new-light"] .account-main .primary-btn:hover { box-shadow: 0 6px 16px rgba(230, 0, 35, 0.3); filter: brightness(1.2); }
 
 @media (max-width: 960px) {

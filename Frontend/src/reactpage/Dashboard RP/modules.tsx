@@ -3,6 +3,7 @@ import { Sidebar, Topbar } from "./dashboard";
 import "../../styles/dashboard-css/modules.css";
 import { getModules, addModule, deleteModule, addAssessment } from "../../services/api";
 
+// API Interface types
 interface Assessment {
   id: string;
   name: string;
@@ -25,6 +26,7 @@ interface Module {
 }
 
 export default function Modules() {
+  // State Initialization
   const [modules, setModules] = useState<Module[]>([]);
 
   const [totalTargetModules, setTotalTargetModules] = useState(() => {
@@ -55,7 +57,7 @@ export default function Modules() {
     deadline: "",
   });
 
-  // backend load
+  // Load modules
   useEffect(() => {
     async function loadData() {
       try {
@@ -70,7 +72,7 @@ export default function Modules() {
     loadData();
   }, []);
 
-  // analytics
+  // Degree classification logic
   const getModuleAverage = (module: Module) => {
     if (!module.assessments || module.assessments.length === 0) return 0;
     let totalWeight = 0;
@@ -82,6 +84,9 @@ export default function Modules() {
     return totalWeight === 0 ? 0 : (weightedScore / totalWeight) * 100;
   };
 
+  /* This classification logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "calculate the average grade and figure out the uk degree classification"
+     The output was reviewed, modified, and tested by the author. */
   const stats = useMemo(() => {
     const activeModules = modules.filter((m) => m.assessments && m.assessments.length > 0);
     let totalAverages = 0;
@@ -91,7 +96,6 @@ export default function Modules() {
 
     const currentAverage = activeModules.length > 0 ? totalAverages / activeModules.length : 0;
 
-    // --- MATCHING THE PYTHON BACKEND GRADING SYSTEM ---
     let currentClassification = "No Grades Logged";
     let classColor = "var(--tracker-muted)";
 
@@ -121,6 +125,9 @@ export default function Modules() {
     let neededAverageMessage = "";
     let chartFill = 0;
 
+    /* This chart calculation logic was developed with assistance from Gemini (Google Gemini, 2026).
+       Prompt: "calculate the percentage needed on remaining modules to get a first class"
+       The output was reviewed, modified, and tested by the author. */
     if (remainingModules > 0) {
       const neededAverage = pointsNeeded / remainingModules;
       neededAverageMessage =
@@ -143,7 +150,7 @@ export default function Modules() {
     };
   }, [modules, totalTargetModules]);
 
-  // handlers
+  // Form Handlers
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -223,6 +230,7 @@ export default function Modules() {
         ) : (
           <section className="modules-grid">
             <div className="modules-left">
+              {/* Tracker Graphic Component */}
               <div className="modules-card tracker-card">
                 <div className="tracker-inner-gradient">
                   <div className="card-header tracker-header">
@@ -276,6 +284,8 @@ export default function Modules() {
                   </div>
                 </div>
               </div>
+
+              {/* Add new Module Component */}
               <div className="modules-card">
                 <div className="card-header form-card-header">
                   <h2>Log New Module</h2>
@@ -371,6 +381,8 @@ export default function Modules() {
                 </form>
               </div>
             </div>
+
+            {/* List map of Modules */}
             <div className="modules-right">
               <div className="modules-card full-height list-card">
                 <div className="card-header list-card-header">
@@ -433,6 +445,8 @@ export default function Modules() {
             </div>
           </section>
         )}
+
+        {/* Assessment Logging Modal Component */}
         {activeModuleId && (
           <div className="modal-overlay">
             <div className="modules-card modal-content">

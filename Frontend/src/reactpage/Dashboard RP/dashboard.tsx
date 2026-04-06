@@ -4,6 +4,7 @@ import "../../styles/dashboard-css/dashboard.css";
 import { getTimetable, getDeadlines, getTransactions } from "../../services/api";
 import { getUsername } from "../../services/storage";
 
+// Interfaces
 interface TimetableEntry {
   id: number;
   module_name: string;
@@ -29,7 +30,7 @@ interface BudgetTransaction {
   category: { type: string };
 }
 
-// Sidebar
+// Sidebar Navigation Component
 export const Sidebar = () => {
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(() => {
@@ -89,7 +90,8 @@ export const Sidebar = () => {
     </aside>
   );
 };
-// topbar
+
+// Topbar Theme and Avatar Component
 export const Topbar = () => {
   const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "original");
   const [username] = useState(() => getUsername() || "Student");
@@ -178,6 +180,8 @@ export const Topbar = () => {
     </header>
   );
 };
+
+// Main Dashboard Aggregate View
 export default function Dashboard() {
   const [todaysClasses, setTodaysClasses] = useState<TimetableEntry[]>([]);
   const [upcomingDeadlines, setUpcomingDeadlines] = useState<DeadlineEntry[]>([]);
@@ -189,6 +193,9 @@ export default function Dashboard() {
   });
   const [loading, setLoading] = useState(true);
 
+  /* This data aggregation logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "make the app gathers the schedule, deadlines, and transactions  and shows in the dashboard"
+     The output was reviewed, modified, and tested by the author. */
   useEffect(() => {
     async function fetchDashboardData() {
       try {
@@ -263,7 +270,7 @@ export default function Dashboard() {
 
       <section className="dash-grid">
         <div className="dash-col dash-col-left">
-          {/* Today's Timetable */}
+          {/* Today's Timetable Widget */}
           <article className="card">
             <header className="card-head">
               <div className="card-head-left">
@@ -316,7 +323,7 @@ export default function Dashboard() {
             )}
           </article>
 
-          {/* Upcoming Deadlines */}
+          {/* Upcoming Deadlines Widget */}
           <article className="card">
             <header className="card-head">
               <div className="card-head-left">
@@ -388,7 +395,7 @@ export default function Dashboard() {
         </div>
 
         <div className="dash-col dash-col-right">
-          {/* Tasks Due Soon */}
+          {/* Tasks Due Soon Widget */}
           <article className="card">
             <header className="card-head">
               <div className="card-head-left">
@@ -430,7 +437,7 @@ export default function Dashboard() {
             </ul>
           </article>
 
-          {/* Budget Snapshot */}
+          {/* Budget Snapshot Widget */}
           <article className="card">
             <header className="card-head">
               <div className="card-head-left">

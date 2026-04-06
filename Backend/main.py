@@ -130,7 +130,7 @@ def get_modules(current_user_email, current_user_id):
         modules = academics_service.get_user_modules(current_user_id)
         for module in modules:
             assessments = academics_service.get_module_assessments(
-                module["id"], current_user_email
+                module["id"], current_user_id
             )
             module["assessments"] = assessments
         return jsonify(modules), 200

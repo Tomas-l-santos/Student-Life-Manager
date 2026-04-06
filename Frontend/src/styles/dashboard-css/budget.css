@@ -1,26 +1,26 @@
 /* This is the CSS for the dashboard.html file for now*/
 
 :root {
-  --navy-900: #07144a;
-  --navy-850: #081a58;
-  --navy-800: #0a216f;
+  --navy-900:  #07144a;
+  --navy-850:  #081a58;
+  --navy-800:  #0a216f;
 
-  --bg: #f5f7fb;
-  --panel: #ffffff;
-  --panel-2: #eef2f8;
-  --border: #e3e8f2;
-  --text: #0b1020;
-  --muted: #63708a;
+  --bg:  #f5f7fb;
+  --panel:  #ffffff;
+  --panel-2:  #eef2f8;
+  --border:  #e3e8f2;
+  --text:  #0b1020;
+  --muted:  #63708a;
 
-  --sidebar: #081a58;
-  --sidebar-2: #0b1f66;
-  --sidebar-text: #e9eeff;
-  --sidebar-muted: #b9c6ff;
+  --sidebar:  #081a58;
+  --sidebar-2:  #0b1f66;
+  --sidebar-text:  #e9eeff;
+  --sidebar-muted:  #b9c6ff;
 
-  --event-orange: #f59e0b;
-  --event-cyan: #22c55e;   /* you can change these later */
-  --event-blue: #38bdf8;
-  --event-purple: #a855f7;
+  --event-orange:  #f59e0b;
+  --event-cyan:  #22c55e;   /* you can change these later */
+  --event-blue:  #38bdf8;
+  --event-purple:  #a855f7;
 
   --shadow: 0 6px 18px rgba(10, 23, 64, 0.12);
   --radius: 12px;
@@ -30,77 +30,80 @@
 
   /* --- React Charts & Premium Number Colors --- */
   --primary: var(--navy-800);
-  --income-color: #2563eb; 
-  --expense-color: #e11d48; 
-  --balance-color: #0f172a; 
-  --chart-income: #2563eb;
-  --chart-expense: #e11d48;
+  --income-color:  #2563eb; 
+  --expense-color:  #e11d48; 
+  --balance-color:  #0f172a; 
+  --chart-income:  #2563eb;
+  --chart-expense:  #e11d48;
   --chart-cat-1: var(--event-blue); 
   --chart-cat-2: var(--event-purple); 
   --chart-cat-3: var(--event-orange);
-  --chart-cat-4: #14b8a6; 
-  --chart-cat-5: #ec4899; 
-  --chart-cat-6: #f97316;
+  --chart-cat-4:  #14b8a6; 
+  --chart-cat-5:  #ec4899; 
+  --chart-cat-6:  #f97316;
 }
 
-/* Dark) */
+/* Dark */
+/* This dark theme variable swap logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "setup the css variables for a pitch black dark theme"
+   The output was reviewed, modified, and tested by the author. */
 [data-theme="dark"] {
-  --bg: #000000;
-  --panel: #121212;
-  --panel-2: #1a1a1a;
-  --border: #27272a;
-  --text: #ffffff;
-  --muted: #a1a1aa;
+  --bg:  #000000;
+  --panel:  #121212;
+  --panel-2:  #1a1a1a;
+  --border:  #27272a;
+  --text:  #ffffff;
+  --muted:  #a1a1aa;
 
-  --sidebar: #000000;
-  --sidebar-2: #050505;
-  --sidebar-text: #ffffff;
-  --sidebar-muted: #a1a1aa;
+  --sidebar:  #000000;
+  --sidebar-2:  #050505;
+  --sidebar-text:  #ffffff;
+  --sidebar-muted:  #a1a1aa;
 
-  --primary: #06b6d4; 
-  --income-color: #06b6d4; 
-  --expense-color: #d946ef; 
-  --balance-color: #ffffff; 
+  --primary:  #06b6d4; 
+  --income-color:  #06b6d4; 
+  --expense-color:  #d946ef; 
+  --balance-color:  #ffffff; 
 
-  --chart-income: #06b6d4;
-  --chart-expense: #d946ef;
-  --chart-cat-1: #38bdf8; 
-  --chart-cat-2: #a855f7; 
-  --chart-cat-3: #f59e0b;
-  --chart-cat-4: #ec4899; 
-  --chart-cat-5: #8b5cf6; 
-  --chart-cat-6: #14b8a6;
+  --chart-income:  #06b6d4;
+  --chart-expense:  #d946ef;
+  --chart-cat-1:  #38bdf8; 
+  --chart-cat-2:  #a855f7; 
+  --chart-cat-3:  #f59e0b;
+  --chart-cat-4:  #ec4899; 
+  --chart-cat-5:  #8b5cf6; 
+  --chart-cat-6:  #14b8a6;
 
   --shadow: 0 8px 24px rgba(6, 182, 212, 0.1);
-  --topbar-text: #ffffff;
+  --topbar-text:  #ffffff;
 }
 
 /* Light */
 [data-theme="new-light"] {
-  --bg: #faf9f7; 
-  --panel: #ffffff; 
-  --panel-2: #f2f0eb;
-  --border: #e6e4df;
-  --text: #111111; 
-  --muted: #555555;
+  --bg:  #faf9f7; 
+  --panel:  #ffffff; 
+  --panel-2:  #f2f0eb;
+  --border:  #e6e4df;
+  --text:  #111111; 
+  --muted:  #555555;
 
-  --sidebar: #ffffff;
-  --sidebar-2: #ffffff;
-  --sidebar-text: #111111;
-  --sidebar-muted: #555555;
+  --sidebar:  #ffffff;
+  --sidebar-2:  #ffffff;
+  --sidebar-text:  #111111;
+  --sidebar-muted:  #555555;
 
-  --primary: #e60023; 
-  --income-color: #111111; 
-  --expense-color: #e60023; 
-  --balance-color: #111111; 
+  --primary:  #e60023; 
+  --income-color:  #111111; 
+  --expense-color:  #e60023; 
+  --balance-color:  #111111; 
 
-  --chart-income: #111111;
-  --chart-expense: #e60023;
-  --chart-cat-1: #111111; --chart-cat-2: #e60023; --chart-cat-3: #f59e0b;
-  --chart-cat-4: #4b5563; --chart-cat-5: #0d9488; --chart-cat-6: #8b5cf6;
+  --chart-income:  #111111;
+  --chart-expense:  #e60023;
+  --chart-cat-1:  #111111; --chart-cat-2:  #e60023; --chart-cat-3:  #f59e0b;
+  --chart-cat-4:  #4b5563; --chart-cat-5:  #0d9488; --chart-cat-6:  #8b5cf6;
 
   --shadow: 0 20px 40px rgba(0, 0, 0, 0.06); 
-  --topbar-text: #111111;
+  --topbar-text:  #111111;
 }
 
 * { box-sizing: border-box; }
@@ -131,7 +134,7 @@ body {
   justify-content: space-between;
   padding: 0 18px;
   background: linear-gradient(90deg, var(--navy-900), var(--navy-800));
-  color: #fff;
+  color:  #fff;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 [data-theme="dark"] .topbar, [data-theme="new-light"] .topbar { 
@@ -158,7 +161,7 @@ body {
 }
 [data-theme="dark"] .logo, [data-theme="new-light"] .logo { 
   background: var(--primary); 
-  color: #fff; 
+  color:  #fff; 
 }
 
 .brand h1 { margin: 0; font-size: 18px; font-weight: 650; }
@@ -220,7 +223,7 @@ body {
 }
 [data-theme="dark"] .avatar .dot, [data-theme="new-light"] .avatar .dot { 
   background: var(--primary); 
-  color: #fff; 
+  color:  #fff; 
 }
 .avatar span {
   font-size: 13px;
@@ -391,7 +394,7 @@ body {
 }
 
 .summary-card {
-  background: #fff;
+  background:  #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -412,7 +415,7 @@ body {
 }
 
 .budget-panel {
-  background: #fff;
+  background:  #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -435,7 +438,7 @@ body {
   padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 10px;
-  background: #fff;
+  background:  #fff;
   font-size: 13px;
   color: var(--text);
   outline: none;
@@ -455,10 +458,13 @@ body {
 }
 [data-theme="dark"] .budget-form input, 
 [data-theme="dark"] .budget-form select { 
-  background: #000000 !important; 
-  color: #ffffff !important; 
-  border-color: #27272a !important; 
+  background:  #000000 !important; 
+  color:  #ffffff !important; 
+  border-color:  #27272a !important; 
 }
+/* This date picker fix was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "fix the date picker icon so it is visible in dark mode"
+   The output was reviewed, modified, and tested by the author. */
 [data-theme="dark"] input[type="date"]::-webkit-calendar-picker-indicator { 
   filter: invert(1); cursor: pointer; 
 }
@@ -469,7 +475,7 @@ body {
   border: none;
   border-radius: 10px;
   background: var(--primary);
-  color: #fff;
+  color:  #fff;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -477,11 +483,11 @@ body {
 .budget-btn:hover { background: var(--navy-850); }
 
 .secondary-btn {
-  background: #e8edf8;
+  background:  #e8edf8;
   color: var(--text);
   border: 1px solid var(--border);
 }
-.secondary-btn:hover { background: #dde6f5; }
+.secondary-btn:hover { background:  #dde6f5; }
 [data-theme="dark"] .secondary-btn, [data-theme="new-light"] .secondary-btn { 
   background: var(--bg); 
 }
@@ -524,8 +530,8 @@ body {
   cursor: pointer;
 }
 
-.edit-btn { background: #dbeafe; color: #1d4ed8; }
-.delete-btn { background: #fee2e2; color: #b91c1c; }
+.edit-btn { background:  #dbeafe; color:  #1d4ed8; }
+.delete-btn { background:  #fee2e2; color:  #b91c1c; }
 .table-btn:hover { opacity: 0.9; }
 
 .amount-income { color: var(--income-color) !important; }
@@ -533,9 +539,9 @@ body {
 .amount-balance.positive { color: var(--balance-color) !important; }
 .amount-balance.negative { color: var(--expense-color) !important; }
 
-.btn-income { background: var(--primary) !important; color: #fff !important; }
-.btn-expense { background: var(--expense-color) !important; color: #fff !important; }
-[data-theme="new-light"] .btn-income { background: #111111 !important; } 
+.btn-income { background: var(--primary) !important; color:  #fff !important; }
+.btn-expense { background: var(--expense-color) !important; color:  #fff !important; }
+[data-theme="new-light"] .btn-income { background:  #111111 !important; } 
 
 .pill-type { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; }
 .pill-income { background: rgba(37, 99, 235, 0.1); color: var(--income-color); }

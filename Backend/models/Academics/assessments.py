@@ -106,7 +106,7 @@ class Assessments:
         module_assessments = [
             a
             for a in assessments
-            if a["module_id"] == module_id and a["user_id"] == user_id
+            if a["module_id"] == module_id and a.get("user_id") == user_id
         ]
 
         # Sort by date (most recent first)
@@ -119,7 +119,7 @@ class Assessments:
         # Get a specific assessment
         assessments = self.storage.read_all()
         for a in assessments:
-            if a["id"] == assessment_id and a["user_id"] == user_id:
+            if a["id"] == assessment_id and a.get("user_id") == user_id:
                 return a
         return None
 
@@ -129,7 +129,7 @@ class Assessments:
         assessments = self.storage.read_all()
 
         for i, a in enumerate(assessments):
-            if a["id"] == assessment_id and a["user_id"] == user_id:
+            if a["id"] == assessment_id and a.get("user_id") == user_id:
                 # Update fields
                 if "name" in updates:
                     a["name"] = updates["name"]
@@ -183,7 +183,7 @@ class Assessments:
         assessments = self.storage.read_all()
 
         for i, a in enumerate(assessments):
-            if a["id"] == assessment_id and a["user_id"] == user_id:
+            if a["id"] == assessment_id and a.get("user_id") == user_id:
                 assessments.pop(i)
                 self.storage.overwrite(assessments)
                 return True
@@ -197,7 +197,7 @@ class Assessments:
         assessments = [
             a
             for a in assessments
-            if not (a["module_id"] == module_id and a["user_id"] == user_id)
+            if not (a["module_id"] == module_id and a.get("user_id") == user_id)
         ]
         self.storage.overwrite(assessments)
         return True
