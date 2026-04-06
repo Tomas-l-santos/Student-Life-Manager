@@ -223,19 +223,6 @@ Tasks was connected to deadlines backend as it made use of the same data and wou
  - Top-level `README.md` updated with CI badge, tech stack table, and documentation links
 
 ### Retrospective
-The CI pipeline immediately revealed issues that had not been caught locally 
-because flake8 was not installed in the team's PATH outside the virtual 
-environment. Using `python -m flake8` rather than `flake8` directly resolved 
-this — this approach is now documented in `Backend/README.md`.
-
-Two ESLint errors pointed to a React anti-pattern in both `account.tsx` and 
-`dashboard.tsx`: `setState` called synchronously inside `useEffect`. In both 
-cases the values came from `localStorage`, which is synchronous. The correct 
-pattern — initialising state directly from localStorage using useState's lazy 
-initialiser — was applied to both files.
-
-The ESLint configuration caused a dependency conflict when attempting to 
-install `@typescript-eslint/eslint-plugin` separately. The project already 
-had `typescript-eslint` installed as a bundle via `package.json`. The 
-resolution was to use ESLint 9's flat config format (`eslint.config.js`) 
-and configure only the packages already present rather than duplicating them.
+The CI pipeline immediately revealed issues that had not been caught locally because flake8 was not installed in the team's PATH outside the virtual environment. Using `python -m flake8` rather than `flake8` directly resolved this.
+Two ESLint errors pointed to a React anti-pattern in both `account.tsx` and `dashboard.tsx`: `setState` called synchronously inside `useEffect`. In both cases the values came from `localStorage`, which is synchronous. The correct pattern was applied to both files.
+The ESLint configuration caused a dependency conflict when attempting to install `@typescript-eslint/eslint-plugin` separately. The project already had `typescript-eslint` installed as a bundle via `package.json`. The resolution was to use ESLint 9's flat config format (`eslint.config.js`) and configure only the packages already present rather than duplicating them.
