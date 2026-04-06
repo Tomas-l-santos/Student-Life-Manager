@@ -223,6 +223,7 @@ Tasks was connected to deadlines backend as it made use of the same data and wou
  - `Backend/README.md` — setup guide, project structure, full API reference
  - `Frontend/README.md` — setup guide, page reference, project structure
  - Top-level `README.md` updated with CI badge, tech stack table, and documentation links
+ - `Academics/` and `main.py` updated with user_email instances replaced with user_id
 
 ### Retrospective
 The CI pipeline immediately revealed issues that had not been caught locally because flake8 was not installed in the team's PATH outside the virtual environment. Using `python -m flake8` rather than `flake8` directly resolved this.
