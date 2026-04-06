@@ -1,0 +1,39 @@
+# State Diagrams
+
+## Overview
+This section presents the state diagrams for the Student Life Management System. State diagrams were used to model the dynamic behaviour of the system by showing how key features change between different states based on user actions, validation checks, and system rules.
+
+These diagrams were selected to support features with clear event-driven behaviour, such as user authentication, password recovery, financial budget alerts, academic tracking, and task progression. They also help connect the requirements to expected system behaviour before implementation.
+
+## State Diagram 1: User Authentication and Password Recovery
+
+https://mermaid.live/view#pako:eNqFVE2P0zAQ_SuWj6hfmyVtmgPSqiskJNCuCtoDhIMVT1NrEzvYTpdS9b8zjpM2iVLwyfa8Nx9vPD7RVHGgMTWWWXgULNOsmB6CRBJcP979JNPpB_JZZRnwp8om0hsuF7V5C5kwFrSQGYlJqgFdEZamqpLW47sIx3jwxk0N5Ug6sFxwAgUT-bwyoCUrYF4yY96U5uM--lGF9C6ELKsm6CBIrxBk6JqvmRVKklQVZQ4Wxgt0JwzzSSINJMZ0RXLcCZabK8FD6voqu3fmtFfef0h4EvIjKlBT2oLGSBfYMDmrj4RlTMhb0PS1LT8kO29g1kJRWnMtvQUNFQtJIWRlwRDIWWmAj6v13LRtC6k6gD5u4VcFxguxUzpTlvQ7e5vg3D19e_6KAiDZgORkOeUiE9Zde3Zrb7Av-CJ2TnjX1pi4x-R7ZnqUHqyftQH7kOfqrdO5fzKvCbY9wxsyxwfmEh6W2PE-1LdVhaR7JrOrvP3X1E12UwPd0PnNuK4NauxhXkJWJXdXt0M-gpuPZqa6LeW1oT_vN8Cd0fcIx0-V3AldeD-oaW94W5hj4m9EJzTTgtPY6gomtACNPwYe6cmxEopJF5DQGLec6deEJvKMnJLJ70oVLU2rKtvTeIcjhSdfefP1XSDYOdAblwKNw9oDjU_0N42DWfQ-DKJgHUThIlpFE3qk8ep-tg7DcBmF98H6brlYnif0Tx1xMYtW4aKz7iYUuLBKf_Efb_3_nv8CpGvYaA
+
+### State Diagram 1 
+
+This diagram models the lifecycle of a user account from registration to authentication and recovery. It reflects the requirements for account creation, login validation, password strength enforcement, OTP-based password recovery, temporary lockout after repeated failed login attempts, and permanent account deletion. This was important to model because the authentication feature contains multiple security-related transitions and error states.
+
+## State Diagram 2: Finance Tracking and Budget Alerts
+
+https://mermaid.live/view#pako:eNqVlMGOmzAQhl_FstRLRSKHYEhQu4d2c6jU9tBVVamlBwvPglVsR8ZESaO8e20ICURLtOXk8cz3zwwe-4hzzQGnuLbMwqNghWFytgszhdz36-1vNJs9oK_6G-Ta8DpTneOy0bq7tVDFJ5VrCShFjHMkWuNu_Ga_BVX3AHRWn-NW9UrWT1Yb4A7bsUr0mVDNdsBv2D7DNHzO-iI9yHztIEU5UzlU1d1kE_FDoq_Ehz81UjJz-L7l7hh8cQZyVuVN5UwktbJldUBWW1bVncQN4DV-CFsK9aHhBVin0Df2Dq3IG6SfUSWksNM0M8r1sCID9OH969jP3rvZ5wC8LX7AL8hIoJMYVXpnIqT7P9exaMlLlf-FjQt8NTp1WhsurEM7h-_X2QiUNYcp4hEqGCHcb8AQGou-OBR-RlFeMlXAeQxudKdGyfsMSH3_grjrjgNcGMFxak0DAZZgJPMmPnouw7YEd6dx6pacmT8ZztTJMVumfmote8zopihx-uym1VlNW8n5bbmEgOJgPupGWZzSVgGnR7zHabRYzxOyjmkYJ2QZhasAH3Aakzld0ygk4YKElIarU4D_tinJPIkIjZNlGNOIJgu6DLA_EG2-dE9b-8Kd_gFQAqAt
+    
+### State Diagram 2
+
+This diagram shows how the finance system changes state when a user records, edits, or deletes income and expense entries. It also includes budget monitoring behaviour by showing transitions between normal spending, warning level, and limit exceeded states. This supports the budgeting and alert logic required by the finance manager.
+
+## State Diagram 3: Module and Grade Tracking
+
+https://mermaid.live/view#pako:eNp9VEtvnDAQ_ivWSL1E7MoQYLccKkWbHFP1UKlSSw8WnhgUsCPbJE1X-9_rx-7SBDac7JnvwYzH3kOjOEIFxjKLtx0Tmg2r56yWxH2_rn6T1eoL-aruFR97NLWMiXMgpON6p9FJcFIRxjkZQiyi3-Y948YYNGZAab-h5J0UjiUVYeewIa9oT25z9FuNG87PvpMEMY3S-F4hYj3_B3aitS7TCRnpYUleQty5ROo7WHB-Rs0E7ljfjP2x5ua0OVZOWAQd_WcMr_OdaYF212LzeEErlEAkov_pB6XJhn6ad2Wqabkngxf5r7cXC5u1BHlnp4aYj4pZtpb4QjSasbcfceOA3DmzyXU-QMf8pRMwruOkaZkU05zOJy9GbrHHyOJhteB2gizO__LJeai7MpCA0B2HyuoRExhQD8xvYe_JNdgWB6yhckvO9GMNtTw4zhOTP5UaTjStRtFC9cB643bjE5_u5xnibgPqnRqlhaoIClDt4Q9UeZavaUo3WbkptukmzxJ4dZBiXVJabK_LlObX2efykMDfYEnX25Q6YLrNaJnToswT8Keg9H18HsIrcfgHtDJklA
+
+    
+### State Diagram 3
+
+This diagram models the states involved in academic module tracking. It begins with module creation and progresses through assessment entry, weighting configuration, average grade calculation, and distinction target analysis. It helps represent how the academic performance feature supports both record keeping and goal setting.
+
+## State Diagram 4: Task and Deadline Management
+
+https://mermaid.live/view#pako:eNqVlMty2yAUhl-FYdmxXV0s2dGiG2eTyeQyvWxSdYHFqayxAA0gp6nH796DZDnUVjuJFhJw_g_O-UHsaaE40IwayyxcV6zUTEx3US4JPt8__CDT6Sdyr74yszW57IeP3S7kWisNCHOSEcY5sTjykQPjdSWhB3yRgx5rJmUHODExbAe8Vw4Rp7qRj1qVGoxBIeanbSfvhV7QaVdKNDX0SQimt6Q4DlxO60sHFeGVhsLWL0OJPvAZRCU56OsWviglERuqI6xptGLFppLlaFrvQc-1jn_YgeYtOA7fHA0kDTNmcGsM-cu1QklbSUSfld6eVhpmvZDjpxXguewr_2PxpWf3yoL51nDvXEgcWiu1RQssq2ozatgZ13atEzocP0_jHad_RF9XGEv0lsk1k3dq19eFX7JWTHOsrm6FHE3yTYwvukjyPOjnOBY_eT-U8LoZLoz_KZ3QUlecZla3MKECtGCuS_cOyKndgICcZtjkuHk5zeUBmYbJJ6XEgGnVlhua_WS1wV7v_vFSOEnAnbiVaqWlWdLNQLM9_UWzMFnOFss0CK-iOEmWcYzRF5pFi1mapkkaR0EYpldReJjQ392awWyZLoJ4MQ-TJJjPkySdUOCVVfquv5S6u-nwB8z_g5g
+
+### State Diagram 4
+
+This diagram shows the task lifecycle within the productivity area of the system. It includes task creation, Kanban progression, note-taking, reminders, and overdue status transitions. This is useful because the task system is heavily based on workflow state changes and deadline monitoring.
