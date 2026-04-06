@@ -8,6 +8,7 @@ from storage.storagerepo import JSONStorage
 
 EMAIL_REGEX = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
 USERNAME_REGEX = r"^[a-zA-Z0-9_]{3,20}$"
+MAX_EMAIL_LENGTH = 254  # RFC 5321 hard limit
 
 
 class AuthService:
@@ -17,6 +18,8 @@ class AuthService:
         self.reset_tokens = {}
 
     def validate_email(self, email):
+        if len(email) > MAX_EMAIL_LENGTH:
+            raise ValueError(f"Email must not exceed {MAX_EMAIL_LENGTH} characters")
         if not re.match(EMAIL_REGEX, email):
             raise ValueError("Invalid email format")
 

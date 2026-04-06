@@ -1,11 +1,10 @@
 import pytest
 import jwt
-import time
+import os
+from datetime import datetime, timedelta
 
 
 class TestAuthEnforcement:
-    """Every protected route must reject requests without a valid token."""
-
     PROTECTED_ROUTES = [
         ("GET", "/api/transactions"),
         ("POST", "/api/transactions"),
@@ -35,10 +34,6 @@ class TestAuthEnforcement:
         assert res.status_code == 401
 
     def test_expired_token_returns_401(self, client):
-        import os
-        from auth_routes import generate_token
-        from datetime import datetime, timedelta
-
         # Manually create an already-expired token
         payload = {
             "email": "test@example.com",
@@ -65,8 +60,6 @@ class TestAuthEnforcement:
 
 
 class TestDataIsolation:
-    """Users must not be able to access each other's data."""
-
     def _register_and_login(self, client, email, username):
         client.post(
             "/api/auth/register",
@@ -135,8 +128,6 @@ class TestDataIsolation:
 
 
 class TestInputSanitisation:
-    """Malformed inputs must not crash the server."""
-
     def test_sql_injection_attempt_in_email(self, client):
         res = client.post(
             "/api/auth/login",

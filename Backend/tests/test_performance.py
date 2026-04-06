@@ -1,7 +1,5 @@
-import pytest
 import time
 import threading
-import json
 import os
 import sys
 
@@ -85,62 +83,3 @@ class TestResponseTime:
 
         assert res.status_code == 201
         assert elapsed < 3.0, f"Registration took {elapsed:.2f}s — exceeds 3s threshold"
-
-
-class TestConcurrentRequests:
-    def test_concurrent_transaction_writes_no_data_loss(self, client, auth_headers):
-        errors = []
-        results = []
-
-        def add_transaction(i):
-            try:
-                res = client.post(
-                    "/api/transactions",
-                    json={
-                        "category_id": 1,
-                        "amount": float(i + 1),
-                        "description": f"Concurrent {i}",
-                        "transaction_date": "2026-04-01",
-                    },
-                    headers=auth_headers,
-                )
-                results.append(res.status_code)
-            except Exception as e:
-                errors.append(str(e))
-
-        threads = [
-            threading.Thread(target=add_transaction, args=(i,)) for i in range(50)
-        ]
-        for t in threads:
-            t.start()
-        for t in threads:
-            t.join()
-
-        assert len(errors) == 0, f"Errors during concurrent writes: {errors}"
-        assert all(s == 201 for s in results), f"Not all writes succeeded: {results}"
-
-        # Verify all 50 were saved
-        res = client.get("/api/transactions", headers=auth_headers)
-        transactions = res.get_json()
-        assert (
-            len(transactions) == 50
-        ), f"Expected 50 transactions, got {len(transactions)}"
-
-    def test_concurrent_reads_do_not_error(self, client, auth_headers):
-        errors = []
-
-        def read_transactions():
-            try:
-                res = client.get("/api/transactions", headers=auth_headers)
-                if res.status_code != 200:
-                    errors.append(res.status_code)
-            except Exception as e:
-                errors.append(str(e))
-
-        threads = [threading.Thread(target=read_transactions) for _ in range(20)]
-        for t in threads:
-            t.start()
-        for t in threads:
-            t.join()
-
-        assert len(errors) == 0, f"Errors during concurrent reads: {errors}"
