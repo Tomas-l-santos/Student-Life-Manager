@@ -18,7 +18,7 @@ class Notes:
 
     def create(
         self,
-        user_email,
+        user_id,
         module_id,
         module_name,
         module_code,
@@ -40,7 +40,7 @@ class Notes:
 
         note = {
             "id": self._generate_id(),
-            "user_email": user_email,
+            "user_id": user_id,
             "module_id": module_id,
             "module_name": module_name,
             "module_code": module_code,
@@ -58,14 +58,14 @@ class Notes:
         return note
 
     def get_all_for_module(
-        self, module_id, user_email, topic=None, include_archived=False
+        self, module_id, user_id, topic=None, include_archived=False
     ):
 
         notes = self.storage.read_all()
         module_notes = [
             n
             for n in notes
-            if n["module_id"] == module_id and n["user_email"] == user_email
+            if n["module_id"] == module_id and n["user_id"] == user_id
         ]
 
         # Filter by topic if specified
@@ -84,7 +84,7 @@ class Notes:
 
         return module_notes
 
-    def get_topics_for_module(self, module_id, user_email):
+    def get_topics_for_module(self, module_id, user_id):
 
         # Get specific topics for a module
         notes = self.storage.read_all()
@@ -92,7 +92,7 @@ class Notes:
             n
             for n in notes
             if n["module_id"] == module_id
-            and n["user_email"] == user_email
+            and n["user_id"] == user_id
             and not n.get("is_archived", False)
         ]
 
@@ -116,22 +116,22 @@ class Notes:
 
         return topics
 
-    def get_by_id(self, note_id, user_email):
+    def get_by_id(self, note_id, user_id):
 
         # Get a specific note
         notes = self.storage.read_all()
         for n in notes:
-            if n["id"] == note_id and n["user_email"] == user_email:
+            if n["id"] == note_id and n["user_id"] == user_id:
                 return n
         return None
 
-    def update(self, note_id, user_email, updates):
+    def update(self, note_id, user_id, updates):
 
         # Update an existing note
         notes = self.storage.read_all()
 
         for i, n in enumerate(notes):
-            if n["id"] == note_id and n["user_email"] == user_email:
+            if n["id"] == note_id and n["user_id"] == user_id:
                 # Update allowed fields
                 if "title" in updates:
                     if not updates["title"].strip():
@@ -166,36 +166,36 @@ class Notes:
 
         raise ValueError("Note not found")
 
-    def delete(self, note_id, user_email):
+    def delete(self, note_id, user_id):
 
         # Delete a note
         notes = self.storage.read_all()
 
         for i, n in enumerate(notes):
-            if n["id"] == note_id and n["user_email"] == user_email:
+            if n["id"] == note_id and n["user_id"] == user_id:
                 notes.pop(i)
                 self.storage.overwrite(notes)
                 return True
 
         raise ValueError("Note not found")
 
-    def delete_all_for_module(self, module_id, user_email):
+    def delete_all_for_module(self, module_id, user_id):
 
         # Delete all notes for a module (used when module is deleted)
         notes = self.storage.read_all()
         notes = [
             n
             for n in notes
-            if not (n["module_id"] == module_id and n["user_email"] == user_email)
+            if not (n["module_id"] == module_id and n["user_id"] == user_id)
         ]
         self.storage.overwrite(notes)
         return True
 
-    def search_notes(self, user_email, query, module_id=None):
+    def search_notes(self, user_id, query, module_id=None):
 
         # Search notes by title, content, or tags
         notes = self.storage.read_all()
-        user_notes = [n for n in notes if n["user_email"] == user_email]
+        user_notes = [n for n in notes if n["user_id"] == user_id]
 
         # Filter by module if specified
         if module_id:
@@ -228,22 +228,22 @@ class Notes:
 
         return matching_notes
 
-    def pin_note(self, note_id, user_email):
+    def pin_note(self, note_id, user_id):
 
         # Pin a note to the top
-        return self.update(note_id, user_email, {"is_pinned": True})
+        return self.update(note_id, user_id, {"is_pinned": True})
 
-    def unpin_note(self, note_id, user_email):
+    def unpin_note(self, note_id, user_id):
 
         # Unpin a note
-        return self.update(note_id, user_email, {"is_pinned": False})
+        return self.update(note_id, user_id, {"is_pinned": False})
 
-    def archive_note(self, note_id, user_email):
+    def archive_note(self, note_id, user_id):
 
         # Archive a note
-        return self.update(note_id, user_email, {"is_archived": True})
+        return self.update(note_id, user_id, {"is_archived": True})
 
-    def unarchive_note(self, note_id, user_email):
+    def unarchive_note(self, note_id, user_id):
 
         # Unarchive a note
-        return self.update(note_id, user_email, {"is_archived": False})
+        return self.update(note_id, user_id, {"is_archived": False})

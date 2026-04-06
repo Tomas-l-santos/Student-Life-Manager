@@ -175,7 +175,9 @@ This was the most intensive sprint in terms of bug resolution. The `user_email` 
  - `App.tsx` updated with routes for `/account` and `/help`
 
 ### Not Delivered
-- Task backend (`task_service.py`, `tasks.json`) — task management instead connected to deadlines backend
+ - Task backend (`task_service.py`, `tasks.json`) — task management instead connected to deadlines backend
+ - The `AcademicsService`, `Modules`, `Assessments`, and `Notes` models were all built using user_email as the identifier which should be resolved into user-id
+
 
 ### Retrospective
 `deadlines.tsx` and `timetable.tsx` were initially connected to local React state rather than the backend. Both required a refactor once the backend services were built by replacing `useState` initialisers and manual state mutations with `useEffect` load-on-mount and API calls on save and delete.
