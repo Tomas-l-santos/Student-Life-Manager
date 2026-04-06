@@ -20,7 +20,7 @@ class Modules:
 
     def create(
         self,
-        user_email,
+        user_id,
         name,
         code,
         credits,
@@ -54,14 +54,14 @@ class Modules:
             raise ValueError("Invalid year of study")
 
         # Check for duplicate module
-        if self._module_exists(user_email, code, academic_year):
+        if self._module_exists(user_id, code, academic_year):
             raise ValueError(
                 "Module with this code already exists for this academic year"
             )
 
         module = {
             "id": self._generate_id(),
-            "user_email": user_email,
+            "user_id": user_id,
             "name": name,
             "code": code,
             "credits": credits,
@@ -75,13 +75,13 @@ class Modules:
         self.storage.append(module)
         return module
 
-    def _module_exists(self, user_email, code, academic_year):
+    def _module_exists(self, user_id, code, academic_year):
 
         # Check if module already exists
         modules = self.storage.read_all()
         for m in modules:
             if (
-                m["user_email"] == user_email
+                m["user_id"] == user_id
                 and m["code"] == code
                 and m["academic_year"] == academic_year
                 and m["status"] != "dropped"
@@ -89,11 +89,11 @@ class Modules:
                 return True
         return False
 
-    def get_all(self, user_email, year_of_study=None, academic_year=None, status=None):
+    def get_all(self, user_id, year_of_study=None, academic_year=None, status=None):
 
         # Get all modules for a user with optional filters
         modules = self.storage.read_all()
-        user_modules = [m for m in modules if m["user_email"] == user_email]
+        user_modules = [m for m in modules if m["user_id"] == user_id]
 
         # Apply filters
         if year_of_study:
@@ -116,22 +116,22 @@ class Modules:
 
         return user_modules
 
-    def get_by_id(self, module_id, user_email):
+    def get_by_id(self, module_id, user_id):
 
         # Get a specific module
         modules = self.storage.read_all()
         for m in modules:
-            if m["id"] == module_id and m["user_email"] == user_email:
+            if m["id"] == module_id and m["user_id"] == user_id:
                 return m
         return None
 
-    def update(self, module_id, user_email, updates):
+    def update(self, module_id, user_id, updates):
 
         # Update an existing module
         modules = self.storage.read_all()
 
         for i, m in enumerate(modules):
-            if m["id"] == module_id and m["user_email"] == user_email:
+            if m["id"] == module_id and m["user_id"] == user_id:
                 # Update fields
                 if "name" in updates:
                     m["name"] = updates["name"]
@@ -168,13 +168,13 @@ class Modules:
 
         raise ValueError("Module not found")
 
-    def delete(self, module_id, user_email):
+    def delete(self, module_id, user_id):
 
         # Delete a module
         modules = self.storage.read_all()
 
         for i, m in enumerate(modules):
-            if m["id"] == module_id and m["user_email"] == user_email:
+            if m["id"] == module_id and m["user_id"] == user_id:
                 modules.pop(i)
                 self.storage.overwrite(modules)
                 return True

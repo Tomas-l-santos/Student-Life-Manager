@@ -127,7 +127,7 @@ def get_categories():
 @token_required
 def get_modules(current_user_email, current_user_id):
     try:
-        modules = academics_service.get_user_modules(current_user_email)
+        modules = academics_service.get_user_modules(current_user_id)
         for module in modules:
             assessments = academics_service.get_module_assessments(
                 module["id"], current_user_email
@@ -144,7 +144,7 @@ def create_module(current_user_email, current_user_id):
     data = request.json
     try:
         new_module = academics_service.create_module(
-            user_email=current_user_email,  # Secure identity
+            user_id=current_user_id,  # Secure identity
             name=data.get("name"),
             code=data.get("code"),
             credits=data.get("credits"),
@@ -162,7 +162,7 @@ def create_module(current_user_email, current_user_id):
 @token_required
 def delete_module(current_user_email, current_user_id, module_id):
     try:
-        academics_service.delete_module(module_id, current_user_email)
+        academics_service.delete_module(module_id, current_user_id)
         return jsonify({"success": True}), 200
     except Exception as e:
         print(f"Backend Error deleting module: {e}")
@@ -175,7 +175,7 @@ def add_assessment(current_user_email, current_user_id):
     data = request.json
     try:
         new_assessment = academics_service.create_assessment(
-            user_email=current_user_email,
+            user_id=current_user_id,
             module_id=int(data.get("module_id")),
             name=data.get("name"),
             assessment_type=data.get("assessment_type"),

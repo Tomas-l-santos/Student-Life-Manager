@@ -69,6 +69,13 @@ Runs flake8 across all Python files to check for PEP8 style violations and poten
 
 The configuration is stored in `Backend/.flake8` which sets the maximum line length to 100 characters and excludes virtual environment folders.
 
+#### Stage 7 - Format Check with black
+```yaml
+- run: |
+    cd Backend
+    python -m black --check --diff .
+```
+Runs black in check mode which exits with a non-zero code if any file would be reformatted, failing the pipeline.
 ### Frontend Job
 
 #### Stage 1 — Checkout
