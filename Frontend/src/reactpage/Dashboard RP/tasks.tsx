@@ -15,6 +15,7 @@ interface Task {
 }
 
 export default function Tasks() {
+  // State
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
@@ -45,7 +46,9 @@ export default function Tasks() {
     }
   };
 
-  // Auto-save logic
+  /* This auto-save functionality was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "make the task notes auto save after typing instead of using a save button"
+     The output was reviewed, modified, and tested by the author. */
   useEffect(() => {
     if (!selectedTask) return;
 
@@ -67,6 +70,7 @@ export default function Tasks() {
     return () => clearTimeout(timer);
   }, [selectedTask]);
 
+  // View and UI Handlers
   const handleOpenTask = (task: Task) => {
     setSelectedTask(task);
     setSaveStatus("idle");
@@ -101,6 +105,9 @@ export default function Tasks() {
     }
   };
 
+  /* This kanban logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "make buttons to move tasks between todo, in progress, and done"
+     The output was reviewed, modified, and tested by the author. */
   const moveTaskStatus = async (e: React.MouseEvent, task: Task, newStatus: Task["status"]) => {
     e.stopPropagation();
     try {
@@ -146,6 +153,9 @@ export default function Tasks() {
     }
   };
 
+  /* This component layout was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "help me with the kanban board layout for the tasks it looks badS"
+     The output was reviewed, modified, and tested by the author. */
   const renderKanbanColumn = (status: Task["status"]) => {
     const columnTasks = tasks.filter((t) => t.status === status);
 
@@ -239,6 +249,7 @@ export default function Tasks() {
       <Topbar />
 
       <main className="main-content">
+        {/* Kanban Toolbar Controls */}
         <section className="tasks-toolbar">
           <div className="tasks-heading">
             <h2>Tasks Board</h2>
@@ -289,6 +300,7 @@ export default function Tasks() {
               {renderKanbanColumn("Done")}
             </div>
 
+            {/* Note Editor Side Panel */}
             <aside className="task-editor-panel auto-save-panel">
               {selectedTask ? (
                 <div className="editor-full-layout">
@@ -311,7 +323,7 @@ export default function Tasks() {
                     className="editor-notes-area full-bleed-textarea"
                     value={selectedTask.notes}
                     onChange={handleUpdateNotes}
-                    placeholder="Start typing your notes here. Everything saves automatically..."
+                    placeholder="Start..."
                   ></textarea>
                 </div>
               ) : (
@@ -325,6 +337,7 @@ export default function Tasks() {
         )}
       </main>
 
+      {/* Task form Modal */}
       <div
         className={`modal-overlay ${isModalOpen ? "show" : ""}`}
         style={isModalOpen ? { display: "flex" } : { display: "none" }}
