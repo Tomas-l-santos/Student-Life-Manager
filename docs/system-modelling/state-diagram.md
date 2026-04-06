@@ -41,7 +41,7 @@ stateDiagram-v2
     Authenticated --> DeleteAccountRequested : delete account
     DeleteAccountRequested --> AccountDeleted : confirm deletion
     AccountDeleted --> [*]
-
+```
 ### State Diagram 1 
 
 This diagram models the lifecycle of a user account from registration to authentication and recovery. It reflects the requirements for account creation, login validation, password strength enforcement, OTP-based password recovery, temporary lockout after repeated failed login attempts, and permanent account deletion. This was important to model because the authentication feature contains multiple security-related transitions and error states.
