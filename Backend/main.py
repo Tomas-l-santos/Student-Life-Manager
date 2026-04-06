@@ -203,7 +203,7 @@ def add_deadline(current_user_email, current_user_id):
             due_date=data["due_date"],
             priority=data.get("priority", "normal"),
             status=data.get("status", "To-Do"),
-            notes=data.get("notes", "")
+            notes=data.get("notes", ""),
         )
         return jsonify(d), 201
     except Exception as e:

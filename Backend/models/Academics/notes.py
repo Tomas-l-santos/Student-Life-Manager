@@ -63,9 +63,7 @@ class Notes:
 
         notes = self.storage.read_all()
         module_notes = [
-            n
-            for n in notes
-            if n["module_id"] == module_id and n["user_id"] == user_id
+            n for n in notes if n["module_id"] == module_id and n["user_id"] == user_id
         ]
 
         # Filter by topic if specified
