@@ -1,26 +1,26 @@
 /* This is the CSS for the help page */
 
 :root{
-  --navy-900:#07144a;
-  --navy-850:#081a58;
-  --navy-800:#0a216f;
+  --navy-900: #07144a;
+  --navy-850: #081a58;
+  --navy-800: #0a216f;
 
-  --bg:#ffffff;
-  --panel:#f5f7fb;
-  --panel-2:#eef2f8;
-  --border:#e3e8f2;
-  --text:#0b1020;
-  --muted:#63708a;
+  --bg: #ffffff;
+  --panel: #f5f7fb;
+  --panel-2: #eef2f8;
+  --border: #e3e8f2;
+  --text: #0b1020;
+  --muted: #63708a;
 
-  --sidebar:#081a58;
-  --sidebar-2:#0b1f66;
-  --sidebar-text:#e9eeff;
-  --sidebar-muted:#b9c6ff;
+  --sidebar: #081a58;
+  --sidebar-2: #0b1f66;
+  --sidebar-text: #e9eeff;
+  --sidebar-muted: #b9c6ff;
 
-  --event-orange:#f59e0b;
-  --event-cyan:#22c55e;   
-  --event-blue:#38bdf8;
-  --event-purple:#a855f7;
+  --event-orange: #f59e0b;
+  --event-cyan: #22c55e;   
+  --event-blue: #38bdf8;
+  --event-purple: #a855f7;
 
   --shadow: 0 6px 18px rgba(10, 23, 64, 0.12);
   --radius:12px;
@@ -32,37 +32,37 @@
 
 /* Dark */
 [data-theme="dark"] {
-  --bg: #000000;
-  --panel: #121212;
-  --panel-2: #1a1a1a;
-  --border: #27272a;
-  --text: #ffffff;
-  --muted: #a1a1aa;
+  --bg:  #000000;
+  --panel:  #121212;
+  --panel-2:  #1a1a1a;
+  --border:  #27272a;
+  --text:  #ffffff;
+  --muted:  #a1a1aa;
 
-  --sidebar: #000000;
-  --sidebar-2: #050505;
-  --sidebar-text: #ffffff;
-  --sidebar-muted: #a1a1aa;
+  --sidebar:  #000000;
+  --sidebar-2:  #050505;
+  --sidebar-text:  #ffffff;
+  --sidebar-muted:  #a1a1aa;
 
-  --primary: #06b6d4; 
+  --primary:  #06b6d4; 
   --shadow: 0 8px 24px rgba(6, 182, 212, 0.1);
 }
 
 /*Light */
 [data-theme="new-light"] {
-  --bg: #faf9f7;
-  --panel: #ffffff;
-  --panel-2: #f2f0eb;
-  --border: #e6e4df;
-  --text: #111111;
-  --muted: #555555;
+  --bg:  #faf9f7;
+  --panel:  #ffffff;
+  --panel-2:  #f2f0eb;
+  --border:  #e6e4df;
+  --text:  #111111;
+  --muted:  #555555;
 
-  --sidebar: #ffffff;
-  --sidebar-2: #ffffff;
-  --sidebar-text: #111111;
-  --sidebar-muted: #555555;
+  --sidebar:  #ffffff;
+  --sidebar-2:  #ffffff;
+  --sidebar-text:  #111111;
+  --sidebar-muted:  #555555;
 
-  --primary: #e60023; 
+  --primary:  #e60023; 
   --shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
 }
 
@@ -94,7 +94,7 @@ body{
   justify-content:space-between;
   padding: 0 18px 0 18px;
   background: linear-gradient(90deg, var(--navy-900), var(--navy-800));
-  color: #fff;
+  color:  #fff;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 [data-theme="dark"] .topbar, [data-theme="new-light"] .topbar { background: var(--panel); border-color: var(--border); color: var(--text); }
@@ -116,7 +116,7 @@ body{
   font-weight:700;
   letter-spacing:0.5px;
 }
-[data-theme="dark"] .logo, [data-theme="new-light"] .logo { background: var(--primary); color: #fff; }
+[data-theme="dark"] .logo, [data-theme="new-light"] .logo { background: var(--primary); color:  #fff; }
 
 .brand h1{
   margin:0;
@@ -178,7 +178,7 @@ body{
   font-weight:700;
   font-size: 12px;
 }
-[data-theme="dark"] .avatar .dot, [data-theme="new-light"] .avatar .dot { background: var(--primary); color: #fff; }
+[data-theme="dark"] .avatar .dot, [data-theme="new-light"] .avatar .dot { background: var(--primary); color:  #fff; }
 
 .avatar span{
   font-size: 13px;
@@ -303,8 +303,7 @@ body{
   gap:8px;
   opacity:0.95;
 }
-
-.badge{
+.tz .badge{
   padding: 4px 8px;
   border-radius: 999px;
   background: rgba(255,255,255,0.10);
@@ -399,6 +398,9 @@ body{
   color: var(--text);
 }
 
+/* This CSS Grid layout logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "create a grid layout for quick links that collapses to one column on smaller screens"
+   The output was reviewed, modified, and tested by the author. */
 .quick-links-grid{
   display:grid;
   grid-template-columns: repeat(2, 1fr);
