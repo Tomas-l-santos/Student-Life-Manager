@@ -36,6 +36,11 @@ jobs:
         run: |
           cd Backend
           python -m flake8 .
+          
+      - name: Check formatting with black
+        run: |
+          cd Backend
+          python -m black --check --diff .
 
   frontend:
     name: Frontend Build
