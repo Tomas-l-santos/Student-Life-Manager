@@ -131,9 +131,7 @@ class AcademicsService:
     def get_year_overview(self, user_id, year_of_study, academic_year):
 
         # Get year overview with all modules and grades
-        return self.analytics.get_year_overview(
-            user_id, year_of_study, academic_year
-        )
+        return self.analytics.get_year_overview(user_id, year_of_study, academic_year)
 
     def get_module_summary(self, module_id, user_id):
 
@@ -162,9 +160,7 @@ class AcademicsService:
             tags=tags,
         )
 
-    def get_module_notes(
-        self, module_id, user_id, topic=None, include_archived=False
-    ):
+    def get_module_notes(self, module_id, user_id, topic=None, include_archived=False):
 
         # Get all notes for a module
 

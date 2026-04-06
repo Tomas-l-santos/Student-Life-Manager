@@ -27,8 +27,6 @@ def generate_token(email, user_id):
 
 
 def token_required(f):
-    """Decorator to protect routes with JWT"""
-
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
@@ -60,7 +58,7 @@ def token_required(f):
 @auth_bp.route("/register", methods=["POST"])
 def register():
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True)
 
         if (
             not data
@@ -104,7 +102,7 @@ def register():
 @auth_bp.route("/login", methods=["POST"])
 def login():
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True)
 
         if not data or not data.get("email") or not data.get("password"):
             return jsonify({"error": "Missing email or password"}), 400
@@ -167,7 +165,7 @@ def get_current_user(current_user_email, current_user_id):
 @token_required
 def change_password(current_user_email, current_user_id):
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True)
 
         if not data or not data.get("new_password"):
             return jsonify({"error": "New password is required"}), 400
@@ -186,7 +184,7 @@ def change_password(current_user_email, current_user_id):
 def forgot_password():
     """Request a password reset token (6 digits)"""
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True)
 
         if not data or not data.get("email"):
             return jsonify({"error": "Email is required"}), 400
@@ -243,7 +241,7 @@ def forgot_password():
 def reset_password():
     """Reset password using the 6-digit token"""
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True)
 
         if not data or not data.get("token") or not data.get("new_password"):
             return jsonify({"error": "Token and new password are required"}), 400
@@ -261,7 +259,7 @@ def reset_password():
 @auth_bp.route("/verify-reset-token", methods=["POST"])
 def verify_reset_token():
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True)
 
         if not data or not data.get("token"):
             return jsonify({"error": "Token is required"}), 400

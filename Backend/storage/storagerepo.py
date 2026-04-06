@@ -23,9 +23,12 @@ class JSONStorage:
                 json.dump(data, f, indent=2)
 
     def append(self, item):
-        data = self.read_all()
-        data.append(item)
-        self.write_all(data)
+        with self.lock:
+            with open(self.filepath, "r") as f:
+                data = json.load(f)
+            data.append(item)
+            with open(self.filepath, "w") as f:
+                json.dump(data, f, indent=2)
 
     def overwrite(self, data):
         self.write_all(data)
