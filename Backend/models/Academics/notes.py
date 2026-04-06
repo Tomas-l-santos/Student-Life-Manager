@@ -65,7 +65,7 @@ class Notes:
         module_notes = [
             n
             for n in notes
-            if n["module_id"] == module_id and n["user_id"] == user_id
+            if n["module_id"] == module_id and n.get("user_id") == user_id
         ]
 
         # Filter by topic if specified
@@ -92,7 +92,7 @@ class Notes:
             n
             for n in notes
             if n["module_id"] == module_id
-            and n["user_id"] == user_id
+            and n.get("user_id") == user_id
             and not n.get("is_archived", False)
         ]
 
@@ -121,7 +121,7 @@ class Notes:
         # Get a specific note
         notes = self.storage.read_all()
         for n in notes:
-            if n["id"] == note_id and n["user_id"] == user_id:
+            if n["id"] == note_id and n.get("user_id") == user_id:
                 return n
         return None
 
@@ -131,7 +131,7 @@ class Notes:
         notes = self.storage.read_all()
 
         for i, n in enumerate(notes):
-            if n["id"] == note_id and n["user_id"] == user_id:
+            if n["id"] == note_id and n.get("user_id") == user_id:
                 # Update allowed fields
                 if "title" in updates:
                     if not updates["title"].strip():
@@ -172,7 +172,7 @@ class Notes:
         notes = self.storage.read_all()
 
         for i, n in enumerate(notes):
-            if n["id"] == note_id and n["user_id"] == user_id:
+            if n["id"] == note_id and n.get("user_id") == user_id:
                 notes.pop(i)
                 self.storage.overwrite(notes)
                 return True
@@ -186,7 +186,7 @@ class Notes:
         notes = [
             n
             for n in notes
-            if not (n["module_id"] == module_id and n["user_id"] == user_id)
+            if not (n["module_id"] == module_id and n.get("user_id") == user_id)
         ]
         self.storage.overwrite(notes)
         return True
@@ -195,7 +195,7 @@ class Notes:
 
         # Search notes by title, content, or tags
         notes = self.storage.read_all()
-        user_notes = [n for n in notes if n["user_id"] == user_id]
+        user_notes = [n for n in notes if n.get("user_id") == user_id]
 
         # Filter by module if specified
         if module_id:
