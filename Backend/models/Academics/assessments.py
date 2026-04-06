@@ -28,7 +28,7 @@ class Assessments:
 
     def create(
         self,
-        user_email,
+        user_id,
         module_id,
         module_name,
         module_code,
@@ -80,7 +80,7 @@ class Assessments:
 
         assessment = {
             "id": self._generate_id(),
-            "user_email": user_email,
+            "user_id": user_id,
             "module_id": module_id,
             "module_name": module_name,
             "module_code": module_code,
@@ -98,7 +98,7 @@ class Assessments:
         self.storage.append(assessment)
         return assessment
 
-    def get_all_for_module(self, module_id, user_email):
+    def get_all_for_module(self, module_id, user_id):
 
         # Get all assessments for a specific module
 
@@ -106,7 +106,7 @@ class Assessments:
         module_assessments = [
             a
             for a in assessments
-            if a["module_id"] == module_id and a["user_email"] == user_email
+            if a["module_id"] == module_id and a["user_id"] == user_id
         ]
 
         # Sort by date (most recent first)
@@ -114,22 +114,22 @@ class Assessments:
 
         return module_assessments
 
-    def get_by_id(self, assessment_id, user_email):
+    def get_by_id(self, assessment_id, user_id):
 
         # Get a specific assessment
         assessments = self.storage.read_all()
         for a in assessments:
-            if a["id"] == assessment_id and a["user_email"] == user_email:
+            if a["id"] == assessment_id and a["user_id"] == user_id:
                 return a
         return None
 
-    def update(self, assessment_id, user_email, updates):
+    def update(self, assessment_id, user_id, updates):
 
         # Update an existing assessment
         assessments = self.storage.read_all()
 
         for i, a in enumerate(assessments):
-            if a["id"] == assessment_id and a["user_email"] == user_email:
+            if a["id"] == assessment_id and a["user_id"] == user_id:
                 # Update fields
                 if "name" in updates:
                     a["name"] = updates["name"]
@@ -177,27 +177,27 @@ class Assessments:
 
         raise ValueError("Assessment not found")
 
-    def delete(self, assessment_id, user_email):
+    def delete(self, assessment_id, user_id):
 
         # Delete an assessment
         assessments = self.storage.read_all()
 
         for i, a in enumerate(assessments):
-            if a["id"] == assessment_id and a["user_email"] == user_email:
+            if a["id"] == assessment_id and a["user_id"] == user_id:
                 assessments.pop(i)
                 self.storage.overwrite(assessments)
                 return True
 
         raise ValueError("Assessment not found")
 
-    def delete_all_for_module(self, module_id, user_email):
+    def delete_all_for_module(self, module_id, user_id):
 
         # Delete all assessments for a module (used when module is deleted)
         assessments = self.storage.read_all()
         assessments = [
             a
             for a in assessments
-            if not (a["module_id"] == module_id and a["user_email"] == user_email)
+            if not (a["module_id"] == module_id and a["user_id"] == user_id)
         ]
         self.storage.overwrite(assessments)
         return True
