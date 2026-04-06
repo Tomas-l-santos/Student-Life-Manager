@@ -3,15 +3,13 @@ import json
 import os
 import tempfile
 import sys
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 from main import app as flask_app
 from services.authorisation import AuthService
 from services.budget_service import BudgetService
 from services.deadline_service import DeadlineService
 from services.timetable_service import TimetableService
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 @pytest.fixture
 def temp_dir():

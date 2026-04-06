@@ -42,6 +42,18 @@ jobs:
           cd Backend
           python -m black --check --diff .
 
+      - name: Run tests
+        run: |
+          cd Backend
+          pytest tests/ -v --tb=short --cov=services --cov-report=term-missing
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: Backend/coverage.xml
+        if: always()
+
   frontend:
     name: Frontend Build
     runs-on: ubuntu-latest

@@ -9,8 +9,6 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 
 class TestResponseTime:
-    """NFR-5: Key operations complete in acceptable time."""
-
     def test_login_completes_under_2_seconds(self, client):
         client.post(
             "/api/auth/register",
@@ -90,13 +88,7 @@ class TestResponseTime:
 
 
 class TestConcurrentRequests:
-    """Test that JSONStorage's thread lock prevents data corruption under load."""
-
     def test_concurrent_transaction_writes_no_data_loss(self, client, auth_headers):
-        """
-        100 threads each add one transaction simultaneously.
-        All 100 must be persisted — no writes lost to race conditions.
-        """
         errors = []
         results = []
 
@@ -135,7 +127,6 @@ class TestConcurrentRequests:
         ), f"Expected 50 transactions, got {len(transactions)}"
 
     def test_concurrent_reads_do_not_error(self, client, auth_headers):
-        """Multiple simultaneous reads must all succeed."""
         errors = []
 
         def read_transactions():
