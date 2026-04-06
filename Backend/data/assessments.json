@@ -78,5 +78,53 @@
     "percentage": 74.0,
     "uk_grade": "First Class (1st)",
     "created_at": "2026-04-02T19:16:31.115325"
+  },
+  {
+    "id": 10,
+    "user_id": "d294385c-70a1-40ea-b9af-1b24228d17ba",
+    "module_id": 8,
+    "module_name": "OS Management",
+    "module_code": "COMP 1172",
+    "name": "Coursework 1",
+    "assessment_type": "coursework",
+    "score": 81.0,
+    "max_score": 100.0,
+    "weight": 60.0,
+    "date": "2026-04-06",
+    "percentage": 81.0,
+    "uk_grade": "First Class (1st)",
+    "created_at": "2026-04-06T22:20:47.681274"
+  },
+  {
+    "id": 11,
+    "user_id": "d294385c-70a1-40ea-b9af-1b24228d17ba",
+    "module_id": 8,
+    "module_name": "OS Management",
+    "module_code": "COMP 1172",
+    "name": "Coursework 2",
+    "assessment_type": "coursework",
+    "score": 74.0,
+    "max_score": 100.0,
+    "weight": 40.0,
+    "date": "2026-04-06",
+    "percentage": 74.0,
+    "uk_grade": "First Class (1st)",
+    "created_at": "2026-04-06T22:21:02.988435"
+  },
+  {
+    "id": 12,
+    "user_id": "d294385c-70a1-40ea-b9af-1b24228d17ba",
+    "module_id": 9,
+    "module_name": "Communication",
+    "module_code": "COMP 1182",
+    "name": "Coursework 1",
+    "assessment_type": "coursework",
+    "score": 80.0,
+    "max_score": 100.0,
+    "weight": 100.0,
+    "date": "2026-04-06",
+    "percentage": 80.0,
+    "uk_grade": "First Class (1st)",
+    "created_at": "2026-04-06T22:21:43.218573"
   }
 ]
