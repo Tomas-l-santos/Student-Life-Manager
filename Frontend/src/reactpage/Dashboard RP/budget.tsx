@@ -12,6 +12,7 @@ import {
   deleteBudget,
 } from "../../services/api";
 
+// Type Interfaces
 interface Category {
   id: number;
   name: string;
@@ -34,11 +35,13 @@ interface BudgetStatus {
 }
 
 export default function Budget() {
+  // Core State
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [budgetStatus, setBudgetStatusData] = useState<BudgetStatus[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Summary and Form States
   const [summary, setSummary] = useState({
     income: 0,
     expenses: 0,
@@ -58,6 +61,7 @@ export default function Budget() {
 
   const [limitForm, setLimitForm] = useState({ category_id: "", amount: "" });
 
+  // Data Fetching Logic
   const fetchData = useCallback(async () => {
     try {
       const [txData, catData, statusData] = await Promise.all([
@@ -95,6 +99,7 @@ export default function Budget() {
     fetchData();
   }, [fetchData]);
 
+  // Transaction Handlers
   const handleAddTransaction = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!txForm.category_id || !txForm.amount) return;
@@ -114,6 +119,7 @@ export default function Budget() {
     }
   };
 
+  // Budget Limit Handlers
   const handleSetLimit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!limitForm.category_id || !limitForm.amount) return;
@@ -154,6 +160,7 @@ export default function Budget() {
     }
   };
 
+  // Data processing for charts
   const filteredCategories = categories.filter((c) => c.type === txForm.type);
   const expenseCategories = categories.filter((c) => c.type === "expense");
 
@@ -163,6 +170,9 @@ export default function Budget() {
   ];
   const cashFlowColors = ["#2563eb", "#e11d48"];
 
+  /* This data grouping logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "Create a function that adds up transaction amounts for each category to use in a pie chart."
+     The output was reviewed, modified, and tested by the author. */
   const expenseBreakdown = Object.values(
     transactions
       .filter((t) => {
@@ -193,11 +203,13 @@ export default function Budget() {
       <Topbar />
 
       <main className="budget-main">
+        {/* Header */}
         <header className="budget-header">
           <h2>Financial Dashboard</h2>
           <p>Track your income, expenses, and monthly budget limits.</p>
         </header>
 
+        {/* Summary Overview */}
         <section className="budget-summary-grid">
           <div className="summary-card">
             <h3>Monthly Income</h3>
@@ -217,6 +229,7 @@ export default function Budget() {
           </div>
         </section>
 
+        {/* Transaction Input Forms */}
         <section className="budget-content-grid">
           <div className="budget-panel">
             <div className="panel-head panel-head-row">
@@ -345,6 +358,10 @@ export default function Budget() {
           </div>
         </section>
 
+        {/* Recharts Pie Charts Section */}
+        {/* This Recharts integration was developed with assistance from Gemini (Google Gemini, 2026).
+            Prompt: "Build a responsive PieChart with Recharts to show cash flow and expenses, using custom colors for each segment."
+            The output was reviewed, modified, and tested by the author. */}
         <section className="budget-content-grid">
           <div className="budget-panel">
             <div className="panel-head">
@@ -424,6 +441,7 @@ export default function Budget() {
           </div>
         </section>
 
+        {/* Dynamic Budget Limit Progress Bars */}
         <section className="budget-content-grid">
           <div className="budget-panel">
             <div className="panel-head">
@@ -572,7 +590,7 @@ export default function Budget() {
             </div>
           </div>
 
-          {/* Transactions Table */}
+          {/* Transactions Data Table */}
           <div className="budget-panel transaction-panel" style={{ marginBottom: 0 }}>
             <div className="panel-head">
               <h3>Recent Transactions</h3>
