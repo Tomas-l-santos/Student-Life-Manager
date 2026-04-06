@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/styles.css";
 
 export default function ForgotPassword() {
+  // Step manager initialization
   const navigate = useNavigate();
   // Step 1: Request OTP | Step 2: Enter OTP & New Password | Step 3: Success
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -13,6 +14,9 @@ export default function ForgotPassword() {
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  /* This OTP email request integration was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "link the forgot password form to the backend to send the otp email"
+     The output was reviewed, modified, and tested by the author. */
   const handleRequestOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return setErrorMsg("Please enter your email address.");
@@ -42,6 +46,9 @@ export default function ForgotPassword() {
     }
   };
 
+  /* This authentication UI logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "help with the resetting the password"
+     The output was reviewed, modified, and tested by the author. */
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!otp || !newPassword) return setErrorMsg("Please fill out all fields.");
@@ -79,6 +86,7 @@ export default function ForgotPassword() {
     }
   };
 
+  // Main UI Form Rendering logic
   return (
     <div className="reset-password-wrapper">
       {/* Navbar */}
@@ -127,7 +135,7 @@ export default function ForgotPassword() {
                 </div>
               )}
 
-              {/* Request OTP */}
+              {/* Request OTP Step */}
               {step === 1 && (
                 <form onSubmit={handleRequestOTP}>
                   <h2 className="serif-headline">Reset your password</h2>
@@ -166,7 +174,7 @@ export default function ForgotPassword() {
                 </form>
               )}
 
-              {/* Enter OTP */}
+              {/* Enter OTP Step */}
               {step === 2 && (
                 <form onSubmit={handleResetPassword}>
                   <h2 className="serif-headline">Check your email</h2>
@@ -240,7 +248,7 @@ export default function ForgotPassword() {
                 </form>
               )}
 
-              {/* Success */}
+              {/* Success Step */}
               {step === 3 && (
                 <div
                   style={{

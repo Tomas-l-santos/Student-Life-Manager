@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { saveSession } from "../services/storage";
 
+// Existing User Login Modal Component
 export function LoginModal({ onClose }: { onClose: () => void }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -155,6 +156,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
   );
 }
 
+// New User Signup Modal Component
 export function SignupModal({
   onClose,
   onSwitchToLogin,
@@ -172,6 +174,9 @@ export function SignupModal({
   const [isRegistered, setIsRegistered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  /* This registration logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "help with password strength validation for signup pop up!!"
+     The output was reviewed, modified, and tested by the author. */
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");

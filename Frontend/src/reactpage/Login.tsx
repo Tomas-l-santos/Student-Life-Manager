@@ -4,11 +4,13 @@ import "../styles/styles.css";
 import { LoginModal, SignupModal } from "./Signup";
 
 function Login() {
+  // Modal state triggers
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
   return (
     <div className="landing-wrapper">
+      {/* Top Navbar Routing Elements */}
       <nav className="top-nav">
         <div className="nav-logo">
           <img src="/Images/student_life_logo_5.png" alt="Logo" />
@@ -35,6 +37,7 @@ function Login() {
         </div>
       </nav>
 
+      {/* Main Hero Header and Display Cards */}
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">
@@ -66,6 +69,7 @@ function Login() {
         </div>
       </section>
 
+      {/* Core Feature Overviews */}
       <div className="features-intro">
         <h2 className="features-intro__title">Bring your student life together</h2>
         <p className="features-intro__sub">
@@ -114,6 +118,7 @@ function Login() {
         </div>
       </section>
 
+      {/* Conditionally rendered Modals */}
       {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
 
       {isSignUpOpen && (
