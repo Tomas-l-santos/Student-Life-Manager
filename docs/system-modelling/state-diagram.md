@@ -9,6 +9,38 @@ These diagrams were selected to support features with clear event-driven behavio
 
 https://mermaid.live/view#pako:eNqFVE2P0zAQ_SuWj6hfmyVtmgPSqiskJNCuCtoDhIMVT1NrEzvYTpdS9b8zjpM2iVLwyfa8Nx9vPD7RVHGgMTWWWXgULNOsmB6CRBJcP979JNPpB_JZZRnwp8om0hsuF7V5C5kwFrSQGYlJqgFdEZamqpLW47sIx3jwxk0N5Ug6sFxwAgUT-bwyoCUrYF4yY96U5uM--lGF9C6ELKsm6CBIrxBk6JqvmRVKklQVZQ4Wxgt0JwzzSSINJMZ0RXLcCZabK8FD6voqu3fmtFfef0h4EvIjKlBT2oLGSBfYMDmrj4RlTMhb0PS1LT8kO29g1kJRWnMtvQUNFQtJIWRlwRDIWWmAj6v13LRtC6k6gD5u4VcFxguxUzpTlvQ7e5vg3D19e_6KAiDZgORkOeUiE9Zde3Zrb7Av-CJ2TnjX1pi4x-R7ZnqUHqyftQH7kOfqrdO5fzKvCbY9wxsyxwfmEh6W2PE-1LdVhaR7JrOrvP3X1E12UwPd0PnNuK4NauxhXkJWJXdXt0M-gpuPZqa6LeW1oT_vN8Cd0fcIx0-V3AldeD-oaW94W5hj4m9EJzTTgtPY6gomtACNPwYe6cmxEopJF5DQGLec6deEJvKMnJLJ70oVLU2rKtvTeIcjhSdfefP1XSDYOdAblwKNw9oDjU_0N42DWfQ-DKJgHUThIlpFE3qk8ep-tg7DcBmF98H6brlYnif0Tx1xMYtW4aKz7iYUuLBKf_Efb_3_nv8CpGvYaA
 
+## State Diagram 1: User Authentication and Password Recovery
+
+stateDiagram-v2
+    [*] --> LoggedOut
+
+    LoggedOut --> Registering : create account
+    Registering --> AccountCreated : valid email/username/password
+    Registering --> Registering : invalid input
+    AccountCreated --> LoggedOut : registration complete
+
+    LoggedOut --> LoggingIn : enter credentials
+    LoggingIn --> Authenticated : valid credentials
+    LoggingIn --> LoginFailed : invalid credentials
+    LoginFailed --> LoggingIn : try again
+    LoginFailed --> LockedOut : 5 failed attempts
+
+    LockedOut --> LoggedOut : 5 minutes elapsed
+
+    LoggedOut --> PasswordRecoveryRequested : forgot password
+    PasswordRecoveryRequested --> OTPSent : send 6-digit OTP
+    OTPSent --> OTPVerification : user enters OTP
+    OTPVerification --> PasswordResetAllowed : valid OTP
+    OTPVerification --> OTPSent : invalid OTP / resend
+    PasswordResetAllowed --> LoggedOut : password changed
+
+    Authenticated --> PasswordChange : change password
+    PasswordChange --> Authenticated : password updated
+
+    Authenticated --> DeleteAccountRequested : delete account
+    DeleteAccountRequested --> AccountDeleted : confirm deletion
+    AccountDeleted --> [*]
+
 ### State Diagram 1 
 
 This diagram models the lifecycle of a user account from registration to authentication and recovery. It reflects the requirements for account creation, login validation, password strength enforcement, OTP-based password recovery, temporary lockout after repeated failed login attempts, and permanent account deletion. This was important to model because the authentication feature contains multiple security-related transitions and error states.
