@@ -36,7 +36,66 @@ The team of four was divided into two functional pairs: Frontend (React/TypeScri
 
 ## 1.2 Backend Critical Evaluation (Team: [Names])
 
-## 1.3 Frontend Critical Evaluation (Team: [Names])
+## 1.3 Frontend Critical Evaluation (Team: [Abhishil Sinoj, Tomas Santos])
+
+Frontend development required balancing fast AI-generated code with the performance and data accuracy needs of a React 19 application. While AI helped generate initial components, additional engineering was needed to turn the system from a basic prototype into a reliable, production-ready student management tool.
+
+---
+
+**_Abhishil Sinoj_**
+
+The following instances represent specific engineering decisions where AI-generated suggestions were critically evaluated and modified to meet the system's performance, security, and functional need
+
+### Architectural Resilience in Data Aggregation (dashboard.tsx)
+
+- Prompt Design & AI Suggestion: The LLM was prompted to create a data-loading function for fetching timetable, deadline, and budget data.The AI suggested a series of sequential await calls.
+
+- Evaluation: Sequential fetching introduced a blocking bottleneck. A delay in one request (e.g., timetable data) would prevent other data (eg., budget information) from rendering, violating NFR-5 (Performance) for a responsive Single Page Application
+
+- Engineering Override: The sequential logic was replaced with a Promise.allSettled() architecture to enable concurrent API execution.
+
+- Learnings: This demonstrates that AI-generated solutions often prioritize simplicity over resilience. A concurrent-first design approach ensures partial UI functionality during service delays or outages, reflecting sound engineering judgement.
+
+### Network Optimization & Rate Limiting (tasks.tsx)
+
+- Prompt Design & AI Suggestion: The AI was assked to "make the notebook notes auto-save as the user types." The AI suggested attaching a backend PUT request directly to the onChange event.
+
+- Evaluation: This approach created a network spam anti-pattern, where each keystroke triggered an API call, potentially overwhelming the backend with redundant requests.
+
+- Engineering Override: A 1000ms debounce function using setTimeout was implemented to buffer input, ensuring synchronization occurs only after user inactivity.
+
+- Learnings: AI logic is often stateless and ignores the cost of network overhead. This reinforced the importance of implementing rate-limiting logic at the source of user input to ensure industry readiness.
+
+### Spatial Mathematical Logic in UI Rendering (timetable.tsx)
+
+- Prompt Design & AI Suggestion: A prompt requested a weekly timetable view using CSS Grid. The AI generated a layout where all class blocks had identical heights.
+
+- Evaluation: This failed functional requirement UR-3, as it prevented visual differentiation between sessions of varying durations (e.g., 1-hour vs 3-hour classes). The solution lacked proper mapping of temporal data to spatial representation
+
+- Engineering Override: A dynamic pixel-per-minute algorithm was implemented to calculate element height and vertical positioning based on timestamps.
+
+- Learnings: While AI performs well in visual styling, it is less effective in handling visual mathematical transformations. Complex data visualizations require deliberate algorithmic design.
+
+### Domain-Specific Accuracy in Academic Analytics (modules.tsx)
+
+- Prompt Design & AI Suggestion: A prompt requested a grade calculation function for university modules. The AI suggested a simple arithmetic mean.
+
+- Evaluation: This was academically incorrect for the UK higher education context as it ignored assessment weightings. Relying on this would have misled students regarding their actual degree classification, failing SR-3.3.
+
+- Engineering Override: A weighted contribution engine was implemented, calculating results using the formula,to produce an accurate weighted average aligned with classification thresholds.
+  - (score/max)× weight = max score
+
+- Learnings : AI lacks contextual domain awareness and defaults to simplified models. Systems requiring domain-specific accuracy must rely on explicitly defined formulas rather than inferred logic.
+
+### Centralized Security Architecture (App.tsx & api.ts)
+
+- Prompt Design & AI Suggestion: The AI initially suggested checking for a login token inside every individual component that needed protection
+
+- Critical Evaluation: This resulted in a fragmented and unmaintainable security model, increasing the risk of unprotected routes and violating NFR-1 (Security).
+
+- Engineering Override: A centralized Higher-Order Component (HOC) pattern was implemented using a "PrivateRoute" wrapper to secure all dashboard routes consistently.
+
+- Learnings: Centralized security architecture improves maintainability and reduces risk. AI can assist with implementation details, but architectural decisions must enforce modular and scalable design principles.
 
 ## 1.4 Comparative Analysis Table
 

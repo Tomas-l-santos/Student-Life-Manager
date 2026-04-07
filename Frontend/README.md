@@ -42,14 +42,14 @@ This approach aligns with Non-Functional Requirements related to usability and p
 
 ## Technical Specification
 
-| Dependency   | Version      | Purpose                                                |
-| ------------ | ------------ | ------------------------------------------------------ |
-| React        | 19.2.4       | UI library for component-based architecture.           |
-| Vite         | 8.0.0 (Beta) | Next-generation frontend tooling and build pipeline.   |
-| TypeScript   | 5.9.3        | Static type checking for robust, error-free logic.     |
-| React Router | 7.13.0       | Declarative routing for dashboard navigation.          |
-| Recharts     | 3.8.1        | Data visualization for financial and academic metrics. |
-| Bootstrap    | 5.3.8        | Grid system and foundational styling components.       |
+| Dependency   | Version      | Purpose                                                                                             |
+| ------------ | ------------ | --------------------------------------------------------------------------------------------------- |
+| React        | 19.2.4       | UI library for component-based architecture.                                                        |
+| Vite         | 8.0.0 (Beta) | Next-generation frontend tooling and build pipeline.                                                |
+| TypeScript   | 5.9.3        | Static type checking for robust, error-free logic.                                                  |
+| React Router | 7.13.0       | Declarative routing for dashboard navigation.                                                       |
+| Recharts     | 3.8.1        | Data visualization for financial and academic metrics.                                              |
+| Bootstrap    | 5.3.8        | Foundational UI components and global resets; layout logic handled via custom CSS Grid and Flexbox. |
 
 ### Technology Justification
 
@@ -96,12 +96,11 @@ Frontend/
 
 ### Structure Rationale
 
-The project structure separates concerns into components, services, and styles, improving code readability and maintainability. 
+The project structure separates concerns into components, services, and styles, improving code readability and maintainability.
 
-Reusable components are isolated to avoid duplication, while API logic is centralised in the services layer to ensure consistent communication with the backend. 
+Reusable components are isolated to avoid duplication, while API logic is centralised in the services layer to ensure consistent communication with the backend.
 
 The inclusion of initial static HTML pages reflects the early prototyping phase of the project, which was later transitioned into a React-based architecture.
-
 
 ## Installation & Setup
 
@@ -115,8 +114,9 @@ Ensure the following tools are installed:
 ### Setup Instructions
 
 1. Clone the repository:
+
 ```bash
-    
+
     git clone <repository-url>
 
 - **_Navigate to Directory: cd Frontend_**
@@ -124,19 +124,17 @@ Ensure the following tools are installed:
     cd Frontend
 
 - **_Install Dependencies: npm install_**
-    
+
     npm install
 
 - **_Launch Local Server: npm run dev_**
-    
+
     npm run dev
 
 - **_Access App: Navigate to http://localhost:5173_**
 ```
 
 ## Key Files
-
-### Key Files
 
 - **App.tsx**  
   Main application component responsible for routing and layout structure.
@@ -159,7 +157,7 @@ Ensure the following tools are installed:
 - **Dashboard Components**  
   Responsible for rendering core features such as tasks, budget tracking, and timetable data.
 
-- **styles.css / App.css / index.css**  
+- **styles**  
   Define global and component-level styling for consistent UI presentation.
 
 ## Technologies Used
@@ -190,8 +188,8 @@ In addition to the primary React-based implementation, several supporting techno
 1. **Access the Application**  
    Open the application in a web browser via the local development server.
 
-2. **User Authentication**  
-   - New users can register by providing an email, username, and password.  
+2. **User Authentication**
+   - New users can register by providing an email, username, and password.
    - Existing users can log in using their credentials.
 
 3. **Navigate the Dashboard**  
@@ -206,10 +204,10 @@ In addition to the primary React-based implementation, several supporting techno
 
 5. **Interact with Features**  
    Users can:
-   - Add, edit, and delete tasks or deadlines  
-   - Input financial data and track expenses  
-   - View and manage timetable entries  
-   - Monitor academic progress through calculated metrics  
+   - Add, edit, and delete tasks or deadlines
+   - Input financial data and track expenses
+   - View and manage timetable entries
+   - Monitor academic progress through calculated metrics
 
 6. **Real-Time Updates**  
    Changes made within the system are reflected immediately across relevant components, ensuring a responsive user experience.
@@ -220,14 +218,12 @@ In addition to the primary React-based implementation, several supporting techno
 
 The frontend implementation supports the following functional requirements:
 
-| Requirement ID | Description | Frontend Implementation |
-|---------------|------------|--------------------------|
-| UR-1          | User account creation and management | Login, Signup, and authentication components |
-| UR-2          | Timetable management | Dynamic timetable views (Day/Week/Month) |
-| UR-3          | Deadline tracking | Dashboard alerts and deadline management features |
-| UR-4          | Task organisation | Kanban task board with task lifecycle management |
-| UR-5          | Module and academic tracking | Academic tracker with weighted average calculations |
-| UR-6          | Budget tracking | Financial dashboard with charts and expense tracking |
+| Requirement ID | Description             | Frontend Implementation                                              |
+| -------------- | ----------------------- | -------------------------------------------------------------------- |
+| UR-1           | User Account & Security | Secure Login, Signup, and JWT session management                     |
+| UR-2           | Financial Management    | Budget.tsx featuring Recharts visualization and budget limit alerts  |
+| UR-3           | Academic Performance    | Modules.tsx with weighted average algorithms and trajectory tracking |
+| UR-4           | Productivity & Tasks    | Kanban board lifecycle management and reactive Deadline tables       |
 
 ### Non-Functional Requirements
 
@@ -275,6 +271,7 @@ Similarly, using Vite (beta) improved development speed but introduced potential
 AI tools such as ChatGPT were used to support frontend development, particularly during prototyping, UI design, and documentation.
 
 AI assisted with:
+
 - Generating initial layout ideas (e.g., dashboard and sidebar)
 - Suggesting project structure and organisation
 - Improving clarity and structure of documentation
@@ -297,6 +294,25 @@ A detailed critical evaluation of AI usage, including prompt evolution, limitati
 
 ### Abhishil - Frontend Development Contribution
 
+- Architecture & Security: Led the transition from static HTML to a React + TypeScript SPA. Implemented protected routing, JWT-based session management, password validation, OTP reset flow, and robust error handling.
+
+- API & Data Handling: Designed a central API layer to integrate with the Flask backend. Implemented parallel data fetching to efficiently combine timetable, deadline, and financial data in real time.
+
+Core Features:
+
+- Built an academic system with grade calculations, UK classification logic, and visual tracking charts.
+  Developed a workload stress indicator and advanced deadline sorting.
+- Engineered a dynamic timetable that visually adapts based on lecture times.
+
+UI & Productivity Tools:
+
+- Developed a Kanban board with drag-and-drop functionality and auto-saving notes.
+- Added charts for financial and academic data visualization.
+
+UX & Design:
+
+- Implemented light/dark themes, smooth animations, and reusable components such as modals.
+
 ## Testing
 
 ### Testing Approach
@@ -305,28 +321,28 @@ Testing was performed to validate the functionality, usability, and consistency 
 
 ### Functional Testing
 
-- Verified user authentication flows, including login, registration, and password recovery  
-- Tested creation, editing, and deletion of tasks, deadlines, and financial records  
-- Confirmed that dashboard data updates correctly after user interactions  
+- Verified user authentication flows, including login, registration, and password recovery
+- Tested creation, editing, and deletion of tasks, deadlines, and financial records
+- Confirmed that dashboard data updates correctly after user interactions
 
 ### User Interface Testing
 
-- Checked layout consistency across all pages  
-- Verified correct rendering of components such as cards, charts, and navigation elements  
+- Checked layout consistency across all pages
+- Verified correct rendering of components such as cards, charts, and navigation elements
 - Ensured visual hierarchy correctly highlights important information (e.g., alerts)
 
 ### Input Validation Testing
 
-- Tested invalid inputs (e.g., weak passwords, empty fields)  
-- Ensured appropriate error messages are displayed  
+- Tested invalid inputs (e.g., weak passwords, empty fields)
+- Ensured appropriate error messages are displayed
 - Verified that data is only submitted when valid
 
 ### Browser Testing
 
-- Tested the application in multiple browsers (e.g., Chrome, Edge)  
-- Ensured consistent behaviour and layout across environments  
+- Tested the application in multiple browsers (e.g., Chrome, Edge)
+- Ensured consistent behaviour and layout across environments
 
 ### Limitations
 
-- No automated testing framework (e.g., Jest or Cypress) was implemented due to project scope  
+- No automated testing framework (e.g., Jest or Cypress) was implemented due to project scope
 - Testing was primarily manual, which may limit coverage of edge cases
