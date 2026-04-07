@@ -1,3 +1,7 @@
+# This template was developed with assistance from Claude ai (Anthropic, 2025).
+# Prompt:“Create a template for a CI/CD pipeline for Github Actions”
+# Prompt:"Newline error in github actions"
+# The output was reviewed, modified, and tested by the Muiiz. 
 name: CI
 
 on:
