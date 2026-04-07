@@ -5,7 +5,7 @@ import { getModules, addModule, deleteModule, addAssessment } from "../../servic
 
 // API Interface types
 interface Assessment {
-  id: string;
+  id: number;
   name: string;
   assessment_type: string;
   score: number;
@@ -15,7 +15,7 @@ interface Assessment {
 }
 
 interface Module {
-  id: string;
+  id: number;
   name: string;
   code: string;
   credits: number;
@@ -37,7 +37,7 @@ export default function Modules() {
   const [loading, setLoading] = useState(true);
 
   // Modal State for Assessment
-  const [activeModuleId, setActiveModuleId] = useState<string | null>(null);
+  const [activeModuleId, setActiveModuleId] = useState<number | null>(null);
   const [assessmentForm, setAssessmentForm] = useState({
     name: "Coursework 1",
     assessment_type: "coursework",
@@ -182,11 +182,11 @@ export default function Modules() {
 
   const handleAddAssessment = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!activeModuleId) return;
+    if (activeModuleId === null) return;
 
     try {
       const result = await addAssessment({
-        module_id: activeModuleId,
+        module_id: activeModuleId.toString(),
         name: assessmentForm.name,
         assessment_type: assessmentForm.assessment_type,
         score: Number(assessmentForm.score),
@@ -208,10 +208,10 @@ export default function Modules() {
     }
   };
 
-  const handleRemoveModule = async (id: string) => {
+  const handleRemoveModule = async (id: number) => {
     if (!window.confirm("Are you sure? This will delete all linked data for this module.")) return;
     try {
-      await deleteModule(id);
+      await deleteModule(id.toString());
       setModules(modules.filter((m) => m.id !== id));
     } catch (error: unknown) {
       const err = error as Error;
@@ -407,10 +407,13 @@ export default function Modules() {
                               </span>
                             </div>
                             <div
-                              className={`score-badge modern-score ${avg >= 70 ? "distinction" : avg === 0 ? "ungraded" : ""}`}
+                              className={`score-badge modern-score ${module.assessments && module.assessments.length > 0 && avg >= 70 ? "distinction" : !module.assessments || module.assessments.length === 0 ? "ungraded" : ""}`}
                               onClick={() => setActiveModuleId(module.id)}
                             >
-                              {avg > 0 ? `${avg.toFixed(1)}%` : "Add Grade"} ➕
+                              {module.assessments && module.assessments.length > 0
+                                ? `${avg.toFixed(1)}%`
+                                : "Add Grade"}{" "}
+                              ➕
                             </div>
                           </div>
                           <div className="module-card-details-row">
@@ -447,7 +450,7 @@ export default function Modules() {
         )}
 
         {/* Assessment Logging Modal Component */}
-        {activeModuleId && (
+        {activeModuleId !== null && (
           <div className="modal-overlay">
             <div className="modules-card modal-content">
               <div className="card-header">

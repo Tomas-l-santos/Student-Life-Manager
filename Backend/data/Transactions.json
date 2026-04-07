@@ -38,5 +38,515 @@
     "transaction_date": "2026-04-03",
     "is_recurring": false,
     "created_at": "2026-04-03T20:56:59.512092"
+  },
+  {
+    "id": 5,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 1.0,
+    "description": "Transaction 0",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.960504"
+  },
+  {
+    "id": 6,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 2.0,
+    "description": "Transaction 1",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.961538"
+  },
+  {
+    "id": 7,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 3.0,
+    "description": "Transaction 2",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.962227"
+  },
+  {
+    "id": 8,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 4.0,
+    "description": "Transaction 3",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.962799"
+  },
+  {
+    "id": 9,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 5.0,
+    "description": "Transaction 4",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.963315"
+  },
+  {
+    "id": 10,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 6.0,
+    "description": "Transaction 5",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.963823"
+  },
+  {
+    "id": 11,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 7.0,
+    "description": "Transaction 6",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.964333"
+  },
+  {
+    "id": 12,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 8.0,
+    "description": "Transaction 7",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.964842"
+  },
+  {
+    "id": 13,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 9.0,
+    "description": "Transaction 8",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.965348"
+  },
+  {
+    "id": 14,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 10.0,
+    "description": "Transaction 9",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.965846"
+  },
+  {
+    "id": 15,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 11.0,
+    "description": "Transaction 10",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.966342"
+  },
+  {
+    "id": 16,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 12.0,
+    "description": "Transaction 11",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.966884"
+  },
+  {
+    "id": 17,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 13.0,
+    "description": "Transaction 12",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.967550"
+  },
+  {
+    "id": 18,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 14.0,
+    "description": "Transaction 13",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.968183"
+  },
+  {
+    "id": 19,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 15.0,
+    "description": "Transaction 14",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.968778"
+  },
+  {
+    "id": 20,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 16.0,
+    "description": "Transaction 15",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.969439"
+  },
+  {
+    "id": 21,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 17.0,
+    "description": "Transaction 16",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.970025"
+  },
+  {
+    "id": 22,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 18.0,
+    "description": "Transaction 17",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.970598"
+  },
+  {
+    "id": 23,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 19.0,
+    "description": "Transaction 18",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.971188"
+  },
+  {
+    "id": 24,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 20.0,
+    "description": "Transaction 19",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.971775"
+  },
+  {
+    "id": 25,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 21.0,
+    "description": "Transaction 20",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.972379"
+  },
+  {
+    "id": 26,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 22.0,
+    "description": "Transaction 21",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.972966"
+  },
+  {
+    "id": 27,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 23.0,
+    "description": "Transaction 22",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.973592"
+  },
+  {
+    "id": 28,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 24.0,
+    "description": "Transaction 23",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.974200"
+  },
+  {
+    "id": 29,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 25.0,
+    "description": "Transaction 24",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.974803"
+  },
+  {
+    "id": 30,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 26.0,
+    "description": "Transaction 25",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.975410"
+  },
+  {
+    "id": 31,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 27.0,
+    "description": "Transaction 26",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.976102"
+  },
+  {
+    "id": 32,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 28.0,
+    "description": "Transaction 27",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.976835"
+  },
+  {
+    "id": 33,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 29.0,
+    "description": "Transaction 28",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.977567"
+  },
+  {
+    "id": 34,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 30.0,
+    "description": "Transaction 29",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.978297"
+  },
+  {
+    "id": 35,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 31.0,
+    "description": "Transaction 30",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.979027"
+  },
+  {
+    "id": 36,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 32.0,
+    "description": "Transaction 31",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.979797"
+  },
+  {
+    "id": 37,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 33.0,
+    "description": "Transaction 32",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.980697"
+  },
+  {
+    "id": 38,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 34.0,
+    "description": "Transaction 33",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.981489"
+  },
+  {
+    "id": 39,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 35.0,
+    "description": "Transaction 34",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.982263"
+  },
+  {
+    "id": 40,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 36.0,
+    "description": "Transaction 35",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.983028"
+  },
+  {
+    "id": 41,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 37.0,
+    "description": "Transaction 36",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.983814"
+  },
+  {
+    "id": 42,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 38.0,
+    "description": "Transaction 37",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.984926"
+  },
+  {
+    "id": 43,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 39.0,
+    "description": "Transaction 38",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.985852"
+  },
+  {
+    "id": 44,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 40.0,
+    "description": "Transaction 39",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.986735"
+  },
+  {
+    "id": 45,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 41.0,
+    "description": "Transaction 40",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.987599"
+  },
+  {
+    "id": 46,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 42.0,
+    "description": "Transaction 41",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.988434"
+  },
+  {
+    "id": 47,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 43.0,
+    "description": "Transaction 42",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.989245"
+  },
+  {
+    "id": 48,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 44.0,
+    "description": "Transaction 43",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.990097"
+  },
+  {
+    "id": 49,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 45.0,
+    "description": "Transaction 44",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.990954"
+  },
+  {
+    "id": 50,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 46.0,
+    "description": "Transaction 45",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.991783"
+  },
+  {
+    "id": 51,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 47.0,
+    "description": "Transaction 46",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.992626"
+  },
+  {
+    "id": 52,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 48.0,
+    "description": "Transaction 47",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.993497"
+  },
+  {
+    "id": 53,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 49.0,
+    "description": "Transaction 48",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.994583"
+  },
+  {
+    "id": 54,
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "category_id": 1,
+    "amount": 50.0,
+    "description": "Transaction 49",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:32.995853"
+  },
+  {
+    "id": 55,
+    "user_id": "a7a02f05-d80d-48fd-a8b3-3b467fd3bcc6",
+    "category_id": 1,
+    "amount": 100.0,
+    "description": "User A's secret",
+    "transaction_date": "2026-04-01",
+    "is_recurring": false,
+    "created_at": "2026-04-07T13:40:34.859476"
   }
 ]
