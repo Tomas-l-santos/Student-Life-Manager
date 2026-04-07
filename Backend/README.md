@@ -6,7 +6,7 @@ Flask REST API serving all data to the frontend
 ```bash
 cd Backend
 python -m venv myenv
-source myenv\Scripts\activate # Windows
+source myenv/Scripts/activate # Windows
 source myenv/bin/activate     # Mac/Linux
 pip install -r requirements.txt
 python main.py
