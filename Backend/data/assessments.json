@@ -1,2 +1,18 @@
-[]
-
+[
+  {
+    "id": 1,
+    "user_id": "64abe2fa-7335-4e9f-afd6-189c9a3d8b54",
+    "module_id": 7,
+    "module_name": "dsdf",
+    "module_code": "dsds",
+    "name": "Coursework 1",
+    "assessment_type": "coursework",
+    "score": 42.0,
+    "max_score": 100.0,
+    "weight": 100.0,
+    "date": "2026-04-07",
+    "percentage": 42.0,
+    "uk_grade": "Third Class (3rd)",
+    "created_at": "2026-04-07T13:45:01.995169"
+  }
+]
