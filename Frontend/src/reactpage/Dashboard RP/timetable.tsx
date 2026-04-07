@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { getTimetable, addTimetableEntry, deleteTimetableEntry } from "../../services/api";
 
+// Constants and Interface Types
 interface TimetableEntry {
   id: number;
   module_name: string;
@@ -45,7 +46,7 @@ export default function Timetable() {
   const [entries, setEntries] = useState<TimetableEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // UI state
+  // UI State toggles
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEntry, setSelectedEntry] = useState<TimetableEntry | null>(null);
   const [viewMode, setViewMode] = useState("WEEK");
@@ -53,7 +54,7 @@ export default function Timetable() {
   const [activeFilters, setActiveFilters] = useState(Object.keys(ENTRY_TYPES));
   const [showLegend, setShowLegend] = useState(false);
 
-  // data range
+  // Date limit setup
   const todayStr = new Date().toISOString().split("T")[0];
   const threeMonthsLater = new Date();
   threeMonthsLater.setMonth(threeMonthsLater.getMonth() + 3);
@@ -84,7 +85,7 @@ export default function Timetable() {
     load();
   }, []);
 
-  //  date
+  // Date formatting helpers
   const getMonday = (d: Date) => {
     const date = new Date(d);
     const day = date.getDay() || 7;
@@ -94,6 +95,9 @@ export default function Timetable() {
 
   const startOfWeek = getMonday(currentDate);
 
+  /* This calendar logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "calculate the days of the week for the timetable view"
+     The output was reviewed, modified, and tested by the author. */
   const weekDays = Array.from({ length: 5 }).map((_, i) => {
     const d = new Date(startOfWeek);
     d.setDate(d.getDate() + i);
@@ -145,6 +149,9 @@ export default function Timetable() {
     return Math.ceil(((d.getTime() - firstDay.getTime()) / 86400000 + firstDay.getDay() + 1) / 7);
   };
 
+  /* This filtering logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "show the timetable events by date range and type"
+     The output was reviewed, modified, and tested by the author. */
   const isDateInRange = (dateToCheck: Date, startDateStr?: string, endDateStr?: string) => {
     if (!startDateStr || !endDateStr) return true;
     const start = new Date(startDateStr);
@@ -154,6 +161,7 @@ export default function Timetable() {
     return dateToCheck >= start && dateToCheck <= end;
   };
 
+  // Entry CRUD Operations
   const handleAddEntry = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -189,6 +197,9 @@ export default function Timetable() {
   const renderHalfHourLines = () =>
     Array.from({ length: 24 }).map((_, i) => <div key={i} className="half-hour-line"></div>);
 
+  /* This grid positioning algorithm was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "make sure the css top and height for timetable events so they match their times"
+     The output was reviewed, modified, and tested by the author. */
   const renderEntriesForDay = (dayName: string, dateToCheck: Date) => {
     return entries
       .filter(
@@ -352,6 +363,7 @@ export default function Timetable() {
       <Sidebar />
       <Topbar />
 
+      {/* Adding Class Entry Modal */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -489,6 +501,7 @@ export default function Timetable() {
         </div>
       )}
 
+      {/* Selected Entry Viewer Modal */}
       {selectedEntry && (
         <div className="modal-overlay" onClick={() => setSelectedEntry(null)}>
           <div
@@ -548,6 +561,7 @@ export default function Timetable() {
       )}
 
       <main className="main">
+        {/* Navigation bar for views and dates */}
         <section className="controls">
           <div className="controls-top">
             <div className="crumb">
@@ -634,6 +648,7 @@ export default function Timetable() {
           <p style={{ padding: "20px", color: "var(--muted)" }}>Loading timetable...</p>
         ) : (
           <section className="timetable-wrap">
+            {/* View Renderers */}
             {viewMode === "WEEK" && (
               <>
                 <div className="week-header">

@@ -8,6 +8,7 @@ export default function Help() {
       <Topbar />
 
       <main className="main-content">
+        {/* CSS Grid for Help content */}
         <section className="help-grid">
           {/* Overview Card */}
           <div className="card help-overview">

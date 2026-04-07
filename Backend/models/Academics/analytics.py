@@ -11,15 +11,15 @@ class AcademicAnalytics:
         self.assessment_service = Assessments()
         self.grading = GradingSystem()
 
-    def calculate_module_grade(self, module_id, user_email):
+    def calculate_module_grade(self, module_id, user_id):
 
         # Get module
-        module = self.module_service.get_by_id(module_id, user_email)
+        module = self.module_service.get_by_id(module_id, user_id)
         if not module:
             raise ValueError("Module not found")
 
         # Get assessments
-        assessments = self.assessment_service.get_all_for_module(module_id, user_email)
+        assessments = self.assessment_service.get_all_for_module(module_id, user_id)
 
         if not assessments:
             return {
@@ -67,11 +67,11 @@ class AcademicAnalytics:
             "assessments": assessments,
         }
 
-    def get_year_overview(self, user_email, year_of_study, academic_year):
+    def get_year_overview(self, user_id, year_of_study, academic_year):
 
         # Get all modules for the year
         modules = self.module_service.get_all(
-            user_email, year_of_study=year_of_study, academic_year=academic_year
+            user_id, year_of_study=year_of_study, academic_year=academic_year
         )
 
         overview = []
@@ -84,7 +84,7 @@ class AcademicAnalytics:
                 continue
 
             # Get grade info for module
-            grade_info = self.calculate_module_grade(module["id"], user_email)
+            grade_info = self.calculate_module_grade(module["id"], user_id)
 
             module_data = {"module": module, "grade_info": grade_info}
 
@@ -118,9 +118,9 @@ class AcademicAnalytics:
             "uk_classification": classification,
         }
 
-    def get_module_summary(self, module_id, user_email):
+    def get_module_summary(self, module_id, user_id):
 
-        grade_info = self.calculate_module_grade(module_id, user_email)
+        grade_info = self.calculate_module_grade(module_id, user_id)
 
         return {
             "module_name": grade_info["module_name"],

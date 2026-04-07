@@ -52,6 +52,7 @@ export async function resetPassword(token: string, new_password: string, email: 
   });
   return res.json();
 }
+
 export async function deleteAccount() {
   const res = await fetch(`${BASE_URL}/api/auth/delete-account`, {
     method: "DELETE",
@@ -61,6 +62,7 @@ export async function deleteAccount() {
   if (!res.ok) throw new Error(result.error || "Failed to delete account");
   return result;
 }
+
 // Budget
 /* This template was developed with assistance from Claude ai (Anthropic, 2025).
  Prompt:“Generate a function that takes in budget information from backend”

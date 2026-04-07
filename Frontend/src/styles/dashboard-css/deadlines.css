@@ -1,67 +1,70 @@
 /* DARK THEME  */
 [data-theme="dark"] {
-  --bg: #000000;
-  --panel: #121212;
-  --panel-2: #1a1a1a;
-  --border: #27272a;
-  --text: #ffffff;
-  --muted: #a1a1aa;
+  --bg:  #000000;
+  --panel:  #121212;
+  --panel-2:  #1a1a1a;
+  --border:  #27272a;
+  --text:  #ffffff;
+  --muted:  #a1a1aa;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 
-  --navy-900: #000000;
-  --navy-850: #000000;
-  --navy-800: #000000;
-  --sidebar: #000000;
-  --sidebar-2: #000000;
-  --sidebar-text: #ffffff;
-  --sidebar-muted: #a1a1aa;
+  --navy-900:  #000000;
+  --navy-850:  #000000;
+  --navy-800:  #000000;
+  --sidebar:  #000000;
+  --sidebar-2:  #000000;
+  --sidebar-text:  #ffffff;
+  --sidebar-muted:  #a1a1aa;
 
-  --event-blue: #06b6d4; 
-  --event-cyan: #06b6d4; 
-  --event-purple: #d946ef; 
-  --topbar-text: #ffffff;
+  --event-blue:  #06b6d4; 
+  --event-cyan:  #06b6d4; 
+  --event-purple:  #d946ef; 
+  --topbar-text:  #ffffff;
 }
 
 /* Light */
 [data-theme="new-light"] {
-  --bg: #ffffff;
-  --panel: #ffffff;
-  --panel-2: #f8f9fa;
-  --border: #eaeaea;
-  --text: #111111;
-  --muted: #666666;
+  --bg:  #ffffff;
+  --panel:  #ffffff;
+  --panel-2:  #f8f9fa;
+  --border:  #eaeaea;
+  --text:  #111111;
+  --muted:  #666666;
   --shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
 
-  --navy-900: #ffffff;
-  --navy-850: #ffffff;
-  --navy-800: #ffffff;
-  --sidebar: #ffffff;
-  --sidebar-2: #ffffff;
-  --sidebar-text: #111111;
-  --sidebar-muted: #666666;
+  --navy-900:  #ffffff;
+  --navy-850:  #ffffff;
+  --navy-800:  #ffffff;
+  --sidebar:  #ffffff;
+  --sidebar-2:  #ffffff;
+  --sidebar-text:  #111111;
+  --sidebar-muted:  #666666;
 
   /* Front Page Brand Red */
-  --event-cyan: #e60023; 
-  --topbar-text: #111111;
+  --event-cyan:  #e60023; 
+  --topbar-text:  #111111;
 }
 
 .topbar { color: var(--topbar-text, #fff); }
 .topbar .brand h1, .topbar .brand small, .avatar span { color: var(--topbar-text, #fff); }
 
 [data-theme="dark"] .topbar .pill, [data-theme="dark"] .avatar, [data-theme="dark"] .hamburger { 
-  background: #121212; border-color: #27272a; color: #fff; 
+  background:  #121212; border-color:  #27272a; color:  #fff; 
 }
 [data-theme="new-light"] .topbar .pill, [data-theme="new-light"] .avatar, [data-theme="new-light"] .hamburger { 
-  background: #ffffff; border-color: #e2e8f0; color: #0f172a; 
+  background:  #ffffff; border-color:  #e2e8f0; color:  #0f172a; 
 }
 [data-theme="dark"] .avatar .dot, [data-theme="new-light"] .avatar .dot { 
-  background: var(--event-blue); color: #000; 
+  background: var(--event-blue); color:  #000; 
 }
 
 [data-theme="dark"] .nav a.active { background: rgba(217, 70, 239, 0.15); border-color: var(--event-purple); color: var(--event-purple); }
 [data-theme="new-light"] .nav a.active { background: rgba(6, 182, 212, 0.15); border-color: var(--event-blue); color: var(--event-blue); }
 
 /* Deadlines Specific Overrides */
+/* This theme override logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "setup the css to force dark backgrounds for the deadline panels"
+   The output was reviewed, modified, and tested by the author. */
 [data-theme="dark"] .summary-card, [data-theme="new-light"] .summary-card { background: var(--panel); border-color: var(--border); }
 [data-theme="dark"] .deadline-table-section, [data-theme="new-light"] .deadline-table-section { background: var(--panel); border-color: var(--border); }
 [data-theme="dark"] .empty-state, [data-theme="new-light"] .empty-state { background: var(--panel); border-color: var(--border); color: var(--text); }
@@ -92,20 +95,20 @@
 /* ------------------------------------------------------------ */
 
 :root{
-  --navy-900:#07144a;
-  --navy-850:#081a58;
-  --navy-800:#0a216f;
-  --bg:#f5f7fb;
-  --panel:#ffffff;
-  --panel-2:#eef2f8;
-  --border:#e3e8f2;
-  --text:#0b1020;
-  --muted:#63708a;
-  --sidebar:#081a58;
-  --sidebar-2:#0b1f66;
-  --sidebar-text:#e9eeff;
-  --sidebar-muted:#b9c6ff;
-  --event-cyan:#22c55e;
+  --navy-900: #07144a;
+  --navy-850: #081a58;
+  --navy-800: #0a216f;
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --panel-2: #eef2f8;
+  --border: #e3e8f2;
+  --text: #0b1020;
+  --muted: #63708a;
+  --sidebar: #081a58;
+  --sidebar-2: #0b1f66;
+  --sidebar-text: #e9eeff;
+  --sidebar-muted: #b9c6ff;
+  --event-cyan: #22c55e;
   --shadow: 0 6px 18px rgba(10, 23, 64, 0.08);
   --radius:16px;
   --sidebar-w: 240px;
@@ -138,7 +141,7 @@ body{
   justify-content:space-between;
   padding: 0 18px;
   background: linear-gradient(90deg, var(--navy-900), var(--navy-800));
-  color: #fff;
+  color:  #fff;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -239,13 +242,13 @@ body{
 }
 
 .primary-btn {
-  background: #0f172a;
-  color: #fff;
+  background:  #0f172a;
+  color:  #fff;
 }
-.primary-btn:hover { background: #1e293b; }
+.primary-btn:hover { background:  #1e293b; }
 
 .secondary-btn{
-  background: #f1f5f9;
+  background:  #f1f5f9;
   color: var(--text);
   border: 1px solid var(--border);
 }
@@ -288,8 +291,8 @@ body{
   font-size: 12px;
 }
 
-.warning-badge { background: #fef3c7; color: #b45309; }
-.danger-badge { background: #fee2e2; color: #b91c1c; }
+.warning-badge { background:  #fef3c7; color:  #b45309; }
+.danger-badge { background:  #fee2e2; color:  #b91c1c; }
 
 .card-icon {
   font-size: 20px;
@@ -301,9 +304,9 @@ body{
   line-height: 1;
 }
 
-.blue-text { color: #1e3a8a; }
-.warning-text { color: #78350f; }
-.danger-text { color: #7f1d1d; }
+.blue-text { color:  #1e3a8a; }
+.warning-text { color:  #78350f; }
+.danger-text { color:  #7f1d1d; }
 
 .stress-card{
   display:flex;
@@ -428,13 +431,13 @@ body{
   font-weight: 600;
 }
 
-.priority-pill.high { background: #fee2e2; color: #b91c1c; }
-.priority-pill.med { background: #fef3c7; color: #b45309; }
-.priority-pill.low { background: #dbeafe; color: #1d4ed8; }
+.priority-pill.high { background:  #fee2e2; color:  #b91c1c; }
+.priority-pill.med { background:  #fef3c7; color:  #b45309; }
+.priority-pill.low { background:  #dbeafe; color:  #1d4ed8; }
 
-.status-pill.due-soon { background: #fef3c7; color: #b45309; }
-.status-pill.overdue { background: #fee2e2; color: #b91c1c; }
-.status-pill.future { background: #dcfce7; color: #15803d; }
+.status-pill.due-soon { background:  #fef3c7; color:  #b45309; }
+.status-pill.overdue { background:  #fee2e2; color:  #b91c1c; }
+.status-pill.future { background:  #dcfce7; color:  #15803d; }
 
 /* Actions */
 .actions-cell {
@@ -489,8 +492,8 @@ body{
 }
 
 .pagination button.active {
-  border-color: #0f172a;
-  color: #0f172a;
+  border-color:  #0f172a;
+  color:  #0f172a;
   font-weight: bold;
 }
 
@@ -500,6 +503,9 @@ body{
 }
 
 /* ===== MODAL CSS ===== */
+/* This modal overlay CSS was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "create a blurred overlay for the popup modal"
+   The output was reviewed, modified, and tested by the author. */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
