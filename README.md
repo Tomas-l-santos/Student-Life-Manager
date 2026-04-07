@@ -1,56 +1,69 @@
-# ELEE1149-Project-Template - Change me
-*A short, descriptive title for your project.*
+# ELEE1149 – Student Life Management System
 
-Have a look at other READMEs “in the wild” (open-source projects on GitHub are great examples) and see what they include. Your README is the first impression of your project, so make it clear, professional, and helpful. Below is a good starting point, and you can customize it for your coursework.
-### Extra Tips:
-
-- Use **clear headings** and a logical structure.
-- Add **badges** (e.g., build status, license, version) for a professional look.
-- Include a **link to a live demo** if available.
-- Add **screenshots or GIFs** to showcase your UI or features.
-- Keep instructions simple and accurate for installation and usage.
-- Maintain a **CHANGELOG.md** for version history.
-- Use semantic commit messages (e.g., feat: add login page).
-- Make sure your README answers:
-   - What is this project?
-   - How do I run it?
-   - Who built it?
+A web-based system designed to support students in managing academic, financial, and personal responsibilities in one unified platform.
 
 ## Table of Contents
 
 - [About the Project](#about-the-project)
-- Features
-- Tech Stack
+- [Features](#features)
+- [Tech Stack](#tech-stack)
 - Getting Started
-  - Prerequisites
-  - Installation
-- Usage
-- Screenshots
-- Project Structure
-- Contributors
-- License
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Project Structure](#project-structure)
+- [Contributors](#contributors)
+- [License](#license)
 
 ## About the Project
 
-Briefly explain:
+This project is a Student Life Management System, developed as part of the ELEE1149 Software Engineering module. The system provides students with a centralised platform to manage key aspects of university life, including:
 
-- What the project does?
-- Why it exists (problem it solves)?
-- Who it’s for?
+- Academic modules and grades
+- Timetables and deadlines
+- Task management
+- Personal budgeting and expenses
+
+### Problem it Solves
+
+Students often use multiple disconnected tools (notes apps, calendars, spreadsheets), which leads to:
+
+- Poor organisation
+- Missed deadlines
+- Lack of visibility over workload and finances
+
+This system solves that by integrating all features into one structured application, improving productivity and reducing stress.
+
+### Target Users
+
+- University students
+- Individuals managing multiple responsibilities
+- Users who need a simple and structured productivity tool
 
 ## Features
-List the main features:
 
-- Feature 1
-- Feature 2
-- Feature 3
+### Core Features
+
+The system was developed based on defined functional and non-functional requirements, ensuring alignment between user needs and implementation.
+
+| Feature Area        | Description |
+|--------------------|-------------|
+| User Account System | Secure login and account creation with password validation and reset functionality |
+| Dashboard          | Central overview displaying tasks, deadlines, and workload indicators with real-time updates |
+| Task Management    | Create, edit, delete, and prioritise tasks, with completion tracking |
+| Deadline Tracking  | Manage deadlines with automatic sorting and visual indicators for overdue and upcoming items |
+| Module Management  | Record modules and assessment results with automatic average calculation |
+| Budget Management  | Track income and expenses with categorisation and real-time balance updates |
 
 ## Tech Stack
-*These are examples only, your team needs list technologies you used*
-- Frontend: React / Angular / Vue
-- Backend: Node.js / Django / Flask
-- Database: MySQL / MongoDB
-- Version Control: Git & GitHub
+
+- Frontend: HTML, CSS, TypeScript, React
+- Backend: Node.js (planned / partially implemented)  
+- Data Storage: Browser Local Storage  
+- Version Control: Git & GitHub  
+- Development Tools: VS Code, GitHub Classroom
+- Database: 
 
 ## Getting Started
 *What does a user need on there system to run this software?*
