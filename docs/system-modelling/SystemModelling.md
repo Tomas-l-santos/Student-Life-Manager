@@ -22,42 +22,47 @@ However, it does come with some limitations, such as not being able to access da
 
 Different diagrams were used to represent different parts of the system.
 
-### 3.1 Use Case Diagram  
-See: `use-case.md`
+### 3.1 Use Case Diagram
+
+See: [use-case.md](./use-case.md)
 
 This diagram shows what the user can actually do in the system, such as creating an account, managing tasks, tracking deadlines, and viewing their budget.
 
 It was useful at the start of the project to make sure all key features were included and matched the requirements.
 
-### 3.2 Activity Diagram  
-See: `activity-diagram.md`
+### 3.2 Activity Diagram
+
+See: [activity-diagram.md](activity-diagram.md)
 
 The activity diagram shows how processes work step by step.  
 For example, it can show the flow of logging in or adding a task.
 
 This helped break things down clearly and made it easier to understand the logic before implementing it.
 
-### 3.3 Sequence Diagram  
-See: `sequence-diagram.md`
+### 3.3 Sequence Diagram
+
+See: [sequence-diagram.md](./sequence-diagram.md)
 
 This diagram shows how different parts of the system interact over time.  
 For example, in the password reset process, the system sends a code to the user’s email, which is then used to verify and update the password.
 
 This was important to make sure everything happens in the correct order, especially for security-related features.
 
-### 3.4 Class Diagram  
-See: `class-diagram.md`
+### 3.4 Class Diagram
+
+See: [class-diagram.md](./class-diagram.md)
 
 The class diagram shows how the system is structured.  
 It includes key components like User, Task, Module, and Budget, and how they relate to each other.
 
 This helped organise the system properly and influenced how data is stored and managed.
 
-### 3.5 State Diagram  
-See: `state-diagram.md`
+### 3.5 State Diagram
+
+See: [state-diagram.md](./state-diagram.md)
 
 The state diagram shows how something changes over time.  
-For example, a task can move between states like *pending*, *in progress*, and *completed*.
+For example, a task can move between states like _pending_, _in progress_, and _completed_.
 
 This helps make sure the system behaves consistently when users interact with it.
 
@@ -84,9 +89,10 @@ Some important decisions were made during the design process:
 All diagrams were based on the system requirements and were used to guide development.
 
 For example:
-- Account creation and login → shown in use case and sequence diagrams  
-- Task and deadline features → shown in activity and class diagrams  
-- Security features (password rules and reset) → shown in sequence diagrams  
+
+- Account creation and login → shown in use case and sequence diagrams
+- Task and deadline features → shown in activity and class diagrams
+- Security features (password rules and reset) → shown in sequence diagrams
 
 This helped make sure that what was designed is exactly what was implemented.
 
@@ -96,8 +102,9 @@ Using these diagrams made it much easier to understand and plan the system befor
 They helped identify missing features and made complex processes clearer.
 
 However, there were also some downsides:
-- Some diagrams can become difficult to read if too much detail is added  
-- Keeping diagrams updated alongside the code can take extra time  
+
+- Some diagrams can become difficult to read if too much detail is added
+- Keeping diagrams updated alongside the code can take extra time
 
 Even with this, the modelling process helped create a more structured and organised system overall.
 
