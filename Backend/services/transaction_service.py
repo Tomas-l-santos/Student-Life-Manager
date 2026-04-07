@@ -4,6 +4,9 @@ from models.Budget import Transaction
 from storage.storagerepo import JSONStorage
 
 
+# This class was created with assistance from ChatGPT (OpenAI, 2026).
+# Prompt:“how should transaction_service.py be structured”
+# The output was reviewed, modified, and tested by the Muiiz.
 class TransactionService:
 
     def __init__(self):

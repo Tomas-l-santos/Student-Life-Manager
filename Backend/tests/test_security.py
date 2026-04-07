@@ -4,6 +4,9 @@ import os
 from datetime import datetime, timedelta
 
 
+# This test was created with assistance from Claude AI (Anthropic, 2026).
+# Prompt:“What are the basics of creating a testing process for SDLC”
+# The output was reviewed, modified, and tested by the Muiiz.
 class TestAuthEnforcement:
     PROTECTED_ROUTES = [
         ("GET", "/api/transactions"),

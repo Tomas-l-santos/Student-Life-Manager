@@ -1,6 +1,9 @@
 import pytest
 
 
+# This test was created with assistance from Claude AI (Anthropic, 2026).
+# Prompt:“What are the basics of creating a testing process for SDLC”
+# The output was reviewed, modified, and tested by the Muiiz.
 class TestRegistration:
     def test_register_success(self, auth_service):
         user = auth_service.register_user(

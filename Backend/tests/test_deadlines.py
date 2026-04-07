@@ -1,9 +1,10 @@
 import pytest
 
 
+# This test was created with assistance from Claude AI (Anthropic, 2026).
+# Prompt:“What are the basics of creating a testing process for SDLC”
+# The output was reviewed, modified, and tested by the Muiiz.
 class TestDeadlineService:
-    """FR-7: Deadline CRUD."""
-
     def test_add_deadline_success(self, deadline_service):
         d = deadline_service.add_deadline(
             user_id="user-123",
