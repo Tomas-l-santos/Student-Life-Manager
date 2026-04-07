@@ -9,6 +9,9 @@ function authHeaders() {
 }
 
 // Authentication
+/* This template was developed with assistance from Claude ai (Anthropic, 2025).
+ Prompt:“Generate a function that takes in authentification information from backend”
+ The output was reviewed, modified, and tested by the Muiiz. */
 export async function login(email: string, password: string) {
   const res = await fetch(`${BASE_URL}/api/auth/login`, {
     method: "POST",
@@ -61,6 +64,9 @@ export async function deleteAccount() {
 }
 
 // Budget
+/* This template was developed with assistance from Claude ai (Anthropic, 2025).
+ Prompt:“Generate a function that takes in budget information from backend”
+ The output was reviewed, modified, and tested by the Muiiz. */
 export async function getTransactions() {
   const res = await fetch(`${BASE_URL}/api/transactions`, {
     headers: authHeaders(),
@@ -189,6 +195,9 @@ export async function addAssessment(data: {
 }
 
 // deadlines
+/* This template was developed with assistance from Claude ai (Anthropic, 2025).
+ Prompt:“Generate a function that takes in deadline information from backend”
+ The output was reviewed, modified, and tested by the Muiiz. */
 export async function getDeadlines() {
   const res = await fetch(`${BASE_URL}/api/deadlines`, { headers: authHeaders() });
   return res.json();
@@ -232,6 +241,9 @@ export async function deleteDeadline(id: number) {
 }
 
 // timetable
+/* This template was developed with assistance from Claude ai (Anthropic, 2025).
+ Prompt:“Generate a function that takes in timetable information from backend”
+ The output was reviewed, modified, and tested by the Muiiz. */
 export async function getTimetable(day?: string) {
   const url = day ? `${BASE_URL}/api/timetable?day=${day}` : `${BASE_URL}/api/timetable`;
   const res = await fetch(url, { headers: authHeaders() });

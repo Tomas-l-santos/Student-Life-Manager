@@ -19,16 +19,17 @@ Have a look at other READMEs “in the wild” (open-source projects on GitHub a
 ## Table of Contents
 
 - [About the Project](#about-the-project)
-- Features
-- Tech Stack
-- Getting Started
-  - Prerequisites
-  - Installation
-- Usage
-- Screenshots
-- Project Structure
-- Contributors
-- License
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Project Structure](#project-structure)
+- [Documentation](#documentation)
+- [Contributors](#contributors)
+- [License](#license)
 
 ## About the Project
 
