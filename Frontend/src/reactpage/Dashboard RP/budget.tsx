@@ -281,7 +281,7 @@ export default function Budget() {
                 <option value="">Select category...</option>
                 {filteredCategories.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {c.icon} {c.name}
+                    {c.name}
                   </option>
                 ))}
               </select>
@@ -328,7 +328,7 @@ export default function Budget() {
                 <option value="">Select expense category...</option>
                 {expenseCategories.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {c.icon} {c.name}
+                    {c.name}
                   </option>
                 ))}
               </select>
@@ -359,9 +359,6 @@ export default function Budget() {
         </section>
 
         {/* Recharts Pie Charts Section */}
-        {/* This Recharts integration was developed with assistance from Gemini (Google Gemini, 2026).
-            Prompt: "Build a responsive PieChart with Recharts to show cash flow and expenses, using custom colors for each segment."
-            The output was reviewed, modified, and tested by the author. */}
         <section className="budget-content-grid">
           <div className="budget-panel">
             <div className="panel-head">
@@ -485,9 +482,7 @@ export default function Budget() {
                           gap: "8px",
                         }}
                       >
-                        <span>
-                          {stat.budget.category.icon} {stat.budget.category.name}
-                        </span>
+                        <span>{stat.budget.category.name}</span>
                         {stat.status === "exceeded" && (
                           <span
                             style={{
@@ -637,9 +632,7 @@ export default function Budget() {
                             </span>
                           </td>
                           <td style={{ fontWeight: "600" }}>{t.description}</td>
-                          <td style={{ color: "var(--muted)" }}>
-                            {t.category.icon} {t.category.name}
-                          </td>
+                          <td style={{ color: "var(--muted)" }}>{t.category.name}</td>
                           <td
                             style={{ fontWeight: "700" }}
                             className={

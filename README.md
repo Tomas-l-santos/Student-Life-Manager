@@ -24,9 +24,9 @@
 
 <br><br>
 
-  <img src="./Frontend/public/Images/Home.png" alt="Student Life Management System Interface" width="100%">
+  <img src="/docs/images/opening.gif" alt="Student Life Management System Demo" width="100%">
 
-## </div>
+</div>
 
 > **A web-based system designed to support students in managing academic, financial, and personal responsibilities in one unified platform.**
 
@@ -120,7 +120,7 @@ Terminal 1: Start the backend:
 ```bash
 cd Backend
 source myenv/Scripts/activate # for windows Git Bash
-python main.py
+python main.py # python3 for Ma OS
 # Running on http://127.0.0.1:5000
 ```
 
@@ -136,7 +136,49 @@ Open http://localhost:5173 in your browser.
 
 ## Screenshots
 
-_Add screenshots or GIFs to showcase the UI or functionality._
+### Home Page and About Page
+
+| Home Page                                 | About Page                       |
+| ----------------------------------------- | -------------------------------- |
+| ![Home](/Frontend/public/Images/Home.png) | ![About](/docs/images/about.png) |
+
+### Login And Signup Popup
+
+| Login Popup                      | Signup Popup                       |
+| -------------------------------- | ---------------------------------- |
+| ![Login](/docs/images/login.png) | ![Signup](/docs/images/signup.png) |
+
+### DashBoard (Variants)
+
+| Dashboard(Classic)                   | Dashboard(Light Mode)            | Dashboard(Dark Mode)           |
+| ------------------------------------ | -------------------------------- | ------------------------------ |
+| ![Classic](/docs/images/classic.png) | ![Light](/docs/images/light.png) | ![Dark](/docs/images/dark.png) |
+
+### Timtable And Deadlines Screen
+
+| Timetable                                | Deadlines                               |
+| ---------------------------------------- | --------------------------------------- |
+| ![Timetable](/docs/images/timtables.png) | ![Deadlines](/docs/images/deadline.png) |
+
+### Tasks and Modules Screen
+
+| Tasks                                 | Modules                                   |
+| ------------------------------------- | ----------------------------------------- |
+| ![Tasks](/docs/images/taskscreen.png) | ![Modules](/docs/images/modulescreen.png) |
+
+### Budget Screen
+
+| Budget-1                          | Budget-2                          |
+| --------------------------------- | --------------------------------- |
+| ![Bud1](/docs/images/budget1.png) | ![Bud2](/docs/images/budget1.png) |
+
+### Account and Help Screen
+
+| Account Screen                       | Help Screen                    |
+| ------------------------------------ | ------------------------------ |
+| ![Acoount](/docs/images/account.png) | ![Help](/docs/images/help.png) |
+
+---
 
 ### Project Structure
 
