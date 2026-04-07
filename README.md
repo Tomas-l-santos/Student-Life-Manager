@@ -1,6 +1,29 @@
 # ELEE1149 – Student Life Management System
 
-A web-based system designed to support students in managing academic, financial, and personal responsibilities in one unified platform.
+<div align="center">
+
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/Made%20with-Python%203.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  </a>
+  <a href="https://react.dev/">
+    <img src="https://img.shields.io/badge/Made%20with-React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
+  </a>
+  <a href="https://vitejs.dev/">
+    <img src="https://img.shields.io/badge/Vite_8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
+  </a>
+
+<br> <img src="https://img.shields.io/badge/ESLint-9.39-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint">
+<img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge" alt="Build Status">
+<img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License">
+<br><br> <img src="./Frontend/public/Images/Home.png" alt="Student Life Management System Interface" width="100%">
+
+</div>
+
+---
+
+> **A web-based system designed to support students in managing academic, financial, and personal responsibilities in one unified platform.**
+
+---
 
 ## Table of Contents
 
@@ -48,27 +71,26 @@ This system solves that by integrating all features into one structured applicat
 
 The system was developed based on defined functional and non-functional requirements, ensuring alignment between user needs and implementation.
 
-| Feature Area        | Description |
-|--------------------|-------------|
-| User Account System | Secure login and account creation with password validation and reset functionality |
-| Dashboard          | Central overview displaying tasks, deadlines, and workload indicators with real-time updates |
-| Task Management    | Create, edit, delete, and prioritise tasks, with completion tracking |
-| Deadline Tracking  | Manage deadlines with automatic sorting and visual indicators for overdue and upcoming items |
-| Module Management  | Record modules and assessment results with automatic average calculation |
-| Budget Management  | Track income and expenses with categorisation and real-time balance updates |
+| Feature Area        | Description                                                                                  |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| User Account System | Secure login and account creation with password validation and reset functionality           |
+| Dashboard           | Central overview displaying tasks, deadlines, and workload indicators with real-time updates |
+| Task Management     | Create, edit, delete, and prioritise tasks, with completion tracking                         |
+| Deadline Tracking   | Manage deadlines with automatic sorting and visual indicators for overdue and upcoming items |
+| Module Management   | Record modules and assessment results with automatic average calculation                     |
+| Budget Management   | Track income and expenses with categorisation and real-time balance updates                  |
 
 ## Tech Stack
 
 - Frontend: HTML, CSS, TypeScript 5.9, React 19, Vite 8, Recharts
-- Backend: Python 3.12, Flask 3, Flask-CORS  
+- Backend: Python 3.12, Flask 3, Flask-CORS
 - Data Storage: JSON flat files
 - Authentication: pyJWT, bcrypt
-- Version Control: Git & GitHub  
+- Version Control: Git & GitHub
 - Development Tools: VS Code, GitHub Classroom,
 - Linting: ESLint 9, Prettier, flake8, Black
 
 ## Getting Started
-*What does a user need on there system to run this software?*
 
 ### Prerequisites
 
@@ -79,20 +101,24 @@ The system was developed based on defined functional and non-functional requirem
 - Git
 
 ### Installation
+
 See [Backend README](./Backend/README.md#setup) and [Frontend README](./Frontend/README.md#setup-instructions)
 
 ### Usage
+
 You need two terminals running simultaneously
 
 Terminal 1: Start the backend:
+
 ```bash
 cd Backend
-source myenv/Scripts/activate   # for windows Git Bash
+source myenv/Scripts/activate # for windows Git Bash
 python main.py
 # Running on http://127.0.0.1:5000
 ```
 
 Terminal 2: Start the frontend:
+
 ```bash
 cd Frontend
 npm run dev
@@ -102,27 +128,56 @@ npm run dev
 Open http://localhost:5173 in your browser.
 
 ## Screenshots
-*Add screenshots or GIFs to showcase the UI or functionality.*
 
+_Add screenshots or GIFs to showcase the UI or functionality._
 
 ### Project Structure
-*Example format below*
+
+_Example format below_
+
 ```
-project-name/
+elee1149-courswork-2025-a-s-s-a/
+├── Backend/                   # Flask REST API and data logic
+│   ├── data/                  # JSON files for persistent storage
+│   ├── models/                # Data classes (Academics, Budget, User)
+│   ├── services/              # Coordination layer between models and routes
+│   ├── storage/               # Thread-safe JSON storage management
+│   ├── tests/                 # Full backend test suite
+│   ├── main.py                # Main Flask entry point and API routes
+│   ├── requirements.txt       # Python backend dependencies
+│   └── .flake8                # Backend linting configuration
 │
-├── src/            # Source code
-├── docs/           # Documentation
-├── tests/          # Unit tests
-└── README.md       # Project README
+├── Frontend/                   # React 19 & TypeScript SPA
+│   ├── public/                # Static assets (Logos, Team images)
+│   ├── src/
+│   │   ├── reactpage/         # Core application pages and components
+│   │   ├── services/          # API client and LocalStorage management
+│   │   ├── styles/            # Modular CSS themes (Classic, Light, Dark)
+│   │   ├── App.tsx            # Protected routing and component map
+│   │   └── main.tsx           # React DOM rendering entry point
+│   ├── package.json           # Frontend dependencies and scripts
+│   └── vite.config.ts         # Vite build tool configuration
+│
+└── README.md                   # Main project documentation
 ```
+
+## Documentation & Reflection
+
+The full engineering process is documented in the following files:
+
+- Requirements: See Requirements.md for Functional & Non-Functional mapping.
+
+- System Modelling: See SystemModelling.md for UML and Architectural decisions.
+
+- AI Reflection: See AI-Reflection.md for evaluation of LLM usage during the SDLC.
 
 ## Contributors
 
-- [A9rlt](https://github.com/A9rlt) - Back End Developer
-- [AbishilS](https://github.com/AbishilS) - Front End Developer
-- [declaringintent](https://github.com/declaringintent) – Back End Developer
-- [Tomas-l-santos](https://github.com/Tomas-l-santos) - Front End Developer
+- [A9rlt](https://github.com/A9rlt) - Lead Back End Developer
+- [AbishilS](https://github.com/AbishilS) - Lead Front End Developer
+- [declaringintent](https://github.com/declaringintent) – Lead Back End Developer
+- [Tomas-l-santos](https://github.com/Tomas-l-santos) - Lead Front End Developer
 
 ## License
-Specify the license (e.g., MIT, Apache 2.0).
-`
+
+Distributed under the **MIT License**. See the [LICENSE](./License) file for more information.
