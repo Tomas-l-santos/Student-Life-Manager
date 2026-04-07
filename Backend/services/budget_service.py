@@ -23,22 +23,22 @@ class BudgetService:
         categories = self.categories_storage.read_all()
         if not categories:
             default_categories = [
-                {"id": 1, "name": "Food & Dining", "type": "expense", "icon": ""},
-                {"id": 2, "name": "Transportation", "type": "expense", "icon": ""},
-                {"id": 3, "name": "Rent", "type": "expense", "icon": ""},
-                {"id": 4, "name": "Utilities", "type": "expense", "icon": ""},
-                {"id": 5, "name": "Entertainment", "type": "expense", "icon": ""},
-                {"id": 6, "name": "Shopping", "type": "expense", "icon": ""},
-                {"id": 7, "name": "Education", "type": "expense", "icon": ""},
-                {"id": 8, "name": "Healthcare", "type": "expense", "icon": ""},
-                {"id": 9, "name": "Personal Care", "type": "expense", "icon": ""},
-                {"id": 10, "name": "Other Expenses", "type": "expense", "icon": ""},
-                {"id": 11, "name": "Groceries", "type": "expense", "icon": ""},
-                {"id": 12, "name": "Salary", "type": "income", "icon": ""},
-                {"id": 13, "name": "Work", "type": "income", "icon": ""},
-                {"id": 14, "name": "Scholarship", "type": "income", "icon": ""},
-                {"id": 15, "name": "Allowance", "type": "income", "icon": ""},
-                {"id": 16, "name": "Other Income", "type": "income", "icon": ""},
+                {"id": 1, "name": "Food & Dining", "type": "expense", "icon": "󰉚"},
+                {"id": 2, "name": "Transportation", "type": "expense", "icon": "󰃧"},
+                {"id": 3, "name": "Rent", "type": "expense", "icon": ""},
+                {"id": 4, "name": "Utilities", "type": "expense", "icon": "󱌢"},
+                {"id": 5, "name": "Entertainment", "type": "expense", "icon": "󰊗"},
+                {"id": 6, "name": "Shopping", "type": "expense", "icon": ""},
+                {"id": 7, "name": "Education", "type": "expense", "icon": ""},
+                {"id": 8, "name": "Healthcare", "type": "expense", "icon": ""},
+                {"id": 9, "name": "Personal Care", "type": "expense", "icon": "󰢙"},
+                {"id": 10, "name": "Other Expenses", "type": "expense", "icon": "󱉠"},
+                {"id": 11, "name": "Groceries", "type": "expense", "icon": ""},
+                {"id": 12, "name": "Salary", "type": "income", "icon": "󱪑"},
+                {"id": 13, "name": "Work", "type": "income", "icon": "󰄔"},
+                {"id": 14, "name": "Scholarship", "type": "income", "icon": ""},
+                {"id": 15, "name": "Allowance", "type": "income", "icon": "󰄔"},
+                {"id": 16, "name": "Other Income", "type": "income", "icon": "󱉡"},
             ]
             self.categories_storage.write_all(default_categories)
 
