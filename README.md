@@ -59,45 +59,47 @@ The system was developed based on defined functional and non-functional requirem
 
 ## Tech Stack
 
-- Frontend: HTML, CSS, TypeScript, React
-- Backend: Node.js (planned / partially implemented)  
-- Data Storage: Browser Local Storage  
+- Frontend: HTML, CSS, TypeScript 5.9, React 19, Vite 8, Recharts
+- Backend: Python 3.12, Flask 3, Flask-CORS  
+- Data Storage: JSON flat files
+- Authentication: pyJWT, bcrypt
 - Version Control: Git & GitHub  
-- Development Tools: VS Code, GitHub Classroom
-- Database: 
+- Development Tools: VS Code, GitHub Classroom,
+- Linting: ESLint 9, Prettier, flake8, Black
 
 ## Getting Started
 *What does a user need on there system to run this software?*
 
 ### Prerequisites
 
-- Node.js vXX
-- Python vXX
-- Any other tools
+- Python 3.12 or higher
+- Node.js 20 or higher
+- npm 10 or higher
+- A Gmail account with an App Password configured (for OTP email)
+- Git
 
 ### Installation
-*How does a user install/build from source or precomplied binaries?*
-
-```
-# Clone the repository
-git clone https://github.com/your-org/project-name.git
-
-# Navigate to the project folder
-cd project-name
-
-# Install dependencies
-
-```
+See [Backend README](./Backend/README.md#setup) and [Frontend README](./Frontend/README.md#setup-instructions)
 
 ### Usage
-*How do we run/start the software?*
+You need two terminals running simultaneously
 
+Terminal 1: Start the backend:
+```bash
+cd Backend
+source myenv/Scripts/activate   # for windows Git Bash
+python main.py
+# Running on http://127.0.0.1:5000
 ```
-npm start
-...
-cargo run
+
+Terminal 2: Start the frontend:
+```bash
+cd Frontend
+npm run dev
+# Local: http://localhost:5173
 ```
-*Or any other commands*
+
+Open http://localhost:5173 in your browser.
 
 ## Screenshots
 *Add screenshots or GIFs to showcase the UI or functionality.*
