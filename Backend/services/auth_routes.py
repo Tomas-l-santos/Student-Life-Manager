@@ -16,6 +16,10 @@ auth_service = AuthService()
 # Secret key for JWT - use environment variable in production
 SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
 
+# This template was created with assistance from ChatGPT (OpenAI, 2026).
+# Prompt:“How do I implement login security to prevent invalid or malicious input”
+# The output was reviewed, modified, and tested by the Muiiz.
+
 
 # This code was fixed with assistance from Claude ai (Anthropic, 2025).
 # Prompt:“Explain the security risk of user_email and how to fix it”
