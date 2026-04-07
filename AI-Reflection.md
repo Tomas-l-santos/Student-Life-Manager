@@ -34,7 +34,36 @@ The team of four was divided into two functional pairs: Frontend (React/TypeScri
 
 - Debugging: We provided AI with specific Python tracebacks and browser console errors. Rather than blindly applying fixes, we asked the AI to “Explain the root cause of this CORS error,” allowing the team to understand the fix before implementation.
 
-## 1.2 Backend Critical Evaluation (Team: [Names])
+## 1.2 Backend Critical Evaluation (Team: [Muiiz Ayodele, Amr Assaf])
+
+In Backend development, AI were most valuable in generating templates and structure as well as explaining library APIs and security designs. However, AI often extended past what was necessary, often to the detriment of the entire code. It was also unreliable at times where errors could not be found in a code block but was rather a result of foreign code.
+
+### CI Pipeline Development  - Muiiz Ayodele
+- Prompt Desing and AI Suggestion: AI was prompted to generate a GitHub Actions CI pipeline for the project, inclusing steps for installation, linting, and formatting. The AI suggested a linear pipeline frontend and backend tests were executed sequentially all within a single job. Furthermore, the AI gave a static list of files to be checked for syntax.
+
+- Evaluation: While functional the AI-generated pipeline lacked optimization and separation of concerns. Running checks sequentially increased feedback time. Additionally, formatting was enforced after linting which meant that any error that could be solved through formatting would fail before that stage. Lastly, the files all had to be manually added for the linting process which made it easier to miss one accidentally.
+
+- Engineering Override: The pipeline was restructured to two parallel jobs for frontend and backend. Linting was placed after formatting checks with Black in the backend stage. All relevant files were automatically gathered and compiled before the linting stage through py_compile
+
+- Learnings: AI provides a solid baseline but lacks awareness of CI efficiency and developer experience. Engineering judgment is often required to optimize execution order, introduce parallelism, and reduce runtime costs.
+
+### Architecture - Muiiz Ayodele
+- Prompt Desing and AI Suggestion: AI produced Flask applications where route handlers contained inline file I/O, business logic, and validation all within a single function.
+
+- Evaluation: While functional for small prototypes, this approach made code difficult to maintain, test, and extend. It showed poor OOP and would have required more work from all members of the project.
+
+- Engineering Override: The architecture was refactored into a strict three layer structure where the routes would handle request parsing and response formatting only, the services would contain all business logic, validation, and computation, and storage would handle file I/O with consistent methods.
+
+- Learnings: AI code often prioritised simplicity and short term progress over long term ease of maintainability. The layered architecture enabled easier error spotting which was critical to a project developed by multiple people.
+
+### Data Persistence - Muiiz Ayodele
+- Prompt Desing and AI Suggestion: AI generated implementations for persistence relied on basic file handling, using direct open and write calls embedded within functions, often assumming single threaded execution model.
+
+- Evaluation: This approach introduced a critical risk, spotted during testing, or race conditions under concurrent requests. Multiple requests could read and overwrite files simultaneously, leading to data loss.
+
+- Engineering Override: a threading.Lock was introduced to enforce atomic read/write operations. The lock is acquired before any file access and only released after operation completion.
+
+- Learnings: AI overlooks concurrency and real world problems, especially when suggesting persistence strategies.
 
 ## 1.3 Frontend Critical Evaluation (Team: [Abhishil Sinoj, Tomas Santos])
 
