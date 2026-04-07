@@ -8,7 +8,7 @@ from services.timetable_service import TimetableService
 
 app = Flask(__name__)
 CORS(app)
-# Register the auth Blueprint 
+# Register the auth Blueprint
 app.register_blueprint(auth_bp)
 
 budget_service = BudgetService()
