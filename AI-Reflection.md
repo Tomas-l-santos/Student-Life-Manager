@@ -71,6 +71,103 @@ Frontend development required balancing fast AI-generated code with the performa
 
 ---
 
+**_Tomas Santos_**
+
+My contribution to the project focused on translating requirements into frontend structure, producing HTML prototypes that acted as blueprints for the later React implementation, creating the CSS system used to keep both the HTML and React versions visually consistent, and developing the system modelling diagrams and supporting documentation. Because of this role, AI was used less for generating final application logic and more for requirements interpretation, interface planning, styling refinement, diagram explanation, and documentation quality improvement. This made AI useful as a support mechanism across multiple SDLC stages rather than as a direct source of finished code.
+
+---
+
+### Requirements Interpretation into Frontend Structure
+
+| Aspect | Description |
+|------|------------|
+| Prompt Design & AI Suggestion | AI was prompted to help interpret the requirements into possible page structures and user-facing layouts. This included asking for suitable page breakdowns for features such as dashboard navigation, module management, deadlines, tasks, budget tracking, and account-related areas. |
+| Critical Evaluation | The AI suggestions were useful for early brainstorming, but they often treated pages as isolated screens rather than parts of a connected system. This created a risk that the interface would look complete while failing to reflect requirement relationships, such as links between modules, deadlines, and tasks, or the distinction between functional and non-functional expectations. |
+| Engineering Override | Requirements were manually reviewed and translated into page structures that better reflected the actual system scope. The frontend blueprint work focused on ensuring that required features had a clear place in the interface and that the page structure supported later implementation rather than just visual presentation. This helped maintain traceability between requirements, planned behaviour, and interface design. |
+| Learning Outcome | This showed that AI can help generate options, but it does not reliably preserve requirement traceability. Human judgement was needed to ensure that layouts were grounded in the actual specification rather than generic student dashboard assumptions. |
+
+---
+
+### HTML Blueprint Development for Later React Conversion
+
+| Aspect | Description |
+|------|------------|
+| Prompt Design & AI Suggestion | AI was prompted to generate structured HTML layouts for dashboards, sidebars, page containers, and common student management views. The aim was not to produce a finished frontend, but to build page blueprints that could later guide React development. |
+| Critical Evaluation | While the generated layouts provided a useful starting point, they were often too generic and visually focused. They usually produced standard dashboard patterns without enough consideration for modularity, section reuse, or how the structure would later be converted into React components. In several cases, AI-generated layouts would have required major restructuring if used directly. |
+| Engineering Override | The HTML pages were manually redesigned and reorganised to act as blueprints rather than final static pages. This meant prioritising clear structure, reusable section patterns, and consistency across pages so that the later React work had a more reliable visual and organisational reference. The HTML therefore served as a design and communication tool within the SDLC, not just a prototype. |
+| Learning Outcome | AI accelerated initial drafting, but it did not adequately account for implementation transition. This reinforced the importance of using prototypes as engineering artefacts that support later development, rather than as disconnected visual mock-ups. |
+
+---
+
+### CSS System Consistency Across HTML and React
+
+| Aspect | Description |
+|------|------------|
+| Prompt Design & AI Suggestion | AI was used to suggest dashboard styling approaches, including colour palettes, sidebar styling, card layouts, spacing systems, and typography. Prompts often focused on creating a clean and modern interface suitable for a student management platform. |
+| Critical Evaluation | Although many of the AI suggestions looked visually acceptable in isolation, they were often inconsistent when compared across multiple pages. Different suggestions introduced conflicting colours, spacing values, and component styles, which would have made it difficult to preserve a coherent visual identity between the HTML blueprint version and the later React implementation. |
+| Engineering Override | A manual CSS structure was developed to create a shared design language across both HTML and React. This included consistent colours, panel styling, sidebar appearance, layout spacing, and overall UI hierarchy. Instead of treating CSS as page-specific decoration, it was handled as a system-wide design layer that supported continuity between prototype and implementation. |
+| Learning Outcome | AI was useful for style inspiration, but not for enforcing long-term consistency. This highlighted that maintainable frontend work depends on controlled styling decisions rather than accepting disconnected code snippets from separate prompts. |
+
+---
+
+### System Modelling, UML, and Architectural Communication
+
+| Aspect | Description |
+|------|------------|
+| Prompt Design & AI Suggestion | AI was used to help improve the wording of system modelling explanations, organise modelling documentation, and clarify the purpose of diagrams such as behavioural and structural views. Prompts focused on making the written explanations clearer and more aligned with academic expectations. |
+| Critical Evaluation | AI-generated text often sounded polished but too generic. It could describe what a diagram was in theory, but not always why that diagram mattered for this specific system. In some cases, the outputs risked making the modelling documentation sound detached from the real requirements and implementation decisions, which would weaken ownership and traceability. |
+| Engineering Override | The diagrams were created and organised to reflect the actual Student Life Management system rather than generic UML examples. Explanations were rewritten so they clearly connected requirements, interface behaviour, and overall system structure. This ensured that the modelling documentation was not just present for completeness, but actively supported reasoning about the system. |
+| Learning Outcome | AI can refine written explanation, but it cannot replace design understanding. The real value came from using AI to improve communication after the diagrams and modelling intent were already understood and created manually. |
+
+---
+
+### Documentation Quality and README Development
+
+| Aspect | Description |
+|------|------------|
+| Prompt Design & AI Suggestion | AI was used to improve wording, organise documentation into clearer sections, refine contribution statements, and make README content sound more professional and better aligned with marking expectations. |
+| Critical Evaluation | Some AI-generated documentation sounded formal but lacked authenticity. There was also a risk that the writing could imply work that had not actually been completed or describe the project too generically. That would have reduced both accuracy and credibility. |
+| Engineering Override | Documentation was repeatedly revised to ensure it remained accurate to the real work carried out. AI suggestions were used as a draft-improvement tool, but final wording was controlled manually so that the documentation reflected genuine contribution, clearer ownership, and more natural communication. |
+| Learning Outcome | This reinforced that strong documentation is not just about polished wording. It must also preserve truthfulness, ownership, and alignment with the real development process. |
+
+---
+
+### Critical Reflection on AI Use Across the SDLC
+
+| Aspect | Description |
+|------|------------|
+| Prompt Design & AI Suggestion | AI was used across several stages of the lifecycle, including requirements interpretation, early layout planning, styling ideas, modelling explanations, and documentation refinement. |
+| Critical Evaluation | The main limitation was that AI often produced outputs that were locally convincing but globally inconsistent. In other words, a single answer could appear useful on its own, while still failing to align with requirements, other pages, or the wider architecture of the project. |
+| Engineering Override | AI outputs were treated as provisional drafts rather than accepted solutions. Each output had to be checked against the real project context, expected system behaviour, and the team’s design direction before being used. |
+| Learning Outcome | This developed a stronger understanding that AI should support engineering judgement, not replace it. The most valuable skill was not prompt writing alone, but the ability to evaluate, reject, and reshape outputs so they fit the actual system. |
+
+---
+
+### Overall Reflection
+
+The use of AI improved efficiency mainly during the planning and documentation stages, especially when exploring layout options, refining CSS ideas, improving modelling explanations, and making documentation clearer. However, its weaknesses became more visible as soon as project-specific context, traceability, and consistency were required.
+
+AI was most effective when used for:
+- generating initial ideas for page structure and layout  
+- suggesting possible visual patterns and styling directions  
+- refining wording in modelling and documentation sections  
+
+AI was least effective when used for:
+- preserving traceability between requirements, design, and implementation  
+- maintaining consistency across several related files and pages  
+- representing the true system architecture without human correction  
+
+A major learning from this process was that AI is strongest when used as a support tool inside an existing engineering process. It was helpful for accelerating early drafts and improving presentation quality, but it could not replace requirement interpretation, system-level consistency, or ownership of design decisions.
+
+In future projects, AI would be used more strategically by:
+- giving more constrained prompts that include requirement context  
+- using it earlier for brainstorming, but later for refinement rather than generation  
+- checking every output against project artefacts such as requirements, diagrams, and implementation plans before acceptance  
+
+Overall, this experience improved my understanding of how frontend planning, documentation, requirements traceability, and system modelling all contribute to software engineering quality. It also showed that the value of AI in a project is not measured by how much it produces, but by how well its outputs are evaluated and integrated through human judgement.
+
+---
+
 **_Abhishil Sinoj_**
 
 The following instances represent specific engineering decisions where AI-generated suggestions were critically evaluated and modified to meet the system's performance, security, and functional need
