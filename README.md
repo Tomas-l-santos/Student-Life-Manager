@@ -7,12 +7,13 @@ A web-based system designed to support students in managing academic, financial,
 - [About the Project](#about-the-project)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
-- Getting Started
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Project Structure](#project-structure)
+- [Documentation](#documentation)
 - [Contributors](#contributors)
 - [License](#license)
 

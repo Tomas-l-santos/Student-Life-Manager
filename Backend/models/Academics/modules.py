@@ -81,7 +81,7 @@ class Modules:
         modules = self.storage.read_all()
         for m in modules:
             if (
-                m.get("user_id") == user_id
+                m["user_id"] == user_id
                 and m["code"] == code
                 and m["academic_year"] == academic_year
                 and m["status"] != "dropped"
@@ -93,7 +93,7 @@ class Modules:
 
         # Get all modules for a user with optional filters
         modules = self.storage.read_all()
-        user_modules = [m for m in modules if m.get("user_id") == user_id]
+        user_modules = [m for m in modules if m["user_id"] == user_id]
 
         # Apply filters
         if year_of_study:
@@ -121,7 +121,7 @@ class Modules:
         # Get a specific module
         modules = self.storage.read_all()
         for m in modules:
-            if m["id"] == module_id and m.get("user_id") == user_id:
+            if m["id"] == module_id and m["user_id"] == user_id:
                 return m
         return None
 
@@ -131,7 +131,7 @@ class Modules:
         modules = self.storage.read_all()
 
         for i, m in enumerate(modules):
-            if m["id"] == module_id and m.get("user_id") == user_id:
+            if m["id"] == module_id and m["user_id"] == user_id:
                 # Update fields
                 if "name" in updates:
                     m["name"] = updates["name"]
@@ -174,7 +174,7 @@ class Modules:
         modules = self.storage.read_all()
 
         for i, m in enumerate(modules):
-            if m["id"] == module_id and m.get("user_id") == user_id:
+            if m["id"] == module_id and m["user_id"] == user_id:
                 modules.pop(i)
                 self.storage.overwrite(modules)
                 return True
