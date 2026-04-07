@@ -6,7 +6,7 @@ Flask REST API serving all data to the frontend
 ```bash
 cd Backend
 python -m venv myenv
-myenv\Scripts\activate        # Windows
+source myenv\Scripts\activate # Windows
 source myenv/bin/activate     # Mac/Linux
 pip install -r requirements.txt
 python main.py
@@ -53,10 +53,11 @@ data/              = JSON storage files
 models/            = Data classes (User, Transaction, etc.)
 services/          = Business logic layer
 storage/           = JSONStorage abstraction
+tests/             = Automated test
 main.py            = Flask app + routes
 requirements.txt
 ## Linting
 ```bash
-flake8 .     # check style
-black .      # auto-format
+python -m flake8 .     # check style
+python -m black .      # auto-format
 ```
