@@ -129,4 +129,3 @@ class AcademicAnalytics:
             "percentage": grade_info["current_percentage"],
             "progress": f"{grade_info['total_weight']}% complete",
         }
-        
