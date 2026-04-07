@@ -451,7 +451,7 @@ Build a comprehensive student management system combining budget tracking and ac
 
 ## Team Reflections
 
-### Developer 1 (Backend - Auth/Budget)
+### Developer 1 (Backend)
 **Went Well:**
 - All features came together nicely
 - Email integration was satisfying to get working
@@ -467,7 +467,37 @@ Build a comprehensive student management system combining budget tracking and ac
 
 ---
 
-### Developer 2 (Backend - Academics/Notes)
+### Developer 2 (Backend)
+**Went Well:**
+- UK grading system research was interesting
+- Notes feature exceeded initial scope (in a good way)
+- Clean code organization
+
+**Could Improve:**
+- Should have flagged the user_id inconsistency earlier
+- Need to improve Git workflow (fewer large commits)
+- Could document decisions better
+
+
+**Personal Goal:**
+- Get better at breaking down large features into smaller tasks
+
+### Developer 3 (Backend)
+**Went Well:**
+- UK grading system research was interesting
+- Notes feature exceeded initial scope (in a good way)
+- Clean code organization
+
+**Could Improve:**
+- Should have flagged the user_id inconsistency earlier
+- Need to improve Git workflow (fewer large commits)
+- Could document decisions better
+
+**Personal Goal:**
+- Get better at breaking down large features into smaller tasks
+
+
+### Developer 4 (Backend)
 **Went Well:**
 - UK grading system research was interesting
 - Notes feature exceeded initial scope (in a good way)
