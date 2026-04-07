@@ -34,9 +34,97 @@ The team of four was divided into two functional pairs: Frontend (React/TypeScri
 
 - Debugging: We provided AI with specific Python tracebacks and browser console errors. Rather than blindly applying fixes, we asked the AI to “Explain the root cause of this CORS error,” allowing the team to understand the fix before implementation.
 
-## 1.2 Backend Critical Evaluation (Team: [Names])
+## 1.2 Backend Critical Evaluation (Team: [Muiiz Ayodele, Amr Assaf])
 
-## 1.3 Frontend Critical Evaluation (Team: [Names])
+In Backend development, AI were most valuable in generating templates and structure as well as explaining library APIs and security designs. However, AI often extended past what was necessary, often to the detriment of the entire code. It was also unreliable at times where errors could not be found in a code block but was rather a result of foreign code.
+
+### CI Pipeline Development  - Muiiz Ayodele
+- Prompt Desing and AI Suggestion: AI was prompted to generate a GitHub Actions CI pipeline for the project, inclusing steps for installation, linting, and formatting. The AI suggested a linear pipeline frontend and backend tests were executed sequentially all within a single job. Furthermore, the AI gave a static list of files to be checked for syntax.
+
+- Evaluation: While functional the AI-generated pipeline lacked optimization and separation of concerns. Running checks sequentially increased feedback time. Additionally, formatting was enforced after linting which meant that any error that could be solved through formatting would fail before that stage. Lastly, the files all had to be manually added for the linting process which made it easier to miss one accidentally.
+
+- Engineering Override: The pipeline was restructured to two parallel jobs for frontend and backend. Linting was placed after formatting checks with Black in the backend stage. All relevant files were automatically gathered and compiled before the linting stage through py_compile
+
+- Learnings: AI provides a solid baseline but lacks awareness of CI efficiency and developer experience. Engineering judgment is often required to optimize execution order, introduce parallelism, and reduce runtime costs.
+
+### Architecture - Muiiz Ayodele
+- Prompt Desing and AI Suggestion: AI produced Flask applications where route handlers contained inline file I/O, business logic, and validation all within a single function.
+
+- Evaluation: While functional for small prototypes, this approach made code difficult to maintain, test, and extend. It showed poor OOP and would have required more work from all members of the project.
+
+- Engineering Override: The architecture was refactored into a strict three layer structure where the routes would handle request parsing and response formatting only, the services would contain all business logic, validation, and computation, and storage would handle file I/O with consistent methods.
+
+- Learnings: AI code often prioritised simplicity and short term progress over long term ease of maintainability. The layered architecture enabled easier error spotting which was critical to a project developed by multiple people.
+
+### Data Persistence - Muiiz Ayodele
+- Prompt Desing and AI Suggestion: AI generated implementations for persistence relied on basic file handling, using direct open and write calls embedded within functions, often assumming single threaded execution model.
+
+- Evaluation: This approach introduced a critical risk, spotted during testing, or race conditions under concurrent requests. Multiple requests could read and overwrite files simultaneously, leading to data loss.
+
+- Engineering Override: a threading.Lock was introduced to enforce atomic read/write operations. The lock is acquired before any file access and only released after operation completion.
+
+- Learnings: AI overlooks concurrency and real world problems, especially when suggesting persistence strategies.
+
+## 1.3 Frontend Critical Evaluation (Team: [Abhishil Sinoj, Tomas Santos])
+
+Frontend development required balancing fast AI-generated code with the performance and data accuracy needs of a React 19 application. While AI helped generate initial components, additional engineering was needed to turn the system from a basic prototype into a reliable, production-ready student management tool.
+
+---
+
+**_Abhishil Sinoj_**
+
+The following instances represent specific engineering decisions where AI-generated suggestions were critically evaluated and modified to meet the system's performance, security, and functional need
+
+### Architectural Resilience in Data Aggregation (dashboard.tsx)
+
+- Prompt Design & AI Suggestion: The LLM was prompted to create a data-loading function for fetching timetable, deadline, and budget data.The AI suggested a series of sequential await calls.
+
+- Evaluation: Sequential fetching introduced a blocking bottleneck. A delay in one request (e.g., timetable data) would prevent other data (eg., budget information) from rendering, violating NFR-5 (Performance) for a responsive Single Page Application
+
+- Engineering Override: The sequential logic was replaced with a Promise.allSettled() architecture to enable concurrent API execution.
+
+- Learnings: This demonstrates that AI-generated solutions often prioritize simplicity over resilience. A concurrent-first design approach ensures partial UI functionality during service delays or outages, reflecting sound engineering judgement.
+
+### Network Optimization & Rate Limiting (tasks.tsx)
+
+- Prompt Design & AI Suggestion: The AI was assked to "make the notebook notes auto-save as the user types." The AI suggested attaching a backend PUT request directly to the onChange event.
+
+- Evaluation: This approach created a network spam anti-pattern, where each keystroke triggered an API call, potentially overwhelming the backend with redundant requests.
+
+- Engineering Override: A 1000ms debounce function using setTimeout was implemented to buffer input, ensuring synchronization occurs only after user inactivity.
+
+- Learnings: AI logic is often stateless and ignores the cost of network overhead. This reinforced the importance of implementing rate-limiting logic at the source of user input to ensure industry readiness.
+
+### Spatial Mathematical Logic in UI Rendering (timetable.tsx)
+
+- Prompt Design & AI Suggestion: A prompt requested a weekly timetable view using CSS Grid. The AI generated a layout where all class blocks had identical heights.
+
+- Evaluation: This failed functional requirement UR-3, as it prevented visual differentiation between sessions of varying durations (e.g., 1-hour vs 3-hour classes). The solution lacked proper mapping of temporal data to spatial representation
+
+- Engineering Override: A dynamic pixel-per-minute algorithm was implemented to calculate element height and vertical positioning based on timestamps.
+
+- Learnings: While AI performs well in visual styling, it is less effective in handling visual mathematical transformations. Complex data visualizations require deliberate algorithmic design.
+
+### Domain-Specific Accuracy in Academic Analytics (modules.tsx)
+
+- Prompt Design & AI Suggestion: A prompt requested a grade calculation function for university modules. The AI suggested a simple arithmetic mean.
+
+- Evaluation: This was academically incorrect for the UK higher education context as it ignored assessment weightings. Relying on this would have misled students regarding their actual degree classification, failing SR-3.3.
+
+- Engineering Override: A weighted contribution engine was implemented, calculating results using the formula,to produce an accurate weighted average aligned with classification thresholds.
+  - (score/max)× weight = max score
+
+- Learnings : AI lacks contextual domain awareness and defaults to simplified models. Systems requiring domain-specific accuracy must rely on explicitly defined formulas rather than inferred logic.
+
+### Centralized Security Architecture (App.tsx & api.ts)
+
+- Prompt Design & AI Suggestion: The AI initially suggested checking for a login token inside every individual component that needed protection
+
+- Critical Evaluation: This resulted in a fragmented and unmaintainable security model, increasing the risk of unprotected routes and violating NFR-1 (Security).
+
+- Engineering Override: A centralized Higher-Order Component (HOC) pattern was implemented using a "PrivateRoute" wrapper to secure all dashboard routes consistently.
+
+- Learnings: Centralized security architecture improves maintainability and reduces risk. AI can assist with implementation details, but architectural decisions must enforce modular and scalable design principles.
 
 ## 1.4 Comparative Analysis Table
 

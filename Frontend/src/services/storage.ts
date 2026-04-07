@@ -1,3 +1,6 @@
+/* This test was created with assistance from Claude AI (Anthropic, 2026).
+ Prompt:“How do i manage localStorage sessions”
+ The output was reviewed, modified, and tested by the Muiiz. */
 export function saveSession(token: string, email: string, username: string) {
   localStorage.setItem("token", token);
   localStorage.setItem("user_email", email);

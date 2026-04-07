@@ -1,112 +1,286 @@
-# ELEE1149-Project-Template - Change me
-*A short, descriptive title for your project.*
+# ELEE1149 – Student Life Management System
 
-Have a look at other READMEs “in the wild” (open-source projects on GitHub are great examples) and see what they include. Your README is the first impression of your project, so make it clear, professional, and helpful. Below is a good starting point, and you can customize it for your coursework.
-### Extra Tips:
+<div align="center">
 
-- Use **clear headings** and a logical structure.
-- Add **badges** (e.g., build status, license, version) for a professional look.
-- Include a **link to a live demo** if available.
-- Add **screenshots or GIFs** to showcase your UI or features.
-- Keep instructions simple and accurate for installation and usage.
-- Maintain a **CHANGELOG.md** for version history.
-- Use semantic commit messages (e.g., feat: add login page).
-- Make sure your README answers:
-   - What is this project?
-   - How do I run it?
-   - Who built it?
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/Made%20with-Python%203.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  </a>
+  <a href="https://react.dev/">
+    <img src="https://img.shields.io/badge/Made%20with-React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
+  </a>
+  <a href="https://vitejs.dev/">
+    <img src="https://img.shields.io/badge/Vite_8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
+  </a>
+
+<br><br>
+
+  <img src="https://skillicons.dev/icons?i=ts,css,py,html,js" alt="Languages">
+
+<br><br>
+
+  <img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="ESLint">
+  <img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge" alt="Build Status">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="License">
+
+<br><br>
+
+  <img src="./Frontend/public/Images/Home.png" alt="Student Life Management System Interface" width="100%">
+
+## </div>
+
+> **A web-based system designed to support students in managing academic, financial, and personal responsibilities in one unified platform.**
+
+---
 
 ## Table of Contents
 
 - [About the Project](#about-the-project)
-- Features
-- Tech Stack
-- Getting Started
-  - Prerequisites
-  - Installation
-- Usage
-- Screenshots
-- Project Structure
-- Contributors
-- License
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Project Structure](#project-structure)
+- [Documentation](#Documentation)
+- [Contributors](#contributors)
+- [License](#license)
 
 ## About the Project
 
-Briefly explain:
+This project is a Student Life Management System, developed as part of the ELEE1149 Software Engineering module. The system provides students with a centralised platform to manage key aspects of university life, including:
 
-- What the project does?
-- Why it exists (problem it solves)?
-- Who it’s for?
+- Academic modules and grades
+- Timetables and deadlines
+- Task management
+- Personal budgeting and expenses
+
+### Problem it Solves
+
+Students often use multiple disconnected tools (notes apps, calendars, spreadsheets), which leads to:
+
+- Poor organisation
+- Missed deadlines
+- Lack of visibility over workload and finances
+
+This system solves that by integrating all features into one structured application, improving productivity and reducing stress.
+
+### Target Users
+
+- University students
+- Individuals managing multiple responsibilities
+- Users who need a simple and structured productivity tool
 
 ## Features
-List the main features:
 
-- Feature 1
-- Feature 2
-- Feature 3
+### Core Features
+
+The system was developed based on defined functional and non-functional requirements, ensuring alignment between user needs and implementation.
+
+| Feature Area        | Description                                                                                  |
+| ------------------- | -------------------------------------------------------------------------------------------- |
+| User Account System | Secure login and account creation with password validation and reset functionality           |
+| Dashboard           | Central overview displaying tasks, deadlines, and workload indicators with real-time updates |
+| Task Management     | Create, edit, delete, and prioritise tasks, with completion tracking                         |
+| Deadline Tracking   | Manage deadlines with automatic sorting and visual indicators for overdue and upcoming items |
+| Module Management   | Record modules and assessment results with automatic average calculation                     |
+| Budget Management   | Track income and expenses with categorisation and real-time balance updates                  |
 
 ## Tech Stack
-*These are examples only, your team needs list technologies you used*
-- Frontend: React / Angular / Vue
-- Backend: Node.js / Django / Flask
-- Database: MySQL / MongoDB
+
+- Frontend: HTML, CSS, TypeScript 5.9, React 19, Vite 8, Recharts
+- Backend: Python 3.12, Flask 3, Flask-CORS
+- Data Storage: JSON flat files
+- Authentication: pyJWT, bcrypt
 - Version Control: Git & GitHub
+- Development Tools: VS Code, GitHub Classroom,
+- Linting: ESLint 9, Prettier, flake8, Black
 
 ## Getting Started
-*What does a user need on there system to run this software?*
 
 ### Prerequisites
 
-- Node.js vXX
-- Python vXX
-- Any other tools
+- Python 3.12 or higher
+- Node.js 20 or higher
+- npm 10 or higher
+- A Gmail account with an App Password configured (for OTP email)
+- Git
 
 ### Installation
-*How does a user install/build from source or precomplied binaries?*
 
-```
-# Clone the repository
-git clone https://github.com/your-org/project-name.git
-
-# Navigate to the project folder
-cd project-name
-
-# Install dependencies
-
-```
+See [Backend README](./Backend/README.md#setup) and [Frontend README](./Frontend/README.md#setup-instructions)
 
 ### Usage
-*How do we run/start the software?*
 
+**_You need two terminals running simultaneously_**
+
+Terminal 1: Start the backend:
+
+```bash
+cd Backend
+source myenv/Scripts/activate # for windows Git Bash
+python main.py
+# Running on http://127.0.0.1:5000
 ```
-npm start
-...
-cargo run
+
+Terminal 2: Start the frontend:
+
+```bash
+cd Frontend
+npm run dev
+# Local: http://localhost:5173
 ```
-*Or any other commands*
+
+Open http://localhost:5173 in your browser.
 
 ## Screenshots
-*Add screenshots or GIFs to showcase the UI or functionality.*
 
+_Add screenshots or GIFs to showcase the UI or functionality._
 
 ### Project Structure
-*Example format below*
+
 ```
-project-name/
-│
-├── src/            # Source code
-├── docs/           # Documentation
-├── tests/          # Unit tests
-└── README.md       # Project README
+elee1149-courswork-2025-a-s-s-a
+├── AI-Reflection.md                    # Formal declaration and critical evaluation of GenAI usage
+├── Backend                             # Flask REST API implementation and core business logic
+│   ├── README.md                       # Backend technical documentation and environment setup
+│   ├── data                            # Persistent flat-file storage layer (JSON format)
+│   │   ├── Transactions.json           # Stores all user financial income and expense records
+│   │   ├── Users.json                  # Persistent user credentials and profile metadata
+│   │   ├── assessments.json            # Academic grading records and weightings
+│   │   ├── budgets.json                # User-defined monthly category spending limits
+│   │   ├── categories.json             # Static definition of expense and income types
+│   │   ├── deadlines.json              # Primary store for all academic task deadlines
+│   │   ├── modules.json                # Registry for academic course modules and credits
+│   │   ├── notes.json                  # Content for the distraction-free notebook feature
+│   │   └── timetable.json              # Scheduled events and class occurrences
+│   ├── main.py                         # Application gateway and RESTful endpoint definitions
+│   ├── models                          # Object-oriented schemas and data transfer objects
+│   │   ├── Academics                   # Schema definitions for modules and grades
+│   │   ├── Budget                      # Data structures for financial transactions
+│   │   ├── deadline.py                 # Blueprint for academic deadline objects
+│   │   ├── timetable_entry.py          # Blueprint for scheduling and duration logic
+│   │   └── user.py                     # User entity model including secure UUID management
+│   ├── requirements.txt                # Python environment dependencies (Flask, JWT, bcrypt)
+│   ├── services                        # Business logic layer isolating API from storage
+│   │   ├── academics_service.py        # Logic for grade weighting and module analytics
+│   │   ├── auth_routes.py              # JWT-based secure endpoint controllers
+│   │   ├── authorisation.py            # Authentication logic and password hashing management
+│   │   ├── budget_service.py           # Financial threshold logic and balance calculations
+│   │   ├── deadline_service.py         # CRUD operations and sorting for task management
+│   │   ├── timetable_service.py        # Algorithmic scheduling and occurrence logic
+│   │   └── transaction_service.py      # Validation and management of cash flow data
+│   ├── storage                         # Infrastructure layer for I/O operations
+│   │   └── storagerepo.py              # Thread-safe JSON handling with locking mechanisms
+│   └── tests                           # Automated test suite for quality assurance
+│       ├── __init__.py                 # Python package initialization for pytest
+│       ├── conftest.py                 # Global test fixtures and temporary data setup
+│       ├── test_auth.py                # Validation for login, registration, and lockout
+│       ├── test_budget.py              # Unit tests for financial logic and limits
+│       ├── test_deadlines.py           # Verification of task CRUD and priority sorting
+│       ├── test_performance.py         # Benchmarking for API response times and latency
+│       ├── test_security.py            # Tests for JWT enforcement and data isolation
+│       └── test_timetable.py           # Logic verification for scheduling algorithms
+├── Frontend                            # React 19 / TypeScript Single Page Application (SPA)
+│   ├── README.md                       # Frontend architecture overview and build guides
+│   ├── ReactandTypeScripts.md          # Technical guidelines for TSX component development
+│   ├── eslint.config.js                # Linting rules for maintaining code quality standards
+│   ├── index.html                      # Empty
+│   ├── package-lock.json               # Deterministic dependency tree lock file
+│   ├── package.json                    # Frontend project metadata and script definitions
+│   ├── public                          # Static assets served without processing
+│   │   ├── Images                      # Core system imagery and UI visual elements
+│   │   └── vite.svg                    # Application favicon and default branding
+│   ├── src                             # Main application source code
+│   │   ├── App.css                     # Empty
+│   │   ├── App.tsx                     # Main router configuration and route guarding
+│   │   ├── Pages                       # Legacy/Static HTML prototyping layouts
+│   │   ├── assets                      # Component-specific static resources
+│   │   ├── components                  # Empty
+│   │   ├── index.css                   # Empty
+│   │   ├── main.tsx                    # Entry point for React DOM mounting
+│   │   ├── reactpage                   # Primary dashboard and authentication views
+│   │   ├── services                    # API client infrastructure and storage helpers
+│   │   └── styles                      # Modular CSS system supporting dynamic theming
+│   │       ├── dashboard-css           # Style modules for dashboard feature pages
+│   │       │   ├── account&security.css
+│   │       │   ├── budget.css
+│   │       │   ├── dashboard.css
+│   │       │   ├── deadlines.css
+│   │       │   ├── help.css
+│   │       │   ├── modules.css
+│   │       │   ├── tasks.css
+│   │       │   └── timetable.css
+│   │       ├── login css               # Dedicated styles for the auth and entry flows
+│   │       │   ├── createyouraccount.css
+│   │       │   ├── forgotpassword.css
+│   │       │   └── login.css
+│   │       └── styles.css              # Core styling for Landing, About, and Auth pages
+│   ├── tsconfig.app.json               # TypeScript configuration for application code
+│   ├── tsconfig.json                   # Master TypeScript compiler settings
+│   ├── tsconfig.node.json              # TypeScript configuration for Vite/Node environment
+│   └── vite.config.ts                  # Vite build tool and dev server configuration
+├── GeistMono                           # Project typography resources
+│   ├── GeistMonoNerdFontMono-Regular.otf# Monospaced font file for technical UI elements
+│   ├── LICENSE                         # Licensing terms for font redistribution
+│   └── README.md                       # Font installation and usage instructions
+├── License                             # Primary project licensing terms (MIT)
+├── OriginalREADME.md                   # Inherited project documentation
+├── README.md                           # Main project portal and documentation hub
+├── Testing.md                          # Record of manual and automated testing results
+└── docs                                # Comprehensive engineering and lifecycle documentation
+    ├── agile                           # Project management and iterative development logs
+    │   ├── backlog.md                  # Prioritised list of functional user stories
+    │   ├── retrospective.md            # Critical analysis of team performance and workflow
+    │   └── sprint-log.md               # Detailed history of development iterations
+    ├── ci-cd.md                        # Documentation of the linting and testing pipeline
+    ├── images                          # Repository of UML diagrams and system screenshots
+    │   ├── ClassDiagram.png            # Visual representation of data structures
+    │   ├── Diagrams.md                 # Technical index of all system diagrams
+    │   ├── Passwords.png               # Architectural view of authentication security
+    │   ├── Screenshots.md              # Visual evidence of the implemented UI
+    │   ├── SequenceDiagramOne.png      # Workflow mapping for login/auth cycles
+    │   ├── SequenceDiagramTwo.png      # Workflow mapping for module management
+    │   ├── StateDiagramFour.png        # State transitions for budget tracking
+    │   ├── StateDiagramOne.png         # State transitions for user sessions
+    │   ├── StateDiagramThree.png       # State transitions for task progress
+    │   ├── StateDiagramTwo.png         # State transitions for academic modules
+    │   ├── acc.png                     # Visual blueprint of account systems
+    │   ├── budget.png                  # Visual blueprint of financial management
+    │   ├── modules.png                 # Visual blueprint of academic tracking
+    │   └── task.png                    # Visual blueprint of the Kanban board logic
+    ├── requirements                    # Formal requirements engineering documentation
+    │   ├── Requirement.md              # Functional and non-functional specifications
+    │   ├── traceability-matrix.md      # Mapping of requirements to implementation
+    │   └── user-stories.md             # End-user requirements and use-case scenarios
+    └── system-modelling                # Blueprint for system architecture and UML
+        ├── SystemModelling.md          # Master architectural design document
+        ├── activity-diagram.md         # Process flow logic for system operations
+        ├── architecture.md             # High-level overview of system components
+        ├── class-diagram.md            # Structural modelling of backend entities
+        ├── sequence-diagram.md         # Temporal mapping of system interactions
+        ├── state-diagram.md            # Behavioral modelling of system entities
+        └── use-case.md                 # Visual mapping of user-system interactions
 ```
+
+## Documentation
+
+The full engineering process is documented in the following files:
+
+- Requirements: See [Requirements.md](./docs/requirements/Requirement.md) for Functional & Non-Functional mapping.
+
+- System Modelling: See [SystemModelling.md](./docs/system-modelling/SystemModelling.md) for UML and Architectural decisions.
+
+- AI Reflection: See [AI-Reflection.md](./AI-Reflection.md) for evaluation of LLM usage during the SDLC.
 
 ## Contributors
 
-- [A9rlt](https://github.com/A9rlt) - Back End Developer
-- [AbishilS](https://github.com/AbishilS) - Front End Developer
-- [declaringintent](https://github.com/declaringintent) – Back End Developer
-- [Tomas-l-santos](https://github.com/Tomas-l-santos) - Front End Developer
+- [A9rlt](https://github.com/A9rlt) - Lead Back End Developer
+- [AbishilS](https://github.com/AbishilS) - Lead Front End Developer
+- [declaringintent](https://github.com/declaringintent) – Lead Back End Developer
+- [Tomas-l-santos](https://github.com/Tomas-l-santos) - Lead Front End Developer
 
 ## License
-Specify the license (e.g., MIT, Apache 2.0).
-`
+
+Distributed under the **MIT License**. See the [LICENSE](./License) file for more information.

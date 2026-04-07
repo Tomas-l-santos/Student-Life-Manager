@@ -3,7 +3,7 @@
     "user_id": "ade0f21a-8f5e-4a51-8fae-6239e967bfdf",
     "email": "abhishilsinoj@gmail.com",
     "username": "dsdsadsds",
-    "password_hash": "$2b$12$pfMncO6KTxPFeSC2wmqlAe.mMYDnFX.wQg7lvZZN7fEu1fFWPjAN6",
+    "password_hash": "$2b$12$7.x73J8bcwjKIgqEZuQC/OihK/D5OodhUkwZN8xIus5Ma3Rd8Chnm",
     "birthdate": "2003-02-10"
   },
   {
@@ -33,5 +33,68 @@
     "username": "Ameera",
     "password_hash": "$2b$12$otRfuSHJbi5LB.YtY.acl.cp6aleN302VH8vzoF5jzdwrksHSLdzC",
     "birthdate": "2005-02-10"
+  },
+  {
+    "user_id": "8dbef3ef-f442-44a0-80dc-a6655abbaad1",
+    "email": "api@example.com",
+    "username": "apiuser",
+    "password_hash": "$2b$12$jbpoeXl7O8yxThREoDa7BevS1Oef0kBPDNHjN/DvKeF03S4lMQbAm",
+    "birthdate": "2000-01-01"
+  },
+  {
+    "user_id": "b08f8c92-56b2-4592-b9a8-3612f220dbe0",
+    "email": "login@example.com",
+    "username": "loginuser",
+    "password_hash": "$2b$12$B9p3CQvpidsPTccqqKDLVOhAFPMEP1/56hkqjNZz5NK95GuEFfc.K",
+    "birthdate": "2000-01-01"
+  },
+  {
+    "user_id": "6be63468-43e4-4977-ae2c-b42b962dd420",
+    "email": "test@example.com",
+    "username": "testuser",
+    "password_hash": "$2b$12$7x2uuqoxL23Fv.MH5kh9hu9LcPl0tgwARLtpTNgK0/Teu/i7IzGrG",
+    "birthdate": "2000-01-01"
+  },
+  {
+    "user_id": "5dccb5dd-60c2-4f92-b568-a156b9778796",
+    "email": "perf@example.com",
+    "username": "perfuser",
+    "password_hash": "$2b$12$Aq/ZyU4F/byantZvqLFh.eJBGAdTXl9KTN/ZeLkXYQcN9MvUoT6dK",
+    "birthdate": "2000-01-01"
+  },
+  {
+    "user_id": "d02b5e19-02d2-485c-996b-5197dceef09b",
+    "email": "timing@example.com",
+    "username": "timinguser",
+    "password_hash": "$2b$12$cXzzFC3LQ2SH8aJw0uBPWeLZcKuc910PAfWSaXGtaekWEBD/4AWSi",
+    "birthdate": "2000-01-01"
+  },
+  {
+    "user_id": "a7a02f05-d80d-48fd-a8b3-3b467fd3bcc6",
+    "email": "userA@test.com",
+    "username": "userA",
+    "password_hash": "$2b$12$xTLCr1iHyRbRJqyWHanI7uWbbvsXqTQJ25DTSkkvI5c98OE1wapP6",
+    "birthdate": "2000-01-01"
+  },
+  {
+    "user_id": "5f991c66-6416-4c33-bf60-5a099089446a",
+    "email": "userB@test.com",
+    "username": "userB",
+    "password_hash": "$2b$12$ZOheroy8gHl/pSEQetzUruz0RkFsHt4YAu23M56j5k2xTinYRFqSS",
+    "birthdate": "2000-01-01"
+  },
+  {
+    "user_id": "d3c54cf3-e33d-4d1a-89b9-20f769e11d24",
+    "email": "ownerA@test.com",
+    "username": "ownerA",
+    "password_hash": "$2b$12$2MBAIOQ7hkfp.kNMIS99t.greIq.q7kNpqrvcoImIkfEpSUMcvL3W",
+    "birthdate": "2000-01-01"
+  },
+  {
+    "user_id": "d4f27393-0320-4c80-bb89-0bce22b9636e",
+    "email": "attackerB@test.com",
+    "username": "attackerB",
+    "password_hash": "$2b$12$eYJJWe6iCn4FW0QTYzTIl.Kjlro3.Q5DOnr6l/7aHvcVxRQrov2Pi",
+    "birthdate": "2000-01-01"
   }
 ]

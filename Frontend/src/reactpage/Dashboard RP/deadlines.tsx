@@ -104,7 +104,9 @@ export default function Deadlines() {
     });
   }, [deadlines]);
 
-  // Form Handlers
+/* This code was fixed with assistance from Claude ai (Anthropic, 2026).
+ Prompt:“Identify and fix TpyeScript errors related to handleInputChange”
+ The output was reviewed, modified, and tested by the Muiiz. */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };

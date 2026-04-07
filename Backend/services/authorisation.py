@@ -11,6 +11,9 @@ USERNAME_REGEX = r"^[a-zA-Z0-9_]{3,20}$"
 MAX_EMAIL_LENGTH = 254  # RFC 5321 hard limit
 
 
+# This class was created with assistance from ChatGPT (OpenAI, 2026).
+# Prompt:“How do I implement a secure user model with authentificaltion support”
+# The output was reviewed, modified, and tested by the Muiiz.
 class AuthService:
     def __init__(self, storage_path="data/users.json"):
         self.storage = JSONStorage(storage_path)

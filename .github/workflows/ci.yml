@@ -1,3 +1,7 @@
+# This template was developed with assistance from Claude ai (Anthropic, 2025).
+# Prompt:“Create a template for a CI/CD pipeline for Github Actions”
+# Prompt:"Newline error in github actions"
+# The output was reviewed, modified, and tested by the Muiiz. 
 name: CI
 
 on:
@@ -31,16 +35,16 @@ jobs:
         run: |
           cd Backend
           python -m py_compile $(git ls-files '*.py')
-
-      - name: Lint with flake8
-        run: |
-          cd Backend
-          python -m flake8 .
           
       - name: Check formatting with black
         run: |
           cd Backend
           python -m black --check --diff .
+
+      - name: Lint with flake8
+        run: |
+          cd Backend
+          python -m flake8 .
 
       - name: Run tests
         run: |

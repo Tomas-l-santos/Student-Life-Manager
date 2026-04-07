@@ -5,6 +5,9 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
+# This test was created with assistance from Claude AI (Anthropic, 2026).
+# Prompt:“What are the basics of creating a testing process for SDLC”
+# The output was reviewed, modified, and tested by the Muiiz.
 class TestResponseTime:
     def test_login_completes_under_2_seconds(self, client):
         client.post(

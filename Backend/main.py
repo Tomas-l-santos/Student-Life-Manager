@@ -6,10 +6,12 @@ from services.auth_routes import auth_bp, token_required
 from services.deadline_service import DeadlineService
 from services.timetable_service import TimetableService
 
+# This template was created with assistance from Claude ai (Anthropic, 2026).
+# Prompt:“Help me connect the fronend and backend of my student management app”
+# The output was reviewed, modified, and tested by the Muiiz.
 app = Flask(__name__)
-# --- CRITICAL FIX: Enabling CORS so React can communicate with Flask ---
 CORS(app)
-# Register the auth Blueprint (gives you /api/auth/login, /api/auth/me, etc.)
+# Register the auth Blueprint
 app.register_blueprint(auth_bp)
 
 budget_service = BudgetService()
@@ -122,7 +124,7 @@ def get_categories():
     return jsonify(result), 200
 
 
-# Accademic routes
+# Academic routes
 @app.route("/api/modules", methods=["GET"])
 @token_required
 def get_modules(current_user_email, current_user_id):
