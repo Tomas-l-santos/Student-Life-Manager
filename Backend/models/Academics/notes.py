@@ -245,4 +245,3 @@ class Notes:
 
         # Unarchive a note
         return self.update(note_id, user_id, {"is_archived": False})
-
