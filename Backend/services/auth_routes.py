@@ -17,6 +17,9 @@ auth_service = AuthService()
 SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
 
 
+# This code was fixed with assistance from Claude ai (Anthropic, 2025).
+# Prompt:“Explain the security risk of user_email and how to fix it”
+# The output was reviewed, modified, and tested by the Muiiz.
 def generate_token(email, user_id):
     payload = {
         "email": email,

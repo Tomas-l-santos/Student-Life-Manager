@@ -3,6 +3,9 @@ from models.Budget import Transaction, Budget
 from datetime import datetime
 
 
+# This code was fixed with assistance from Claude ai (Anthropic, 2025).
+# Prompt:“Explain the security risk of user_email and how to fix it”
+# The output was reviewed, modified, and tested by the Muiiz.
 class BudgetService:
     def __init__(
         self,

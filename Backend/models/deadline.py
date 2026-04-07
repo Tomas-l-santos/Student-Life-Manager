@@ -1,6 +1,9 @@
 from datetime import datetime
 
 
+# This template was developed with assistance from Claude ai (Anthropic, 2025).
+# Prompt:“Generate a class that stores information required for a deadlines page”
+# The output was reviewed, modified, and tested by the Muiiz.
 class Deadline:
     def __init__(
         self,

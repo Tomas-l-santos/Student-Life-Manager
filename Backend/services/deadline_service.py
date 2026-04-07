@@ -4,6 +4,9 @@ from models.deadline import Deadline
 from storage.storagerepo import JSONStorage
 
 
+# This template was developed with assistance from Claude ai (Anthropic, 2025).
+# Prompt:“Generate a template for the deadlines page which would add deadlines, update it and allow for deletion”
+# The output was reviewed, modified, and tested by the Muiiz.
 class DeadlineService:
     def __init__(self, storage_path="data/deadlines.json"):
         self.storage = JSONStorage(storage_path)

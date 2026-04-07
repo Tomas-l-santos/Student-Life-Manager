@@ -13,6 +13,9 @@ VALID_DAYS = (
 VALID_TYPES = ("lecture", "lab", "seminar", "tutorial", "other")
 
 
+# This template was developed with assistance from Claude ai (Anthropic, 2025).
+# Prompt:“Generate a template that takes in entries to create timetables”
+# The output was reviewed, modified, and tested by the Muiiz.
 class TimetableService:
     def __init__(self, storage_path="data/timetable.json"):
         self.storage = JSONStorage(storage_path)
