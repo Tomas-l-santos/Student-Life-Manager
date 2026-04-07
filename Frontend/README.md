@@ -1,73 +1,332 @@
-# React + TypeScript + Vite
+# Student Life Management System Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+The Student Life Management (SLM) frontend is a high performance Single Page Application (SPA) built with React 19 and TypeScript. It serves as a centralized Command Center for students, providing real-time synchronisation with a Flask REST API to manage academic progress, financial health, and daily productivity.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Purpose
 
-## React Compiler
+The aim of this frontend is to eliminate academic burnout by consolidating fragmented student data into a single, intuitive interface. Unlike static prototypes, this system features a fully reactive UI where data changes (e.g., updating a grade or completing a task) immediately propagate across the dashboard metrics.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+### Implemented Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Secure Authentication (UR-1, SR-1.1, SR-1.2): Responsive Login and Registration modals with real-time password strength validation.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Unified Dashboard (UR-2): Aggregated view of today's classes and upcoming deadlines using global state management.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Dynamic Timetable (UR-3): Support for Day, Week, and Month views with interactive filtering by entry type (Lecture, Lab, Seminar).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Financial Visualization (UR-4): Integrated Recharts library to provide interactive spending breakdowns and budget limit alerts.
+
+- Academic Tracker (UR-5): Algorithmic calculation of weighted averages and distinction trajectories (UK 1st/2:1 classification).
+
+- Kanban Task Board (UR-6): A productivity lifecycle manager with a distraction-free Notebook Area for detailed planning.
+
+## User Interface Design
+
+### Design Approach
+
+- Consistency: A Sidebar architecture ensures navigation is never more than one click away.
+
+- Hierarchy: High-contrast cards separate critical "Alerts" (Overdue/Overbudget) from standard informational lists.
+
+- Adaptability: A CSS-variable driven engine supports Classic, Light, and Dark modes to reduce eye strain during late-night study sessions.
+
+### Design Rationale
+
+The interface follows a dashboard-first approach, where key information is presented immediately upon login. This design reduces the need for navigation between pages and supports efficient task completion.
+
+This approach aligns with Non-Functional Requirements related to usability and performance, particularly the requirement that key tasks should be completed within a limited number of interactions. It also improves maintainability, as reusable components and consistent layout
+
+## Technical Specification
+
+| Dependency   | Version      | Purpose                                                |
+| ------------ | ------------ | ------------------------------------------------------ |
+| React        | 19.2.4       | UI library for component-based architecture.           |
+| Vite         | 8.0.0 (Beta) | Next-generation frontend tooling and build pipeline.   |
+| TypeScript   | 5.9.3        | Static type checking for robust, error-free logic.     |
+| React Router | 7.13.0       | Declarative routing for dashboard navigation.          |
+| Recharts     | 3.8.1        | Data visualization for financial and academic metrics. |
+| Bootstrap    | 5.3.8        | Grid system and foundational styling components.       |
+
+### Technology Justification
+
+React was selected due to its component-based architecture, which improves code reusability and maintainability. TypeScript was used to enhance code reliability through static typing.
+
+Vite was chosen for its fast build times and efficient development workflow, although its beta version introduces potential stability risks. This trade-off was considered acceptable due to the performance benefits during development.
+
+React Router enables efficient client-side navigation, reducing page reloads and improving user experience. Recharts was integrated to provide clear and interactive data visualisation, supporting better interpretation of financial and academic data.
+
+## Frontend Structure
+
+```text
+Frontend/
+├── public/                     # Static global assets
+│   └── Images/                 # System UI screenshots and logos
+├── src/                        # Main application source code
+│   ├── assets/                 # Local assets and icon files
+│   ├── components/             # Reusable UI components
+│   ├── Pages/                  # Legacy/Static HTML prototyping layouts
+│   │   ├── dashboard pages/    # HTML mockups for dashboard features
+│   │   └── Login Pages/        # HTML mockups for entry pages
+│   ├── reactpage/              # Primary React Application Logic
+│   │   ├── Dashboard RP/       # Core feature components (Budget, Tasks, etc.)
+│   │   ├── about.tsx           # Company/Team information page
+│   │   ├── ForgotPassword.tsx  # Password recovery workflow
+│   │   ├── Login.tsx           # Landing page logic (home page)
+│   │   └── Signup.tsx          # User registration modals
+│   ├── services/               # Infrastructure Layer
+│   │   ├── api.ts              # Flask REST API endpoints and Fetch logic
+│   │   └── storage.ts          # LocalStorage management (JWT & Sessions)
+│   ├── styles/                 # Modular CSS System
+│   │   ├── dashboard-css/      # Feature specific styling
+│   │   ├── login css/          # Authentication specific styling(HTML)
+│   │   └── styles.css          # styles for about,ForgotPassword,login,signup.tsx (React)
+│   ├── App.tsx                 # Main Router and Private Route configuration
+│   ├── main.tsx                # Application entry point (DOM Rendering)
+│   ├── App.css                 # Base application styles
+│   └── index.css               # Global reset and typography
+├── .eslintrc.js                # Linting configuration
+├── package.json                # Dependencies and project metadata
+├── tsconfig.json               # TypeScript compiler settings
+└── vite.config.ts              # Vite build and server configuration
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Structure Rationale
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The project structure separates concerns into components, services, and styles, improving code readability and maintainability. 
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Reusable components are isolated to avoid duplication, while API logic is centralised in the services layer to ensure consistent communication with the backend. 
+
+The inclusion of initial static HTML pages reflects the early prototyping phase of the project, which was later transitioned into a React-based architecture.
+
+
+## Installation & Setup
+
+### Prerequisites
+
+Ensure the following tools are installed:
+
+- Node.js (v18 or higher)
+- npm (comes with Node.js)
+
+### Setup Instructions
+
+1. Clone the repository:
+```bash
+    
+    git clone <repository-url>
+
+- **_Navigate to Directory: cd Frontend_**
+
+    cd Frontend
+
+- **_Install Dependencies: npm install_**
+    
+    npm install
+
+- **_Launch Local Server: npm run dev_**
+    
+    npm run dev
+
+- **_Access App: Navigate to http://localhost:5173_**
 ```
+
+## Key Files
+
+### Key Files
+
+- **App.tsx**  
+  Main application component responsible for routing and layout structure.
+
+- **main.tsx**  
+  Entry point of the React application, responsible for rendering the app into the DOM.
+
+- **api.ts**  
+  Handles communication with the Flask backend API, including data fetching and submission.
+
+- **storage.ts**  
+  Manages local storage, including session handling and token persistence.
+
+- **Login.tsx / Signup.tsx**  
+  Implements authentication interfaces and user input handling.
+
+- **ForgotPassword.tsx**  
+  Manages password recovery workflow using verification mechanisms.
+
+- **Dashboard Components**  
+  Responsible for rendering core features such as tasks, budget tracking, and timetable data.
+
+- **styles.css / App.css / index.css**  
+  Define global and component-level styling for consistent UI presentation.
+
+## Technologies Used
+
+### Core Technologies
+
+- React (Frontend framework)
+- TypeScript (Static typing)
+- Vite (Build tool)
+- Flask (Backend API)
+- Recharts (Data visualisation)
+
+In addition to the primary React-based implementation, several supporting technologies were used during the development process:
+
+- **HTML & CSS**  
+  Used during the initial prototyping phase to design and structure static layouts before transitioning to a React-based architecture. These prototypes acted as blueprints for the final component design.
+
+- **JavaScript**  
+  Used in early development stages to test interactive behaviour before implementing logic within React components.
+
+- **Mermaid**  
+  Used to generate system diagrams (e.g., sequence diagrams and system models) to support documentation and system understanding.
+
+## Usage Guide
+
+### How to Use the Frontend
+
+1. **Access the Application**  
+   Open the application in a web browser via the local development server.
+
+2. **User Authentication**  
+   - New users can register by providing an email, username, and password.  
+   - Existing users can log in using their credentials.
+
+3. **Navigate the Dashboard**  
+   After logging in, users are presented with a dashboard displaying key information such as upcoming deadlines, scheduled activities, and summary metrics.
+
+4. **Use the Sidebar Navigation**  
+   The sidebar provides access to core features including:
+   - Timetable
+   - Tasks
+   - Budget tracking
+   - Academic performance
+
+5. **Interact with Features**  
+   Users can:
+   - Add, edit, and delete tasks or deadlines  
+   - Input financial data and track expenses  
+   - View and manage timetable entries  
+   - Monitor academic progress through calculated metrics  
+
+6. **Real-Time Updates**  
+   Changes made within the system are reflected immediately across relevant components, ensuring a responsive user experience.
+
+## Requirements Coverage
+
+### Functional Requirements Mapping
+
+The frontend implementation supports the following functional requirements:
+
+| Requirement ID | Description | Frontend Implementation |
+|---------------|------------|--------------------------|
+| UR-1          | User account creation and management | Login, Signup, and authentication components |
+| UR-2          | Timetable management | Dynamic timetable views (Day/Week/Month) |
+| UR-3          | Deadline tracking | Dashboard alerts and deadline management features |
+| UR-4          | Task organisation | Kanban task board with task lifecycle management |
+| UR-5          | Module and academic tracking | Academic tracker with weighted average calculations |
+| UR-6          | Budget tracking | Financial dashboard with charts and expense tracking |
+
+### Non-Functional Requirements
+
+The frontend also addresses key non-functional requirements:
+
+- **Usability**  
+  A consistent layout and intuitive navigation reduce user effort and improve accessibility.
+
+- **Performance**  
+  The use of a Single Page Application (SPA) architecture enables fast interaction and reduced page reloads.
+
+- **Responsiveness**  
+  The interface adapts to different screen sizes using responsive design principles.
+
+- **Maintainability**  
+  A modular component-based structure ensures that features can be updated and extended efficiently.
+
+## Design Decisions
+
+### Key Frontend Decisions
+
+- **Prototype-First Development Approach**  
+  Initial static HTML and CSS pages were created to design and validate the user interface before transitioning to a React-based architecture. This approach reduced development risk and allowed early testing of layout and usability.
+
+- **Component-Based Architecture (React)**  
+  The system was later implemented using React to enable reusable components and improve maintainability. This reduces code duplication and supports scalable development.
+
+- **Separation of Concerns**  
+  The project structure separates UI components, styling, and data handling (services layer). This improves readability, debugging, and future extensibility.
+
+- **Use of CSS Variables for Theming**  
+  A variable-based styling system was implemented to support multiple themes and ensure consistent design across the application.
+
+- **Client-Side Routing**  
+  React Router was used to handle navigation within the application without full page reloads, improving performance and user experience.
+
+### Design Trade-offs
+
+While React improves scalability and maintainability, it introduces additional complexity compared to static HTML. The initial use of static pages simplified early development but required restructuring during the transition to a dynamic framework.
+
+Similarly, using Vite (beta) improved development speed but introduced potential stability risks, which were considered acceptable within the project scope.
+
+## AI Usage Acknowledgement
+
+AI tools such as ChatGPT were used to support frontend development, particularly during prototyping, UI design, and documentation.
+
+AI assisted with:
+- Generating initial layout ideas (e.g., dashboard and sidebar)
+- Suggesting project structure and organisation
+- Improving clarity and structure of documentation
+
+All AI-generated outputs were critically reviewed, modified, and tested before being integrated into the system to ensure alignment with project requirements and architecture.
+
+A detailed critical evaluation of AI usage, including prompt evolution, limitations, and decision-making, is provided in the `AI-Reflection.md` file.
+
+## State who worked on the frontend and what they contributed.
+
+### Tomas – Frontend Development Contribution
+
+- Led the initial frontend prototyping phase by designing and developing HTML-based layouts, which served as the foundation for the React application.
+
+- Engineered a consistent and reusable CSS styling system, ensuring seamless visual transition from static prototypes to the final TypeScript-based implementation.
+
+- Translated functional requirements into structured frontend features, preparing them for scalable integration within a component-based React architecture.
+
+- Developed and standardised the theming and visual identity of the application, including layout structure, colour schemes, and UI consistency across all main interfaces.
+
+### Abhishil - Frontend Development Contribution
+
+## Testing
+
+### Testing Approach
+
+Testing was performed to validate the functionality, usability, and consistency of the frontend system.
+
+### Functional Testing
+
+- Verified user authentication flows, including login, registration, and password recovery  
+- Tested creation, editing, and deletion of tasks, deadlines, and financial records  
+- Confirmed that dashboard data updates correctly after user interactions  
+
+### User Interface Testing
+
+- Checked layout consistency across all pages  
+- Verified correct rendering of components such as cards, charts, and navigation elements  
+- Ensured visual hierarchy correctly highlights important information (e.g., alerts)
+
+### Input Validation Testing
+
+- Tested invalid inputs (e.g., weak passwords, empty fields)  
+- Ensured appropriate error messages are displayed  
+- Verified that data is only submitted when valid
+
+### Browser Testing
+
+- Tested the application in multiple browsers (e.g., Chrome, Edge)  
+- Ensured consistent behaviour and layout across environments  
+
+### Limitations
+
+- No automated testing framework (e.g., Jest or Cypress) was implemented due to project scope  
+- Testing was primarily manual, which may limit coverage of edge cases

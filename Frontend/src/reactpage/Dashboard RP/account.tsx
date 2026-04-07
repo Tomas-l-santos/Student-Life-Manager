@@ -6,10 +6,12 @@ import { deleteAccount } from "../../services/api";
 import "../../styles/dashboard-css/account&security.css";
 
 export default function Account() {
+  // Navigation and user state initialization
   const navigate = useNavigate();
   const [email] = useState(() => getUserEmail() || "student@email.com");
   const [username] = useState(() => getUsername() || "Student");
 
+  // Auth Handlers
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -19,6 +21,9 @@ export default function Account() {
     navigate("/forgot-password");
   };
 
+  /* This function was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "Generate an function to handle account deletion and add try-catch error handling."
+     The output was reviewed, modified, and tested by the author. */
   const handleDeleteAccount = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete your account and all stored data? This action cannot be undone."
@@ -37,12 +42,14 @@ export default function Account() {
     }
   };
 
+  // Main UI Render
   return (
     <div className="app">
       <Sidebar />
       <Topbar />
 
       <main className="main-content account-main">
+        {/* Header Section */}
         <section className="page-header">
           <div>
             <h2>Account & Security</h2>
@@ -50,6 +57,7 @@ export default function Account() {
           </div>
         </section>
 
+        {/* Account Details & Security Grid */}
         <section className="account-grid">
           <div className="card account-card">
             <div className="card-header">

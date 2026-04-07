@@ -13,6 +13,7 @@ interface Deadline {
 }
 
 export default function Deadlines() {
+  // State Initialization
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deadlines, setDeadlines] = useState<Deadline[]>([]);
   const [loading, setLoading] = useState(true);
@@ -36,6 +37,7 @@ export default function Deadlines() {
     stressColor: "var(--event-cyan)",
   });
 
+  // Fetch deadlines
   useEffect(() => {
     async function load() {
       try {
@@ -50,6 +52,9 @@ export default function Deadlines() {
     load();
   }, []);
 
+  /* This stress level logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "calculate a stress level based on overdue and upcoming deadlines"
+     The output was reviewed, modified, and tested by the author. */
   useEffect(() => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -196,8 +201,12 @@ export default function Deadlines() {
     return { class: "future", text: "Future" };
   };
 
+  // Filtering and Sorting
   const priorityWeight: Record<string, number> = { high: 3, normal: 2, low: 1 };
 
+  /* This filtering logic was developed with assistance from Gemini (Google Gemini, 2026).
+     Prompt: "sort the deadlines by priority or date and add a search bar"
+     The output was reviewed, modified, and tested by the author. */
   const filteredDeadlines = deadlines
     .filter(
       (d) =>
@@ -218,6 +227,7 @@ export default function Deadlines() {
       <Sidebar />
       <Topbar />
 
+      {/* Deadline Modal */}
       {isModalOpen && (
         <div
           className="modal-overlay"
@@ -314,6 +324,7 @@ export default function Deadlines() {
         </div>
       )}
 
+      {/* Main Container */}
       <main className="deadlines-main">
         <section className="deadlines-header">
           <div className="header-title-group">
@@ -351,6 +362,7 @@ export default function Deadlines() {
           </div>
         </section>
 
+        {/* Summary Cards */}
         <section className="deadline-summary">
           <div className="summary-card">
             <div className="card-top">
@@ -395,6 +407,7 @@ export default function Deadlines() {
           </div>
         </section>
 
+        {/* Deadline Table */}
         <section className="deadline-table-section">
           <div className="table-header-area">
             <div>

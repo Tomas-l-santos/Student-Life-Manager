@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/styles.css";
 import { LoginModal, SignupModal } from "./Signup";
 
+// Core Data interface and hardcoded initial arrays
 interface TeamMember {
   id: number;
   name: string;
@@ -16,29 +17,29 @@ const teamData: TeamMember[] = [
     id: 1,
     name: "Abhishil Sinoj",
     role: "Frontend Developer",
-    img: "/Images/test.png",
-    bio: "Simply the best",
+    img: "/Images/abhishil.png",
+    bio: "He would say he's the smartest in the room, but his colleagues all know him as the most deaf. Abhishil loves to play pranks and annoy people often, but he is quite reliable in a pinch and often ensures his work gets done",
   },
   {
     id: 2,
-    name: "Tomas Santos",
+    name: "Tomás Santos",
     role: "Frontend Developer",
-    img: "/Images/test.png",
-    bio: "?",
+    img: "/Images/tomas.png",
+    bio: "Tomas is a big bundle of joy and a chatterbox distracting anyone in his vicinity. But when the time is right he is determined and hardworking with a great efficiency in every task at hand.",
   },
   {
     id: 3,
     name: "Muiiz Ayodele",
     role: "Backend Architect",
-    img: "/Images/test.png",
-    bio: "?",
+    img: "/Images/muiiz.png",
+    bio: "Muiiz is the kind of person who treats rules less like guidelines and more like sacred law honestly, the chances of the sun rising in the west are higher than him ever breaking one. Always punctual, always prepared, and somehow always a step ahead, he’s the guy you can rely on when things need to be done properly.Despite being in his mid-20s, he carries a rare kind of innocence that makes him stand out in the best way possible. He’s genuinely kind, incredibly dependable, and the sort of person who’ll always show up for you",
   },
   {
     id: 4,
-    name: "Aamr",
+    name: "Amr Assaf",
     role: "Backend Architect",
-    img: "/Images/test.png",
-    bio: "?",
+    img: "/Images/amr.png",
+    bio: "Even though he lives two minutes away he is always the one that comes in latest. Amr is the type of person to find the quickest way to get his things sorted and leave to go home. However don’t let that fool you, he is a hard worker does what ever he can to finish the work with a high quality. once he puts his mind to it or looks at the due date.",
   },
 ];
 
@@ -49,7 +50,7 @@ function About() {
 
   return (
     <div className="agency-wrapper">
-      {/* Navbar */}
+      {/* Shared public Navbar */}
       <nav className="top-nav">
         <div className="nav-logo">
           <img src="/Images/student_life_logo_5.png" alt="Logo" />
@@ -69,7 +70,7 @@ function About() {
         </div>
       </nav>
 
-      {/* NEW COMBINED SECTION: About Us Grid */}
+      {/* Main About Us Grid content */}
       <section className="premium-about-section">
         <div className="about-grid">
           {/* Left Side: Huge Title & Mission Text */}
@@ -99,7 +100,7 @@ function About() {
               />
               <div className="philosophy-column">
                 <img
-                  src="/Images/test.png"
+                  src="/Images/abt2.png"
                   alt="Students collaborating"
                   className="secondary-rounded-img"
                 />
@@ -116,7 +117,7 @@ function About() {
         </div>
       </section>
 
-      {/* Team section */}
+      {/* Interactive Team Map section */}
       <section className="agency-team">
         <h2>Meet your team</h2>
         <p className="team-sub">
@@ -140,7 +141,7 @@ function About() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Public Page Footer section */}
       <footer className="agency-combined-footer">
         <div className="graphic-circles footer-circle-left"></div>
 
@@ -191,7 +192,10 @@ function About() {
         </div>
       </footer>
 
-      {/* Team Modal */}
+      {/* Dynamic Team Modal popup component */}
+      {/* This component layout was developed with assistance from Gemini (Google Gemini, 2026).
+          Prompt: "create a team member details modal that closes when clicking outside"
+          The output was reviewed, modified, and tested by the author. */}
       {activeOwner && (
         <div className="agency-modal-overlay" onClick={() => setActiveOwner(null)}>
           <div className="agency-modal" onClick={(e) => e.stopPropagation()}>

@@ -1,24 +1,22 @@
-/* ============================================================
-   SHARED TIMETABLE CSS (3 Themes: Original, New Light, Dark)
-   ============================================================ */
+/* Timetable */
 
-/* 1. ORIGINAL THEME (Teammate's exact code - Untouched) */
+/* original */
 :root{
-  --navy-900:#07144a;
-  --navy-850:#081a58;
-  --navy-800:#0a216f;
+  --navy-900: #07144a;
+  --navy-850: #081a58;
+  --navy-800: #0a216f;
 
-  --bg:#f5f7fb;
-  --panel:#ffffff;
-  --panel-2:#eef2f8;
-  --border:#dfe5ef;
-  --text:#0b1020;
-  --muted:#63708a;
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --panel-2: #eef2f8;
+  --border: #dfe5ef;
+  --text: #0b1020;
+  --muted: #63708a;
 
-  --sidebar:#081a58;
-  --sidebar-2:#0b1f66;
-  --sidebar-text:#e9eeff;
-  --sidebar-muted:#b9c6ff;
+  --sidebar: #081a58;
+  --sidebar-2: #0b1f66;
+  --sidebar-text: #e9eeff;
+  --sidebar-muted: #b9c6ff;
 
   --shadow:0 6px 18px rgba(10, 23, 64, 0.08);
   --radius:18px;
@@ -31,70 +29,74 @@
   --slot-count:24;
 
   /* Theme Accents (For overrides later) */
-  --event-blue:#38bdf8;
-  --event-purple:#a855f7;
+  --event-blue: #38bdf8;
+  --event-purple: #a855f7;
 }
 
 /* 2. DARK THEME ("Lost in Crowd" Pitch Black) */
 [data-theme="dark"] {
-  --bg: #000000;
-  --panel: #121212;
-  --panel-2: #1a1a1a;
-  --border: #27272a;
-  --text: #ffffff;
-  --muted: #a1a1aa;
+  --bg:  #000000;
+  --panel:  #121212;
+  --panel-2:  #1a1a1a;
+  --border:  #27272a;
+  --text:  #ffffff;
+  --muted:  #a1a1aa;
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
 
-  --navy-900: #000000;
-  --navy-850: #000000;
-  --navy-800: #000000;
-  --sidebar: #000000;
-  --sidebar-2: #000000;
-  --sidebar-text: #ffffff;
-  --sidebar-muted: #a1a1aa;
+  --navy-900:  #000000;
+  --navy-850:  #000000;
+  --navy-800:  #000000;
+  --sidebar:  #000000;
+  --sidebar-2:  #000000;
+  --sidebar-text:  #ffffff;
+  --sidebar-muted:  #a1a1aa;
 
-  --event-blue: #06b6d4; /* Cyan */
-  --event-purple: #d946ef; /* Magenta */
+  --event-blue:  #06b6d4; /* Cyan */
+  --event-purple:  #d946ef; /* Magenta */
   
-  --topbar-text: #ffffff;
+  --topbar-text:  #ffffff;
 }
 
 /* 3. NEW LIGHT THEME ("Front Page" Ultra-Clean & Red) */
 [data-theme="new-light"] {
-  --bg: #ffffff;
-  --panel: #ffffff;
-  --panel-2: #f8f9fa;
-  --border: #eaeaea;
-  --text: #111111;
-  --muted: #666666;
+  --bg:  #ffffff;
+  --panel:  #ffffff;
+  --panel-2:  #f8f9fa;
+  --border:  #eaeaea;
+  --text:  #111111;
+  --muted:  #666666;
   --shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
 
-  --navy-900: #ffffff;
-  --navy-850: #ffffff;
-  --navy-800: #ffffff;
-  --sidebar: #ffffff;
-  --sidebar-2: #ffffff;
-  --sidebar-text: #111111;
-  --sidebar-muted: #666666;
+  --navy-900:  #ffffff;
+  --navy-850:  #ffffff;
+  --navy-800:  #ffffff;
+  --sidebar:  #ffffff;
+  --sidebar-2:  #ffffff;
+  --sidebar-text:  #111111;
+  --sidebar-muted:  #666666;
 
   /* Front Page Brand Red */
-  --event-cyan: #e60023; 
-  --topbar-text: #111111;
+  --event-cyan:  #e60023; 
+  --topbar-text:  #111111;
 }
 
 /* --- Theme Override Fixes --- */
+/* This theme override logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "set the backgrounds for the timetable calendar to follow the color modes"
+   The output was reviewed, modified, and tested by the author. */
+
 /* Topbar & Header Buttons */
 .topbar { color: var(--topbar-text, #fff); }
 .topbar .brand h1, .topbar .brand small, .avatar span { color: var(--topbar-text, #fff); }
 
 [data-theme="dark"] .topbar .pill, [data-theme="dark"] .avatar, [data-theme="dark"] .hamburger { 
-  background: #121212; border-color: #27272a; color: #fff; 
+  background:  #121212; border-color:  #27272a; color:  #fff; 
 }
 [data-theme="new-light"] .topbar .pill, [data-theme="new-light"] .avatar, [data-theme="new-light"] .hamburger { 
-  background: #ffffff; border-color: #e2e8f0; color: #0f172a; 
+  background:  #ffffff; border-color:  #e2e8f0; color:  #0f172a; 
 }
 [data-theme="dark"] .avatar .dot, [data-theme="new-light"] .avatar .dot { 
-  background: var(--event-blue); color: #000; 
+  background: var(--event-blue); color:  #000; 
 }
 
 /* Active Sidebar links */
@@ -451,7 +453,7 @@ body{
   padding:10px 14px;
   border-radius:12px;
   border:1px solid var(--border);
-  background:#fff;
+  background: #fff;
   font-size:14px;
   color:var(--text);
   cursor:pointer;
@@ -493,7 +495,7 @@ body{
   border:1px solid var(--border);
   border-radius:999px;
   overflow:hidden;
-  background:#fff;
+  background: #fff;
 }
 
 .segmented button{
@@ -512,9 +514,12 @@ body{
 }
 
 /* ===== TIMETABLE WRAP ===== */
+/* This grid sizing logic was developed with assistance from Gemini (Google Gemini, 2026).
+   Prompt: "set the grid columns for the timetable cells"
+   The output was reviewed, modified, and tested by the author. */
 .timetable-wrap{
   margin-top:18px;
-  background:#fff;
+  background: #fff;
   border:1px solid var(--border);
   border-radius:18px;
   box-shadow:var(--shadow);
@@ -525,7 +530,7 @@ body{
 .week-header{
   display:grid;
   grid-template-columns:var(--time-col-w) repeat(5, 1fr);
-  background:#fff;
+  background: #fff;
   border-bottom:1px solid var(--border);
 }
 
@@ -550,7 +555,7 @@ body{
 }
 
 .week-header .blank{
-  background:#fff;
+  background: #fff;
 }
 
 /* ===== GRID ===== */
@@ -561,7 +566,7 @@ body{
 
 .time-col{
   border-right:1px solid var(--border);
-  background:#fff;
+  background: #fff;
 }
 
 .time-slot{
@@ -577,7 +582,7 @@ body{
 
 .day{
   position:relative;
-  background:#fff;
+  background: #fff;
   border-right:1px solid var(--border);
   height:calc(var(--slot-h) * var(--slot-count));
 }
@@ -754,7 +759,7 @@ body{
   padding: 12px;
   margin-top: 10px;
   background: var(--event-blue);
-  color: #fff;
+  color:  #fff;
   border: none;
   border-radius: 8px;
   font-weight: bold;
