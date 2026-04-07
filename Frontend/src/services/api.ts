@@ -9,7 +9,7 @@ function authHeaders() {
 }
 
 // Authentication
-/* This template was developed with assistance from Claude ai (Anthropic, 2025).
+/* This template was developed with assistance from Claude ai (Anthropic, 2026).
  Prompt:“Generate a function that takes in authentification information from backend”
  The output was reviewed, modified, and tested by the Muiiz. */
 export async function login(email: string, password: string) {
@@ -64,7 +64,7 @@ export async function deleteAccount() {
 }
 
 // Budget
-/* This template was developed with assistance from Claude ai (Anthropic, 2025).
+/* This template was developed with assistance from Claude ai (Anthropic, 2026).
  Prompt:“Generate a function that takes in budget information from backend”
  The output was reviewed, modified, and tested by the Muiiz. */
 export async function getTransactions() {
@@ -195,7 +195,7 @@ export async function addAssessment(data: {
 }
 
 // deadlines
-/* This template was developed with assistance from Claude ai (Anthropic, 2025).
+/* This template was developed with assistance from Claude ai (Anthropic, 2026).
  Prompt:“Generate a function that takes in deadline information from backend”
  The output was reviewed, modified, and tested by the Muiiz. */
 export async function getDeadlines() {
@@ -241,7 +241,7 @@ export async function deleteDeadline(id: number) {
 }
 
 // timetable
-/* This template was developed with assistance from Claude ai (Anthropic, 2025).
+/* This template was developed with assistance from Claude ai (Anthropic, 2026).
  Prompt:“Generate a function that takes in timetable information from backend”
  The output was reviewed, modified, and tested by the Muiiz. */
 export async function getTimetable(day?: string) {
