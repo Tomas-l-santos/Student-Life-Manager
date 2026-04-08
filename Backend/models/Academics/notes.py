@@ -159,7 +159,7 @@ class Notes:
                 n["updated_at"] = datetime.now().isoformat()
 
                 notes[i] = n
-                self.storage.overwrite(notes)
+                self.storage.write_all(notes)
                 return n
 
         raise ValueError("Note not found")
@@ -172,7 +172,7 @@ class Notes:
         for i, n in enumerate(notes):
             if n["id"] == note_id and n["user_id"] == user_id:
                 notes.pop(i)
-                self.storage.overwrite(notes)
+                self.storage.write_all(notes)
                 return True
 
         raise ValueError("Note not found")
@@ -186,7 +186,7 @@ class Notes:
             for n in notes
             if not (n["module_id"] == module_id and n["user_id"] == user_id)
         ]
-        self.storage.overwrite(notes)
+        self.storage.write_all(notes)
         return True
 
     def search_notes(self, user_id, query, module_id=None):
