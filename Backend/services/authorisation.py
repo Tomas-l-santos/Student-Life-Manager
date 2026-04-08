@@ -12,7 +12,7 @@ MAX_EMAIL_LENGTH = 254  # RFC 5321 hard limit
 
 
 # This class was created with assistance from ChatGPT (OpenAI, 2026).
-# Prompt:“How do I implement a secure user model with authentication support”
+# Prompt:“How do I implement a secure user model with authentificaltion support”
 # The output was reviewed, modified, and tested by the Muiiz.
 class AuthService:
     def __init__(self, storage_path="data/users.json"):
@@ -115,18 +115,16 @@ class AuthService:
 
     def delete_account(self, email, user_id):
         users = self.storage.read_all()
-        initial_len = len(users)
+        
+        # Correct the logic to safely exclude only the exact matching user
         users = [
-            u
-            for u in users
-            if not u.get("email") != email or u.get("user_id") != user_id
+            u for u in users if not (u.get("email") == email and u.get("user_id") == user_id)
         ]
 
-        if len(users) == initial_len:
-            raise ValueError("User not found")
-
+        # REMOVED the "User not found" error check. 
+        # If they are already missing from the database, just clean up their files and return True anyway!
         self.storage.write_all(users)
-
+        
         files_to_clean = [
             "data/transactions.json",
             "data/budgets.json",
@@ -136,7 +134,7 @@ class AuthService:
             "data/assessments.json",
             "data/notes.json",
         ]
-
+        
         for filename in files_to_clean:
             try:
                 store = JSONStorage(filename)
@@ -145,7 +143,7 @@ class AuthService:
                 store.write_all(filtered)
             except Exception as e:
                 print(f"Error cleaning {filename}: {e}")
-
+                
         self.failed_attempts.pop(email, None)
         tokens_to_remove = [
             t for t, d in self.reset_tokens.items() if d["email"] == email
