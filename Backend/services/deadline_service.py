@@ -81,7 +81,7 @@ class DeadlineService:
                 if "notes" in updates:
                     d["notes"] = updates["notes"]
                 deadlines[i] = d
-                self.storage.overwrite(deadlines)
+                self.storage.write_all(deadlines)
                 return d
         raise ValueError("Deadline not found")
 
@@ -94,5 +94,5 @@ class DeadlineService:
         ]
         if len(filtered) == len(deadlines):
             raise ValueError("Deadline not found")
-        self.storage.overwrite(filtered)
+        self.storage.write_all(filtered)
         return True

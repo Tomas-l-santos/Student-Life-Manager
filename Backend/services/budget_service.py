@@ -151,7 +151,7 @@ class BudgetService:
                 if "is_recurring" in updates:
                     t["is_recurring"] = updates["is_recurring"]
                 transactions[i] = t
-                self.transactions_storage.overwrite(transactions)
+                self.transactions_storage.write_all(transactions)
                 t["category"] = self.get_category_by_id(t["category_id"])
                 return t
         raise ValueError("Transaction not found")
@@ -161,7 +161,7 @@ class BudgetService:
         for i, t in enumerate(transactions):
             if t["id"] == transaction_id and t.get("user_id") == user_id:
                 transactions.pop(i)
-                self.transactions_storage.overwrite(transactions)
+                self.transactions_storage.write_all(transactions)
                 return True
         raise ValueError("Transaction not found")
 
@@ -224,7 +224,7 @@ class BudgetService:
                 and b.get("year") == year
             ):
                 b["amount"] = amount
-                self.budgets_storage.overwrite(budgets)
+                self.budgets_storage.write_all(budgets)
                 b["category"] = category
                 return b
         budget = Budget(
@@ -275,7 +275,7 @@ class BudgetService:
                     raise ValueError("Invalid amount")
                 b["amount"] = amount
                 budgets[i] = b
-                self.budgets_storage.overwrite(budgets)
+                self.budgets_storage.write_all(budgets)
                 b["category"] = self.get_category_by_id(b["category_id"])
                 return b
         raise ValueError("Budget not found")
@@ -285,7 +285,7 @@ class BudgetService:
         for i, b in enumerate(budgets):
             if b["id"] == budget_id and b.get("user_id") == user_id:
                 budgets.pop(i)
-                self.budgets_storage.overwrite(budgets)
+                self.budgets_storage.write_all(budgets)
                 return True
         raise ValueError("Budget not found")
 

@@ -92,7 +92,7 @@ class AuthService:
                     new_password.encode(), bcrypt.gensalt()
                 ).decode()
                 u["password_hash"] = new_hash
-                self.storage.overwrite(users)
+                self.storage.write_all(users)
                 return True
 
         raise ValueError("User not found")
@@ -123,32 +123,27 @@ class AuthService:
         if len(users) == initial_len:
             raise ValueError("User not found")
 
-        self.storage.overwrite(users)
-        for filename in [
+        self.storage.write_all(users)
+        
+        files_to_clean = [
             "data/transactions.json",
             "data/budgets.json",
             "data/deadlines.json",
             "data/timetable.json",
-        ]:
+            "data/modules.json",
+            "data/assessments.json",
+            "data/notes.json",
+        ]
+        
+        for filename in files_to_clean:
             try:
                 store = JSONStorage(filename)
                 data = store.read_all()
                 filtered = [item for item in data if item.get("user_id") != user_id]
-                store.overwrite(filtered)
+                store.write_all(filtered)
             except Exception as e:
                 print(f"Error cleaning {filename}: {e}")
-        for filename in [
-            "data/modules.json",
-            "data/assessments.json",
-            "data/notes.json",
-        ]:
-            try:
-                store = JSONStorage(filename)
-                data = store.read_all()
-                filtered = [item for item in data if item.get("user_email") != email]
-                store.overwrite(filtered)
-            except Exception as e:
-                print(f"Error cleaning {filename}: {e}")
+                
         self.failed_attempts.pop(email, None)
         tokens_to_remove = [
             t for t, d in self.reset_tokens.items() if d["email"] == email
@@ -213,7 +208,7 @@ class AuthService:
                     new_password.encode(), bcrypt.gensalt()
                 ).decode()
                 u["password_hash"] = new_hash
-                self.storage.overwrite(users)
+                self.storage.write_all(users)
 
                 # Delete the used token and clear
                 del self.reset_tokens[token]
