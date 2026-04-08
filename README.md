@@ -321,11 +321,31 @@ The full engineering process is documented in the following files:
 
 ## Known Issues
 
+### Backend
+
 - Many Exceptions are bare which leaks internal error details to the client.
 - No proper logging of errors.
 - No actual rate limiting exists for logging in as the lockout counter resets everytime the Flask process restarts.
 - There is no error handling for corrupted JSON files.
 - Many functions are inefficient such as calling `datetime.strptime` twice in `get_user_transactions` to retrieve month and year separately.
+
+### Frontend
+
+- The "Sort by Date" feature in the tasks module fails to reorder cards correctly.
+
+- Category icons exist in the backend schema but are not integrated into the frontend UI.
+
+- Migration from HTML to React caused CSS regressions and layout inconsistencies in the tasks and deadlines HTML pages
+
+- The Task Kanban board lacks industry-standard drag-and-drop support
+
+### Documents
+
+- UML diagrams were not fully updated after the final-week refactor and may still reference user_email instead of user_id.
+
+- Minor discrepancies exist between planned sprint dates and actual commit timestamps due to asynchronous group work.
+
+- Test-Results.md not created due to lack of time
 
 ## Contributors
 
