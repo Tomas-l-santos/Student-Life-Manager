@@ -117,7 +117,9 @@ class AuthService:
         users = self.storage.read_all()
         initial_len = len(users)
         users = [
-            u for u in users if not u.get("email") != email or u.get("user_id") != user_id
+            u
+            for u in users
+            if not u.get("email") != email or u.get("user_id") != user_id
         ]
 
         if len(users) == initial_len:
