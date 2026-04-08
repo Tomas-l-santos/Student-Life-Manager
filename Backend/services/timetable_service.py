@@ -13,6 +13,7 @@ VALID_DAYS = (
 )
 VALID_TYPES = ("lecture", "lab", "seminar", "tutorial", "other")
 
+
 # This template was developed with assistance from Claude ai (Anthropic, 2025).
 # Prompt:“Generate a template that takes in entries to create timetables”
 # The output was reviewed, modified, and tested by the Muiiz.
@@ -104,7 +105,7 @@ class TimetableService:
                     if updates["day"] not in VALID_DAYS:
                         raise ValueError(f"Day must be one of: {', '.join(VALID_DAYS)}")
                     e["day"] = updates["day"]
-                
+
                 # Fetch updates or fallback to existing values to validate the new pair
                 new_start = updates.get("start_time", e["start_time"])
                 new_end = updates.get("end_time", e["end_time"])
@@ -112,12 +113,12 @@ class TimetableService:
                     self._validate_times(new_start, new_end)
                     e["start_time"] = new_start
                     e["end_time"] = new_end
-                    
+
                 if "start_date" in updates:
                     e["start_date"] = updates["start_date"]
                 if "end_date" in updates:
                     e["end_date"] = updates["end_date"]
-                
+
                 entries[i] = e
                 self.storage.write_all(entries)
                 return e

@@ -124,7 +124,7 @@ class AuthService:
             raise ValueError("User not found")
 
         self.storage.write_all(users)
-        
+
         files_to_clean = [
             "data/transactions.json",
             "data/budgets.json",
@@ -134,7 +134,7 @@ class AuthService:
             "data/assessments.json",
             "data/notes.json",
         ]
-        
+
         for filename in files_to_clean:
             try:
                 store = JSONStorage(filename)
@@ -143,7 +143,7 @@ class AuthService:
                 store.write_all(filtered)
             except Exception as e:
                 print(f"Error cleaning {filename}: {e}")
-                
+
         self.failed_attempts.pop(email, None)
         tokens_to_remove = [
             t for t, d in self.reset_tokens.items() if d["email"] == email
