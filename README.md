@@ -239,7 +239,6 @@ elee1149-courswork-2025-a-s-s-a
 │   │   ├── App.tsx                     # Main router configuration and route guarding
 │   │   ├── Pages                       # Legacy/Static HTML prototyping layouts
 │   │   ├── assets                      # Component-specific static resources
-│   │   ├── components                  # Empty
 │   │   ├── index.css                   # Empty
 │   │   ├── main.tsx                    # Entry point for React DOM mounting
 │   │   ├── reactpage                   # Primary dashboard and authentication views
