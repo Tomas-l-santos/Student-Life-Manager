@@ -24,7 +24,7 @@
 
 <br><br>
 
-  <img src="/docs/images/opening3.gif" alt="Student Life Management System Demo" width="100%">
+  <img src="/docs/images/Final.gif" alt="Student Life Management System Demo" width="100%">
 
 </div>
 
@@ -168,9 +168,9 @@ Open http://localhost:5173 in your browser.
 
 ### Budget Screen
 
-| Budget-1                          | Budget-2                          |
-| --------------------------------- | --------------------------------- |
-| ![Bud1](/docs/images/budget1.png) | ![Bud2](/docs/images/budget1.png) |
+| Budget-1                         | Budget-2                          |
+| -------------------------------- | --------------------------------- |
+| ![Bud1](/docs/images/buget2.png) | ![Bud2](/docs/images/budget1.png) |
 
 ### Account and Help Screen
 
@@ -215,15 +215,15 @@ elee1149-courswork-2025-a-s-s-a
 │   │   └── transaction_service.py      # Validation and management of cash flow data
 │   ├── storage                         # Infrastructure layer for I/O operations
 │   │   └── storagerepo.py              # Thread-safe JSON handling with locking mechanisms
-│   └── tests                           # Automated test suite for quality assurance
-│       ├── __init__.py                 # Python package initialization for pytest
-│       ├── conftest.py                 # Global test fixtures and temporary data setup
-│       ├── test_auth.py                # Validation for login, registration, and lockout
-│       ├── test_budget.py              # Unit tests for financial logic and limits
-│       ├── test_deadlines.py           # Verification of task CRUD and priority sorting
-│       ├── test_performance.py         # Benchmarking for API response times and latency
-│       ├── test_security.py            # Tests for JWT enforcement and data isolation
-│       └── test_timetable.py           # Logic verification for scheduling algorithms
+│   └── tests                           # Test For Backend
+│       ├── __init__.py
+│       ├── conftest.py
+│       ├── test_auth.py
+│       ├── test_budget.py
+│       ├── test_deadlines.py
+│       ├── test_performance.py
+│       ├── test_security.py
+│       └── test_timetable.py
 ├── Frontend                            # React 19 / TypeScript Single Page Application (SPA)
 │   ├── README.md                       # Frontend architecture overview and build guides
 │   ├── ReactandTypeScripts.md          # Technical guidelines for TSX component development
@@ -315,6 +315,10 @@ The full engineering process is documented in the following files:
 - System Modelling: See [SystemModelling.md](./docs/system-modelling/SystemModelling.md) for UML and Architectural decisions.
 
 - AI Reflection: See [AI-Reflection.md](./AI-Reflection.md) for evaluation of LLM usage during the SDLC.
+
+## Demo
+
+- https://youtu.be/RxWvsZ9n9e4
 
 ## Contributors
 
