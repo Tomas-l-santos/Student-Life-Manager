@@ -59,6 +59,22 @@ Vite was chosen for its fast build times and efficient development workflow, alt
 
 React Router enables efficient client-side navigation, reducing page reloads and improving user experience. Recharts was integrated to provide clear and interactive data visualisation, supporting better interpretation of financial and academic data.
 
+## API End Points
+
+| Route Path       | Component          | Auth Required | Description                     |
+| ---------------- | ------------------ | ------------- | ------------------------------- |
+| /                | Login.tsx          | No            | Landing page with login/signup  |
+| /about           | about.tsx          | No            | Info about the system and team  |
+| /forgot-password | ForgotPassword.tsx | No            | Reset password flow             |
+| /dashboard       | dashboard.tsx      | Yes           | Overview of classes and tasks   |
+| /timetable       | timetable.tsx      | Yes           | View and manage schedule        |
+| /deadlines       | deadlines.tsx      | Yes           | Track assignments and deadlines |
+| /tasks           | tasks.tsx          | Yes           | Kanban board for tasks          |
+| /modules         | modules.tsx        | Yes           | Track grades and performance    |
+| /budget          | budget.tsx         | Yes           | Monitor spending and budget     |
+| /account         | account.tsx        | Yes           | Manage user profile             |
+| /help            | help.tsx           | Yes           | Guides, FAQs, and support       |
+
 ## Frontend Structure
 
 ```text
