@@ -172,7 +172,7 @@ class Assessments:
                         raise ValueError("Invalid date format. Use YYYY-MM-DD")
 
                 assessments[i] = a
-                self.storage.overwrite(assessments)
+                self.storage.write_all(assessments)
                 return a
 
         raise ValueError("Assessment not found")
@@ -185,7 +185,7 @@ class Assessments:
         for i, a in enumerate(assessments):
             if a["id"] == assessment_id and a.get("user_id") == user_id:
                 assessments.pop(i)
-                self.storage.overwrite(assessments)
+                self.storage.write_all(assessments)
                 return True
 
         raise ValueError("Assessment not found")
@@ -199,5 +199,5 @@ class Assessments:
             for a in assessments
             if not (a["module_id"] == module_id and a.get("user_id") == user_id)
         ]
-        self.storage.overwrite(assessments)
+        self.storage.write_all(assessments)
         return True

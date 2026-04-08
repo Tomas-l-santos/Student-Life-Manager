@@ -163,7 +163,7 @@ class Modules:
                     m["status"] = updates["status"]
 
                 modules[i] = m
-                self.storage.overwrite(modules)
+                self.storage.write_all(modules)
                 return m
 
         raise ValueError("Module not found")
@@ -176,7 +176,7 @@ class Modules:
         for i, m in enumerate(modules):
             if m["id"] == module_id and m.get("user_id") == user_id:
                 modules.pop(i)
-                self.storage.overwrite(modules)
+                self.storage.write_all(modules)
                 return True
 
         raise ValueError("Module not found")

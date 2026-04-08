@@ -12,23 +12,26 @@ class JSONStorage:
             with open(filepath, "w") as f:
                 json.dump([], f)
 
+    def _read_all_unlocked(self):
+        """Internal method to read without acquiring the lock."""
+        with open(self.filepath, "r") as f:
+            return json.load(f)
+
+    def _write_all_unlocked(self, data):
+        """Internal method to write without acquiring the lock."""
+        with open(self.filepath, "w") as f:
+            json.dump(data, f, indent=2)
+
     def read_all(self):
         with self.lock:
-            with open(self.filepath, "r") as f:
-                return json.load(f)
+            return self._read_all_unlocked()
 
     def write_all(self, data):
         with self.lock:
-            with open(self.filepath, "w") as f:
-                json.dump(data, f, indent=2)
+            self._write_all_unlocked(data)
 
     def append(self, item):
         with self.lock:
-            with open(self.filepath, "r") as f:
-                data = json.load(f)
+            data = self._read_all_unlocked()
             data.append(item)
-            with open(self.filepath, "w") as f:
-                json.dump(data, f, indent=2)
-
-    def overwrite(self, data):
-        self.write_all(data)
+            self._write_all_unlocked(data)

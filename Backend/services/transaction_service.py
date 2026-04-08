@@ -77,4 +77,4 @@ class TransactionService:
             for t in transactions
             if not (t["id"] == transaction_id and t["user_id"] == user_id)
         ]
-        self.storage.overwrite(filtered)
+        self.storage.write_all(filtered)
