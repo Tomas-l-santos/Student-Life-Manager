@@ -14,7 +14,7 @@ The development team utilized Large Language Models (LLMs) specifically Google G
 
 The team carefully checked and tested all AI suggestions to make sure they were correct and secure. This ensured the final system was built with human judgment, supported by AI.
 
-## 1 Methodology & Group Workflow
+## Methodology & Group Workflow
 
 ### Collaborative Integration
 
@@ -34,11 +34,12 @@ The team of four was divided into two functional pairs: Frontend (React/TypeScri
 
 - Debugging: We provided AI with specific Python tracebacks and browser console errors. Rather than blindly applying fixes, we asked the AI to “Explain the root cause of this CORS error,” allowing the team to understand the fix before implementation.
 
-## 1.2 Backend Critical Evaluation (Team: [Muiiz Ayodele, Amr Assaf])
+## Backend Critical Evaluation (Team: [Muiiz Ayodele, Amr Assaf])
 
 In Backend development, AI were most valuable in generating templates and structure as well as explaining library APIs and security designs. However, AI often extended past what was necessary, often to the detriment of the entire code. It was also unreliable at times where errors could not be found in a code block but was rather a result of foreign code.
 
-### CI Pipeline Development  - Muiiz Ayodele
+### CI Pipeline Development - Muiiz Ayodele
+
 - Prompt Desing and AI Suggestion: AI was prompted to generate a GitHub Actions CI pipeline for the project, inclusing steps for installation, linting, and formatting. The AI suggested a linear pipeline frontend and backend tests were executed sequentially all within a single job. Furthermore, the AI gave a static list of files to be checked for syntax.
 
 - Evaluation: While functional the AI-generated pipeline lacked optimization and separation of concerns. Running checks sequentially increased feedback time. Additionally, formatting was enforced after linting which meant that any error that could be solved through formatting would fail before that stage. Lastly, the files all had to be manually added for the linting process which made it easier to miss one accidentally.
@@ -48,6 +49,7 @@ In Backend development, AI were most valuable in generating templates and struct
 - Learnings: AI provides a solid baseline but lacks awareness of CI efficiency and developer experience. Engineering judgment is often required to optimize execution order, introduce parallelism, and reduce runtime costs.
 
 ### Architecture - Muiiz Ayodele
+
 - Prompt Desing and AI Suggestion: AI produced Flask applications where route handlers contained inline file I/O, business logic, and validation all within a single function.
 
 - Evaluation: While functional for small prototypes, this approach made code difficult to maintain, test, and extend. It showed poor OOP and would have required more work from all members of the project.
@@ -57,6 +59,7 @@ In Backend development, AI were most valuable in generating templates and struct
 - Learnings: AI code often prioritised simplicity and short term progress over long term ease of maintainability. The layered architecture enabled easier error spotting which was critical to a project developed by multiple people.
 
 ### Data Persistence - Muiiz Ayodele
+
 - Prompt Desing and AI Suggestion: AI generated implementations for persistence relied on basic file handling, using direct open and write calls embedded within functions, often assumming single threaded execution model.
 
 - Evaluation: This approach introduced a critical risk, spotted during testing, or race conditions under concurrent requests. Multiple requests could read and overwrite files simultaneously, leading to data loss.
@@ -65,7 +68,7 @@ In Backend development, AI were most valuable in generating templates and struct
 
 - Learnings: AI overlooks concurrency and real world problems, especially when suggesting persistence strategies.
 
-## 1.3 Frontend Critical Evaluation (Team: [Abhishil Sinoj, Tomas Santos])
+## Frontend Critical Evaluation (Team: [Abhishil Sinoj, Tomas Santos])
 
 Frontend development required balancing fast AI-generated code with the performance and data accuracy needs of a React 19 application. While AI helped generate initial components, additional engineering was needed to turn the system from a basic prototype into a reliable, production-ready student management tool.
 
@@ -126,7 +129,7 @@ The following instances represent specific engineering decisions where AI-genera
 
 - Learnings: Centralized security architecture improves maintainability and reduces risk. AI can assist with implementation details, but architectural decisions must enforce modular and scalable design principles.
 
-## 1.4 Comparative Analysis Table
+## Comparative Analysis Table
 
 The table below shows how AI suggestions were compared with final human decisions, highlighting how each was reviewed to ensure the system is secure, reliable, and well-structured.
 
@@ -150,7 +153,7 @@ The table below shows how AI suggestions were compared with final human decision
 | System Theming          | Hardcoded HEX values or a single "Dark Mode" toggle.                                        | Engineered a Dynamic Theme Engine using CSS Custom Properties and data-theme attributes.                   | Addresses NFR-9, providing a customizable user experience (Classic, Light, Dark) for different lighting environments.                  |
 | Code Integrity          | Unstructured JavaScript with minimal error checking.                                        | Implemented TypeScript (TSX) with strict interface definitions for all data models.                        | Reduces runtime errors and ensures that both pairs adhered to the agreed-upon Data Contracts.                                          |
 
-## 1.5 Professional & Ethical Reflection
+## Professional & Ethical Reflection
 
 ### Data Security & Privacy Protocols
 
@@ -172,4 +175,10 @@ While the AI was helpful, it had limitations that required human oversight:
 
 - Context Limitations: For larger, multi-file projects, the AI sometimes suggested changes that conflicted with existing code. We mitigated this by providing smaller, well-defined code sections and clearly specifying component interfaces
 
-## 1.6 Conclusion on AI in the SDLC
+## Conclusion on AI in the SDLC
+
+The development of the SLM system demonstrates a clear example of modern AI-augmented engineering. Throughout the software development lifecycle, tools such as Gemini, ChatGPT, and Claude significantly accelerated tasks like generating boilerplate code and handling syntax. However, they lacked the contextual understanding needed to produce fully reliable, production-ready systems.
+
+A recurring issue was the “perfect prototype” trap, where AI-generated solutions worked in isolation but failed in real-world, multi-user environments. Without human oversight, the system would have faced serious problems, including race conditions in data handling, network congestion due to excessive API calls, and errors in grade calculations.
+
+This highlights that while AI can greatly enhance development speed, human expertise remains essential to ensure accuracy, reliability, and robustness.
