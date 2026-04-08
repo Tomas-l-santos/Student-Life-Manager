@@ -8,7 +8,7 @@ This project followed an adapted Scrum methodology suited to a 4-person student 
 | Team Member | GitHub Handle | Role |
 |-------------|--------------|------|
 | Muiiz Ayodele | declaringintent | Backend Architect |
-| Aamr | A9rlt | Backend Architect |
+| Amr Assaf | A9rlt | Backend Architect |
 | Abhishil Sinoj | AbishilS | Frontend Developer |
 | Tomas Santos | tomas-l-santos | Frontend Developer |
 
