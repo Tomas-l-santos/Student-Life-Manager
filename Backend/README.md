@@ -20,6 +20,8 @@ Create a `.env` file in the `Backend/` folder:
  - GMAIL_APP_PASSWORD = "your gmail app password"
  - EMAIL_USER = "your gmail"
 
+A SECRET_KEY is used to sign JSON Web tokens for authentication to ensure that tokens cannot be tampered with. A GMAIL_APP_PASSWORD is a password that google would allow to use as it blocks less secure apps from using your main password. 
+
 ## API Endpoints
 
 | Method | Endpoint | Auth | Description |
@@ -46,6 +48,10 @@ Create a `.env` file in the `Backend/` folder:
 | POST | `/api/timetable` | Yes | Add entry |
 | PUT | `/api/timetable/<id>` | Yes | Update entry |
 | DELETE | `/api/timetable/<id>` | Yes | Delete entry |
+| GET | `/api/modules` | Yes | Get modules |
+| POST | `/api/modules` | Yes | Add modules |
+| DELETE | `/api/modules/<id>` | Yes | Delete modules |
+
 
 ## Project Structure
 
@@ -91,9 +97,23 @@ Backend/                          # Flask REST API implementation and core busin
     └── test_timetable.py
 ```
 
-## Linting
+## Backend Architecture
+
+The backend follows a three-layer architecture designed to keep responsibilities clearly separated and the codebase maintainable.
+- Models
+ - Define the structure of application data (e.g. `User`, `Transaction`, `Deadline`)
+ - Responsible for serialisation (`to_dict`) and deserialisation (`from_dict`)
+- Services
+ - Handles validation, calculations, and rules
+- Storage
+ - Handles all file I/O using JSON files
+ - Provides `read_all`, `write_all`, `append`, `overwrite`
+ - Incldes a threading lock to prevent race conditions during concurrent access
+
+## Linting and testing
 
 ```bash
 python -m flake8 .     # check style
 python -m black .      # auto-format
+pytest tests/ -v --tb=short --cov=services --cov-report=term-missing  #tests
 ```

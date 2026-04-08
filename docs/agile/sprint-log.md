@@ -14,7 +14,7 @@ This project followed an adapted Scrum methodology suited to a 4-person student 
 
 
 ## Sprint 1 — Project Initialisation and Requirements Engineering
-**Dates:** 18 Dec 2025 – 6 Feb 2026  
+**Dates:** 11 jan 2026 – 6 Feb 2026  
 **Sprint Goal:** Set up the repository, establish team roles, and produce the initial requirements documentation.
 
 ### Planned 
