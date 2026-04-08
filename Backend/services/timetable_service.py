@@ -54,8 +54,8 @@ class TimetableService:
             day=day,
             start_time=start_time,
             end_time=end_time,
-            start_date=start_date,  # Added
-            end_date=end_date,  # Added
+            start_date=start_date,  
+            end_date=end_date,  
         )
         self.storage.append(entry.to_dict())
         return entry.to_dict()

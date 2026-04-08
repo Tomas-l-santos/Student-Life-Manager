@@ -46,7 +46,7 @@ The requirements were written collaboratively across multiple pull requests, wit
  - Use case diagram for UR-1
  - Sequence diagrams for UR-2 to 4
  - Expenses and Budget backend code
- - Authentification backend for login and signup
+ - Authentication backend for login and signup
  - Define data models
 
 ### Delivered

@@ -1,10 +1,10 @@
 # System Modelling (Activity Diagrams)
 
-## 1 Introduction
+## Introduction
 
 This section details the behavioral logic of the Student Life Management system. The following activity diagrams utilize swimlanes to separate concerns between the user, the client-side React application, and the Flask server. This architectural visualization demonstrates how the system maintains state and enforces security constraints across the full stack.
 
-## 1.1 User Authentication and Security Lockout
+## User Authentication and Security Lockout
 
 This diagram illustrates the application’s access control workflow, from entering credentials to generating a JSON Web Token (JWT). It also emphasizes the defensive measures used to enforce NFR-2, where authorisation.py tracks failed_attempts to mitigate brute-force attacks.
 
@@ -21,7 +21,7 @@ Logic Overview:
   temporarily locked.
 - Persistence: On a successful login, the JWT is saved in localStorage to maintain the session.
 
-## 1.2 Password Recovery (OTP) Workflow
+## Password Recovery (OTP) Workflow
 
 This workflow shows how the system handles password recovery via OTP, integrating with external SMTP services. The process is asynchronous: the system responds to the user immediately while sending the email securely in the background.
 
@@ -37,7 +37,7 @@ Logic Overview:
 - Temporal Logic: OTPs expire 3600 seconds (1 hour) after issuance. The verify_reset_token function in authorisation.py compares the current time against the stored expiry timestamp before permitting a password reset.
 - Secure Cleanup: To prevent reuse, the OTP is immediately removed from server memory following a successful password update.
 
-## 5.3 Academic Grade & Distinction Calculation
+## Academic Grade & Distinction Calculation
 
 This workflow illustrates the distinction calculation process. The backend ensures that submitted scores do not exceed the maximum allowed, while the frontend React engine performs real-time calculations to determine the student’s UK degree classification.
 
@@ -53,7 +53,7 @@ Logic Overview:
 Contribution = (Score/Max Score) × Weight
 -Reactive UI: The frontend’s "useMemo" hook updates the Donut Chart automatically whenever the assessment array changes
 
-## 5.4 Financial Transaction & Budget Alerting
+## Financial Transaction & Budget Alerting
 
 This workflow illustrates budget monitoring with conditional branching based on spending thresholds. It supports NFR-6 by providing immediate visual feedback to the user regarding their financial status.
 
@@ -70,17 +70,15 @@ Logic Overview:
   - ≥ 80% triggers a Warning state
   - ≥ 100% triggers an Exceeded state
 
-## 5.5 Kanban Task & Workload Evaluation
+## Kanban Task & Workload Evaluation
 
-Related Requirements: US-18, US-20, SR-4.3
-
-This workflow illustrates the interaction between the Kanban task board and the Workload Stress indicator. It shows how a state change in a single component automatically triggers a recalculation of the user’s overall productivity metrics.
+**_Related Requirements: UR-4, SR-4.3, SR-4.4, US-18, US-20_**
 
 | Task Management Activity Diagram |
 | -------------------------------- |
 | ![task](../images/task.png)      |
 
-**_Related Requirements: UR-4, SR-4.3, SR-4.4, US-18, US-20_**
+This workflow illustrates the interaction between the Kanban task board and the Workload Stress indicator. It shows how a state change in a single component automatically triggers a recalculation of the user’s overall productivity metrics.
 
 Logic Overview:
 

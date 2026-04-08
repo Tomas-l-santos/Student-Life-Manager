@@ -12,7 +12,7 @@ The development team utilized Large Language Models (LLMs) specifically Google G
 
 - Debugging: Finding and fixing errors by understanding system messages, especially when parts of the app fail to connect or work together properly.
 
-The team carefully checked and tested all AI suggestions to make sure they were correct and secure. This ensured the final system was built with human judgment, supported by AI.
+All AI-generated suggestions were reviewed, tested, and validated by the team before integration. This ensured the final system was built with human judgment, supported by AI.
 
 ## Methodology & Group Workflow
 
@@ -40,7 +40,7 @@ In Backend development, AI were most valuable in generating templates and struct
 
 ### CI Pipeline Development - Muiiz Ayodele
 
-- Prompt Desing and AI Suggestion: AI was prompted to generate a GitHub Actions CI pipeline for the project, inclusing steps for installation, linting, and formatting. The AI suggested a linear pipeline frontend and backend tests were executed sequentially all within a single job. Furthermore, the AI gave a static list of files to be checked for syntax.
+- Prompt Design and AI Suggestion: AI was prompted to generate a GitHub Actions CI pipeline for the project, including steps for installation, linting, and formatting. The AI suggested a linear pipeline frontend and backend tests were executed sequentially all within a single job. Furthermore, the AI gave a static list of files to be checked for syntax.
 
 - Evaluation: While functional the AI-generated pipeline lacked optimization and separation of concerns. Running checks sequentially increased feedback time. Additionally, formatting was enforced after linting which meant that any error that could be solved through formatting would fail before that stage. Lastly, the files all had to be manually added for the linting process which made it easier to miss one accidentally.
 
@@ -50,7 +50,7 @@ In Backend development, AI were most valuable in generating templates and struct
 
 ### Architecture - Muiiz Ayodele
 
-- Prompt Desing and AI Suggestion: AI produced Flask applications where route handlers contained inline file I/O, business logic, and validation all within a single function.
+- Prompt Design and AI Suggestion: AI produced Flask applications where route handlers contained inline file I/O, business logic, and validation all within a single function.
 
 - Evaluation: While functional for small prototypes, this approach made code difficult to maintain, test, and extend. It showed poor OOP and would have required more work from all members of the project.
 
@@ -60,7 +60,7 @@ In Backend development, AI were most valuable in generating templates and struct
 
 ### Data Persistence - Muiiz Ayodele
 
-- Prompt Desing and AI Suggestion: AI generated implementations for persistence relied on basic file handling, using direct open and write calls embedded within functions, often assumming single threaded execution model.
+- Prompt Design and AI Suggestion: AI generated implementations for persistence relied on basic file handling, using direct open and write calls embedded within functions, often assuming single threaded execution model.
 
 - Evaluation: This approach introduced a critical risk, spotted during testing, or race conditions under concurrent requests. Multiple requests could read and overwrite files simultaneously, leading to data loss.
 
@@ -173,13 +173,13 @@ Overall, this experience improved my understanding of how frontend planning, doc
 
 **_Abhishil Sinoj_**
 
-The following instances represent specific engineering decisions where AI-generated suggestions were critically evaluated and modified to meet the system's performance, security, and functional need
+The following instances represent specific engineering decisions where AI-generated suggestions were critically evaluated and modified to meet the system's performance, security, and functional needs.
 
 ### Architectural Resilience in Data Aggregation (dashboard.tsx)
 
 - Prompt Design & AI Suggestion: The LLM was prompted to create a data-loading function for fetching timetable, deadline, and budget data.The AI suggested a series of sequential await calls.
 
-- Evaluation: Sequential fetching introduced a blocking bottleneck. A delay in one request (e.g., timetable data) would prevent other data (eg., budget information) from rendering, violating NFR-5 (Performance) for a responsive Single Page Application
+- Evaluation: Sequential fetching introduced a blocking bottleneck. A delay in one request (e.g., timetable data) would prevent other data (e.g., budget information) from rendering, violating NFR-5 (Performance) for a responsive Single Page Application
 
 - Engineering Override: The sequential logic was replaced with a Promise.allSettled() architecture to enable concurrent API execution.
 
@@ -187,7 +187,7 @@ The following instances represent specific engineering decisions where AI-genera
 
 ### Network Optimization & Rate Limiting (tasks.tsx)
 
-- Prompt Design & AI Suggestion: The AI was assked to "make the notebook notes auto-save as the user types." The AI suggested attaching a backend PUT request directly to the onChange event.
+- Prompt Design & AI Suggestion: The AI was asked to "make the notebook notes auto-save as the user types." The AI suggested attaching a backend PUT request directly to the onChange event.
 
 - Evaluation: This approach created a network spam anti-pattern, where each keystroke triggered an API call, potentially overwhelming the backend with redundant requests.
 
@@ -214,7 +214,7 @@ The following instances represent specific engineering decisions where AI-genera
 - Engineering Override: A weighted contribution engine was implemented, calculating results using the formula,to produce an accurate weighted average aligned with classification thresholds.
   - (score/max)× weight = max score
 
-- Learnings : AI lacks contextual domain awareness and defaults to simplified models. Systems requiring domain-specific accuracy must rely on explicitly defined formulas rather than inferred logic.
+- Learnings: AI lacks contextual domain awareness and defaults to simplified models. Systems requiring domain-specific accuracy must rely on explicitly defined formulas rather than inferred logic.
 
 ### Centralized Security Architecture (App.tsx & api.ts)
 
