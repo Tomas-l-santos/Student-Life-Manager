@@ -1,13 +1,14 @@
 # Introduction
 
-## system overview
+The Student Life Management (SLM) system is an integrated productivity platform designed for higher education students. Built using React 19 (TypeScript) and Python (Flask), it addresses “app fatigue” by combining academic tracking, financial budgeting, and personal task management into a single, unified dashboard. The system uses a local-first data storage approach with structured JSON to ensure both performance and user privacy. Its key features include a weighted grade calculator aligned with UK degree classifications, a dynamic workload stress indicator based on upcoming deadlines, and a thread-safe financial tracking system. By bringing these elements together, SLM offers students clear and practical insights into their academic progress and overall wellbeing.
 
 # Stakeholders
 
-- Primary stakeholders
-  Students, they use the system to create accounts, track modules/grades, manage timetables, record expenses, and view reminders/stress indicators.
-
-# Stakeholders
+| Stakeholder         | Interest                         | Priority |
+| ------------------- | -------------------------------- | -------- |
+| Student user        | Manage time, finances, deadlines | High     |
+| Developer team      | Maintainable, testable codebase  | High     |
+| University assessor | Evidence of engineering process  | Medium   |
 
 # Specifications
 
@@ -102,24 +103,25 @@
 - NFR-9
   The system shall allow users to switch between Light, Dark, and Classic modes to ensure comfortable use in different lighting environments and improve overall accessibility.
 
-# Mermaid map of requirements
+# Constraints
 
-- Security
-  NFR-1
-  NFR-2
+### Technical Constraints
 
-- Data Integrity & Privacy
-  NFR-3
-  NFR-4
-  NFR-7
+- Data Storage: The system only uses flat JSON files for storage. No SQL or NoSQL databases were allowed, so custom file-locking was needed to keep data safe.
 
-- Performance
-  NFR-5
+- Environment: The application runs only on a local setup, with the backend on 127.0.0.1:5000 and the frontend on localhost:5173.
 
-- Usability & Accessibility
-  NFR-6
-  NFR-8
-  mermaid map of requirements
+- Compatibility: It must run on standard student laptops (Windows and macOS) using only Python 3.12 and Node.js 22+, without complex setup.
+
+### Academic & Regulatory Constraints
+
+- Deadline: The entire project had to be completed by April 8, 2026, limiting some features to basic functionality.
+
+### Team & Process Constraints
+
+- Team Structure: The project was built by a team of four, split into frontend and backend pairs, requiring clear communication and API design.
+
+- Budget: Only free tools were used. No paid services or cloud platforms were included, ensuring the project is easy to reproduce.
 
 # Useability Requirements
 

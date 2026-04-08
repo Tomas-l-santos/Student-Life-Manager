@@ -1,221 +1,113 @@
-# Features
+# Core System Features
 
-- Budget tracking and expense management
-- Academic module and assessment tracking
-- UK grading system with grade calculations
-- Note-taking system organized by topics
-- User authentication and password management
+- Financial Management: Budget tracking with category-specific limits and analytics.
 
----
+- Academic Infrastructure: Module and assessment tracking with weighted contribution logic.
+
+- Grading Analytics: UK degree classification trajectory (1st, 2:1, etc.) and GPA calculations.
+
+- Productivity Suite: Kanban task management and spatial timetable rendering.
+
+- Security Framework: JWT authentication, OTP password recovery, and secure data purging.
 
 # Completed Features
 
-## 1. Authentication System
+## Authentication System
 
-- User registration with email validation
-- Login with JWT token authentication
-- Password validation (uppercase, lowercase, number, special char)
-- Password change functionality
-- Forgot password with 6-digit OTP
-- Email integration for password reset
-- Account lockout after 5 failed attempts
-- Birthdate collection during registration
+- JWT Integration: Token-based session management with protected React routes.
 
-## 2. Budget Management
+- Validation Engine: Strict regex for emails/usernames and complexity requirements for passwords.
 
-- Transaction creation (income/expense)
-- Category system (11 expense, 5 income categories)
-- Budget creation per category per month
-- Set budget status tracking (on track/warning/exceeded)
-- Transaction summary by month/year
-- Recurring transaction support
-- Category-based transaction filtering
+- Brute-Force Protection: Account lockout mechanism after 5 failed login attempts.
 
-## 3. Academic Management - Modules
+- Recovery Flow: 6-digit OTP generation and email integration for password resets.
 
-- Module creation with UK credit system (10, 15, 20, 30, 40, 60)
-- Module tracking by year and academic year
-- Module status (in progress, completed, dropped)
-- Duplicate module prevention per academic year
-- Module filtering by year/status
+- Privacy Control: Permanent account deletion with cascading data purge across all JSON files.
 
-## 4. Academic Management - Assessments
+## Academic Management - Modules
 
-- Assessment creation with multiple types (exam, coursework, essay, project, etc.)
-- Automatic UK grade calculation
-- Weighted grade calculations
-- Assessment tracking with scores and weights
-- Date validation (YYYY-MM-DD format)
+- UK Credit Standard: Support for 10, 15, 20, 30, 40, and 60 credit module weights.
 
-## 5. Academic Management - Analytics
+- Grade Trajectory: Real-time calculation of marks needed in remaining modules to achieve a 1st Class degree.
 
-- Module grade calculation (weighted average)
-- UK grading system (1st, 2:1, 2:2, 3rd, Fail)
-- Degree classification system
-- Year overview with credit-weighted average
-- Progress tracking (total weight vs remaining weight)
-- Module summary generation
+- Assessment Tracking: CRUD operations for Exams, Coursework, and Projects with weighted scoring.
 
-## 6. Notes System
+- UK Classification: Automatic mapping of percentages to 1st, 2:1, 2:2, and 3rd Class honours.
 
-- Note creation for modules
-- Topic-based organization (user-defined topics)
-- Pin/unpin notes
-- Archive/unarchive notes
-- Tag support for categorization
-- Search functionality (title, content, topic, tags)
-- Topic list with note counts
-- Automatic cleanup when module deleted
+## Productivity & Scheduling
 
-## 7. Data Storage
+- Spatial Timetable: Mathematical rendering (Pixel-per-Minute algorithm) for accurate schedule visualization.
 
-- JSON-based storage system
-- Thread-safe operations with Lock
-- Automatic file creation
-- CRUD operations for all models
+- Multi-View Calendar: Support for Day, Week, and Month navigation.
 
-## 8. Models
+- Kanban Task Board: 3-column state machine (To-Do, In-Progress, Done) for academic triage.
 
-- User model with UUID
-- Transaction model
-- Budget model
-- Category model
-- Module model
-- Assessment model
-- Note model
+- Workload Heuristics: Reactive "Stress Level" indicator calculated based on overdue/upcoming deadline ratios.
 
----
+- Persistence: Debounced auto-save for task notes to prevent data loss during typing.
+
+## Financial Analytics
+
+- Category Limits: Monthly spending thresholds with visual alerts (On Track, Warning, Exceeded).
+
+- Data Visualization: Recharts integration for Expense Breakdown and Cash Flow distribution.
+
+- Transaction Ledger: Historical summary by month and year with income/expense filtering.eration
+
+## UI/UX & System Architecture
+
+- Dynamic Theme Engine: System-wide support for Classic, Light, and Dark modes via CSS variables.
+
+- Concurrent Fetching: Optimized dashboard loading using Promise.allSettled() for non-blocking API calls.
+
+- Thread-Safe Storage: Custom JSON storage repository using Python threading.Lock to prevent data corruption.
 
 # Must Have Features
 
-## Backend
+**_All are completed_**
 
-- Add environment variable loading (.env file)
-- Implement proper error logging
-- Implement proper CORS configuration
+- Environment Security: Implementation of .env files for SECRET_KEYS and sensitive API credentials.
 
-## Data & Security
+- Cross-Origin Support: Proper CORS configuration to bridge the React frontend and Flask backend.
 
-- Hash sensitive data at rest
-- Implement refresh tokens for JWT
-- Add session management
-- Create database migration from JSON to SQLite/PostgreSQL
-- Add data backup functionality
-- Implement data export (CSV/Excel)
+- Thread-Safe Persistence: Custom locking mechanisms in the backend to prevent JSON data corruption during concurrent writes.
 
-## Testing
+- Stateless Authentication: JWT-based login system with temporal account lockout (NFR-2).
 
-- Write unit tests for all services
-- Write integration tests for routes
-- Add end-to-end testing
-- Create test data generators
-- Set up CI/CD pipeline
-
----
+- CI/CD Pipeline: Automated GitHub Actions for linting, formatting, and building.
 
 # Should Have Features
 
-## Budget Features
+**_All are completed_**
 
-- Budget templates (preset budgets)
-- Budget alerts/notifications
-- Spending analytics and charts
-- Budget recommendations based on spending patterns
-- Receipt upload and OCR
-- Recurring transaction automation
-- Export budget reports (PDF/Excel)
+- Weighted Academic Engine: Algorithmic calculation of grades based on UK classification (1st, 2:1, etc.).
 
-## Academic Features
+- Workload Stress Heuristic: A visual metric that converts deadline density into a tiered "Stress Level" indicator.
 
-- Grade calculator (UK system 1st, 2:1, 2:2, 3rd, Fail)
-- Predicted grade calculator
-- Module prerequisite tracking
-- Timetable/schedule management
-- Study time tracker
-- Assignment deadline reminders
-- Grade improvement suggestions
-- Academic goal setting and tracking
-- Transcript generation
-- Course comparison tool
+- Temporal UI Rendering: Pixel-per-minute algorithm for the Timetable to ensure lectures scale accurately to their duration.
 
-## Notes Features
+- Asynchronous Data Aggregation: Use of Promise.allSettled() to ensure the dashboard loads all modules without blocking the UI.
 
-- Rich text editor (markdown rendering)
-- Note sharing with other students
-- Note version history
-- File attachments (images, PDFs)
-- Voice notes
-- Drawing/sketch support
-- Collaborative notes (real-time editing)
-- Note templates
-- Export notes to PDF/Word
-- OCR for handwritten notes
-
-## User Management
-
-- Profile picture upload
-- User preferences/settings
-- Email verification
-- Two-factor authentication (2FA)
-- Social login (Google, Microsoft)
-- Account deletion
-- Data privacy controls
-- Activity log/audit trail
-
----
+- Debounced Persistence: 1000ms delay on the notebook editor to prevent server flooding.
 
 # Could Have
 
-## Advanced Features
+- Multi-Theme Engine: Dynamic switching between Classic Blue, Light, and Dark modes via CSS variables. [Done]
 
-- Mobile app (React Native/Flutter)
-- Desktop app (Electron)
-- Dark mode
-- Multiple theme support
-- Accessibility features (screen reader support)
-- Internationalization (i18n) - multiple languages
-- Push notifications
-- Email notifications
-- SMS notifications
+- Multi-View Calendar: Support for Day, Week, and Month views within the Timetable module. [Done]
 
-## Social Features
+- Kanban State Machine: status management for tasks (To-Do → In Progress → Done). [Done]
 
-- Friend system
-- Study groups
-- Budget groups (shared expenses)
-- Leaderboards (gamification)
-- Achievement badges
-- Study buddy matching
-- Anonymous Q&A forum
-
-## Analytics & Insights
-
-- Spending trends visualization
-- Grade trends over time
-- Study pattern analysis
-- Personalized recommendations
-- Predictive analytics (future grades)
-- Budget vs actual comparison
-- Year-over-year comparisons
-
-## Integrations
-
-- Bank account integration (Plaid API)
-- University LMS integration (Canvas, Moodle)
-- Calendar integration (Google Calendar, Outlook)
-- Cloud storage (Google Drive, Dropbox)
-- Payment apps (PayPal, Venmo)
-- Student discount platforms
-
----
+- Data Export: Ability to export the financial ledger to CSV (Planned but de-prioritized for core stability). [NOT DONE]
 
 # Wont Have Features
 
-- Cryptocurrency tracking
-- Investment portfolio management
-- Loan/debt management
-- Scholarship finder
-- Job board integration
-- Marketplace for student items
-- Housing/accommodation finder
-- Meal planning integration
+- Third-Party Integrations: Direct linking to personal bank accounts (Plaid API).
+
+- SQL Migration: The system remains strictly on a custom-built JSON persistence layer rather than a relational database.
+
+- Native Mobile App: Support is limited to web browsers; no iOS or Android native packages were developed.
+
+- Peer-to-Peer Sharing: Real-time collaboration on notes or shared budget groups.
+
+- OCR & Image Processing: Automatic timetable filling from images or receipt scanning.
