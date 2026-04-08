@@ -24,7 +24,7 @@
 
 <br><br>
 
-  <img src="/docs/images/opening.gif" alt="Student Life Management System Demo" width="100%">
+  <img src="/docs/images/opening2.gif" alt="Student Life Management System Demo" width="100%">
 
 </div>
 
