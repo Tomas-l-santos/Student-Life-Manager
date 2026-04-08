@@ -17,13 +17,13 @@ The pipeline contains two parallel jobs, one for the backend tests and the other
 
 #### Stage 1 — Checkout
 ```yaml
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 ```
 Clones the repository onto the GitHub Actions runner so subsequent steps have access to the code.
 
 #### Stage 2 — Python Setup
 ```yaml
-- uses: actions/setup-python@v4
+- uses: actions/setup-python@v5
   with:
     python-version: "3.12"
 ```
@@ -39,7 +39,7 @@ Installs all runtime dependencies from `requirements.txt`. If a developer adds a
 
 #### Stage 4 — Install Dev Tools
 ```yaml
-- run: pip install flake8
+- run: pip install flake8 black
 ```
 Installs flake8 separately (development tool not runtime dependency)
 
@@ -51,7 +51,15 @@ Installs flake8 separately (development tool not runtime dependency)
 ```
 Compiles every tracked Python file without executing it. This catches syntax errors such as missing colons, unclosed brackets, or invalid indentation that would cause an immediate crash at startup. It runs before linting so that the most critical errors are reported first.
 
-#### Stage 6 — Lint with flake8
+#### Stage 6 - Format Check with black
+```yaml
+- run: |
+    cd Backend
+    python -m black --check --diff .
+```
+Runs black in check mode which exits with a non-zero code if any file would be reformatted, failing the pipeline.
+
+#### Stage 7 — Lint with flake8
 ```yaml
 - run: |
     cd Backend
@@ -69,13 +77,6 @@ Runs flake8 across all Python files to check for PEP8 style violations and poten
 
 The configuration is stored in `Backend/.flake8` which sets the maximum line length to 100 characters and excludes virtual environment folders.
 
-#### Stage 7 - Format Check with black
-```yaml
-- run: |
-    cd Backend
-    python -m black --check --diff .
-```
-Runs black in check mode which exits with a non-zero code if any file would be reformatted, failing the pipeline.
 ### Frontend Job
 
 #### Stage 1 — Checkout
@@ -83,7 +84,7 @@ Clones the repository.
 
 #### Stage 2 — Node Setup
 ```yaml
-- uses: actions/setup-node@v3
+- uses: actions/setup-node@v4
   with:
     node-version: "20"
 ```
@@ -103,8 +104,7 @@ Installs all packages from `package.json` and `package-lock.json`.
     cd Frontend
     npx tsc --noEmit
 ```
-Runs the TypeScript compiler across the entire codebase without producing any output files. This catches type errors that would not necessarily 
-revent the app from running in development but would indicate bugs or incorrect assumptions in the code. Examples of what it catches:
+Runs the TypeScript compiler across the entire codebase without producing any output files. This catches type errors that would not necessarily prevent the app from running in development but would indicate bugs or incorrect assumptions in the code. Examples of what it catches:
 
 | Error | Meaning |
 |-------|---------|
@@ -118,7 +118,7 @@ revent the app from running in development but would indicate bugs or incorrect 
     cd Frontend
     npm run build
 ```
-Runs `tsc -b && vite build` to produce the full production bundle. This verifies that the application compiles end-to-end, including all imports, assets, and optimisations. A passing build confirms the app could be deployed as-is.
+Runs `tsc -b && vite build` to produce the full production bundle. This verifies that the application compiles end-to-end, including all imports, assets,and optimisations. A passing build confirms the app could be deployed as-is.
 
 #### Stage 6 — Lint with ESLint
 ```yaml
@@ -131,7 +131,7 @@ Runs ESLint across all `.ts` and `.tsx` files using the configuration in `eslint
 ## 3. How to Read the Results
 
 ### Finding the Actions tab
-1. Go to the repository on GitHub: `https://github.com/declaringintent/Software-app`
+1. Go to the repository on GitHub
 2. Click the Actions tab at the top of the page
 3. Each push or pull request will appear as a workflow run in the list
 

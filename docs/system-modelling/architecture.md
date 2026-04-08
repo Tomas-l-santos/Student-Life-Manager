@@ -152,7 +152,7 @@ Every service instantiates `JSONStorage` with a specific file path. If the file 
 | `categories.json` | *(dict)* | 16 predefined categories: 11 expense, 5 income — initialised automatically |
 | `deadlines.json` | `Deadline` | Deadlines: user_id, title, module_name, due_date, priority, status, notes |
 | `timetable.json` | `TimetableEntry` | Classes: user_id, module_name, location, type, day, times, date range |
-| `modules.json` | `Modules` | Academic modules: user_email, name, code, credits, year, academic_year |
+| `modules.json` | `Modules` | Academic modules: user_id, name, code, credits, year, academic_year |
 | `assessments.json` | `Assessments` | Assessment results: module_id, name, type, score, max_score, weight |
 
 **Note on data model field detail:**

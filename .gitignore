@@ -4,3 +4,5 @@
 **/.env
 **/intern.sh
 **/repo_llm_context.md
+**/.DS_Store
+**/.myenv/

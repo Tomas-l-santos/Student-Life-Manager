@@ -11,11 +11,11 @@ The main aim of this was not just to draw diagrams, but to actually plan the sys
 
 The system is designed as a web-based application made up of three main parts:
 
-- **Frontend** – Built using HTML and CSS (with plans to convert to React). This is what the user interacts with.
+- **Frontend** – Built using HTML, CSS, and React. This is what the user interacts with.
 - **Application Logic** – Handles features such as login, task management, and updating data.
-- **Data Storage** – Uses local storage to save user data like tasks, modules, and budget information.
+- **Data Storage** – Uses Flask  to save user data like tasks, modules, and budget information into JSON files.
 
-This approach was chosen mainly because it keeps the system simple and easy to run without needing a database.  
+This approach was chosen because it keeps the system simple and easy to run without needing a database.  
 However, it does come with some limitations, such as not being able to access data across different devices and reduced scalability.
 
 ## 3. UML Diagrams and Their Purpose

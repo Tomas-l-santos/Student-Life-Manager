@@ -12,7 +12,7 @@ MAX_EMAIL_LENGTH = 254  # RFC 5321 hard limit
 
 
 # This class was created with assistance from ChatGPT (OpenAI, 2026).
-# Prompt:“How do I implement a secure user model with authentificaltion support”
+# Prompt:“How do I implement a secure user model with authentication support”
 # The output was reviewed, modified, and tested by the Muiiz.
 class AuthService:
     def __init__(self, storage_path="data/users.json"):
@@ -117,7 +117,9 @@ class AuthService:
         users = self.storage.read_all()
         initial_len = len(users)
         users = [
-            u for u in users if u.get("email") != email and u.get("user_id") != user_id
+            u
+            for u in users
+            if not u.get("email") != email or u.get("user_id") != user_id
         ]
 
         if len(users) == initial_len:

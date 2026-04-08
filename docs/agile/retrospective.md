@@ -1,7 +1,7 @@
 # Project Retrospective - Student Life Management System
 
 **Project:** Student Budget & Academics Management System  
-**Sprint/Period:** Initial Development (January - March 2025)  
+**Sprint/Period:** Initial Development (January - March 2026)  
 **Team Size:** 4 developers  
 **Retrospective Date:** April 7, 2025
 
@@ -23,8 +23,8 @@ Build a comprehensive student management system combining budget tracking and ac
 ### Overall Assessment
 **Status:** Completed   
 **Team Morale:** Positive  
-**Technical Debt:** None 
-**Next Steps:** Small tweaks and bug fixes
+**Technical Debt:** multiple 
+**Next Steps:** Architectural tweaks and bug fixes
 
 ---
 
