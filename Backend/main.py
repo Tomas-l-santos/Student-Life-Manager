@@ -10,7 +10,7 @@ from services.timetable_service import TimetableService
 # Prompt:“Help me connect the fronend and backend of my student management app”
 # The output was reviewed, modified, and tested by the Muiiz.
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["http://localhost:5173"])
 # Register the auth Blueprint
 app.register_blueprint(auth_bp)
 

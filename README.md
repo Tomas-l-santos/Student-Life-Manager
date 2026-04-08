@@ -9,7 +9,7 @@
     <img src="https://img.shields.io/badge/Made%20with-React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
   </a>
   <a href="https://vitejs.dev/">
-    <img src="https://img.shields.io/badge/Vite_8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
+    <img src="https://img.shields.io/badge/Built%20with-Vite_8.0-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
   </a>
 
 <br><br>
@@ -43,7 +43,9 @@
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Project Structure](#project-structure)
-- [Documentation](#Documentation)
+- [Documentation](#documentation)
+- [Demo](#demo)
+- [Known Issues](#known-issues)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -86,6 +88,7 @@ The system was developed based on defined functional and non-functional requirem
 | Deadline Tracking   | Manage deadlines with automatic sorting and visual indicators for overdue and upcoming items |
 | Module Management   | Record modules and assessment results with automatic average calculation                     |
 | Budget Management   | Track income and expenses with categorisation and real-time balance updates                  |
+| Timetable Entries   | Create a personalised timetable with categorisation for different objectives                 |
 
 ## Tech Stack
 
@@ -94,7 +97,7 @@ The system was developed based on defined functional and non-functional requirem
 - Data Storage: JSON flat files
 - Authentication: pyJWT, bcrypt
 - Version Control: Git & GitHub
-- Development Tools: VS Code, GitHub Classroom,
+- Development Tools: VS Code, GitHub Classroom
 - Linting: ESLint 9, Prettier, flake8, Black
 
 ## Getting Started
@@ -113,13 +116,13 @@ See [Backend README](./Backend/README.md#setup) and [Frontend README](./Frontend
 
 ### Usage
 
-**_You need two terminals running simultaneously_**
+**_You need two terminals running simultaneously._**
 
 Terminal 1: Start the backend:
 
 ```bash
 cd Backend
-source myenv/Scripts/activate # for windows Git Bash
+source myenv/Scripts/activate # for Windows Git Bash
 python main.py # python3 for Ma OS
 # Running on http://127.0.0.1:5000
 ```
@@ -253,7 +256,7 @@ elee1149-courswork-2025-a-s-s-a
 │   │       │   ├── modules.css
 │   │       │   ├── tasks.css
 │   │       │   └── timetable.css
-│   │       ├── login css               # Dedicated styles for the auth and entry flows
+│   │       ├── login-css               # Dedicated styles for the auth and entry flows
 │   │       │   ├── createyouraccount.css
 │   │       │   ├── forgotpassword.css
 │   │       │   └── login.css
@@ -269,7 +272,6 @@ elee1149-courswork-2025-a-s-s-a
 ├── License                             # Primary project licensing terms (MIT)
 ├── OriginalREADME.md                   # Inherited project documentation
 ├── README.md                           # Main project portal and documentation hub
-├── Testing.md                          # Record of manual and automated testing results
 └── docs                                # Comprehensive engineering and lifecycle documentation
     ├── agile                           # Project management and iterative development logs
     │   ├── backlog.md                  # Prioritised list of functional user stories
@@ -278,9 +280,7 @@ elee1149-courswork-2025-a-s-s-a
     ├── ci-cd.md                        # Documentation of the linting and testing pipeline
     ├── images                          # Repository of UML diagrams and system screenshots
     │   ├── ClassDiagram.png            # Visual representation of data structures
-    │   ├── Diagrams.md                 # Technical index of all system diagrams
     │   ├── Passwords.png               # Architectural view of authentication security
-    │   ├── Screenshots.md              # Visual evidence of the implemented UI
     │   ├── SequenceDiagramOne.png      # Workflow mapping for login/auth cycles
     │   ├── SequenceDiagramTwo.png      # Workflow mapping for module management
     │   ├── StateDiagramFour.png        # State transitions for budget tracking
@@ -317,13 +317,21 @@ The full engineering process is documented in the following files:
 
 ## Demo
 
-- https://youtu.be/RxWvsZ9n9e4
+- [Watch the Demo](https://youtu.be/RxWvsZ9n9e4)
+
+## Known Issues
+
+- Many Exceptions are bare which leaks internal error details to the client.
+- No proper logging of errors.
+- No actual rate limiting exists for logging in as the lockout counter resets everytime the Flask process restarts.
+- There is no error handling for corrupted JSON files.
+- Many functions are inefficient such as calling `datetime.strptime` twice in `get_user_transactions` to retrieve month and year separately.
 
 ## Contributors
 
 - [A9rlt](https://github.com/A9rlt) - Lead Back End Developer
 - [AbishilS](https://github.com/AbishilS) - Lead Front End Developer
-- [declaringintent](https://github.com/declaringintent) – Lead Back End Developer
+- [declaringintent](https://github.com/declaringintent) - Lead Back End Developer
 - [Tomas-l-santos](https://github.com/Tomas-l-santos) - Lead Front End Developer
 
 ## License

@@ -98,7 +98,7 @@ Frontend/
 │   │   └── storage.ts          # LocalStorage management (JWT & Sessions)
 │   ├── styles/                 # Modular CSS System
 │   │   ├── dashboard-css/      # Feature specific styling
-│   │   ├── login css/          # Authentication specific styling(HTML)
+│   │   ├── login-css/          # Authentication specific styling(HTML)
 │   │   └── styles.css          # styles for about,ForgotPassword,login,signup.tsx (React)
 │   ├── App.tsx                 # Main Router and Private Route configuration
 │   ├── main.tsx                # Application entry point (DOM Rendering)
